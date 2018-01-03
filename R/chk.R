@@ -63,6 +63,12 @@ chk_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
 
 #' @rdname check_generic
 #' @export
+chk_unique <- function(x) {
+  anyDuplicated(x)
+}
+
+#' @rdname check_generic
+#' @export
 chk_date_yyyymmdd <- function(x) {
   chk_blank(x) | (str_detect(x, "[0-9]{8}") & !is.na(lubridate::ymd(x, quiet = TRUE)))
 }
@@ -93,7 +99,7 @@ NULL
 
 #' @rdname check_helper
 #' @export
-chk_filter <- function(.dat, .var, .func, .flt = NULL) {
+chk_filter <- function(.dat, .var, .func, .flt = NULL, .args = list()) {
   .var <- enquo(.var)
   .flt <- enquo(.flt)
   if (identical(quo(NULL), .flt))
@@ -104,29 +110,35 @@ chk_filter <- function(.dat, .var, .func, .flt = NULL) {
 
 #' @rdname check_helper
 #' @export
-chk_filter_vars <- function(.dat, .vars, .func, .flt = NULL) {
+chk_filter_vars <- function(.dat, .vars, .func, .flt = NULL, .args = list()) {
   # .vars <- enquo(.vars)
   .flt <- enquo(.flt)
 
   if (identical(quo(NULL), .flt))
     .flt <- quo(rep(TRUE, nrow(.dat)))
 
+  # .dat %>%
+  #   mutate_at(.vars, funs(ifelse(!!.flt, .func(.), NA), .args = .args)) %>%
+  #   select(!!!.vars)
   .dat %>%
-    mutate_at(.vars, funs(ifelse(!!.flt, .func(.), NA))) %>%
+    mutate(.cond = !!.flt) %>%
+    mutate_at(.vars, funs(.func, .args = .args)) %>%
+    mutate_at(.vars, funs(ifelse(.cond, ., NA))) %>%
     select(!!!.vars)
+
 }
 
 #' @rdname check_helper
 #' @export
-chk_filter_all <- function(.dat, .vars, .func, .flt = NULL) {
-  chk_filter_vars(.dat, .vars, .func, !!enquo(.flt)) %>%
+chk_filter_all <- function(.dat, .vars, .func, .flt = NULL, .args = list()) {
+  chk_filter_vars(.dat, .vars, .func, !!enquo(.flt), .args) %>%
     apply(1, all)
 }
 
 #' @rdname check_helper
 #' @export
-chk_filter_any <- function(.dat, .vars, .func, .flt = NULL) {
-  chk_filter_vars(.dat, .vars, .func, !!enquo(.flt)) %>%
+chk_filter_any <- function(.dat, .vars, .func, .flt = NULL, .args = list()) {
+  chk_filter_vars(.dat, .vars, .func, !!enquo(.flt), .args) %>%
     apply(1, any)
 }
 

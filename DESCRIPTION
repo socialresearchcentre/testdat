@@ -5,7 +5,9 @@ Version: 0.0.0.9001
 Authors@R: person("First", "Last", email = "daniel.smith@srcentre.com.au", role = c("aut", "cre"))
 Description: An extension of testthat made for checking data frames.
 Depends:
-    R (>= 3.2.2), testthat (>= 2.0.0), rlang, dplyr, stringr, lubridate
+    R (>= 3.2.2), testthat (>= 2.0.0)
+Imports:
+    rlang, dplyr, stringr, lubridate, glue
 License: MIT
 Encoding: UTF-8
 LazyData: true

@@ -8,13 +8,13 @@
 \alias{chk_filter_any}
 \title{Checking Helper Functions}
 \usage{
-chk_filter(.dat, .var, .func, .flt = NULL)
+chk_filter(.dat, .var, .func, .flt = NULL, .args = list())
 
-chk_filter_vars(.dat, .vars, .func, .flt = NULL)
+chk_filter_vars(.dat, .vars, .func, .flt = NULL, .args = list())
 
-chk_filter_all(.dat, .vars, .func, .flt = NULL)
+chk_filter_all(.dat, .vars, .func, .flt = NULL, .args = list())
 
-chk_filter_any(.dat, .vars, .func, .flt = NULL)
+chk_filter_any(.dat, .vars, .func, .flt = NULL, .args = list())
 }
 \arguments{
 \item{.dat}{a `tbl`}

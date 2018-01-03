@@ -1,4 +1,5 @@
 
+#' @export
 expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, ...) {
   exp <- testthat:::as.expectation.logical(ok, failure_message, info = info, srcref = srcref)
 
@@ -17,8 +18,8 @@ expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, ...) 
 }
 
 #' @export
-expect_base <- function(var, base, data = get_reporter()$get_data()) {
-  # act <- list(val = get_reporter()$get_data(), lab = "data")
+expect_base <- function(var, base, data = get_testdata()) {
+  # act <- list(val = get_testdata(), lab = "data")
   act <- quasi_label(rlang::enquo(data))
 
   act$var_desc <- expr_label(get_expr(enquo(var)))
@@ -44,8 +45,8 @@ expect_base <- function(var, base, data = get_reporter()$get_data()) {
 }
 
 #' @export
-expect_cond <- function(cond1, cond2, data = get_reporter()$get_data()) {
-  # act <- list(val = get_reporter()$get_data(), lab = "data")
+expect_cond <- function(cond1, cond2, data = get_testdata()) {
+  # act <- list(val = get_testdata(), lab = "data")
   act <- quasi_label(rlang::enquo(data))
 
   cond1 <- enquo(cond1)
@@ -71,8 +72,8 @@ expect_cond <- function(cond1, cond2, data = get_reporter()$get_data()) {
 }
 
 #' @export
-expect_values <- function(var, ..., miss = TRUE, data = get_reporter()$get_data()) {
-  # act <- list(val = get_reporter()$get_data(), lab = "data")
+expect_values <- function(var, ..., miss = TRUE, data = get_testdata()) {
+  # act <- list(val = get_testdata(), lab = "data")
   act <- quasi_label(rlang::enquo(data))
 
   act$var_desc <- expr_label(get_expr(enquo(var)))
@@ -94,31 +95,43 @@ expect_values <- function(var, ..., miss = TRUE, data = get_reporter()$get_data(
 }
 
 #' @export
-expect_unique <- function(var, filter = NULL, data = get_reporter()$get_data()) {
+expect_unique <- function(var, filter = NULL, data = get_testdata()) {
 }
 
 #' @export
-expect_regex <- function(var, pattern, data = get_reporter()$get_data()) {
+expect_regex <- function(var, pattern, data = get_testdata()) {
 }
 
 #' @export
-expect_func <- function(func, var, ..., data = get_reporter()$get_data()) {
-  func(data[[var]], ...)
-}
-
-expect_allany <- function(func, vars, flt = NULL, data = get_reporter()$get_data(), allany) {
+expect_func <- function(var, func, flt = NULL, data = get_testdata(), args = list()) {
   act <- quasi_label(rlang::enquo(data))
   act$func_desc <- expr_label(get_expr(enquo(func)))
-  act$var_desc <- expr_label(get_expr(enquo(vars)))
+  act$var_desc <- expr_label(get_expr(enquo(var)))
   act$flt_desc <- expr_label(get_expr(enquo(flt)))
 
-  act$result <- allany(data, vars, func, !!enquo(flt))
+  act$result <- chk_filter(data, !!enquo(var), func, !!enquo(flt))
+
+  expect_custom(
+    all(act$result, na.rm = TRUE),
+    sprintf("%s has %i records failing %s on variable %s with filter %s.",
+            act$lab, sum(!act$result, na.rm = TRUE), act$func_desc, act$var_desc, act$flt_desc),
+    failed_count = sum(!act$result, na.rm = TRUE)
+  )
+}
+
+expect_allany <- function(var, func, flt = NULL, data = get_testdata(), args = list(), allany) {
+  act <- quasi_label(rlang::enquo(data))
+  act$func_desc <- expr_label(get_expr(enquo(func)))
+  act$var_desc <- expr_label(get_expr(enquo(var)))
+  act$flt_desc <- expr_label(get_expr(enquo(flt)))
+
+  act$result <- allany(data, var, func, !!enquo(flt), args)
 
   expect_custom(
     all(act$result, na.rm = TRUE),
     sprintf("%s has %i records failing %s on variables %s with filter %s.",
-            act$lab, sum(act$result, na.rm = TRUE), act$func_desc, act$var_desc, act$flt_desc),
-    failed_count = sum(act$result, na.rm = TRUE)
+            act$lab, sum(!act$result, na.rm = TRUE), act$func_desc, act$var_desc, act$flt_desc),
+    failed_count = sum(!act$result, na.rm = TRUE)
   )
 }
 

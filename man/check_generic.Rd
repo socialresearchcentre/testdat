@@ -10,6 +10,7 @@
 \alias{chk_length}
 \alias{chk_miss}
 \alias{chk_nmiss}
+\alias{chk_unique}
 \alias{chk_date_yyyymmdd}
 \alias{chk_date_yyyymm}
 \alias{chk_date_yyyy}
@@ -30,6 +31,8 @@ chk_length(x, len)
 chk_miss(x, miss = getOption("testdat.miss_text"))
 
 chk_nmiss(x, miss = getOption("testdat.miss_text"))
+
+chk_unique(x)
 
 chk_date_yyyymmdd(x)
 
