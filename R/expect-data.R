@@ -1,3 +1,5 @@
+#' @importFrom glue glue
+NULL
 
 #' @export
 expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, ...) {
@@ -36,8 +38,9 @@ expect_base <- function(var, base, data = get_testdata()) {
 
   expect_custom(
     !any(act$total),
-    sprintf("%s has a base mismatch in variable %s. %i cases have %s but %s is missing. %i cases do not have %s but %s is non missing.",
-            act$lab, act$var_desc, sum(act$miss), act$base_desc, act$var_desc, sum(act$nmiss), act$base_desc, act$var_desc),
+    glue("{act$lab} has a base mismatch in variable {act$var_desc}.
+          {sum(act$miss)} cases have {act$base_desc} but {act$var_desc} is missing.
+          {sum(act$nmiss)} cases do not have {act$base_desc} but {act$var_desc} is non missing."),
     failed_count = sum(act$total)
   )
 
@@ -63,8 +66,8 @@ expect_cond <- function(cond1, cond2, data = get_testdata()) {
 
   expect_custom(
     !any(act$cond_fail),
-    sprintf("%s failed consistency check. %i cases have %s but not %s.",
-            act$lab, sum(act$cond_fail), act$cond1_desc, act$cond2_desc),
+    glue("{act$lab} failed consistency check.{sum(act$cond_fail)} cases have \\
+          {act$cond1_desc} but not {act$cond2_desc}."),
     failed_count = sum(act$cond_fail)
   )
 
@@ -85,8 +88,8 @@ expect_values <- function(var, ..., miss = TRUE, data = get_testdata()) {
 
   expect_custom(
     !any(act$vals),
-    sprintf("%s has invalid values in variable %s. %i cases have values other than %s.",
-            act$lab, act$var_desc, sum(act$vals), act$vals_desc),
+    glue("{act$lab} has invalid values in variable {act$var_desc}.\\
+          {sum(act$vals)} cases have values other than {act$vals_desc}."),
     data = list(table(act$val[[act$var]][!act$val[[act$var]] %in% unlist(list(...))])),
     failed_count = sum(act$vals)
   )
@@ -113,8 +116,8 @@ expect_func <- function(var, func, flt = NULL, data = get_testdata(), args = lis
 
   expect_custom(
     all(act$result, na.rm = TRUE),
-    sprintf("%s has %i records failing %s on variable %s with filter %s.",
-            act$lab, sum(!act$result, na.rm = TRUE), act$func_desc, act$var_desc, act$flt_desc),
+    glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records failing \\
+          {act$func_desc} on variable {act$var_desc} with filter {act$flt_desc}."),
     failed_count = sum(!act$result, na.rm = TRUE)
   )
 }
@@ -129,8 +132,8 @@ expect_allany <- function(var, func, flt = NULL, data = get_testdata(), args = l
 
   expect_custom(
     all(act$result, na.rm = TRUE),
-    sprintf("%s has %i records failing %s on variables %s with filter %s.",
-            act$lab, sum(!act$result, na.rm = TRUE), act$func_desc, act$var_desc, act$flt_desc),
+    glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records failing \\
+          {act$func_desc} on variable {act$var_desc} with filter {act$flt_desc}."),
     failed_count = sum(!act$result, na.rm = TRUE)
   )
 }
