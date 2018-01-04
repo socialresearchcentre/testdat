@@ -88,7 +88,7 @@ expect_values <- function(var, ..., miss = TRUE, data = get_testdata()) {
 
   expect_custom(
     !any(act$vals),
-    glue("{act$lab} has invalid values in variable {act$var_desc}.\\
+    glue("{act$lab} has invalid values in variable {act$var_desc}. \\
           {sum(act$vals)} cases have values other than {act$vals_desc}."),
     data = list(table(act$val[[act$var]][!act$val[[act$var]] %in% unlist(list(...))])),
     failed_count = sum(act$vals)
@@ -105,35 +105,21 @@ expect_unique <- function(var, filter = NULL, data = get_testdata()) {
 expect_regex <- function(var, pattern, data = get_testdata()) {
 }
 
-#' @export
-expect_func <- function(var, func, flt = NULL, data = get_testdata(), args = list()) {
-  act <- quasi_label(rlang::enquo(data))
-  act$func_desc <- expr_label(get_expr(enquo(func)))
-  act$var_desc <- expr_label(get_expr(enquo(var)))
-  act$flt_desc <- expr_label(get_expr(enquo(flt)))
-
-  act$result <- chk_filter(data, !!enquo(var), func, !!enquo(flt))
-
-  expect_custom(
-    all(act$result, na.rm = TRUE),
-    glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records failing \\
-          {act$func_desc} on variable {act$var_desc} with filter {act$flt_desc}."),
-    failed_count = sum(!act$result, na.rm = TRUE)
-  )
-}
-
 expect_allany <- function(var, func, flt = NULL, data = get_testdata(), args = list(), allany) {
   act <- quasi_label(rlang::enquo(data))
   act$func_desc <- expr_label(get_expr(enquo(func)))
-  act$var_desc <- expr_label(get_expr(enquo(var)))
+  act$var_desc <- str_replace_all(expr_label(get_expr(enquo(var))), "(^`vars\\(~?)|(\\)`$)", "`")
   act$flt_desc <- expr_label(get_expr(enquo(flt)))
+  act$args_desc <- str_replace_all(expr_label(get_expr(enquo(args))), "(^`list\\(~?)|(\\)`$)", "`")
 
   act$result <- allany(data, var, func, !!enquo(flt), args)
 
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records failing \\
-          {act$func_desc} on variable {act$var_desc} with filter {act$flt_desc}."),
+          {act$func_desc} on variable {act$var_desc}.
+          Filter: {act$flt_desc}
+          Arguments: {act$args_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE)
   )
 }
@@ -143,3 +129,6 @@ expect_all <- function(...) { expect_allany(..., allany = chk_filter_all) }
 
 #' @export
 expect_any <- function(...) { expect_allany(..., allany = chk_filter_any) }
+
+#' @export
+expect_func <- function(var, ...) { expect_allany(vars(!!enquo(var)), ..., allany = chk_filter_all) }

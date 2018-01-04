@@ -31,6 +31,7 @@ context_data <- function(data) {
 
 #' @export
 start_data_test <- function(context, data) {
+  # exists(data)
   set_reporter(ProgressReporter$new())
   context(context)
   context_data(data)
@@ -39,7 +40,7 @@ start_data_test <- function(context, data) {
 #' @export
 end_data_test <- function(context, data) {
   get_reporter()$.end_context()
-  get_reporter()$get_results()
+  # get_reporter()$get_results()
 }
 
 data_reporter <- function() {
