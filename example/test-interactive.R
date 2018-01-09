@@ -75,6 +75,12 @@ test_that("Check formats", {
   expect_func(e314, chk_date_yyyymmdd)
 })
 
+test_that("Uniqueness", {
+  expect_unique(vars(e313, e307))
+  expect_unique(vars(e313), inscope == 0)
+  expect_unique(vars(gosid))
+})
+
 end_data_test("JCU", dat)
 x <- get_reporter()$get_results()
 str(x[[1]]$results[[3]])

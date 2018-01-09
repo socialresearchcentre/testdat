@@ -1,4 +1,5 @@
 #' @importFrom glue glue
+#' @importFrom stringr str_replace_all
 NULL
 
 #' @export
@@ -98,18 +99,38 @@ expect_values <- function(var, ..., miss = TRUE, data = get_testdata()) {
 }
 
 #' @export
-expect_unique <- function(var, filter = NULL, data = get_testdata()) {
+expect_unique <- function(var, flt = TRUE, data = get_testdata()) {
+  act <- quasi_label(rlang::enquo(data))
+  act$var_desc <- str_replace_all(expr_label(get_expr(enquo(var))), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
+
+  flt <- enquo(flt)
+  act$result <- data %>%
+    filter(!!flt) %>%
+    select(!!!var) %>%
+    duplicated %>%
+    not
+
+  expect_custom(
+    all(act$result, na.rm = TRUE),
+    glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} duplicate records \\
+         on variable {act$var_desc}.
+         Filter: {act$flt_desc}"),
+    failed_count = sum(!act$result, na.rm = TRUE)
+  )
+
+  invisible(act$val)
 }
 
 #' @export
 expect_regex <- function(var, pattern, data = get_testdata()) {
 }
 
-expect_allany <- function(var, func, flt = NULL, data = get_testdata(), args = list(), allany) {
+expect_allany <- function(var, func, flt = TRUE, data = get_testdata(), args = list(), allany) {
   act <- quasi_label(rlang::enquo(data))
   act$func_desc <- expr_label(get_expr(enquo(func)))
-  act$var_desc <- str_replace_all(expr_label(get_expr(enquo(var))), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$flt_desc <- expr_label(get_expr(enquo(flt)))
+  act$var_desc  <- str_replace_all(expr_label(get_expr(enquo(var))), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$flt_desc  <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
   act$args_desc <- str_replace_all(expr_label(get_expr(enquo(args))), "(^`list\\(~?)|(\\)`$)", "`")
 
   act$result <- allany(data, var, func, !!enquo(flt), args)
@@ -122,6 +143,8 @@ expect_allany <- function(var, func, flt = NULL, data = get_testdata(), args = l
           Arguments: {act$args_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE)
   )
+
+  invisible(act$val)
 }
 
 #' @export
@@ -132,3 +155,37 @@ expect_any <- function(...) { expect_allany(..., allany = chk_filter_any) }
 
 #' @export
 expect_func <- function(var, ...) { expect_allany(vars(!!enquo(var)), ..., allany = chk_filter_all) }
+
+#' @export
+expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
+                           threshold = 0.05, min = 100, data = get_testdata()) {
+  act <- quasi_label(rlang::enquo(data))
+  act$var_desc   <- str_replace_all(expr_label(get_expr(enquo(var))), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$data2_desc <- expr_label(get_expr(enquo(var)))
+  act$var2_desc  <- str_replace_all(expr_label(get_expr(enquo(var))), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$flt_desc   <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
+  act$flt2_desc  <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
+
+  var <- enquo(var)
+  var2 <- enquo(var2)
+  data_tb  <- data  %>% group_by(!!var)  %>% summarise(freq = n())
+  data2_tb <- data2 %>% group_by(!!var2) %>% summarise(freq = n())
+
+  by_var <- structure(quo_text(var), names = quo_text(var2))
+  act$result <-
+    left_join(data_tb, data2_tb, by = by_var) %>%
+    mutate(prop_diff = abs(freq.x - freq.y) / freq.x,
+           pass = prop_diff < threshold | freq.x < min)
+
+  expect_custom(
+    all(act$result$pass, na.rm = TRUE),
+    glue("{act$lab} has {sum(!act$result$pass, na.rm = TRUE)} \\
+          values breaking the {threshold} similarity threshold for variable \\
+          {act$var_desc}
+          Values: {glue::collapse(act$result %>% filter(!pass) %>% pull(!!var), ', ')}
+          Filter: {act$flt_desc}"),
+    table = act$result
+  )
+
+  invisible(act$val)
+}

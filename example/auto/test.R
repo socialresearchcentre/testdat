@@ -1,3 +1,4 @@
+library(srcsample)
 library(srcqilt)
 # library(testthat)
 library(xlsx)
@@ -33,6 +34,13 @@ test_that("Missing contact details", {
   expect_any(vars(phone1, phone2, phone3), chk_nmiss, inscope == 0)
 })
 
+test_that("Email checks", {
+  expect_all(vars(email1, email2, email3), chk_pattern,
+             args = list(pattern = "^[a-zA-Z0-9._%+'-]+@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+$"))
+  email_valid <- function(x) { !email.error(x) }
+  expect_all(vars(email1, email2, email3), email_valid)
+})
+
 test_that("Range checks", {
   expect_values(inscope, 1:5)
   expect_values(sampleframe, 0:8)
@@ -41,6 +49,12 @@ test_that("Range checks", {
 test_that("Check date formats", {
   expect_func(e314, chk_date_yyyymmdd)
   expect_func(completiondate, chk_date_yyyymmdd)
+})
+
+test_that("Uniqueness checks", {
+  expect_unique(vars(e313, e307))
+  expect_unique(vars(e313), inscope == 0)
+  expect_unique(vars(gosid))
 })
 
 test_that("HEIMS format checks", {

@@ -8,20 +8,20 @@
 \alias{chk_filter_any}
 \title{Checking Helper Functions}
 \usage{
-chk_filter(.dat, .var, .func, .flt = NULL, .args = list())
+chk_filter(.dat, .var, .func, .flt = TRUE, .args = list())
 
-chk_filter_vars(.dat, .vars, .func, .flt = NULL, .args = list())
+chk_filter_vars(.dat, .vars, .func, .flt = TRUE, .args = list())
 
-chk_filter_all(.dat, .vars, .func, .flt = NULL, .args = list())
+chk_filter_all(.dat, .vars, .func, .flt = TRUE, .args = list())
 
-chk_filter_any(.dat, .vars, .func, .flt = NULL, .args = list())
+chk_filter_any(.dat, .vars, .func, .flt = TRUE, .args = list())
 }
 \arguments{
 \item{.dat}{a `tbl`}
 
 \item{.func}{a function to use use for checking. The provided function should take a single vector as input and return a logical vector.}
 
-\item{.flt}{a logical expression to be applied as a filter for the check. THis will be evaluated in the context of .dat}
+\item{.flt}{a logical expression to be applied as a filter for the check. This will be evaluated in the context of .dat}
 
 \item{.args}{a list of additional arguments to be added to the function calls.}
 

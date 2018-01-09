@@ -7,7 +7,7 @@ Description: An extension of testthat made for checking data frames.
 Depends:
     R (>= 3.2.2), testthat (>= 2.0.0)
 Imports:
-    rlang, dplyr, stringr, lubridate, glue
+    rlang, dplyr, stringr, lubridate, glue, tidyr
 License: MIT
 Encoding: UTF-8
 LazyData: true
