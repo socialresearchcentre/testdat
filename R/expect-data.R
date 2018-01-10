@@ -10,7 +10,11 @@ expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, ...) 
 
   withRestarts(
     if (testthat:::expectation_broken(exp)) {
-      stop(exp)
+      if (getOption("testdat.stop_on_fail")) {
+        stop(exp)
+      } else {
+        message(exp)
+      }
     } else {
       signalCondition(exp)
     },
@@ -35,17 +39,17 @@ expect_base <- function(var, base, data = get_testdata()) {
 
   act$miss <- is.na(act$val[[act$var]]) & act$base
   act$nmiss <- !is.na(act$val[[act$var]]) & !act$base
-  act$total <- act$miss | act$nmiss
+  act$result <- !(act$miss | act$nmiss)
 
   expect_custom(
-    !any(act$total),
+    all(act$result, na.rm = TRUE),
     glue("{act$lab} has a base mismatch in variable {act$var_desc}.
           {sum(act$miss)} cases have {act$base_desc} but {act$var_desc} is missing.
           {sum(act$nmiss)} cases do not have {act$base_desc} but {act$var_desc} is non missing."),
-    failed_count = sum(act$total)
+    failed_count = sum(!act$result, na.rm = TRUE)
   )
 
-  invisible(act$val)
+  invisible(act$result)
 }
 
 #' @export
@@ -63,16 +67,16 @@ expect_cond <- function(cond1, cond2, data = get_testdata()) {
   act$cond2 <- act$val %>% transmute(!!cond2) %>% pull(1)
   act$cond2[is.na(act$cond2)] <- FALSE
 
-  act$cond_fail <- act$cond1 & !act$cond2
+  act$result <- !(act$cond1 & !act$cond2)
 
   expect_custom(
-    !any(act$cond_fail),
-    glue("{act$lab} failed consistency check.{sum(act$cond_fail)} cases have \\
-          {act$cond1_desc} but not {act$cond2_desc}."),
-    failed_count = sum(act$cond_fail)
+    all(act$result, na.rm = TRUE),
+    glue("{act$lab} failed consistency check. {sum(!act$result, na.rm = TRUE)} \\
+          cases have {act$cond1_desc} but not {act$cond2_desc}."),
+    failed_count = sum(!act$result, na.rm = TRUE)
   )
 
-  invisible(act$val)
+  invisible(act$result)
 }
 
 #' @export
@@ -84,18 +88,18 @@ expect_values <- function(var, ..., miss = TRUE, data = get_testdata()) {
   act$var <- expr_text(get_expr(enquo(var)))
 
   act$vals_desc <- expr_label(get_expr(list(...))) %>% gsub("(^`list\\()|(\\)`$)", "`", .)
-  act$vals <- !act$val[[act$var]] %in% c(unlist(list(...)),
-                                         ifelse(miss, getOption("testdat.miss"), NULL))
+  act$result <- act$val[[act$var]] %in% c(unlist(list(...)),
+                                          ifelse(miss, getOption("testdat.miss"), NULL))
 
   expect_custom(
-    !any(act$vals),
+    all(act$result, na.rm = TRUE),
     glue("{act$lab} has invalid values in variable {act$var_desc}. \\
-          {sum(act$vals)} cases have values other than {act$vals_desc}."),
+          {sum(!act$result, na.rm = TRUE)} cases have values other than {act$vals_desc}."),
     data = list(table(act$val[[act$var]][!act$val[[act$var]] %in% unlist(list(...))])),
-    failed_count = sum(act$vals)
+    failed_count = sum(!act$result, na.rm = TRUE)
   )
 
-  invisible(act$val)
+  invisible(act$result)
 }
 
 #' @export
@@ -126,7 +130,7 @@ expect_unique <- function(var, flt = TRUE, data = get_testdata()) {
     duplicated_ids = act$result_data %>% filter(count > 1) %>% unique
   )
 
-  invisible(act$val)
+  invisible(act$result)
 }
 
 #' @export
@@ -150,7 +154,7 @@ expect_unique_across <- function(var, flt = TRUE, data = get_testdata()) {
     failed_count = sum(!act$result, na.rm = TRUE)
   )
 
-  invisible(act$val)
+  invisible(act$result)
 }
 
 #' @export
@@ -175,7 +179,7 @@ expect_allany <- function(var, func, flt = TRUE, data = get_testdata(), args = l
     failed_count = sum(!act$result, na.rm = TRUE)
   )
 
-  invisible(act$val)
+  invisible(act$result)
 }
 
 #' @export
@@ -218,5 +222,5 @@ expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
     table = act$result
   )
 
-  invisible(act$val)
+  invisible(act$result$pass)
 }
