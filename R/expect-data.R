@@ -13,7 +13,7 @@ expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, ...) 
       if (getOption("testdat.stop_on_fail")) {
         stop(exp)
       } else {
-        message(exp)
+        warning(exp)
       }
     } else {
       signalCondition(exp)
@@ -22,6 +22,14 @@ expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, ...) 
   )
 
   invisible(exp)
+}
+
+#' @export
+filter_expect <- function(data, expect_function, ..., not = TRUE) {
+  expect_result <- expect_function(..., data = !!enquo(data))
+  if (not) expect_result <- !expect_result
+
+  data %>% filter(expect_result)
 }
 
 #' @export
@@ -103,6 +111,10 @@ expect_values <- function(var, ..., miss = TRUE, data = get_testdata()) {
 }
 
 #' @export
+expect_exclusive <- function(var, exc_var, data = get_testdata()) {
+}
+
+#' @export
 expect_unique <- function(var, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(rlang::enquo(data))
   act$var_desc <- str_replace_all(expr_label(get_expr(enquo(var))), "(^`vars\\(~?)|(\\)`$)", "`")
@@ -135,7 +147,6 @@ expect_unique <- function(var, flt = TRUE, data = get_testdata()) {
 
 #' @export
 expect_unique_across <- function(var, flt = TRUE, data = get_testdata()) {
-  browser()
   act <- quasi_label(rlang::enquo(data))
   act$var_desc <- str_replace_all(expr_label(get_expr(enquo(var))), "(^`vars\\(~?)|(\\)`$)", "`")
   act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
@@ -153,6 +164,32 @@ expect_unique_across <- function(var, flt = TRUE, data = get_testdata()) {
          Filter: {act$flt_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE)
   )
+
+  invisible(act$result)
+}
+
+#' TODO
+#' @export
+expect_unique_combine <- function(var, flt = TRUE, data = get_testdata()) {
+  browser()
+  act <- quasi_label(rlang::enquo(data))
+  act$var_desc <- str_replace_all(expr_label(get_expr(enquo(var))), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
+
+  flt <- enquo(flt)
+  act$result <- data %>%
+    filter(!!flt) %>%
+    select(!!!var) %>%
+    gather(var, val) %>%
+
+
+  expect_custom(
+    all(act$result, na.rm = TRUE),
+    glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records with \\
+         duplicates across variables {act$var_desc}.
+         Filter: {act$flt_desc}"),
+    failed_count = sum(!act$result, na.rm = TRUE)
+    )
 
   invisible(act$result)
 }
