@@ -44,6 +44,8 @@ test_that("Email checks", {
 test_that("Range checks", {
   expect_values(inscope, 1:5)
   expect_values(sampleframe, 0:8)
+  expect_func(inscope, chk_values, args = list(1:5))
+  expect_func(sampleframe, chk_values, args = list(0:8))
 })
 
 test_that("Check date formats", {

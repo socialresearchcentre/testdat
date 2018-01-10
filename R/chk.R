@@ -64,7 +64,7 @@ chk_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
 #' @rdname check_generic
 #' @export
 chk_unique <- function(x) {
-  chk_blank(x) | !duplicated(x)
+  chk_blank(x) | !(duplicated(x, fromLast = T) | duplicated(x, fromLast = F))
 }
 
 #' @rdname check_generic
@@ -83,6 +83,19 @@ chk_date_yyyymm <- function(x) {
 #' @export
 chk_date_yyyy <- function(x) {
   chk_blank(x) | (str_detect(x, "[0-9]{4}") & !is.na(lubridate::ymd(paste0(x, "0101"), quiet = TRUE)))
+}
+
+#' @rdname check_generic
+#' @export
+chk_ascii <- function(x) {
+  is.na(x) | !any(grepl("[^\x20-\x7E]", var))
+}
+
+#' @rdname check_generic
+#' @export
+chk_values <- function(x, ..., miss = TRUE) {
+  x %in% c(unlist(list(...)),
+           ifelse(miss, getOption("testdat.miss"), NULL))
 }
 
 #' Checking Helper Functions

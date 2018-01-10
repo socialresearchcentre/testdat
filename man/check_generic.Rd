@@ -14,6 +14,7 @@
 \alias{chk_date_yyyymmdd}
 \alias{chk_date_yyyymm}
 \alias{chk_date_yyyy}
+\alias{chk_ascii}
 \title{Generic Checking Functions}
 \usage{
 chk_dummy(x)
@@ -39,6 +40,8 @@ chk_date_yyyymmdd(x)
 chk_date_yyyymm(x)
 
 chk_date_yyyy(x)
+
+chk_ascii(x)
 }
 \arguments{
 \item{x}{vector to check}
