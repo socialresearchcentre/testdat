@@ -64,7 +64,7 @@ chk_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
 #' @rdname check_generic
 #' @export
 chk_unique <- function(x) {
-  chk_blank(x) | duplicated(x)
+  chk_blank(x) | !duplicated(x)
 }
 
 #' @rdname check_generic

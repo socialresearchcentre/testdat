@@ -105,16 +105,47 @@ expect_unique <- function(var, flt = TRUE, data = get_testdata()) {
   act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
 
   flt <- enquo(flt)
-  act$result <- data %>%
+  act$result_data <- data %>%
     filter(!!flt) %>%
-    select(!!!var) %>%
-    duplicated %>%
-    not
+    group_by(!!!var) %>%
+    mutate(count = n()) %>%
+    ungroup() %>%
+    select(!!!var, count)
+    # select(!!!var) %>%
+    # duplicated %>%
+    # `!`
+
+  act$result <- act$result_data$count == 1
 
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} duplicate records \\
          on variable {act$var_desc}.
+         Filter: {act$flt_desc}"),
+    failed_count = sum(!act$result, na.rm = TRUE),
+    duplicated_ids = act$result_data %>% filter(count > 1) %>% unique
+  )
+
+  invisible(act$val)
+}
+
+#' @export
+expect_unique_across <- function(var, flt = TRUE, data = get_testdata()) {
+  browser()
+  act <- quasi_label(rlang::enquo(data))
+  act$var_desc <- str_replace_all(expr_label(get_expr(enquo(var))), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
+
+  flt <- enquo(flt)
+  act$result <- data %>%
+    filter(!!flt) %>%
+    select(!!!var) %>%
+    apply(1, function(x) { all(chk_unique(x)) })
+
+  expect_custom(
+    all(act$result, na.rm = TRUE),
+    glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records with \\
+         duplicates across variables {act$var_desc}.
          Filter: {act$flt_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE)
   )
