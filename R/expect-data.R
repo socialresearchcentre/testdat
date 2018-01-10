@@ -26,7 +26,7 @@ expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, ...) 
 
 #' @export
 filter_expect <- function(data, expect_function, ..., not = TRUE) {
-  expect_result <- expect_function(..., data = !!enquo(data))
+  expect_result <- expect_function(..., data = data)
   if (not) expect_result <- !expect_result
 
   data %>% filter(expect_result)
@@ -54,7 +54,8 @@ expect_base <- function(var, base, data = get_testdata()) {
     glue("{act$lab} has a base mismatch in variable {act$var_desc}.
           {sum(act$miss)} cases have {act$base_desc} but {act$var_desc} is missing.
           {sum(act$nmiss)} cases do not have {act$base_desc} but {act$var_desc} is non missing."),
-    failed_count = sum(!act$result, na.rm = TRUE)
+    failed_count = sum(!act$result, na.rm = TRUE),
+    total_count = sum(!is.na(act$result))
   )
 
   invisible(act$result)
@@ -81,7 +82,8 @@ expect_cond <- function(cond1, cond2, data = get_testdata()) {
     all(act$result, na.rm = TRUE),
     glue("{act$lab} failed consistency check. {sum(!act$result, na.rm = TRUE)} \\
           cases have {act$cond1_desc} but not {act$cond2_desc}."),
-    failed_count = sum(!act$result, na.rm = TRUE)
+    failed_count = sum(!act$result, na.rm = TRUE),
+    total_count = sum(!is.na(act$result))
   )
 
   invisible(act$result)
@@ -104,7 +106,8 @@ expect_values <- function(var, ..., miss = TRUE, data = get_testdata()) {
     glue("{act$lab} has invalid values in variable {act$var_desc}. \\
           {sum(!act$result, na.rm = TRUE)} cases have values other than {act$vals_desc}."),
     data = list(table(act$val[[act$var]][!act$val[[act$var]] %in% unlist(list(...))])),
-    failed_count = sum(!act$result, na.rm = TRUE)
+    failed_count = sum(!act$result, na.rm = TRUE),
+    total_count = sum(!is.na(act$result))
   )
 
   invisible(act$result)
@@ -139,6 +142,7 @@ expect_unique <- function(var, flt = TRUE, data = get_testdata()) {
          on variable {act$var_desc}.
          Filter: {act$flt_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE),
+    total_count = sum(!is.na(act$result)),
     duplicated_ids = act$result_data %>% filter(count > 1) %>% unique
   )
 
@@ -162,7 +166,8 @@ expect_unique_across <- function(var, flt = TRUE, data = get_testdata()) {
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records with \\
          duplicates across variables {act$var_desc}.
          Filter: {act$flt_desc}"),
-    failed_count = sum(!act$result, na.rm = TRUE)
+    failed_count = sum(!act$result, na.rm = TRUE),
+    total_count = sum(!is.na(act$result))
   )
 
   invisible(act$result)
@@ -188,7 +193,8 @@ expect_unique_combine <- function(var, flt = TRUE, data = get_testdata()) {
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records with \\
          duplicates across variables {act$var_desc}.
          Filter: {act$flt_desc}"),
-    failed_count = sum(!act$result, na.rm = TRUE)
+    failed_count = sum(!act$result, na.rm = TRUE),
+    total_count = sum(!is.na(act$result))
     )
 
   invisible(act$result)
@@ -213,7 +219,8 @@ expect_allany <- function(var, func, flt = TRUE, data = get_testdata(), args = l
           {act$func_desc} on variable {act$var_desc}.
           Filter: {act$flt_desc}
           Arguments: {act$args_desc}"),
-    failed_count = sum(!act$result, na.rm = TRUE)
+    failed_count = sum(!act$result, na.rm = TRUE),
+    total_count = sum(!is.na(act$result))
   )
 
   invisible(act$result)
