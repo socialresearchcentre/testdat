@@ -12,5 +12,6 @@
 #'
 #' @import rlang
 #' @import dplyr
+#' @import stringr
 #' @keywords internal
 "_PACKAGE"

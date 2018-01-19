@@ -1,5 +1,4 @@
 #' @importFrom glue glue
-#' @importFrom stringr str_replace_all
 NULL
 
 #' @export
