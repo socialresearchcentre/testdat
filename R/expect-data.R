@@ -1,6 +1,26 @@
 #' @importFrom glue glue
 NULL
 
+#' Extension of 'expect' to allow inclusion of custom fields
+#'
+#' Use expect_custom to allow inclusion of arbitrary data in expectation
+#' results. Additional data is stored in a list in an attribute called
+#' \code{custom} in the resulting expectation. THis allows data expectations to
+#' store information about the number of failed and successful cases for
+#' reporting of test results.
+#'
+#' @param ok Was the expectation successful?
+#' @param failure_message What message should be shown if the expectation was
+#'   not successful?
+#' @param info Additional information. Included for backward compatibility only
+#'   and new expectations should not use it.
+#' @param srcref Only needed in very rare circumstances where you need to
+#'   forward a srcref captured elsewhere.
+#' @param ... Additional data to be added to a list in the \code{custom}
+#'   attribute of the resulting expectation.
+#' @examples
+#' x <- expect_custom(TRUE, "Test", extra_data = 1:5, more_data = "Hello")
+#' str(x)
 #' @export
 expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, ...) {
   exp <- testthat:::as.expectation.logical(ok, failure_message, info = info, srcref = srcref)
@@ -32,7 +52,7 @@ filter_expect <- function(data, expect_function, ..., not = TRUE) {
 }
 
 #' @export
-expect_base <- function(var, base, data = get_testdata()) {
+expect_base <- function(var, base, miss = getOption("testdat.miss"), data = get_testdata()) {
   # act <- list(val = get_testdata(), lab = "data")
   act <- quasi_label(rlang::enquo(data))
 
@@ -44,8 +64,8 @@ expect_base <- function(var, base, data = get_testdata()) {
   act$base <- act$val %>% transmute(!!base) %>% pull(1)
   act$base[is.na(act$base)] <- FALSE
 
-  act$miss <- is.na(act$val[[act$var]]) & act$base
-  act$nmiss <- !is.na(act$val[[act$var]]) & !act$base
+  act$miss <- (act$val[[act$var]] %in% miss) & act$base
+  act$nmiss <- !(act$val[[act$var]] %in% miss) & !act$base
   act$result <- !(act$miss | act$nmiss)
 
   expect_custom(
@@ -89,16 +109,16 @@ expect_cond <- function(cond1, cond2, data = get_testdata()) {
 }
 
 #' @export
-expect_values <- function(var, ..., miss = TRUE, data = get_testdata()) {
+expect_values <- function(var, ..., miss = getOption("testdat.miss"), data = get_testdata()) {
   # act <- list(val = get_testdata(), lab = "data")
   act <- quasi_label(rlang::enquo(data))
 
   act$var_desc <- expr_label(get_expr(enquo(var)))
   act$var <- expr_text(get_expr(enquo(var)))
 
-  act$vals_desc <- expr_label(get_expr(list(...))) %>% gsub("(^`list\\()|(\\)`$)", "`", .)
-  act$result <- act$val[[act$var]] %in% c(unlist(list(...)),
-                                          ifelse(miss, getOption("testdat.miss"), NULL))
+  # act$vals_desc <- expr_label(get_expr(list(...))) %>% gsub("(^`list\\()|(\\)`$)", "`", .)
+  act$vals_desc <- expr_text(get_expr(lapply(list(...), as.vector))) %>% gsub("(^list\\()|(\\)$)", "`", .)
+  act$result <- act$val[[act$var]] %in% c(unlist(list(...)), miss)
 
   expect_custom(
     all(act$result, na.rm = TRUE),

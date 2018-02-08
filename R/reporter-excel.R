@@ -136,7 +136,7 @@ output_results_excel <- function(results, file) {
               skipped = sum(status %in% "skip"),
               warning = sum(status %in% "warning")) %>%
     ungroup %>%
-    mutate(context = glue::glue("=HYPERLINK(\"#'{str_sub(context, 1, 31)}'!A1\",\"{context}\")"))
+    mutate(context = glue::glue("=HYPERLINK(\"#'{str_sub(context, 1, 30)}'!A1\",\"{context}\")"))
 
   openxlsx::writeData(wb, "__Summary", summary,
                       headerStyle = openxlsx::createStyle(textDecoration = "bold"))
