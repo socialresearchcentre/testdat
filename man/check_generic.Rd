@@ -66,5 +66,5 @@ A logical vector flagging records that have passed or failed the check
 These functions provide common, simple data checks.
 }
 \seealso{
-[Checking Helper Functions][check_helper]
+\link[=check_helper]{Checking Helper Functions}
 }

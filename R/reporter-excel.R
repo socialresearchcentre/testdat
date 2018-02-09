@@ -118,6 +118,21 @@ summarise_results_excel <- function(results) {
     select(context, everything())
 }
 
+#' Output ListReporter results in Excel format
+#'
+#' THis function outputs ListReporter results to an Excel workbook. The workbook
+#' consists of a summary sheet showing aggregarated results for each context,
+#' and one sheet per context showing details of each unsuccessful test.
+#'
+#' @param results A object of class `testthat_results`, e.g. output from
+#'   [test_dir()] or [test_file()]
+#' @examples
+#' \donotrun{
+#' # Output the results from running all tests in a directory
+#' x <- test_dir(".")
+#' class(x)
+#' output_results_excel(x, "Test results.xlsx")
+#' }
 #' @import openxlsx
 #' @export
 output_results_excel <- function(results, file) {

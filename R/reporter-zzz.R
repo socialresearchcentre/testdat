@@ -1,15 +1,20 @@
 
 #' Get/set test data
 #'
-#' Changes global test data to that specified. Used by data expectation functions
+#' A global test data set is used to avoid having to re-specify the testing
+#' dataset in every test. These functions get and set the global data or set the
+#' data for the current context.
 #'
 #' @keywords internal
 #' @param data data to be used
-#' @name data-accessors
+#' @examples
+#' set_testdata(mtcars)
+#' get_testdata(mtcars)
+#' @name global-data
 NULL
 
-#' @rdname data-accessors
 #' @export
+#' @rdname global-data
 set_testdata <- function(data) {
   old <- testthat:::testthat_env$test_data
   # testthat_env$test_data <- data
@@ -17,30 +22,31 @@ set_testdata <- function(data) {
   invisible(old)
 }
 
-#' @rdname data-accessors
 #' @export
+#' @rdname global-data
 get_testdata <- function() {
   testthat:::testthat_env$test_data
 }
 
 
 #' @export
+#' @rdname global-data
 context_data <- function(data) {
   set_testdata(data)
 }
 
 #' @export
-start_data_test <- function(context, data) {
-  # exists(data)
-  set_reporter(ProgressReporter$new())
+start_data_test <- function(context, data, reporter = default_reporter()) {
+  current_reporter <- find_reporter(reporter)
+  set_reporter(current_reporter)
+
   context(context)
   context_data(data)
 }
 
 #' @export
-end_data_test <- function(context, data) {
+end_data_test <- function() {
   get_reporter()$.end_context()
-  # get_reporter()$get_results()
 }
 
 data_reporter <- function() {

@@ -6,20 +6,21 @@
 \alias{testdat-package}
 \title{R package for data unit testing}
 \description{
-An adaptation of [testthat] for data. See vigenttes for details.
+An adaptation of \link{testthat} for data. See vigenttes for details.
 }
 \section{Options}{
 
-- `testdat.miss`: A vector of values to consider missing (default: `c(NA, "")`).
-- `testdat.miss_text`: A vector of values to consider missing in text variables
-   (default: `c("error", "null", "0", ".", "-", ",", "na", "#n/a", "", NA)`).
-   reports printed for the summary reporter (default: 10).
-- `testdat.stop_on_fail`: Should an expectation raise an error on failure?
-   Useful for interactive use of expectation functions (default: `FALSE`).
+\itemize{
+\item \code{testdat.miss}: A vector of values to consider missing (default: \code{c(NA, "")}).
+\item \code{testdat.miss_text}: A vector of values to consider missing in text variables
+(default: \code{c("error", "null", "0", ".", "-", ",", "na", "#n/a", "", NA)}).
+\item \code{testdat.stop_on_fail}: Should an expectation raise an error on failure?
+Useful for interactive use of expectation functions (default: \code{TRUE}).
+}
 }
 
 \author{
-\strong{Maintainer}: First Last \email{daniel.smith@srcentre.com.au}
+\strong{Maintainer}: Danny Smith \email{daniel.smith@srcentre.com.au}
 
 }
 \keyword{internal}
