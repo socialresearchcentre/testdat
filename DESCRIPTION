@@ -14,7 +14,11 @@ Imports:
     lubridate,
     glue,
     tidyr,
-    openxlsx
+    openxlsx,
+    rstudioapi
+Suggests:
+    knitr,
+    rmarkdown
 License: MIT
 VignetteBuilder: knitr
 Encoding: UTF-8

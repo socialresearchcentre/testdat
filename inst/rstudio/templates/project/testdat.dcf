@@ -1,0 +1,10 @@
+Binding: project_testdat
+Title: R Project using testdat
+
+Parameter: exceldefs
+Widget: CheckboxInput
+Label: Use Excel file for base check definitions
+
+Parameter: excelres
+Widget: CheckboxInput
+Label: Output Excel test results

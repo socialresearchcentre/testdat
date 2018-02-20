@@ -1,0 +1,8 @@
+Binding: proj_test
+Title: Example testdat Project Template
+OpenFiles: INDEX
+
+Parameter: proj_num
+Widget: TextInput
+Label: Project Number (NNNN)
+Position: left
