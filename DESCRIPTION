@@ -1,7 +1,7 @@
 Package: testdat
 Type: Package
 Title: Data Unit Testing for R
-Version: 0.0.0.9003
+Version: 0.0.0.9004
 Authors@R: person("Danny", "Smith", email = "daniel.smith@srcentre.com.au", role = c("aut", "cre"))
 Description: An extension of testthat made for checking data frames.
 Depends:
