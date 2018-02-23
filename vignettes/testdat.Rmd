@@ -1,0 +1,110 @@
+---
+title: "Introduction to testdat"
+# author: "Danny Smith"
+# date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to testdat}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+knitr::opts_chunk$set(collapse = T, comment = "#>", error = T)
+options(tibble.print_min = 4L, tibble.print_max = 4L)
+library(testdat)
+```
+
+testdat is a package designed to ease data validation, particularly for complex
+data processing, inspired by software unit testing. testdat extends the strong
+and flexible unit testing framework already provided by testthat with a family
+of functions and reporting tools focused on checking of data frames.
+
+Features include:
+
+* A fully fledged test framework so you can spend more time specifying tests and
+  less time running them
+
+* A set of common methods for simply specifying data validation rules
+
+* Repeatability of data tests (avoid unintentionally breaking your dataset!)
+
+* Data-focused reporting of test results
+
+## Getting started
+
+As an extension of testthat, testdat uses the same basic testing framework.
+Before using testdat (and reading this documentation), make sure you're familiar
+with the introduction to testthat in
+[R packages](http://r-pkgs.had.co.nz/tests.html).
+
+The main addition in testdat is a set of expectations designed for testing data
+frames and a mechanism to attach a data frame to a testing context.
+
+### Data Expectations
+
+Data expectations fall into a few main classes.
+
+Generic
+
+:   Man page: [generic-expectations](../help/generic-expectations)
+
+    Generic expectations allow for testing of a dataset using an arbitrary
+    function. The function provided should take a single vector as its first
+    argument and return a logical vector showing whether each element has passed
+    or failed. Additional arguments to the checking function can be passed as a
+    list using the `args` argument.
+  
+    testdat includes a set of useful checking functions, a list can be found on
+    the [check_generic](../help/check_generic) man page.
+  
+Conditional
+
+:   Man page: [conditional-expectations](../help/conditional-expectations)
+
+    Conditional expectations check for the co-existence of multiple conditions.
+
+Value
+
+:   Man page: [value-expectations](../help/value-expectations)
+
+    Value expectations test variable values for valid data. Tests include
+    explicit value checks, uniqueness and others.
+
+Dataset Comparison
+
+:   Man page: [datacomp-expectations](../help/datacomp-expectations)
+
+    Dataset comparison expectations test for consistency between datasets, for
+    example ensuring similar frequencies between similar variables in different
+    datasets.
+
+### Data Context
+
+Each set of tests in testthat has a `context()`. In testdat, each context has an
+associated dataset, specified with a call to `context_data()`.
+
+```{r}
+context("Example")
+context_data(iris)
+
+test_that("Variable format checks", {
+  expect_regex(Species, "^[a-z]+$")
+})
+
+test_that("Versicolor has sepal length greater than 5 - will fail", {
+  expect_cond(Species %in% "versicolor", Sepal.Length >= 5)
+})
+```
+
+A call to `context_data()` sets the value of the "global test data set", which
+is used as the default for the `data` argument of the various data expectations.
+`set_testdata()` can also be used to modify the global test data outside of a
+testing context.
+
+```{r}
+set_testdata(mtcars)
+identical(get_testdata(), mtcars)
+
+args(expect_cond)
+```

@@ -6,7 +6,7 @@ output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to testdat}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
@@ -15,7 +15,8 @@ options(tibble.print_min = 4L, tibble.print_max = 4L)
 library(testdat)
 ```
 
-testdat is an R package extending the unit testing framework of testthat to data frames.
+testdat is an R package extending the unit testing framework of testthat to data
+frames.
 
 ## Getting started
 
@@ -28,7 +29,21 @@ frames and a mechanism to attach a data frame to a context.
 
 The different classes of data expectation are:
 
-- [generic-expectations]
-- [conditional-expectations]
-- [value-expectations]
-- [datacomp-expectations]
+#### [Generic](../help/generic-expectations)
+
+  These expectations allow for testing of a dataset using an arbitrary function.
+  The function provided should take a single vector as its first argument and
+  return a logical vector showing whether each element has passed or failed.
+  Additional arguments to the checking function can be passed as a list using
+  the `args` argument.
+  
+  testdat includes a set of useful checking functions, a list can be found on
+  the [check_generic](../help/check_generic) man page.
+  
+#### [Conditional](../help/conditional-expectations)
+
+
+#### [Value](../help/value-expectations)
+
+
+#### [Dataset Comparison](../help/datacomp-expectations)

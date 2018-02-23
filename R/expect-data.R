@@ -134,6 +134,14 @@ expect_regex <- function(var, pattern, flt = TRUE, data = get_testdata()) {
   expect_func(!!enquo(var), chk_pattern, !!enquo(flt), data, args = list(pattern))
 }
 
+#' @export
+#' @rdname value-expectations
+#' @param min minimum value for range check
+#' @param max maximum value for range check
+expect_range <- function(var, min, max, flt = TRUE, data = get_testdata()) {
+  expect_func(!!enquo(var), chk_range, !!enquo(flt), data, args = list(min, max))
+}
+
 # TODO
 # #' @export
 # #' @rdname value-expectations
@@ -234,12 +242,14 @@ expect_unique_combine <- function(vars, flt = TRUE, data = get_testdata()) {
 #'   a logical vector of the same length showing whether an element passed or
 #'   failed
 #' @param args a named list of arguments to pass to `func`
-#' @seealso [check_generics] for a set of generic checking functions
+#' @seealso [check_generic] for a set of generic checking functions
 #' @family data expectations
 #' @name generic-expectations
 NULL
 
-expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(), args = list(), allany) {
+#' @rdname generic-expectations
+expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
+                          args = list(), allany = c(chk_filter_all, chk_filter_any)) {
   act <- quasi_label(enquo(data))
   act$func_desc <- expr_label(get_expr(enquo(func)))
   act$var_desc  <- str_replace_all(expr_label(get_expr(enquo(vars))), "(^`vars\\(~?)|(\\)`$)", "`")

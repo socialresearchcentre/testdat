@@ -108,6 +108,7 @@ chk_values <- function(x, ..., miss = TRUE) {
 #' @param .flt a logical expression to be applied as a filter for the check. This will be evaluated in the context of .dat
 #' @param .args a list of additional arguments to be added to the function calls.
 #' @return A logical vector flagging records that have passed or failed the check, with `NA` where records do not meet the filter
+#' @seealso [Generic Checking Functions][check_generic]
 #' @name check_helper
 NULL
 

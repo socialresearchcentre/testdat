@@ -9,7 +9,7 @@
 #' @param data data to be used
 #' @examples
 #' set_testdata(mtcars)
-#' get_testdata(mtcars)
+#' get_testdata()
 #' @name global-data
 NULL
 

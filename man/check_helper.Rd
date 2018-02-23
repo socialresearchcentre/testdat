@@ -33,3 +33,6 @@ A logical vector flagging records that have passed or failed the check, with \co
 \description{
 These helper functions allowing easy checking over multiple columns and filtering to subsets of the data.
 }
+\seealso{
+\link[=check_generic]{Generic Checking Functions}
+}
