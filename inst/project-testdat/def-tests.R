@@ -1,3 +1,4 @@
+library(dplyr)
 
 read_excel_allsheets <- function(filename) {
   sheets <- openxlsx::getSheetNames(filename)

@@ -1,9 +1,32 @@
 
+#' Setup project for data tests
+#'
+#' `use_testdat()` sets up data testing infrastructure.
+#'
+#' Creates a "test" sub-directory with an example test script `test-example.R`
+#' and a script `_run-all.R` to run all associated tests. Optionally:
+#'
+#' * add files `def-tests.R` and `definitions.xlsx` to allow Excel-defined
+#' tests. To use, add `source("def-tests.R")` to your main testing file.
+#'
+#' * set up to output results to an Excel file `results.xlsx` using the
+#' `output_results_excel()` function.
+#'
+#' * add project build settings in R. This creates a batch file and modifies the
+#' RStudio project so your tests can be run directly from the "Build" menu.
+#'
+#' @param path the project path to use. Defaults to the current open project in
+#'   RStudio.
+#' @param excelres set up to output results to Excel file
+#' @param exceldef set up to read results from definitions file
+#' @param build set up for build automation in RStudio. Different OS require
+#'   different build scripts - this should be either "win" or "linux" as
+#'   applicable
 #' @importFrom rstudioapi getActiveProject
 #' @export
 use_testdat <- function(path = rstudioapi::getActiveProject(),
-                        excelres = FALSE, exceldefs = FALSE, build = FALSE) {
-  project_testdat(path, excelres = excelres, exceldefs = exceldefs, build = build)
+                        excelres = FALSE, exceldef = FALSE, build = FALSE) {
+  project_testdat(path, excelres = excelres, exceldef = exceldef, build = build)
 }
 
 project_testdat <- function(path, ...) {
@@ -37,7 +60,7 @@ project_testdat <- function(path, ...) {
             file.path(path, "tests"))
 
   # copy standard definitions file if required
-  if (dots$exceldefs) {
+  if (dots$exceldef) {
     file.copy(system.file("project-testdat", "definitions.xlsx", package = "testdat"),
               file.path(path, "tests"))
     file.copy(system.file("project-testdat", "def-tests.R", package = "testdat"),
