@@ -20,11 +20,11 @@ NULL
 expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
                            threshold = 0.05, min = 100, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc   <- str_replace_all(expr_label(get_expr(enquo(var))), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$data2_desc <- expr_label(get_expr(enquo(data2)))
-  act$var2_desc  <- str_replace_all(expr_label(get_expr(enquo(var2))), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$flt_desc   <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
-  act$flt2_desc  <- str_replace_all(expr_label(get_expr(enquo(flt2))), "^TRUE$", "None")
+  act$var_desc   <- quasi_repl(enquo(var), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$data2_desc <- quasi_repl(enquo(data2))
+  act$var2_desc  <- quasi_repl(enquo(var2), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$flt_desc   <- quasi_repl(enquo(flt), "^TRUE$", "None")
+  act$flt2_desc  <- quasi_repl(enquo(flt2), "^TRUE$", "None")
 
   var <- enquo(var)
   var2 <- enquo(var2)
@@ -55,7 +55,7 @@ expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
 # #' @rdname datacomp-expectations
 expect_labels_identical <- function(data2, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$data2_desc <- expr_label(get_expr(enquo(var)))
+  act$data2_desc <- quasi_repl(enquo(var))
 
   act$result <- FALSE
 
@@ -63,7 +63,7 @@ expect_labels_identical <- function(data2, data = get_testdata()) {
     all(act$result, na.rm = TRUE),
     glue(""),
     table = act$result
-    )
+  )
 
   invisible(act$result)
 }
@@ -73,10 +73,10 @@ expect_labels_identical <- function(data2, data = get_testdata()) {
 #' @param by a character vector of variables to join by. For details see the man page for dplyr [join][dplyr].
 expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc <- str_replace_all(expr_label(get_expr(enquo(vars))), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$data2_desc <- expr_label(get_expr(enquo(data2)))
-  act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
-  act$by_desc <- str_replace_all(expr_label(get_expr(enquo(by))), "(^`c\\(~?)|(\\)`$)", "`")
+  act$var_desc <- quasi_repl(enquo(vars), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$data2_desc <- quasi_repl(enquo(data2))
+  act$flt_desc <- quasi_repl(enquo(flt), "^TRUE$", "None")
+  act$by_desc <- quasi_repl(enquo(by), "(^`c\\(~?)|(\\)`$)", "`")
 
   var_list <- dplyr:::tbl_at_syms(data, vars) %>% sapply(quo_name)
 
@@ -119,9 +119,9 @@ expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get
 #' @importFrom tidyr replace_na
 expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc <- str_replace_all(expr_label(get_expr(enquo(vars))), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$data2_desc <- expr_label(get_expr(enquo(data2)))
-  act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
+  act$var_desc <- quasi_repl(enquo(vars), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$data2_desc <- quasi_repl(enquo(data2))
+  act$flt_desc <- quasi_repl(enquo(flt), "^TRUE$", "None")
 
   flt <- enquo(flt)
 

@@ -76,3 +76,10 @@ filter_expect <- function(data, expect_function, ..., not = TRUE) {
   data %>% filter(expect_result)
 }
 
+quasi_repl <- function(quo, pattern = NULL, replace = "", label = TRUE) {
+  force(quo)
+
+  desc <- expr_label(get_expr(quo))
+  if (!is.null(pattern)) desc <- str_replace_all(desc, pattern, replace)
+  desc
+}

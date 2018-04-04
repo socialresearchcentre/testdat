@@ -14,7 +14,7 @@ expect_values <- function(var, ..., miss = getOption("testdat.miss"), data = get
   # act <- list(val = get_testdata(), lab = "data")
   act <- quasi_label(enquo(data))
 
-  act$var_desc <- expr_label(get_expr(enquo(var)))
+  act$var_desc <- quasi_repl(enquo(var))
   act$var <- expr_text(get_expr(enquo(var)))
 
   # act$vals_desc <- expr_label(get_expr(list(...))) %>% gsub("(^`list\\()|(\\)`$)", "`", .)
@@ -55,10 +55,10 @@ expect_range <- function(var, min, max, flt = TRUE, data = get_testdata()) {
 #' @param exc_val The value to check for exclusivity (default: `1`)
 expect_exclusive <- function(vars, exc_vars, exc_val = 1, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc <- str_replace_all(expr_label(get_expr(enquo(vars))), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$exc_var_desc <- str_replace_all(expr_label(get_expr(enquo(exc_vars))), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$exc_val_desc <- str_replace_all(expr_label(get_expr(enquo(exc_val))), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
+  act$var_desc <- quasi_repl(enquo(vars), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$exc_var_desc <- quasi_repl(enquo(exc_vars), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$exc_val_desc <- quasi_repl(enquo(exc_val), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$flt_desc <- quasi_repl(enquo(flt), "^TRUE$", "None")
 
   vars_list <- dplyr:::tbl_at_syms(data, vars) %>% sapply(quo_name)
   exc_list <- dplyr:::tbl_at_syms(data, exc_vars) %>% sapply(quo_name)
@@ -108,8 +108,8 @@ expect_exclusive <- function(vars, exc_vars, exc_val = 1, flt = TRUE, data = get
 #' @rdname value-expectations
 expect_unique <- function(vars, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc <- str_replace_all(expr_label(get_expr(enquo(vars))), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
+  act$var_desc <- quasi_repl(enquo(vars), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$flt_desc <- quasi_repl(enquo(flt), "^TRUE$", "None")
 
   flt <- enquo(flt)
   act$result_data <- data %>%
@@ -141,8 +141,8 @@ expect_unique <- function(vars, flt = TRUE, data = get_testdata()) {
 #' @rdname value-expectations
 expect_unique_across <- function(vars, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc <- str_replace_all(expr_label(get_expr(enquo(vars))), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
+  act$var_desc <- quasi_repl(enquo(vars), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$flt_desc <- quasi_repl(enquo(flt), "^TRUE$", "None")
 
   flt <- enquo(flt)
   act$result <- data %>%
@@ -168,8 +168,8 @@ expect_unique_across <- function(vars, flt = TRUE, data = get_testdata()) {
 expect_unique_combine <- function(vars, flt = TRUE, data = get_testdata()) {
   browser()
   act <- quasi_label(enquo(data))
-  act$var_desc <- str_replace_all(expr_label(get_expr(enquo(vars))), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
+  act$var_desc <- quasi_repl(enquo(vars), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$flt_desc <- quasi_repl(enquo(flt), "^TRUE$", "None")
 
   flt <- enquo(flt)
   act$result <- data %>%

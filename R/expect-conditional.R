@@ -21,11 +21,11 @@ expect_base <- function(var, base, miss = getOption("testdat.miss"), data = get_
   # act <- list(val = get_testdata(), lab = "data")
   act <- quasi_label(enquo(data))
 
-  act$var_desc <- expr_label(get_expr(enquo(var)))
+  act$var_desc <- quasi_repl(enquo(var))
   act$var <- expr_text(get_expr(enquo(var)))
 
   base <- enquo(base)
-  act$base_desc <- expr_label(get_expr(base))
+  act$base_desc <- quasi_repl(base)
   act$base <- act$val %>% transmute(!!base) %>% pull(1)
   act$base[is.na(act$base)] <- FALSE
 
@@ -54,12 +54,12 @@ expect_cond <- function(cond1, cond2, data = get_testdata()) {
   act <- quasi_label(enquo(data))
 
   cond1 <- enquo(cond1)
-  act$cond1_desc <- expr_label(get_expr(cond1))
+  act$cond1_desc <- quasi_repl(cond1)
   act$cond1 <- act$val %>% transmute(!!cond1) %>% pull(1)
   act$cond1[is.na(act$cond1)] <- FALSE
 
   cond2 <- enquo(cond2)
-  act$cond2_desc <- expr_label(get_expr(cond2))
+  act$cond2_desc <- quasi_repl(cond2)
   act$cond2 <- act$val %>% transmute(!!cond2) %>% pull(1)
   act$cond2[is.na(act$cond2)] <- FALSE
 

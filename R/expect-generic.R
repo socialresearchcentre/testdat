@@ -16,10 +16,10 @@ NULL
 expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
                           args = list(), allany = c(chk_filter_all, chk_filter_any)) {
   act <- quasi_label(enquo(data))
-  act$func_desc <- expr_label(get_expr(enquo(func)))
-  act$var_desc  <- str_replace_all(expr_label(get_expr(enquo(vars))), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$flt_desc  <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
-  act$args_desc <- str_replace_all(expr_label(get_expr(enquo(args))), "(^`list\\(~?)|(\\)`$)", "`")
+  act$func_desc <- quasi_repl(enquo(func))
+  act$var_desc  <- quasi_repl(enquo(vars), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$flt_desc  <- quasi_repl(enquo(flt), "^TRUE$", "None")
+  act$args_desc <- quasi_repl(enquo(args), "(^`list\\(~?)|(\\)`$)", "`")
 
   act$result <- allany(data, vars, func, !!enquo(flt), args)
 
