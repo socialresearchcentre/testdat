@@ -15,7 +15,7 @@ base_missing  <- names(get_testdata())[!names(get_testdata()) %in% defs[["Base c
 if (length(base_missing) > 0)  warning("Some variables do not appear in the `Base checks` list: ",  paste0("`", base_missing,  "`", collapse = ", "))
 
 value_missing <- names(get_testdata())[!names(get_testdata()) %in% defs[["Value checks"]]$Variable]
-if (length(value_missing) > 0) warning("SOme variables do not appear in the `Value checks` list: ", paste0("`", value_missing, "`", collapse = ", "))
+if (length(value_missing) > 0) warning("Some variables do not appear in the `Value checks` list: ", paste0("`", value_missing, "`", collapse = ", "))
 
 # remove variables with no base check from list
 defs[["Base checks"]] %<>% filter(!is.na(Base))

@@ -4,6 +4,7 @@
 #'
 #' @inheritParams data-params
 #' @param data2 the dataset to compare against
+#' @param not reverse the results of the check
 #' @family data expectations
 #' @name datacomp-expectations
 NULL
@@ -67,26 +68,44 @@ expect_labels_identical <- function(data2, data = get_testdata()) {
   invisible(act$result)
 }
 
-# TODO
-# #' @export
-# #' @rdname datacomp-expectations
-expect_valmatch <- function(data2, vars, by, flt = TRUE, data = get_testdata()) {
-  browser()
+#' @export
+#' @rdname datacomp-expectations
+#' @param by a character vector of variables to join by. For details see the man page for dplyr [join][dplyr].
+expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
   act$var_desc <- str_replace_all(expr_label(get_expr(enquo(vars))), "(^`vars\\(~?)|(\\)`$)", "`")
   act$data2_desc <- expr_label(get_expr(enquo(data2)))
   act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
+  act$by_desc <- str_replace_all(expr_label(get_expr(enquo(by))), "(^`c\\(~?)|(\\)`$)", "`")
+
+  var_list <- dplyr:::tbl_at_syms(data, vars) %>% sapply(quo_name)
+
+  if (length(var_list) == 0)
+    stop("Variable specification `vars(", act$var_desc, ")` does not match any variables in ", act$label, ".", call. = FALSE)
+
+  if (any(!var_list %in% names(data)) | any(!var_list %in% names(data2)))
+    stop("Variable specification `vars(", act$var_desc, ")` specifies variables that are not common to both datasets.", call. = FALSE)
+
+  comp = ifelse(not, "%!=%", "%==%")
+
+  var_expr <- var_list %>%
+    structure(lapply(glue("{.}.x {comp} {.}.y"), parse_expr), names = .)
 
   flt <- enquo(flt)
   act$result <- data %>%
     filter(!!flt) %>%
-    left_join(data2, by = by)
+    left_join(data2, by = by) %>%
+    mutate(!!!var_expr) %>%
+    select(names(var_expr)) %>%
+    apply(1, all)
 
   expect_custom(
     all(act$result, na.rm = TRUE),
-    glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records with \\
-         a mismatch on variables {act$var_desc} in dataset {act$data2_desc}.
-         Filter: {act$flt_desc}"),
+    glue("The join of {act$lab} and {act$data2_desc} by {act$by_desc} has \\
+          {sum(!act$result, na.rm = TRUE)} records with a mismatch on \\
+          variables {act$var_desc}.
+          Filter: {act$flt_desc}
+          Comparison: {comp}"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result))
     )
@@ -94,8 +113,38 @@ expect_valmatch <- function(data2, vars, by, flt = TRUE, data = get_testdata()) 
   invisible(act$result)
 }
 
-# TODO
-# #' @export
-# #' @rdname datacomp-expectations
-expect_valnmatch <- function() {
+#' @export
+#' @rdname datacomp-expectations
+#' @param by a character vector of variables to join by. For details see the man page for dplyr [join][dplyr].
+#' @importFrom tidyr replace_na
+expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata()) {
+  act <- quasi_label(enquo(data))
+  act$var_desc <- str_replace_all(expr_label(get_expr(enquo(vars))), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$data2_desc <- expr_label(get_expr(enquo(data2)))
+  act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
+
+  flt <- enquo(flt)
+
+  act$result <- data %>%
+    filter(!!flt) %>%
+    left_join(data2 %>%
+                select(one_of(suppressMessages(common_by(by, data, data2)$y))) %>%
+                mutate(`__result` = TRUE) %>%
+                unique,
+              by = by) %>%
+    replace_na(list(`__result` = FALSE)) %>%
+    pull(`__result`)
+
+  if (not) act$result <- !act$result
+
+  expect_custom(
+    all(act$result, na.rm = TRUE),
+    glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records that\\
+          {ifelse(not, '', ' do not')} exist in dataset {act$data2_desc}.
+          Filter: {act$flt_desc}"),
+    failed_count = sum(!act$result, na.rm = TRUE),
+    total_count = sum(!is.na(act$result))
+  )
+
+  invisible(act$result)
 }

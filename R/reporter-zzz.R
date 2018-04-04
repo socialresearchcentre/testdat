@@ -25,7 +25,14 @@ set_testdata <- function(data) {
 #' @export
 #' @rdname global-data
 get_testdata <- function() {
-  testthat:::testthat_env$test_data
+  dat <- testthat:::testthat_env$test_data
+
+  if (is.null(dat))
+    stop("A dataset has not been specified for the current context. ",
+         "Use `context_data()` to set the dataset.",
+         call. = FALSE)
+
+  return(dat)
 }
 
 

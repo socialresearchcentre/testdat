@@ -48,10 +48,60 @@ expect_range <- function(var, min, max, flt = TRUE, data = get_testdata()) {
   expect_func(!!enquo(var), chk_range, !!enquo(flt), data, args = list(min, max))
 }
 
-# TODO
-# #' @export
-# #' @rdname value-expectations
-expect_exclusive <- function(var, exc_var, data = get_testdata()) {
+#' @export
+#' @rdname value-expectations
+#' @param exc_vars The variable set to check, specified using [vars()]. This
+#'   should include all variables specified in the `vars` argument
+#' @param exc_val The value to check for exclusivity (default: `1`)
+expect_exclusive <- function(vars, exc_vars, exc_val = 1, flt = TRUE, data = get_testdata()) {
+  act <- quasi_label(enquo(data))
+  act$var_desc <- str_replace_all(expr_label(get_expr(enquo(vars))), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$exc_var_desc <- str_replace_all(expr_label(get_expr(enquo(exc_vars))), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$exc_val_desc <- str_replace_all(expr_label(get_expr(enquo(exc_val))), "(^`vars\\(~?)|(\\)`$)", "`")
+  act$flt_desc <- str_replace_all(expr_label(get_expr(enquo(flt))), "^TRUE$", "None")
+
+  vars_list <- dplyr:::tbl_at_syms(data, vars) %>% sapply(quo_name)
+  exc_list <- dplyr:::tbl_at_syms(data, exc_vars) %>% sapply(quo_name)
+
+  if (any(!vars_list %in% exc_list)) {
+    exc_vars <- c(exc_vars, vars)
+    warning("Some variables in vars ", act$var_desc, " do not exist in exc_vars ",
+            act$exc_var_desc, ". Variable lists will be combined.",
+            call. = FALSE)
+  }
+
+  flt <- enquo(flt)
+  act$result <-
+    # Flags records with no codes or 1 code selected from all vars
+    (data %>%
+       filter(!!flt) %>%
+       mutate_at(exc_vars, funs(`%==%`(., exc_val))) %>%
+       select(!!!exc_vars) %>%
+       apply(1, sum) %>%
+       `%in%`(c(0, 1))) |
+    # Flags codes that do NOT have the exclusive var selected
+    (data %>%
+       filter(!!flt) %>%
+       mutate_at(vars, funs(`%!=%`(., exc_val))) %>%
+       select(!!!vars) %>%
+       apply(1, all))
+
+  # %>%
+  #   mutate(!!!var_expr) %>%
+  #   select(names(var_expr)) %>%
+  #   apply(1, all)
+
+  expect_custom(
+    all(act$result, na.rm = TRUE),
+    glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records with \\
+          non-exclusive values in variables {act$var_desc} in variable set \\
+          {act$exc_var_desc}.
+          Filter: {act$flt_desc}"),
+    failed_count = sum(!act$result, na.rm = TRUE),
+    total_count = sum(!is.na(act$result))
+    )
+
+  invisible(act$result)
 }
 
 #' @export
@@ -77,8 +127,8 @@ expect_unique <- function(vars, flt = TRUE, data = get_testdata()) {
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} duplicate records \\
-         on variable {act$var_desc}.
-         Filter: {act$flt_desc}"),
+          on variable {act$var_desc}.
+          Filter: {act$flt_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result)),
     duplicated_ids = act$result_data %>% filter(count > 1) %>% unique
@@ -103,8 +153,8 @@ expect_unique_across <- function(vars, flt = TRUE, data = get_testdata()) {
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records with \\
-         duplicates across variables {act$var_desc}.
-         Filter: {act$flt_desc}"),
+          duplicates across variables {act$var_desc}.
+          Filter: {act$flt_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result))
   )
@@ -130,8 +180,8 @@ expect_unique_combine <- function(vars, flt = TRUE, data = get_testdata()) {
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records with \\
-         duplicates across variables {act$var_desc}.
-         Filter: {act$flt_desc}"),
+          duplicates across variables {act$var_desc}.
+          Filter: {act$flt_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result))
     )
