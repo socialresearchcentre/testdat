@@ -39,7 +39,8 @@ expect_base <- function(var, base, miss = getOption("testdat.miss"), data = get_
           {sum(act$miss)} cases have {act$base_desc} but {act$var_desc} is missing.
           {sum(act$nmiss)} cases do not have {act$base_desc} but {act$var_desc} is non missing."),
     failed_count = sum(!act$result, na.rm = TRUE),
-    total_count = sum(!is.na(act$result))
+    total_count = sum(!is.na(act$result)),
+    var_desc = act$var
   )
 
   invisible(act$result)
