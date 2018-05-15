@@ -7,7 +7,7 @@
 \title{Expectations: consistency checks}
 \usage{
 expect_base(var, base, miss = getOption("testdat.miss"),
-  data = get_testdata())
+  missing_valid = FALSE, data = get_testdata())
 
 expect_cond(cond1, cond2, data = get_testdata())
 }
@@ -18,6 +18,9 @@ expect_cond(cond1, cond2, data = get_testdata())
 
 \item{miss}{a vector of values to be treated as missing. The
 \link[=testdat]{testdat.miss} option is used by default}
+
+\item{missing_valid}{allow missing values for records meeting the condition.
+This allows 'one way' base checks. This is \code{FALSE} by default.}
 
 \item{data}{data frame to test. The \link[=global-data]{global test data} is used
 by default.}

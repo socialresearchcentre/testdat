@@ -1,4 +1,5 @@
 library(dplyr)
+library(magrittr)
 
 read_excel_allsheets <- function(filename) {
   sheets <- openxlsx::getSheetNames(filename)
@@ -17,15 +18,19 @@ if (length(base_missing) > 0)  warning("Some variables do not appear in the `Bas
 value_missing <- names(get_testdata())[!names(get_testdata()) %in% defs[["Value checks"]]$Variable]
 if (length(value_missing) > 0) warning("Some variables do not appear in the `Value checks` list: ", paste0("`", value_missing, "`", collapse = ", "))
 
-# remove variables with no base check from list
-defs[["Base checks"]] %<>% filter(!is.na(Base))
+# remove variables with no base check from list and
+defs[["Base checks"]] %<>%
+  filter(!is.na(Base)) %>%
+  mutate(`Missing Values` = ifelse(`Missing Values` %in% c(NA, ""), "NULL", `Missing Values`))
 
 #-------------------------------------------------------------------------------
 
 test_that("Base checks", {
   for (i in seq_len(nrow(defs[["Base checks"]]))) {
     expect_base(!!parse_quosure(defs[["Base checks"]][[i, "Variable"]]),
-                !!parse_quosure(defs[["Base checks"]][[i, "Base"]]))
+                !!parse_quosure(defs[["Base checks"]][[i, "Base"]]),
+                c(getOption("testdat.miss"), eval(parse_expr(defs[["Base checks"]][[i, "Missing Values"]]))),
+                defs[["Base checks"]][[i, "Missing Valid"]] %in% TRUE)
   }
 })
 

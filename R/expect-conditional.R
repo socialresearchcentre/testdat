@@ -17,7 +17,9 @@ NULL
 #' @export
 #' @rdname conditional-expectations
 #' @param base condition for missing check
-expect_base <- function(var, base, miss = getOption("testdat.miss"), data = get_testdata()) {
+#' @param missing_valid allow missing values for records meeting the condition.
+#'   This allows 'one way' base checks. This is `FALSE` by default.
+expect_base <- function(var, base, miss = getOption("testdat.miss"), missing_valid = FALSE, data = get_testdata()) {
   # act <- list(val = get_testdata(), lab = "data")
   act <- quasi_label(enquo(data))
 
@@ -29,7 +31,7 @@ expect_base <- function(var, base, miss = getOption("testdat.miss"), data = get_
   act$base <- act$val %>% transmute(!!base) %>% pull(1)
   act$base[is.na(act$base)] <- FALSE
 
-  act$miss <- (act$val[[act$var]] %in% miss) & act$base
+  act$miss <- (act$val[[act$var]] %in% miss & !missing_valid) & act$base
   act$nmiss <- !(act$val[[act$var]] %in% miss) & !act$base
   act$result <- !(act$miss | act$nmiss)
 
