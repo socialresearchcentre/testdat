@@ -34,7 +34,7 @@ chk_equals <- function(x, val) {
 #' @rdname check_generic
 #' @export
 chk_range <- function(x, min, max) {
-  chk_blank(x) | (x >= min & x <= max)
+  chk_blank(x) | ifelse(suppressWarnings((as.numeric(x) >= min & as.numeric(x) <= max)) %in% NA, FALSE, suppressWarnings((as.numeric(x) >= min & as.numeric(x) <= max)))
 }
 
 #' @rdname check_generic
