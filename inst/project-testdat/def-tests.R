@@ -1,5 +1,6 @@
 library(dplyr)
 library(magrittr)
+library(rlang)
 
 read_excel_allsheets <- function(filename) {
   sheets <- openxlsx::getSheetNames(filename)
