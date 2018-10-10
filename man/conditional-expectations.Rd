@@ -45,3 +45,4 @@ Other data expectations: \code{\link{datacomp-expectations}},
   \code{\link{generic-expectations}},
   \code{\link{value-expectations}}
 }
+\concept{data expectations}

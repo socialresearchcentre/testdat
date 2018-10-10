@@ -13,4 +13,5 @@ ExcelReporter
 This reporter gathers all results, adding additional information such as
 test elapsed time, and test filename if available. Very useful for reporting.
 }
+\concept{reporters}
 \keyword{datasets}

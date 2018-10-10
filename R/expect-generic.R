@@ -30,7 +30,9 @@ expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
           Filter: {act$flt_desc}
           Arguments: {act$args_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE),
-    total_count = sum(!is.na(act$result))
+    total_count = sum(!is.na(act$result)),
+    var_desc = act$var_desc,
+    result = act$result
   )
 
   invisible(act$result)

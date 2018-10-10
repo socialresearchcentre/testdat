@@ -58,3 +58,4 @@ Other data expectations: \code{\link{conditional-expectations}},
   \code{\link{datacomp-expectations}},
   \code{\link{generic-expectations}}
 }
+\concept{data expectations}

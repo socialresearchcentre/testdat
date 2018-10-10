@@ -42,7 +42,8 @@ expect_base <- function(var, base, miss = getOption("testdat.miss"), missing_val
           {sum(act$nmiss)} cases do not have {act$base_desc} but {act$var_desc} is non missing."),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result)),
-    var_desc = act$var
+    var_desc = act$var,
+    result = act$result
   )
 
   invisible(act$result)
@@ -73,7 +74,8 @@ expect_cond <- function(cond1, cond2, data = get_testdata()) {
     glue("{act$lab} failed consistency check. {sum(!act$result, na.rm = TRUE)} \\
           cases have {act$cond1_desc} but not {act$cond2_desc}."),
     failed_count = sum(!act$result, na.rm = TRUE),
-    total_count = sum(!is.na(act$result))
+    total_count = sum(!is.na(act$result)),
+    result = act$result
   )
 
   invisible(act$result)

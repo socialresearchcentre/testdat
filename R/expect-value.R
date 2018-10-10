@@ -28,7 +28,8 @@ expect_values <- function(var, ..., miss = getOption("testdat.miss"), data = get
     data = list(table(act$val[[act$var]][!act$val[[act$var]] %in% unlist(list(...))])),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result)),
-    var_desc = act$var
+    var_desc = act$var,
+    result = act$result
   )
 
   invisible(act$result)

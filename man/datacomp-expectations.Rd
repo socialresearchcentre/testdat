@@ -7,8 +7,8 @@
 \alias{expect_join}
 \title{Expectations: cross-dataset expectations}
 \usage{
-expect_similar(var, data2, var2, flt = TRUE, flt2 = flt, threshold = 0.05,
-  min = 100, data = get_testdata())
+expect_similar(var, data2, var2, flt = TRUE, flt2 = flt,
+  threshold = 0.05, min = 100, data = get_testdata())
 
 expect_valmatch(data2, vars, by, not = FALSE, flt = TRUE,
   data = get_testdata())
@@ -52,3 +52,4 @@ Other data expectations: \code{\link{conditional-expectations}},
   \code{\link{generic-expectations}},
   \code{\link{value-expectations}}
 }
+\concept{data expectations}

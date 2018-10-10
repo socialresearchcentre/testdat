@@ -43,3 +43,4 @@ Other data expectations: \code{\link{conditional-expectations}},
   \code{\link{datacomp-expectations}},
   \code{\link{value-expectations}}
 }
+\concept{data expectations}
