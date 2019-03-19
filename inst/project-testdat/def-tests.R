@@ -28,8 +28,8 @@ defs[["Base checks"]] <-
 
 test_that("Base checks", {
   for (i in seq_len(nrow(defs[["Base checks"]]))) {
-    expect_base(!!parse_quo(defs[["Base checks"]][[i, "Variable"]]),
-                !!parse_quo(defs[["Base checks"]][[i, "Base"]]),
+    expect_base(!!parse_expr(defs[["Base checks"]][[i, "Variable"]]),
+                !!parse_expr(defs[["Base checks"]][[i, "Base"]]),
                 c(getOption("testdat.miss"), eval(parse_expr(defs[["Base checks"]][[i, "Missing Values"]]))),
                 defs[["Base checks"]][[i, "Missing Valid"]] %in% TRUE)
   }
@@ -37,7 +37,7 @@ test_that("Base checks", {
 
 # test_that("All labelled variables have no unlabelled values", {
 #   for (i in names(get_testdata())[sapply(get_testdata(), is.labelled)]) {
-#     expect_values(!!parse_quo(i),
+#     expect_values(!!parse_expr(i),
 #                   attr(get_testdata()[[i]], "labels"))
 #   }
 # })
@@ -46,19 +46,19 @@ test_that("Value checks", {
   for (i in seq_len(nrow(defs[["Value checks"]]))) {
     # Length test
     if (!is.na(defs[["Value checks"]][[i, "Max Length"]])) {
-      expect_func(!!parse_quo(defs[["Value checks"]][[i, "Variable"]]),
+      expect_func(!!parse_expr(defs[["Value checks"]][[i, "Variable"]]),
                   chk_length,
                   args = list(defs[["Value checks"]][[i, "Max Length"]]))
     }
     # Pattern test
     if (!is.na(defs[["Value checks"]][[i, "Pattern"]])) {
-      expect_func(!!parse_quo(defs[["Value checks"]][[i, "Variable"]]),
+      expect_func(!!parse_expr(defs[["Value checks"]][[i, "Variable"]]),
                   chk_pattern,
                   args = list(defs[["Value checks"]][[i, "Pattern"]]))
     }
     # Uniqueness test
     if (defs[["Value checks"]][[i, "Unique"]] %in% TRUE) {
-      expect_unique(vars(!!parse_quo(defs[["Base checks"]][[i, "Variable"]])))
+      expect_unique(vars(!!parse_expr(defs[["Base checks"]][[i, "Variable"]])))
     }
     # Value checks
     values <- c()
@@ -71,7 +71,7 @@ test_that("Value checks", {
     }
 
     if (length(values) > 0) {
-      expect_values(!!parse_quo(defs[["Value checks"]][[i, "Variable"]]),
+      expect_values(!!parse_expr(defs[["Value checks"]][[i, "Variable"]]),
                     values)
     }
   }
@@ -79,8 +79,8 @@ test_that("Value checks", {
 
 test_that("Consistency checks", {
   for (i in seq_len(nrow(defs[["Consistency checks"]]))) {
-    expect_cond(!!parse_quo(defs[["Consistency checks"]][[i, "Condition 1"]]),
-                !!parse_quo(defs[["Consistency checks"]][[i, "Condition 2"]]))
+    expect_cond(!!parse_expr(defs[["Consistency checks"]][[i, "Condition 1"]]),
+                !!parse_expr(defs[["Consistency checks"]][[i, "Condition 2"]]))
   }
 })
 
