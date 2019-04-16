@@ -1,26 +1,34 @@
-Package: testdat
 Type: Package
+Package: testdat
 Title: Data Unit Testing for R
 Version: 0.0.0.9010
-Authors@R: person("Danny", "Smith", email = "daniel.smith@srcentre.com.au", role = c("aut", "cre"))
-Description: An extension of testthat made for checking data frames.
+Authors@R: 
+    c(person(given = "Danny",
+             family = "Smith",
+             role = c("aut", "cre"),
+             email = "daniel.smith@srcentre.com.au"),
+      person(given = "The Social Research Centre",
+             role = "cph"))
+Description: An extension of 'testthat' made for checking data
+    frames.
+License: MIT + file LICENSE
 Depends:
     R (>= 3.2.2),
     testthat (>= 2.0.0)
 Imports:
-    rlang,
     dplyr,
-    stringr,
-    lubridate,
     glue,
-    tidyr,
+    lubridate,
     openxlsx,
-    rstudioapi
+    rlang,
+    rstudioapi,
+    stringr,
+    tidyr
 Suggests:
     knitr,
     rmarkdown
-License: MIT
-VignetteBuilder: knitr
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
