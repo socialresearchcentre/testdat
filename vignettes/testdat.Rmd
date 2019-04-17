@@ -105,6 +105,4 @@ testing context.
 ```{r}
 set_testdata(mtcars)
 identical(get_testdata(), mtcars)
-
-args(expect_cond)
 ```

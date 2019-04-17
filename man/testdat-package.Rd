@@ -22,5 +22,10 @@ Useful for interactive use of expectation functions (default: \code{TRUE}).
 \author{
 \strong{Maintainer}: Danny Smith \email{daniel.smith@srcentre.com.au}
 
+Other contributors:
+\itemize{
+  \item The Social Research Centre [copyright holder]
+}
+
 }
 \keyword{internal}
