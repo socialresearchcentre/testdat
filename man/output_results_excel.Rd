@@ -16,7 +16,7 @@ consists of a summary sheet showing aggregarated results for each context,
 and one sheet per context showing details of each unsuccessful test.
 }
 \examples{
-\\donotrun{
+\dontrun{
 # Output the results from running all tests in a directory
 x <- test_dir(".")
 class(x)

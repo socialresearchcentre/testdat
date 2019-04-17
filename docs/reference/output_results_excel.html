@@ -83,6 +83,9 @@ and one sheet per context showing details of each unsuccessful test." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -126,15 +129,12 @@ and one sheet per context showing details of each unsuccessful test.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>\donotrun{
-# Output the results from running all tests in a directory
-x <- test_dir(".")
-class(x)
-output_results_excel(x, "Test results.xlsx")
-}
-</div><div class='output co'>#&gt; <span class='error'>Error: &lt;text&gt;:1:1: unexpected input</span>
-#&gt; <span class='error'>1: \</span>
-#&gt; <span class='error'>    ^</span></div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># Output the results from running all tests in a directory</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>test_dir</span>(<span class='st'>"."</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='no'>x</span>)
+<span class='fu'>output_results_excel</span>(<span class='no'>x</span>, <span class='st'>"Test results.xlsx"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
