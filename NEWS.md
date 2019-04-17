@@ -1,3 +1,3 @@
-# testdat 0.0.2
+# testdat 0.0.1
 
 * Initial release.
