@@ -34,7 +34,7 @@
 
 <meta property="og:description" content="Use expect_custom to allow inclusion of arbitrary data in expectation
 results. Additional data is stored in a list in an attribute called
-custom in the resulting expectation. THis allows data expectations to
+custom in the resulting expectation. This allows data expectations to
 store information about the number of failed and successful cases for
 reporting of test results." />
 <meta name="twitter:card" content="summary" />
@@ -67,7 +67,7 @@ reporting of test results." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9011</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9012</span>
       </span>
     </div>
 
@@ -113,7 +113,7 @@ reporting of test results." />
     
     <p>Use expect_custom to allow inclusion of arbitrary data in expectation
 results. Additional data is stored in a list in an attribute called
-<code>custom</code> in the resulting expectation. THis allows data expectations to
+<code>custom</code> in the resulting expectation. This allows data expectations to
 store information about the number of failed and successful cases for
 reporting of test results.</p>
     
@@ -126,22 +126,21 @@ reporting of test results.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ok</th>
-      <td><p>Was the expectation successful?</p></td>
+      <td><p><code>TRUE</code> or <code>FALSE</code> indicating if the expectation was successful.</p></td>
     </tr>
     <tr>
       <th>failure_message</th>
-      <td><p>What message should be shown if the expectation was
-not successful?</p></td>
+      <td><p>Message to show if the expectation failed.</p></td>
     </tr>
     <tr>
       <th>info</th>
-      <td><p>Additional information. Included for backward compatibility only
-and new expectations should not use it.</p></td>
+      <td><p>Character vector continuing additional information. Included
+for backward compatibility only and new expectations should not use it.</p></td>
     </tr>
     <tr>
       <th>srcref</th>
-      <td><p>Only needed in very rare circumstances where you need to
-forward a srcref captured elsewhere.</p></td>
+      <td><p>Location of the failure. Should only needed to be explicitly
+supplied when you need to forward a srcref captured elsewhere.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -150,12 +149,17 @@ attribute of the resulting expectation.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An expectation object. Signals the expectation condition
+with a <code>continue_test</code> restart.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># calling expect_custom directly with some custom data</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>expect_custom</span>(<span class='fl'>TRUE</span>, <span class='st'>"Test"</span>, <span class='kw'>extra_data</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>more_data</span> <span class='kw'>=</span> <span class='st'>"Hello"</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; List of 3
-#&gt;  $ message: chr "success"
+#&gt;  $ message: chr "Test"
 #&gt;  $ srcref : NULL
 #&gt;  $ custom :List of 2
 #&gt;   ..$ extra_data: int [1:5] 1 2 3 4 5
@@ -191,7 +195,9 @@ attribute of the resulting expectation.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#value">Value</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
