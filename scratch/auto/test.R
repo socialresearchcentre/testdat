@@ -11,7 +11,7 @@ dat <- read.xlsx2(file_name, sheetName = "Population Data", stringsAsFactors = F
   rename_all(tolower)
 
 dat %<>%
-  mutate_if(is.character, funs(ifelse(. %in% "", NA, .)))
+  mutate_if(is.character, ~ifelse(. %in% "", NA, .))
 
 # set_reporter(DataReporter$new())
 context("JCU")

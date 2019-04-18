@@ -9,7 +9,7 @@ dat <- read.xlsx2(file_name, sheetName = "Population Data", stringsAsFactors = F
   rename_all(tolower)
 
 dat %<>%
-  mutate_if(is.character, funs(ifelse(. %in% "", NA, .)))
+  mutate_if(is.character, ~ifelse(. %in% "", NA, .))
 
 start_data_test("JCU", dat)
 

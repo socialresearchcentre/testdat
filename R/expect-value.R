@@ -83,14 +83,14 @@ expect_exclusive <- function(vars, exc_vars, exc_val = 1, flt = TRUE, data = get
     # Flags records with no codes or 1 code selected from all vars
     (data %>%
        filter(!!flt) %>%
-       mutate_at(exc_vars, funs(`%==%`(., exc_val))) %>%
+       mutate_at(exc_vars, ~. %==% exc_val) %>%
        select(!!!exc_vars) %>%
        apply(1, sum) %>%
        `%in%`(c(0, 1))) |
     # Flags codes that do NOT have the exclusive var selected
     (data %>%
        filter(!!flt) %>%
-       mutate_at(vars, funs(`%!=%`(., exc_val))) %>%
+       mutate_at(vars, ~. %!=% exc_val) %>%
        select(!!!vars) %>%
        apply(1, all))
 

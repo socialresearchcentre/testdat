@@ -124,8 +124,8 @@ chk_filter <- function(.dat, .var, .func, .flt = TRUE, .args = list()) {
   # .dat %>% mutate(.chk = if_else(!!.flt, .func(!!.var), NA)) %>% pull(.chk)
   .dat %>%
     mutate(.cond = !!.flt) %>%
-    mutate_at(quos(!!.var), funs(.func, .args = .args)) %>%
-    mutate_at(quos(!!.var), funs(ifelse(.cond, ., NA))) %>%
+    mutate_at(quos(!!.var), ~do.call(.func, c(., .args))) %>%
+    mutate_at(quos(!!.var), ~ifelse(.cond, ., NA)) %>%
     # select(!!!.var)
     pull(!!.var)
 }
@@ -138,8 +138,8 @@ chk_filter_vars <- function(.dat, .vars, .func, .flt = TRUE, .args = list()) {
 
   .dat %>%
     mutate(.cond = !!.flt) %>%
-    mutate_at(.vars, funs(.func, .args = .args)) %>%
-    mutate_at(.vars, funs(ifelse(.cond, ., NA))) %>%
+    mutate_at(quos(!!.var), ~do.call(.func, c(., .args))) %>%
+    mutate_at(.vars, ~ifelse(.cond, ., NA)) %>%
     select(!!!.vars)
 }
 
