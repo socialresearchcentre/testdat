@@ -23,7 +23,8 @@ Imports:
     rlang,
     rstudioapi,
     stringr,
-    tidyr
+    tidyr,
+    tidyselect
 Suggests:
     knitr,
     rmarkdown

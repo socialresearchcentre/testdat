@@ -78,7 +78,7 @@ expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get
   act$flt_desc <- quasi_repl(enquo(flt), "^TRUE$", "None")
   act$by_desc <- quasi_repl(enquo(by), "(^`c\\(~?)|(\\)`$)", "`")
 
-  var_list <- dplyr:::tbl_at_syms(data, vars) %>% sapply(quo_name)
+  var_list <- vars_select(tbl_vars(data), !!!vars) %>% unname
 
   if (length(var_list) == 0)
     stop("Variable specification `vars(", act$var_desc, ")` does not match any variables in ", act$label, ".", call. = FALSE)

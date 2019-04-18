@@ -93,7 +93,7 @@ ExcelReporter <-
 summarise_results <- function(results) {
   lapply(results, function(d) {
     tibble(test = d$test,
-           status = testthat:::expectation_type(d),
+           status = expectation_type(d),
            variable = ifelse(is.null(d$custom$var_desc), NA_character_, d$custom$var_desc),
            description = str_replace_all(d$message, "[[:space:]]", " "),
            failed = ifelse(is.null(d$custom$failed_count), NA_real_, d$custom$failed_count),
@@ -106,7 +106,7 @@ summarise_results_excel <- function(results) {
   lapply(results, function(e) {
     lapply(e$results, function(d) {
       tibble(test = d$test,
-             status = testthat:::expectation_type(d),
+             status = expectation_type(d),
              variable = ifelse(is.null(d$custom$var_desc), NA_character_, d$custom$var_desc),
              description = str_replace_all(d$message, "[[:space:]]", " "),
              failed_records = ifelse(is.null(d$custom$failed_count), NA_real_, d$custom$failed_count),

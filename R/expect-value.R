@@ -68,8 +68,8 @@ expect_exclusive <- function(vars, exc_vars, exc_val = 1, flt = TRUE, data = get
   act$exc_val_desc <- quasi_repl(enquo(exc_val), "(^`vars\\(~?)|(\\)`$)", "`")
   act$flt_desc <- quasi_repl(enquo(flt), "^TRUE$", "None")
 
-  vars_list <- dplyr:::tbl_at_syms(data, vars) %>% sapply(quo_name)
-  exc_list <- dplyr:::tbl_at_syms(data, exc_vars) %>% sapply(quo_name)
+  vars_list <- vars_select(tbl_vars(data), !!!vars) %>% unname
+  exc_list <- vars_select(tbl_vars(data), !!!exc_vars) %>% unname
 
   if (any(!vars_list %in% exc_list)) {
     exc_vars <- c(exc_vars, vars)

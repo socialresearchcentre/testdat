@@ -61,6 +61,8 @@ chk_values(x, ..., miss = TRUE)
 \item{len}{maximum string length for checking string variables}
 
 \item{miss}{vector of values to be treated as missing}
+
+\item{...}{vectors of valid values}
 }
 \value{
 A logical vector flagging records that have passed or failed the check
