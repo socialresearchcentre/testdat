@@ -7,11 +7,14 @@
 #'   a logical vector of the same length showing whether an element passed or
 #'   failed
 #' @param args a named list of arguments to pass to `func`
+#' @param allany function to use to combine results for each vector
+#' @param ... arguments to pass to `expect_allany()`
 #' @seealso [check_generic] for a set of generic checking functions
 #' @family data expectations
 #' @name generic-expectations
 NULL
 
+#' @export
 #' @rdname generic-expectations
 expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
                           args = list(), allany = c(chk_filter_all, chk_filter_any)) {

@@ -19,6 +19,8 @@ chk_filter_any(.dat, .vars, .func, .flt = TRUE, .args = list())
 \arguments{
 \item{.dat}{a \code{tbl}}
 
+\item{.var}{a single column to check}
+
 \item{.func}{a function to use use for checking. The provided function should take a single vector as input and return a logical vector.}
 
 \item{.flt}{a logical expression to be applied as a filter for the check. This will be evaluated in the context of .dat}

@@ -5,6 +5,7 @@
 #' @inheritParams data-params
 #' @param data2 the dataset to compare against
 #' @param not reverse the results of the check
+#' @param by a character vector of variables to join by. For details see the man page for dplyr [join][dplyr::join].
 #' @family data expectations
 #' @name datacomp-expectations
 NULL
@@ -70,7 +71,6 @@ expect_labels_identical <- function(data2, data = get_testdata()) {
 
 #' @export
 #' @rdname datacomp-expectations
-#' @param by a character vector of variables to join by. For details see the man page for dplyr [join][dplyr].
 expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
   act$var_desc <- quasi_repl(enquo(vars), "(^`vars\\(~?)|(\\)`$)", "`")
@@ -115,7 +115,6 @@ expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get
 
 #' @export
 #' @rdname datacomp-expectations
-#' @param by a character vector of variables to join by. For details see the man page for dplyr [join][dplyr].
 #' @importFrom tidyr replace_na
 expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))

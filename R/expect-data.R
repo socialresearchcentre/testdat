@@ -1,6 +1,9 @@
 #' @importFrom glue glue
 NULL
 
+#' @export
+dplyr::vars
+
 #' Expectation params
 #' @keywords internal
 #' @param var an unquoted variable name
@@ -10,6 +13,5 @@ NULL
 #'   [testdat.miss][testdat] option is used by default
 #' @param data data frame to test. The [global test data][global-data] is used
 #'   by default.
-#' @export vars
 #' @name data-params
 NULL

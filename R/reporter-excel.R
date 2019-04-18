@@ -128,6 +128,7 @@ summarise_results_excel <- function(results) {
 #'
 #' @param results A object of class `testthat_results`, e.g. output from
 #'   [test_dir()] or [test_file()]
+#' @param file Output file name
 #' @examples
 #' \dontrun{
 #' # Output the results from running all tests in a directory

@@ -55,6 +55,9 @@ chk_values(x, ..., miss = TRUE)
 
 \item{max}{maximum value for range check}
 
+\item{pattern}{pattern to look for as defined in
+\link[stringr:str_detect]{str_detect()}}
+
 \item{len}{maximum string length for checking string variables}
 
 \item{miss}{vector of values to be treated as missing}

@@ -9,6 +9,8 @@ output_results_excel(results, file)
 \arguments{
 \item{results}{A object of class \code{testthat_results}, e.g. output from
 \code{\link[=test_dir]{test_dir()}} or \code{\link[=test_file]{test_file()}}}
+
+\item{file}{Output file name}
 }
 \description{
 THis function outputs ListReporter results to an Excel workbook. The workbook

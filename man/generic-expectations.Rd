@@ -31,6 +31,10 @@ by default.}
 
 \item{args}{a named list of arguments to pass to \code{func}}
 
+\item{allany}{function to use to combine results for each vector}
+
+\item{...}{arguments to pass to \code{expect_allany()}}
+
 \item{var}{an unquoted variable name}
 }
 \description{
