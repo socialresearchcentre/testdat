@@ -46,8 +46,14 @@ expect_regex <- function(var, pattern, flt = TRUE, data = get_testdata()) {
 #' @rdname value-expectations
 #' @param min minimum value for range check
 #' @param max maximum value for range check
-expect_range <- function(var, min, max, flt = TRUE, data = get_testdata()) {
-  expect_func(!!enquo(var), chk_range, !!enquo(flt), data, args = list(min, max))
+expect_range <- function(var, min, max, ..., flt = TRUE, data = get_testdata()) {
+  expect_func(!!enquo(var),
+              function(x, min, max, ...) {
+                chk_range(x, min, max) | chk_values(x, ...)
+              },
+              !!enquo(flt),
+              data,
+              args = list(min, max, ...))
 }
 
 #' @export
