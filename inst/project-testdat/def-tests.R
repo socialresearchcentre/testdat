@@ -65,7 +65,7 @@ test_that("Value checks", {
     if (defs[["Value checks"]][[i, "Labels"]] %in% TRUE)
       values <- c(values, attr(get_testdata()[[defs[["Value checks"]][[i, "Variable"]]]], "labels"))
 
-    for (j in names(defs[["Value checks"]])[grepl("^ Range ", names(defs[["Value checks"]]))]) {
+    for (j in names(defs[["Value checks"]])[grepl("^Range ", names(defs[["Value checks"]]))]) {
       if (!is.na(defs[["Value checks"]][[i, j]]))
         values <- c(values, eval(parse_expr(defs[["Value checks"]][[i, j]])))
     }
