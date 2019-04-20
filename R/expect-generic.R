@@ -19,12 +19,17 @@ NULL
 expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
                           args = list(), allany = c(chk_filter_all, chk_filter_any)) {
   act <- quasi_label(enquo(data))
-  act$func_desc <- quasi_repl(enquo(func))
-  act$var_desc  <- quasi_repl(enquo(vars), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$flt_desc  <- quasi_repl(enquo(flt), "^TRUE$", "None")
-  act$args_desc <- quasi_repl(enquo(args), "(^`list\\(~?)|(\\)`$)", "`")
+  act$func_desc <- quo_label(enquo(func))
+  act$var_desc  <- quo_label_vars(enquo(vars))
+  act$flt_desc  <- quo_label_flt(enquo(flt))
+  act$args_desc <- quo_label_repl(args, "(^`list\\()|(\\)`$)", "`")
+  # act$args_desc <- lapply(args, as_label) %>% paste0(collapse = ", ")
 
-  act$result <- allany(data, vars, func, !!enquo(flt), args)
+  act$result <- allany(eval_tidy(enquo(data)),
+                       vars,
+                       eval_tidy(enquo(func)),
+                       !!enquo(flt),
+                       args)
 
   expect_custom(
     all(act$result, na.rm = TRUE),
@@ -56,5 +61,5 @@ expect_any <- function(...) {
 #' @export
 #' @rdname generic-expectations
 expect_func <- function(var, ...) {
-  expect_allany(vars(!!enquo(var)), ..., allany = chk_filter_all)
+  expect_allany(vars(!!ensym(var)), ..., allany = chk_filter_all)
 }

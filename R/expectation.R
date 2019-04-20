@@ -89,15 +89,22 @@ filter_expect <- function(data, expect_function, ..., not = TRUE) {
   data %>% filter(expect_result)
 }
 
-quasi_repl <- function(quo, pattern = NULL, replace = "", label = TRUE) {
-  force(quo)
+# labelling helpers ----
 
-  desc <- expr_label(get_expr(quo))
+quasi_repl <- function(quo, pattern = NULL, replace = "", label = TRUE) {
+  desc <- quo_label(quo)
   if (!is.null(pattern)) desc <- str_replace_all(desc, pattern, replace)
   desc
 }
 
-# expectation_type --------------------------------------------------------
+quo_label_repl <- function(quo, pattern, replace = "") {
+  str_replace_all(quo_label(quo), pattern, replace)
+}
+
+quo_label_vars <- function(quo) quo_label_repl(quo, "(^`vars\\()|(\\)`$)", "`")
+quo_label_flt  <- function(quo) quo_label_repl(quo, "^TRUE$", "None")
+
+# expectation_type ----
 
 expectation_type <- function(exp) {
   stopifnot(is.expectation(exp))

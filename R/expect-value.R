@@ -11,14 +11,11 @@ NULL
 #' @rdname value-expectations
 #' @param ... vectors of valid values
 expect_values <- function(var, ..., miss = getOption("testdat.miss"), data = get_testdata()) {
-  # act <- list(val = get_testdata(), lab = "data")
   act <- quasi_label(enquo(data))
 
-  act$var_desc <- quasi_repl(enquo(var))
-  act$var <- expr_text(get_expr(enquo(var)))
-
-  # act$vals_desc <- expr_label(get_expr(list(...))) %>% gsub("(^`list\\()|(\\)`$)", "`", .)
-  act$vals_desc <- expr_text(get_expr(lapply(list(...), as.vector))) %>% gsub("(^list\\()|(\\)$)", "`", .)
+  act$var_desc <- quo_label(ensym(var))
+  act$var <- as_name(ensym(var))
+  act$vals_desc <- lapply(enexprs(...), quo_text) %>% paste0(collapse = ", ") %>% paste0("`", ., "`")
   act$result <- act$val[[act$var]] %in% c(unlist(list(...)), miss)
 
   expect_custom(
@@ -39,7 +36,11 @@ expect_values <- function(var, ..., miss = getOption("testdat.miss"), data = get
 #' @rdname value-expectations
 #' @param pattern a regex to check
 expect_regex <- function(var, pattern, flt = TRUE, data = get_testdata()) {
-  expect_func(!!enquo(var), chk_pattern, !!enquo(flt), data, args = list(pattern))
+  expect_func(!!enquo(var),
+              chk_pattern,
+              !!enquo(flt),
+              !!enquo(data),
+              args = list(pattern = pattern))
 }
 
 #' @export
@@ -52,8 +53,8 @@ expect_range <- function(var, min, max, ..., flt = TRUE, data = get_testdata()) 
                 chk_range(x, min, max) | chk_values(x, ...)
               },
               !!enquo(flt),
-              data,
-              args = list(min, max, ...))
+              !!enquo(data),
+              args = list(min = min, max = max, ...))
 }
 
 #' @export
@@ -63,10 +64,10 @@ expect_range <- function(var, min, max, ..., flt = TRUE, data = get_testdata()) 
 #' @param exc_val The value to check for exclusivity (default: `1`)
 expect_exclusive <- function(vars, exc_vars, exc_val = 1, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc <- quasi_repl(enquo(vars), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$exc_var_desc <- quasi_repl(enquo(exc_vars), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$exc_val_desc <- quasi_repl(enquo(exc_val), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$flt_desc <- quasi_repl(enquo(flt), "^TRUE$", "None")
+  act$var_desc     <- quo_label_vars(enquo(vars))
+  act$exc_var_desc <- quo_label_vars(enquo(exc_vars))
+  act$exc_val_desc <- quo_label(enquo(exc_val))
+  act$flt_desc     <- quo_label_flt(enquo(flt))
 
   vars_list <- vars_select(tbl_vars(data), !!!vars) %>% unname
   exc_list <- vars_select(tbl_vars(data), !!!exc_vars) %>% unname
@@ -116,8 +117,8 @@ expect_exclusive <- function(vars, exc_vars, exc_val = 1, flt = TRUE, data = get
 #' @rdname value-expectations
 expect_unique <- function(vars, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc <- quasi_repl(enquo(vars), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$flt_desc <- quasi_repl(enquo(flt), "^TRUE$", "None")
+  act$var_desc <- quo_label_vars(enquo(vars))
+  act$flt_desc <- quo_label_flt(enquo(flt))
 
   flt <- enquo(flt)
   act$result_data <- data %>%
@@ -149,8 +150,8 @@ expect_unique <- function(vars, flt = TRUE, data = get_testdata()) {
 #' @rdname value-expectations
 expect_unique_across <- function(vars, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc <- quasi_repl(enquo(vars), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$flt_desc <- quasi_repl(enquo(flt), "^TRUE$", "None")
+  act$var_desc <- quo_label_vars(enquo(vars))
+  act$flt_desc <- quo_label_flt(enquo(flt))
 
   flt <- enquo(flt)
   act$result <- data %>%
@@ -176,8 +177,8 @@ expect_unique_across <- function(vars, flt = TRUE, data = get_testdata()) {
 expect_unique_combine <- function(vars, flt = TRUE, data = get_testdata()) {
   browser()
   act <- quasi_label(enquo(data))
-  act$var_desc <- quasi_repl(enquo(vars), "(^`vars\\(~?)|(\\)`$)", "`")
-  act$flt_desc <- quasi_repl(enquo(flt), "^TRUE$", "None")
+  act$var_desc <- quo_label_vars(enquo(vars))
+  act$flt_desc <- quo_label_flt(enquo(flt))
 
   flt <- enquo(flt)
   act$result <- data %>%

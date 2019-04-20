@@ -20,14 +20,13 @@ NULL
 #' @param missing_valid allow missing values for records meeting the condition.
 #'   This allows 'one way' base checks. This is `FALSE` by default.
 expect_base <- function(var, base, miss = getOption("testdat.miss"), missing_valid = FALSE, data = get_testdata()) {
-  # act <- list(val = get_testdata(), lab = "data")
   act <- quasi_label(enquo(data))
 
-  act$var_desc <- quasi_repl(enquo(var))
-  act$var <- expr_text(get_expr(enquo(var)))
+  act$var_desc <- quo_label(ensym(var))
+  act$var <- as_name(ensym(var))
 
   base <- enquo(base)
-  act$base_desc <- quasi_repl(base)
+  act$base_desc <- quo_label(base)
   act$base <- act$val %>% transmute(!!base) %>% pull(1)
   act$base[is.na(act$base)] <- FALSE
 
@@ -54,16 +53,15 @@ expect_base <- function(var, base, miss = getOption("testdat.miss"), missing_val
 #' @param cond1 first condition for consistency check
 #' @param cond2 second condition for consistency check
 expect_cond <- function(cond1, cond2, data = get_testdata()) {
-  # act <- list(val = get_testdata(), lab = "data")
   act <- quasi_label(enquo(data))
 
   cond1 <- enquo(cond1)
-  act$cond1_desc <- quasi_repl(cond1)
+  act$cond1_desc <- quo_label(cond1)
   act$cond1 <- act$val %>% transmute(!!cond1) %>% pull(1)
   act$cond1[is.na(act$cond1)] <- FALSE
 
   cond2 <- enquo(cond2)
-  act$cond2_desc <- quasi_repl(cond2)
+  act$cond2_desc <- quo_label(cond2)
   act$cond2 <- act$val %>% transmute(!!cond2) %>% pull(1)
   act$cond2[is.na(act$cond2)] <- FALSE
 
