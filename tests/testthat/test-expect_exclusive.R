@@ -1,4 +1,3 @@
-library(dplyr)
 context("expect_exclusive")
 
 dat <- tribble(
