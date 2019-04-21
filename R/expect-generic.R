@@ -17,9 +17,11 @@ NULL
 #' @export
 #' @rdname generic-expectations
 expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
-                          args = list(), allany = c(chk_filter_all, chk_filter_any)) {
+                          args = list(),
+                          allany = c(chk_filter_all, chk_filter_any),
+                          func_desc = NULL) {
   act <- quasi_label(enquo(data))
-  act$func_desc <- quo_label(enquo(func))
+  act$func_desc <- if (is_null(func_desc)) quo_label(enquo(func)) else func_desc
   act$var_desc  <- quo_label_vars(enquo(vars))
   act$flt_desc  <- quo_label_flt(enquo(flt))
   act$args_desc <- quo_label_repl(args, "(^`list\\()|(\\)`$)", "`")

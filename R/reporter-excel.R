@@ -19,7 +19,7 @@ summarise_results_excel <- function(results) {
 
 #' Output ListReporter results in Excel format
 #'
-#' THis function outputs ListReporter results to an Excel workbook. The workbook
+#' This function outputs ListReporter results to an Excel workbook. The workbook
 #' consists of a summary sheet showing aggregarated results for each context,
 #' and one sheet per context showing details of each unsuccessful test.
 #'

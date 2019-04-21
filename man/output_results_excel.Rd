@@ -13,7 +13,7 @@ output_results_excel(results, file)
 \item{file}{Output file name}
 }
 \description{
-THis function outputs ListReporter results to an Excel workbook. The workbook
+This function outputs ListReporter results to an Excel workbook. The workbook
 consists of a summary sheet showing aggregarated results for each context,
 and one sheet per context showing details of each unsuccessful test.
 }
