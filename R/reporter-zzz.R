@@ -13,19 +13,21 @@
 #' @name global-data
 NULL
 
+testdat_env <- new.env(parent = emptyenv())
+
 #' @export
 #' @rdname global-data
 set_testdata <- function(data) {
-  old <- testthat:::testthat_env$test_data
+  old <- testdat_env$test_data
   # testthat_env$test_data <- data
-  assign("test_data", data, testthat:::testthat_env)
+  assign("test_data", data, testdat_env)
   invisible(old)
 }
 
 #' @export
 #' @rdname global-data
 get_testdata <- function() {
-  dat <- testthat:::testthat_env$test_data
+  dat <- testdat_env$test_data
 
   if (is.null(dat))
     stop("A dataset has not been specified for the current context. ",
