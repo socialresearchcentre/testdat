@@ -43,21 +43,6 @@ context_data <- function(data) {
   set_testdata(data)
 }
 
-#' @export
-start_data_test <- function(context, data,
-                            reporter = testthat::default_reporter()) {
-  current_reporter <- testthat::find_reporter(reporter)
-  testthat::set_reporter(current_reporter)
-
-  testthat::context(context)
-  context_data(data)
-}
-
-#' @export
-end_data_test <- function() {
-  testthat::get_reporter()$.end_context()
-}
-
 data_reporter <- function() {
   "data"
 }
