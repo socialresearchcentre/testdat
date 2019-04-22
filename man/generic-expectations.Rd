@@ -34,6 +34,9 @@ by default.}
 
 \item{allany}{function to use to combine results for each vector}
 
+\item{func_desc}{A character function description to use in the expectation
+failure message.}
+
 \item{...}{arguments to pass to \code{expect_allany()}}
 
 \item{var}{an unquoted variable name}

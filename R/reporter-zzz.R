@@ -19,7 +19,6 @@ testdat_env <- new.env(parent = emptyenv())
 #' @rdname global-data
 set_testdata <- function(data) {
   old <- testdat_env$test_data
-  # testthat_env$test_data <- data
   assign("test_data", data, testdat_env)
   invisible(old)
 }
@@ -45,17 +44,18 @@ context_data <- function(data) {
 }
 
 #' @export
-start_data_test <- function(context, data, reporter = default_reporter()) {
-  current_reporter <- find_reporter(reporter)
-  set_reporter(current_reporter)
+start_data_test <- function(context, data,
+                            reporter = testthat::default_reporter()) {
+  current_reporter <- testthat::find_reporter(reporter)
+  testthat::set_reporter(current_reporter)
 
-  context(context)
+  testthat::context(context)
   context_data(data)
 }
 
 #' @export
 end_data_test <- function() {
-  get_reporter()$.end_context()
+  testthat::get_reporter()$.end_context()
 }
 
 data_reporter <- function() {

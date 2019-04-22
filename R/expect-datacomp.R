@@ -69,6 +69,7 @@ expect_labels_identical <- function(data2, data = get_testdata()) {
   invisible(act$result)
 }
 
+#' @importFrom tidyselect vars_select
 #' @export
 #' @rdname datacomp-expectations
 expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get_testdata()) {
@@ -115,7 +116,6 @@ expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get
 
 #' @export
 #' @rdname datacomp-expectations
-#' @importFrom tidyr replace_na
 expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
   act$var_desc   <- quo_label_vars(enquo(vars))
@@ -131,7 +131,7 @@ expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_te
                 mutate(`__result` = TRUE) %>%
                 unique,
               by = by) %>%
-    replace_na(list(`__result` = FALSE)) %>%
+    mutate(`__result` = ifelse(is.na(`__result`), FALSE, `__result`)) %>%
     pull(`__result`)
 
   if (not) act$result <- !act$result

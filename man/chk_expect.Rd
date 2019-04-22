@@ -16,6 +16,16 @@ expect_date_yyyymmdd(var, flt = TRUE, data = get_testdata())
 
 expect_max_length(var, len, flt = TRUE, data = get_testdata())
 }
+\arguments{
+\item{var}{an unquoted variable name}
+
+\item{flt}{a filter specifying a subset of the dataset to test}
+
+\item{data}{data frame to test. The \link[=global-data]{global test data} is used
+by default.}
+
+\item{len}{maximum string length for checking string variables}
+}
 \description{
 These expectations are auto-generated from the \code{chk_*()} functions of the
 same name.

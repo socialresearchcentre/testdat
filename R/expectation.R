@@ -47,6 +47,7 @@
 #'
 #' expect_example(x, data = data.frame(x = c(NA, -2:2)))
 #' }
+#' @importFrom testthat expectation is.expectation quasi_label
 #' @export
 expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, ...) {
   type <- if (ok) "success" else "failure"
@@ -81,6 +82,10 @@ expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, ...) 
   invisible(exp)
 }
 
+#' Filter data to expectation result
+#'
+#' \Sexpr[results=rd, stage=render]{testdat:::lifecycle("experimental")}
+#'
 #' @export
 filter_expect <- function(data, expect_function, ..., not = TRUE) {
   expect_result <- expect_function(..., data = data)
@@ -91,6 +96,7 @@ filter_expect <- function(data, expect_function, ..., not = TRUE) {
 
 # labelling helpers ----
 
+#' @importFrom stringr str_replace_all
 quasi_repl <- function(quo, pattern = NULL, replace = "", label = TRUE) {
   desc <- quo_label(quo)
   if (!is.null(pattern)) desc <- str_replace_all(desc, pattern, replace)

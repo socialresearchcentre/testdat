@@ -6,8 +6,10 @@
 #'
 #' @param func A function whose first argument takes a vector to check, and
 #'   returns a logical vector of the same length with the results.
-#' @param func_desc A character function description to use in th
-#' @param vars Should the generated function take a single variable name or a `vars()` object?
+#' @param func_desc A character function description to use in the expectation
+#'   failure message.
+#' @param vars Should the generated function take a single variable name or a
+#'   `vars()` object?
 #' @param all Function to use to combine results for each vector.
 #' @param env The parent environment of the function, defaults to the calling
 #'   environment of `expect_make()`
@@ -54,21 +56,26 @@ expect_make <- function(func, func_desc = NULL, vars = FALSE, all = TRUE, env = 
 #' These expectations are auto-generated from the `chk_*()` functions of the
 #' same name.
 #'
+#' @inheritParams expect_allany
 #' @name chk_expect
 NULL
 
 #' @rdname chk_expect
+#' @inheritParams chk_date_yyyy
 #' @export
 expect_date_yyyy <- expect_make(chk_date_yyyy)
 
 #' @rdname chk_expect
+#' @inheritParams chk_date_yyyymm
 #' @export
 expect_date_yyyymm <- expect_make(chk_date_yyyymm)
 
 #' @rdname chk_expect
+#' @inheritParams chk_date_yyyymmdd
 #' @export
 expect_date_yyyymmdd <- expect_make(chk_date_yyyymmdd)
 
 #' @rdname chk_expect
+#' @inheritParams chk_length
 #' @export
 expect_max_length <- expect_make(chk_length)

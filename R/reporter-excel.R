@@ -1,4 +1,5 @@
 
+#' @importFrom stringr str_replace_all str_sub
 summarise_results_excel <- function(results) {
   lapply(results, function(e) {
     lapply(e$results, function(d) {
@@ -33,7 +34,6 @@ summarise_results_excel <- function(results) {
 #' class(x)
 #' output_results_excel(x, "Test results.xlsx")
 #' }
-#' @import openxlsx
 #' @export
 output_results_excel <- function(results, file) {
   wb <- openxlsx::createWorkbook()

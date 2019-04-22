@@ -23,9 +23,9 @@ Imports:
     rlang,
     rstudioapi,
     stringr,
-    tidyr,
     tidyselect
 Suggests:
+    crayon,
     knitr,
     rmarkdown
 VignetteBuilder: 

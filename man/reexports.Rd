@@ -4,6 +4,15 @@
 \name{reexports}
 \alias{reexports}
 \alias{vars}
+\alias{contains}
+\alias{select_helpers}
+\alias{ends_with}
+\alias{everything}
+\alias{matches}
+\alias{num_range}
+\alias{one_of}
+\alias{starts_with}
+\alias{last_col}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -12,5 +21,7 @@ below to see their documentation.
 
 \describe{
   \item{dplyr}{\code{\link[dplyr]{vars}}}
+
+  \item{tidyselect}{\code{\link[tidyselect]{contains}}, \code{\link[tidyselect]{ends_with}}, \code{\link[tidyselect]{everything}}, \code{\link[tidyselect]{matches}}, \code{\link[tidyselect]{num_range}}, \code{\link[tidyselect]{one_of}}, \code{\link[tidyselect]{starts_with}}, \code{\link[tidyselect]{last_col}}}
 }}
 

@@ -11,9 +11,11 @@ expect_make(func, func_desc = NULL, vars = FALSE, all = TRUE,
 \item{func}{A function whose first argument takes a vector to check, and
 returns a logical vector of the same length with the results.}
 
-\item{func_desc}{A character function description to use in th}
+\item{func_desc}{A character function description to use in the expectation
+failure message.}
 
-\item{vars}{Should the generated function take a single variable name or a \code{vars()} object?}
+\item{vars}{Should the generated function take a single variable name or a
+\code{vars()} object?}
 
 \item{all}{Function to use to combine results for each vector.}
 

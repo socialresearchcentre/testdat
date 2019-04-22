@@ -11,7 +11,5 @@
 #'
 #' @import rlang
 #' @import dplyr
-#' @import stringr
-#' @import tidyselect
 #' @keywords internal
 "_PACKAGE"

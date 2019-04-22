@@ -38,6 +38,7 @@ chk_range <- function(x, min, max) {
 #' @rdname check_generic
 #' @param pattern pattern to look for as defined in
 #'   [str_detect()][stringr::str_detect()]
+#' @importFrom stringr str_detect
 #' @export
 chk_pattern <- function(x, pattern) {
   chk_blank(x) | str_detect(x, pattern)
@@ -45,6 +46,7 @@ chk_pattern <- function(x, pattern) {
 
 #' @rdname check_generic
 #' @param len maximum string length for checking string variables
+#' @importFrom stringr str_length
 #' @export
 chk_length <- function(x, len) {
   chk_blank(x) | str_length(x) <= len
@@ -70,18 +72,24 @@ chk_unique <- function(x) {
 }
 
 #' @rdname check_generic
+#' @importFrom stringr str_detect
+#' @importFrom lubridate ymd
 #' @export
 chk_date_yyyymmdd <- function(x) {
   chk_blank(x) | (str_detect(x, "[0-9]{8}") & !is.na(lubridate::ymd(x, quiet = TRUE)))
 }
 
 #' @rdname check_generic
+#' @importFrom stringr str_detect
+#' @importFrom lubridate ymd
 #' @export
 chk_date_yyyymm <- function(x) {
   chk_blank(x) | (str_detect(x, "[0-9]{6}") & !is.na(lubridate::ymd(paste0(x, "01"), quiet = TRUE)))
 }
 
 #' @rdname check_generic
+#' @importFrom stringr str_detect
+#' @importFrom lubridate ymd
 #' @export
 chk_date_yyyy <- function(x) {
   chk_blank(x) | (str_detect(x, "[0-9]{4}") & !is.na(lubridate::ymd(paste0(x, "0101"), quiet = TRUE)))

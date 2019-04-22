@@ -8,6 +8,8 @@
 #'   failed
 #' @param args a named list of arguments to pass to `func`
 #' @param allany function to use to combine results for each vector
+#' @param func_desc A character function description to use in the expectation
+#'   failure message.
 #' @param ... arguments to pass to `expect_allany()`
 #' @seealso [check_generic] for a set of generic checking functions
 #' @family data expectations
@@ -21,7 +23,7 @@ expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
                           allany = c(chk_filter_all, chk_filter_any),
                           func_desc = NULL) {
   act <- quasi_label(enquo(data))
-  act$func_desc <- if (is_null(func_desc)) quo_label(enquo(func)) else func_desc
+  act$func_desc <- if (is.null(func_desc)) quo_label(enquo(func)) else func_desc
   act$var_desc  <- quo_label_vars(enquo(vars))
   act$flt_desc  <- quo_label_flt(enquo(flt))
   act$args_desc <- quo_label_repl(args, "(^`list\\()|(\\)`$)", "`")

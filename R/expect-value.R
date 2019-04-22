@@ -104,6 +104,7 @@ expect_exclusive <- function(vars, exc_vars, exc_val = 1, flt = TRUE, data = get
   invisible(act$result)
 }
 
+#' @importFrom tidyselect vars_select
 #' @export
 #' @rdname value-expectations
 expect_unique <- function(vars, flt = TRUE, data = get_testdata()) {
