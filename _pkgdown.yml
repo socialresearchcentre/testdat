@@ -2,3 +2,32 @@ destination: docs
 
 development:
   mode: auto
+
+reference:
+- title: Expectations
+  desc: ~
+  contents:
+  - '`conditional-expectations`'
+  - '`value-expectations`'
+  - '`datacomp-expectations`'
+  - '`chk-expect`'
+  - '`generic-expectations`'
+
+- title: Vectorised checking functions
+  desc: ~
+  contents:
+  - '`chk-generic`'
+  - '`chk-helper`'
+
+- title: Configuration
+  desc: ~
+  contents:
+  - '`global-data`'
+  - '`use_testdat`'
+  - '`output_results_excel`'
+
+- title: Advanced
+  desc: ~
+  contents:
+  - '`expect_make`'
+  - '`filter_expect`'

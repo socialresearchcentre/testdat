@@ -56,7 +56,7 @@ Generic
     list using the `args` argument.
   
     testdat includes a set of useful checking functions, a list can be found on
-    the [check_generic](../help/check_generic) man page.
+    the [chk-generic](../help/chk-generic) man page.
   
 Conditional
 

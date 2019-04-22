@@ -1,5 +1,5 @@
 
-#' Make an expectation from a check function
+#' Create an expectation from a check function
 #'
 #' `expect_make()` creates an expection from a vectorised checking function to
 #' allow simple generation of domain specific data checks.
@@ -51,31 +51,31 @@ expect_make <- function(func, func_desc = NULL, vars = FALSE, all = TRUE, env = 
   )
 }
 
-#' Generic Checking Expectations
+#' Expectations: auto-generated
 #'
 #' These expectations are auto-generated from the `chk_*()` functions of the
 #' same name.
 #'
 #' @inheritParams expect_allany
-#' @name chk_expect
+#' @name chk-expect
 NULL
 
-#' @rdname chk_expect
+#' @rdname chk-expect
 #' @inheritParams chk_date_yyyy
 #' @export
 expect_date_yyyy <- expect_make(chk_date_yyyy)
 
-#' @rdname chk_expect
+#' @rdname chk-expect
 #' @inheritParams chk_date_yyyymm
 #' @export
 expect_date_yyyymm <- expect_make(chk_date_yyyymm)
 
-#' @rdname chk_expect
+#' @rdname chk-expect
 #' @inheritParams chk_date_yyyymmdd
 #' @export
 expect_date_yyyymmdd <- expect_make(chk_date_yyyymmdd)
 
-#' @rdname chk_expect
+#' @rdname chk-expect
 #' @inheritParams chk_length
 #' @export
 expect_max_length <- expect_make(chk_length)

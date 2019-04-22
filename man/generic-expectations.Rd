@@ -6,7 +6,7 @@
 \alias{expect_all}
 \alias{expect_any}
 \alias{expect_func}
-\title{Expectations: generic expectations}
+\title{Expectations: generic expectation helpers}
 \usage{
 expect_allany(vars, func, flt = TRUE, data = get_testdata(),
   args = list(), allany = c(chk_filter_all, chk_filter_any),
@@ -45,7 +45,7 @@ failure message.}
 These functions allow for testing of a dataset using an arbitrary function.
 }
 \seealso{
-\link{check_generic} for a set of generic checking functions
+\link{chk-generic} for a set of generic checking functions
 
 Other data expectations: \code{\link{conditional-expectations}},
   \code{\link{datacomp-expectations}},

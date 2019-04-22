@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>R package for data unit testing — testdat-package • testdat</title>
+<title>Generic checking functions — chk-generic • testdat</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="R package for data unit testing — testdat-package" />
+<meta property="og:title" content="Generic checking functions — chk-generic" />
 
-<meta property="og:description" content="An adaptation of testthat for data. See vigenttes for details." />
+<meta property="og:description" content="These functions provide common, simple data checks." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,44 +100,102 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>R package for data unit testing</h1>
+    <h1>Generic checking functions</h1>
     
-    <div class="hidden name"><code>testdat-package.Rd</code></div>
+    <div class="hidden name"><code>chk-generic.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>An adaptation of testthat for data. See vigenttes for details.</p>
+    <p>These functions provide common, simple data checks.</p>
     
     </div>
 
-        
-    <h2 class="hasAnchor" id="options"><a class="anchor" href="#options"></a>Options</h2>
+    <pre class="usage"><span class='fu'>chk_dummy</span>(<span class='no'>x</span>)
 
+<span class='fu'>chk_blank</span>(<span class='no'>x</span>)
+
+<span class='fu'>chk_equals</span>(<span class='no'>x</span>, <span class='no'>val</span>)
+
+<span class='fu'>chk_range</span>(<span class='no'>x</span>, <span class='no'>min</span>, <span class='no'>max</span>)
+
+<span class='fu'>chk_pattern</span>(<span class='no'>x</span>, <span class='no'>pattern</span>)
+
+<span class='fu'>chk_length</span>(<span class='no'>x</span>, <span class='no'>len</span>)
+
+<span class='fu'>chk_miss</span>(<span class='no'>x</span>, <span class='kw'>miss</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"testdat.miss_text"</span>))
+
+<span class='fu'>chk_nmiss</span>(<span class='no'>x</span>, <span class='kw'>miss</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"testdat.miss_text"</span>))
+
+<span class='fu'>chk_unique</span>(<span class='no'>x</span>)
+
+<span class='fu'>chk_date_yyyymmdd</span>(<span class='no'>x</span>)
+
+<span class='fu'>chk_date_yyyymm</span>(<span class='no'>x</span>)
+
+<span class='fu'>chk_date_yyyy</span>(<span class='no'>x</span>)
+
+<span class='fu'>chk_ascii</span>(<span class='no'>x</span>)
+
+<span class='fu'>chk_values</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>miss</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
-    <ul>
-<li><p><code>testdat.miss</code>: A vector of values to consider missing (default: <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c(NA, "")</a></code>).</p></li>
-<li><p><code>testdat.miss_text</code>: A vector of values to consider missing in text variables
-(default: <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("error", "null", "0", ".", "-", ",", "na", "#n/a", "", NA)</a></code>).</p></li>
-<li><p><code>testdat.stop_on_fail</code>: Should an expectation raise an error on failure?
-Useful for interactive use of expectation functions (default: <code>TRUE</code>).</p></li>
-</ul>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>vector to check</p></td>
+    </tr>
+    <tr>
+      <th>val</th>
+      <td><p>value for equality check</p></td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td><p>minimum value for range check</p></td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td><p>maximum value for range check</p></td>
+    </tr>
+    <tr>
+      <th>pattern</th>
+      <td><p>pattern to look for as defined in
+<a href='https://stringr.tidyverse.org/reference/str_detect.html'>str_detect()</a></p></td>
+    </tr>
+    <tr>
+      <th>len</th>
+      <td><p>maximum string length for checking string variables</p></td>
+    </tr>
+    <tr>
+      <th>miss</th>
+      <td><p>vector of values to be treated as missing</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>vectors of valid values</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A logical vector flagging records that have passed or failed the check</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='chk-helper.html'>Checking Helper Functions</a></p></div>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#options">Options</a></li>
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
-
-    <h2>Author</h2>
-    <p><strong>Maintainer</strong>: Danny Smith <a href='mailto:daniel.smith@srcentre.com.au'>daniel.smith@srcentre.com.au</a></p>
-<p>Other contributors:</p><ul>
-<li><p>The Social Research Centre [copyright holder]</p></li>
-</ul>
-
 
   </div>
 </div>

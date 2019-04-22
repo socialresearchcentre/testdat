@@ -1,4 +1,4 @@
-#' Expectations: generic expectations
+#' Expectations: generic expectation helpers
 #'
 #' These functions allow for testing of a dataset using an arbitrary function.
 #'
@@ -11,7 +11,7 @@
 #' @param func_desc A character function description to use in the expectation
 #'   failure message.
 #' @param ... arguments to pass to `expect_allany()`
-#' @seealso [check_generic] for a set of generic checking functions
+#' @seealso [chk-generic] for a set of generic checking functions
 #' @family data expectations
 #' @name generic-expectations
 NULL

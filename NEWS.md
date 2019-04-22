@@ -26,6 +26,6 @@ Initial release.
 
 * Documentation cleanup.
 
-* Removed most R CMD Check warnings.
+* Remove R CMD Check warnings.
 
 * Improved test coverage

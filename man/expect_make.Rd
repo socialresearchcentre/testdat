@@ -2,7 +2,7 @@
 % Please edit documentation in R/expect-make.R
 \name{expect_make}
 \alias{expect_make}
-\title{Make an expectation from a check function}
+\title{Create an expectation from a check function}
 \usage{
 expect_make(func, func_desc = NULL, vars = FALSE, all = TRUE,
   env = caller_env())

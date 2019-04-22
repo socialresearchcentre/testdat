@@ -25,4 +25,3 @@ data for the current context.
 set_testdata(mtcars)
 get_testdata()
 }
-\keyword{internal}

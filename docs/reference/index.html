@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9012</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9013</span>
       </span>
     </div>
 
@@ -111,28 +111,22 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-expectations" class="hasAnchor"><a href="#section-expectations" class="anchor"></a>Expectations</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="check_generic.html">chk_dummy()</a></code> <code><a href="check_generic.html">chk_blank()</a></code> <code><a href="check_generic.html">chk_equals()</a></code> <code><a href="check_generic.html">chk_range()</a></code> <code><a href="check_generic.html">chk_pattern()</a></code> <code><a href="check_generic.html">chk_length()</a></code> <code><a href="check_generic.html">chk_miss()</a></code> <code><a href="check_generic.html">chk_nmiss()</a></code> <code><a href="check_generic.html">chk_unique()</a></code> <code><a href="check_generic.html">chk_date_yyyymmdd()</a></code> <code><a href="check_generic.html">chk_date_yyyymm()</a></code> <code><a href="check_generic.html">chk_date_yyyy()</a></code> <code><a href="check_generic.html">chk_ascii()</a></code> <code><a href="check_generic.html">chk_values()</a></code> </p>
-        </td>
-        <td><p>Generic Checking Functions</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="check_helper.html">chk_filter()</a></code> <code><a href="check_helper.html">chk_filter_vars()</a></code> <code><a href="check_helper.html">chk_filter_all()</a></code> <code><a href="check_helper.html">chk_filter_any()</a></code> </p>
-        </td>
-        <td><p>Checking Helper Functions</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="conditional-expectations.html">expect_base()</a></code> <code><a href="conditional-expectations.html">expect_cond()</a></code> </p>
         </td>
         <td><p>Expectations: consistency checks</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="value-expectations.html">expect_values()</a></code> <code><a href="value-expectations.html">expect_regex()</a></code> <code><a href="value-expectations.html">expect_range()</a></code> <code><a href="value-expectations.html">expect_exclusive()</a></code> <code><a href="value-expectations.html">expect_unique()</a></code> <code><a href="value-expectations.html">expect_unique_across()</a></code> </p>
+        </td>
+        <td><p>Expectations: value checks</p></td>
       </tr><tr>
         
         <td>
@@ -142,22 +136,49 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="ExcelReporter.html">ExcelReporter</a></code> </p>
+          <p><code><a href="chk-expect.html">expect_date_yyyy()</a></code> <code><a href="chk-expect.html">expect_date_yyyymm()</a></code> <code><a href="chk-expect.html">expect_date_yyyymmdd()</a></code> <code><a href="chk-expect.html">expect_max_length()</a></code> </p>
         </td>
-        <td><p>Excel reporter: gather all test results along with elapsed time and
-file information.</p></td>
+        <td><p>Expectations: auto-generated</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="generic-expectations.html">expect_allany()</a></code> <code><a href="generic-expectations.html">expect_all()</a></code> <code><a href="generic-expectations.html">expect_any()</a></code> <code><a href="generic-expectations.html">expect_func()</a></code> </p>
         </td>
-        <td><p>Expectations: generic expectations</p></td>
+        <td><p>Expectations: generic expectation helpers</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-vectorised-checking-functions" class="hasAnchor"><a href="#section-vectorised-checking-functions" class="anchor"></a>Vectorised checking functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="chk-generic.html">chk_dummy()</a></code> <code><a href="chk-generic.html">chk_blank()</a></code> <code><a href="chk-generic.html">chk_equals()</a></code> <code><a href="chk-generic.html">chk_range()</a></code> <code><a href="chk-generic.html">chk_pattern()</a></code> <code><a href="chk-generic.html">chk_length()</a></code> <code><a href="chk-generic.html">chk_miss()</a></code> <code><a href="chk-generic.html">chk_nmiss()</a></code> <code><a href="chk-generic.html">chk_unique()</a></code> <code><a href="chk-generic.html">chk_date_yyyymmdd()</a></code> <code><a href="chk-generic.html">chk_date_yyyymm()</a></code> <code><a href="chk-generic.html">chk_date_yyyy()</a></code> <code><a href="chk-generic.html">chk_ascii()</a></code> <code><a href="chk-generic.html">chk_values()</a></code> </p>
+        </td>
+        <td><p>Generic checking functions</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="output_results_excel.html">output_results_excel()</a></code> </p>
+          <p><code><a href="chk-helper.html">chk_filter()</a></code> <code><a href="chk-helper.html">chk_filter_vars()</a></code> <code><a href="chk-helper.html">chk_filter_all()</a></code> <code><a href="chk-helper.html">chk_filter_any()</a></code> </p>
         </td>
-        <td><p>Output ListReporter results in Excel format</p></td>
+        <td><p>Checking helper functions</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-configuration" class="hasAnchor"><a href="#section-configuration" class="anchor"></a>Configuration</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="global-data.html">set_testdata()</a></code> <code><a href="global-data.html">get_testdata()</a></code> <code><a href="global-data.html">context_data()</a></code> </p>
+        </td>
+        <td><p>Get/set test data</p></td>
       </tr><tr>
         
         <td>
@@ -167,9 +188,29 @@ file information.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="value-expectations.html">expect_values()</a></code> <code><a href="value-expectations.html">expect_regex()</a></code> <code><a href="value-expectations.html">expect_range()</a></code> <code><a href="value-expectations.html">expect_exclusive()</a></code> <code><a href="value-expectations.html">expect_unique()</a></code> <code><a href="value-expectations.html">expect_unique_across()</a></code> </p>
+          <p><code><a href="output_results_excel.html">output_results_excel()</a></code> </p>
         </td>
-        <td><p>Expectations: value checks</p></td>
+        <td><p>Output ListReporter results in Excel format</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-advanced" class="hasAnchor"><a href="#section-advanced" class="anchor"></a>Advanced</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="expect_make.html">expect_make()</a></code> </p>
+        </td>
+        <td><p>Create an expectation from a check function</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="filter_expect.html">filter_expect()</a></code> </p>
+        </td>
+        <td><p>Filter data to expectation result</p></td>
       </tr>
     </tbody>
     </table>
@@ -178,7 +219,10 @@ file information.</p></td>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-expectations">Expectations</a></li>
+      <li><a href="#section-vectorised-checking-functions">Vectorised checking functions</a></li>
+      <li><a href="#section-configuration">Configuration</a></li>
+      <li><a href="#section-advanced">Advanced</a></li>
     </ul>
   </div>
 </div>

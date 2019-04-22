@@ -5,7 +5,6 @@
 #' dataset in every test. These functions get and set the global data or set the
 #' data for the current context.
 #'
-#' @keywords internal
 #' @param data data to be used
 #' @examples
 #' set_testdata(mtcars)

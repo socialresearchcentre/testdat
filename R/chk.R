@@ -1,33 +1,33 @@
-#' Generic Checking Functions
+#' Generic checking functions
 #'
 #' These functions provide common, simple data checks.
 #'
 #' @param x vector to check
 #' @return A logical vector flagging records that have passed or failed the check
-#' @seealso [Checking Helper Functions][check_helper]
-#' @name check_generic
+#' @seealso [Checking Helper Functions][chk-helper]
+#' @name chk-generic
 NULL
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @export
 chk_dummy <- function(x) {
   x == x
 }
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @export
 chk_blank <- function(x) {
   x %in% c("", NA)
 }
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @param val value for equality check
 #' @export
 chk_equals <- function(x, val) {
   chk_blank(x) | x == val
 }
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @param min minimum value for range check
 #' @param max maximum value for range check
 #' @export
@@ -35,7 +35,7 @@ chk_range <- function(x, min, max) {
   chk_blank(x) | ifelse(suppressWarnings((as.numeric(x) >= min & as.numeric(x) <= max)) %in% NA, FALSE, suppressWarnings((as.numeric(x) >= min & as.numeric(x) <= max)))
 }
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @param pattern pattern to look for as defined in
 #'   [str_detect()][stringr::str_detect()]
 #' @importFrom stringr str_detect
@@ -44,7 +44,7 @@ chk_pattern <- function(x, pattern) {
   chk_blank(x) | str_detect(x, pattern)
 }
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @param len maximum string length for checking string variables
 #' @importFrom stringr str_length
 #' @export
@@ -52,26 +52,26 @@ chk_length <- function(x, len) {
   chk_blank(x) | str_length(x) <= len
 }
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @param miss vector of values to be treated as missing
 #' @export
 chk_miss <- function(x, miss = getOption("testdat.miss_text")) {
   tolower(x) %in% miss
 }
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @export
 chk_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
   !chk_miss(x, miss)
 }
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @export
 chk_unique <- function(x) {
   chk_blank(x) | !(duplicated(x, fromLast = T) | duplicated(x, fromLast = F))
 }
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @importFrom stringr str_detect
 #' @importFrom lubridate ymd
 #' @export
@@ -79,7 +79,7 @@ chk_date_yyyymmdd <- function(x) {
   chk_blank(x) | (str_detect(x, "[0-9]{8}") & !is.na(lubridate::ymd(x, quiet = TRUE)))
 }
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @importFrom stringr str_detect
 #' @importFrom lubridate ymd
 #' @export
@@ -87,7 +87,7 @@ chk_date_yyyymm <- function(x) {
   chk_blank(x) | (str_detect(x, "[0-9]{6}") & !is.na(lubridate::ymd(paste0(x, "01"), quiet = TRUE)))
 }
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @importFrom stringr str_detect
 #' @importFrom lubridate ymd
 #' @export
@@ -95,13 +95,13 @@ chk_date_yyyy <- function(x) {
   chk_blank(x) | (str_detect(x, "[0-9]{4}") & !is.na(lubridate::ymd(paste0(x, "0101"), quiet = TRUE)))
 }
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @export
 chk_ascii <- function(x) {
   chk_blank(x) | !any(grepl("[^\x20-\x7E]", x))
 }
 
-#' @rdname check_generic
+#' @rdname chk-generic
 #' @param ... vectors of valid values
 #' @export
 chk_values <- function(x, ..., miss = TRUE) {
@@ -109,7 +109,7 @@ chk_values <- function(x, ..., miss = TRUE) {
            ifelse(miss, getOption("testdat.miss"), NULL))
 }
 
-#' Checking Helper Functions
+#' Checking helper functions
 #'
 #' These helper functions allowing easy checking over multiple columns and filtering to subsets of the data.
 #'
@@ -120,11 +120,11 @@ chk_values <- function(x, ..., miss = TRUE) {
 #' @param .flt a logical expression to be applied as a filter for the check. This will be evaluated in the context of .dat
 #' @param .args a list of additional arguments to be added to the function calls.
 #' @return A logical vector flagging records that have passed or failed the check, with `NA` where records do not meet the filter
-#' @seealso [Generic Checking Functions][check_generic]
-#' @name check_helper
+#' @seealso [Generic Checking Functions][chk-generic]
+#' @name chk-helper
 NULL
 
-#' @rdname check_helper
+#' @rdname chk-helper
 #' @export
 chk_filter <- function(.dat, .var, .func, .flt = TRUE, .args = list()) {
   .var <- enquo(.var)
@@ -139,7 +139,7 @@ chk_filter <- function(.dat, .var, .func, .flt = TRUE, .args = list()) {
     pull(!!.var)
 }
 
-#' @rdname check_helper
+#' @rdname chk-helper
 #' @export
 chk_filter_vars <- function(.dat, .vars, .func, .flt = TRUE, .args = list()) {
   # .vars <- enquo(.vars)
@@ -152,14 +152,14 @@ chk_filter_vars <- function(.dat, .vars, .func, .flt = TRUE, .args = list()) {
     select(!!!.vars)
 }
 
-#' @rdname check_helper
+#' @rdname chk-helper
 #' @export
 chk_filter_all <- function(.dat, .vars, .func, .flt = TRUE, .args = list()) {
   chk_filter_vars(.dat, .vars, .func, !!enquo(.flt), .args) %>%
     apply(1, all)
 }
 
-#' @rdname check_helper
+#' @rdname chk-helper
 #' @export
 chk_filter_any <- function(.dat, .vars, .func, .flt = TRUE, .args = list()) {
   chk_filter_vars(.dat, .vars, .func, !!enquo(.flt), .args) %>%

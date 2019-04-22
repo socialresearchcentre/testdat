@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>R package for data unit testing — testdat-package • testdat</title>
+<title>Expectations: auto-generated — chk-expect • testdat</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="R package for data unit testing — testdat-package" />
+<meta property="og:title" content="Expectations: auto-generated — chk-expect" />
 
-<meta property="og:description" content="An adaptation of testthat for data. See vigenttes for details." />
+<meta property="og:description" content="These expectations are auto-generated from the chk_*() functions of the
+same name." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,44 +101,55 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>R package for data unit testing</h1>
+    <h1>Expectations: auto-generated</h1>
     
-    <div class="hidden name"><code>testdat-package.Rd</code></div>
+    <div class="hidden name"><code>chk-expect.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>An adaptation of testthat for data. See vigenttes for details.</p>
+    <p>These expectations are auto-generated from the <code>chk_*()</code> functions of the
+same name.</p>
     
     </div>
 
-        
-    <h2 class="hasAnchor" id="options"><a class="anchor" href="#options"></a>Options</h2>
+    <pre class="usage"><span class='fu'>expect_date_yyyy</span>(<span class='no'>var</span>, <span class='kw'>flt</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span>())
 
+<span class='fu'>expect_date_yyyymm</span>(<span class='no'>var</span>, <span class='kw'>flt</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span>())
+
+<span class='fu'>expect_date_yyyymmdd</span>(<span class='no'>var</span>, <span class='kw'>flt</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span>())
+
+<span class='fu'>expect_max_length</span>(<span class='no'>var</span>, <span class='no'>len</span>, <span class='kw'>flt</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span>())</pre>
     
-    <ul>
-<li><p><code>testdat.miss</code>: A vector of values to consider missing (default: <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c(NA, "")</a></code>).</p></li>
-<li><p><code>testdat.miss_text</code>: A vector of values to consider missing in text variables
-(default: <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("error", "null", "0", ".", "-", ",", "na", "#n/a", "", NA)</a></code>).</p></li>
-<li><p><code>testdat.stop_on_fail</code>: Should an expectation raise an error on failure?
-Useful for interactive use of expectation functions (default: <code>TRUE</code>).</p></li>
-</ul>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>var</th>
+      <td><p>an unquoted variable name</p></td>
+    </tr>
+    <tr>
+      <th>flt</th>
+      <td><p>a filter specifying a subset of the dataset to test</p></td>
+    </tr>
+    <tr>
+      <th>data</th>
+      <td><p>data frame to test. The <a href='global-data.html'>global test data</a> is used
+by default.</p></td>
+    </tr>
+    <tr>
+      <th>len</th>
+      <td><p>maximum string length for checking string variables</p></td>
+    </tr>
+    </table>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#options">Options</a></li>
-          </ul>
-
-    <h2>Author</h2>
-    <p><strong>Maintainer</strong>: Danny Smith <a href='mailto:daniel.smith@srcentre.com.au'>daniel.smith@srcentre.com.au</a></p>
-<p>Other contributors:</p><ul>
-<li><p>The Social Research Centre [copyright holder]</p></li>
-</ul>
-
+      <li><a href="#arguments">Arguments</a></li>
+                </ul>
 
   </div>
 </div>

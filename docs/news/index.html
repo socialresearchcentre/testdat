@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9012</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9013</span>
       </span>
     </div>
 
@@ -101,12 +101,38 @@
       
     </div>
 
-    <div id="testdat-001" class="section level1">
+    <div id="testdat-0-0-1" class="section level1">
 <h1 class="page-header">
-<a href="#testdat-001" class="anchor"></a>testdat 0.0.1</h1>
+<a href="#testdat-0-0-1" class="anchor"></a>testdat 0.0.1</h1>
+<p>Initial release.</p>
+<div id="major-changes-from-early-development-releases" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major-changes-from-early-development-releases" class="anchor"></a>Major changes from early development releases</h2>
 <ul>
-<li>Initial release.</li>
+<li><p>Removed <code>start_data_test</code> and <code>end_data_test</code> as they don’t have a clear use case.</p></li>
+<li><p>Moved <code>use_testdat</code> into srcproj, it’s a more natural home.</p></li>
+<li><p>Removed <code>ExcelReporter</code>, it is unnecessary since we have Excel output from a ListReporter.</p></li>
+<li><p>New expectation factory function <code><a href="../reference/expect_make.html">expect_make()</a></code> allows users to automagically convert a logical check function of the form used by <code>chk_*()</code> into an expectation.</p></li>
 </ul>
+</div>
+<div id="minor-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes" class="anchor"></a>Minor changes</h2>
+<ul>
+<li>
+<p>Added new expectations and options:</p>
+<ul>
+<li><p><code><a href="../reference/value-expectations.html">expect_range()</a></code> now takes extra allowable values in <code>...</code>. Specifically for cases where there is a bounded range with specified values outside (e.g. missing value codes).</p></li>
+<li><p><code><a href="../reference/conditional-expectations.html">expect_base()</a></code> has a new flag <code>missing_valid</code>. If set to <code>TRUE</code>, missing values are considered valid responses for records that meet the base condition. This allows for one-way base checks, i.e. records <em>not</em> meeting the base condition should be missing, but for records meeting the base condition we don’t care.</p></li>
+</ul>
+</li>
+<li><p>Extensive cleanup of rlang usage to follow better practices. Expression capture for expectation messages should be much cleaner.</p></li>
+<li><p>Simplified dependencies.</p></li>
+<li><p>Documentation cleanup.</p></li>
+<li><p>Remove R CMD Check warnings.</p></li>
+<li><p>Improved test coverage</p></li>
+</ul>
+</div>
 </div>
   </div>
 
@@ -114,7 +140,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#testdat-001">0.0.1</a></li>
+        <li><a href="#testdat-0-0-1">0.0.1</a></li>
       </ul>
     </div>
   </div>

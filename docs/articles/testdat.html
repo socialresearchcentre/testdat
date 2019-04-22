@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9011</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9013</span>
       </span>
     </div>
 
@@ -96,7 +96,7 @@
 <dd>
 <p>Man page: <a href="../help/generic-expectations">generic-expectations</a></p>
 <p>Generic expectations allow for testing of a dataset using an arbitrary function. The function provided should take a single vector as its first argument and return a logical vector showing whether each element has passed or failed. Additional arguments to the checking function can be passed as a list using the <code>args</code> argument.</p>
-<p>testdat includes a set of useful checking functions, a list can be found on the <a href="../help/check_generic">check_generic</a> man page.</p>
+<p>testdat includes a set of useful checking functions, a list can be found on the <a href="../help/chk-generic">chk-generic</a> man page.</p>
 </dd>
 <dt>Conditional</dt>
 <dd>
@@ -119,22 +119,22 @@
 <h3 class="hasAnchor">
 <a href="#data-context" class="anchor"></a>Data Context</h3>
 <p>Each set of tests in testthat has a <code>context()</code>. In testdat, each context has an associated dataset, specified with a call to <code><a href="../reference/global-data.html">context_data()</a></code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">context</span>(<span class="st">"Example"</span>)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="../reference/global-data.html">context_data</a></span>(iris)</a>
-<a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">test_that</span>(<span class="st">"Variable format checks"</span>, {</a>
-<a class="sourceLine" id="cb1-5" title="5">  <span class="kw"><a href="../reference/value-expectations.html">expect_regex</a></span>(Species, <span class="st">"^[a-z]+$"</span>)</a>
-<a class="sourceLine" id="cb1-6" title="6">})</a>
-<a class="sourceLine" id="cb1-7" title="7"></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="kw">test_that</span>(<span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, {</a>
-<a class="sourceLine" id="cb1-9" title="9">  <span class="kw"><a href="../reference/conditional-expectations.html">expect_cond</a></span>(Species <span class="op">%in%</span><span class="st"> "versicolor"</span>, Sepal.Length <span class="op">&gt;=</span><span class="st"> </span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb1-10" title="10">})</a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="co">#&gt; Error: Test failed: 'Versicolor has sepal length greater than 5 - will fail'</span></a>
-<a class="sourceLine" id="cb1-12" title="12"><span class="co">#&gt; * get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">context</span>(<span class="st">"Example"</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="../reference/global-data.html">context_data</a></span>(iris)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">test_that</span>(<span class="st">"Variable format checks"</span>, {</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="kw"><a href="../reference/value-expectations.html">expect_regex</a></span>(Species, <span class="st">"^[a-z]+$"</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">})</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw">test_that</span>(<span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, {</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="kw"><a href="../reference/conditional-expectations.html">expect_cond</a></span>(Species <span class="op">%in%</span><span class="st"> "versicolor"</span>, Sepal.Length <span class="op">&gt;=</span><span class="st"> </span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">})</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; Error: Test failed: 'Versicolor has sepal length greater than 5 - will fail'</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt; * get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></a></code></pre></div>
 <p>A call to <code><a href="../reference/global-data.html">context_data()</a></code> sets the value of the “global test data set”, which is used as the default for the <code>data</code> argument of the various data expectations. <code><a href="../reference/global-data.html">set_testdata()</a></code> can also be used to modify the global test data outside of a testing context.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="../reference/global-data.html">set_testdata</a></span>(mtcars)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/identical">identical</a></span>(<span class="kw"><a href="../reference/global-data.html">get_testdata</a></span>(), mtcars)</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/global-data.html">set_testdata</a></span>(mtcars)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/identical">identical</a></span>(<span class="kw"><a href="../reference/global-data.html">get_testdata</a></span>(), mtcars)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
 </div>
 </div>
   </div>
