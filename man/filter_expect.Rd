@@ -6,6 +6,18 @@
 \usage{
 filter_expect(data, expect_function, ..., not = TRUE)
 }
+\arguments{
+\item{data}{A data frame to test.}
+
+\item{expect_function}{An expectation function.}
+
+\item{...}{Arguments to pass to expect_function.}
+
+\item{not}{Reverse the results of the check.}
+}
+\value{
+The input data frame filtered to records failing the expectation.
+}
 \description{
 \Sexpr[results=rd, stage=render]{testdat:::lifecycle("experimental")}
 }

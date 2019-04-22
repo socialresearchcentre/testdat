@@ -15,7 +15,8 @@ expect_values <- function(var, ..., miss = getOption("testdat.miss"), data = get
 
   act$var_desc <- quo_label(ensym(var))
   act$var <- as_name(ensym(var))
-  act$vals_desc <- lapply(enexprs(...), quo_text) %>% paste0(collapse = ", ") %>% paste0("`", ., "`")
+  act$vals_desc <- lapply(enexprs(...), quo_text)
+  act$vals_desc <- paste0("`", paste0(act$vals_desc, collapse = ", "), "`")
   act$result <- act$val[[act$var]] %in% c(unlist(list(...)), miss)
 
   expect_custom(
@@ -163,7 +164,8 @@ expect_unique_across <- function(vars, flt = TRUE, data = get_testdata()) {
   invisible(act$result)
 }
 
-# TODO
+# TODO - check if any values exist more than once across multiple variables in
+# the entire dataset
 # #' @export
 # #' @rdname value-expectations
 expect_unique_combine <- function(vars, flt = TRUE, data = get_testdata()) {
@@ -175,8 +177,7 @@ expect_unique_combine <- function(vars, flt = TRUE, data = get_testdata()) {
   flt <- enquo(flt)
   act$result <- data %>%
     filter(!!flt) %>%
-    select(!!!vars) %>%
-    gather(vars, val) %>%
+    select(!!!vars)
 
   expect_custom(
     all(act$result, na.rm = TRUE),

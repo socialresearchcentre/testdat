@@ -86,6 +86,11 @@ expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, ...) 
 #'
 #' \Sexpr[results=rd, stage=render]{testdat:::lifecycle("experimental")}
 #'
+#' @param data A data frame to test.
+#' @param expect_function An expectation function.
+#' @param ... Arguments to pass to expect_function.
+#' @param not Reverse the results of the check.
+#' @return The input data frame filtered to records failing the expectation.
 #' @export
 filter_expect <- function(data, expect_function, ..., not = TRUE) {
   expect_result <- expect_function(..., data = data)

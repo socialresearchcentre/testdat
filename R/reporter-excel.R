@@ -15,7 +15,7 @@ summarise_results_excel <- function(results) {
       mutate(context = e$context)
   }) %>%
     bind_rows %>%
-    select(context, everything())
+    select(.data$context, everything())
 }
 
 #' Output ListReporter results in Excel format
@@ -44,14 +44,14 @@ output_results_excel <- function(results, file) {
   # Create summary page
   openxlsx::addWorksheet(wb, "__Summary")
   summary <- results_df %>%
-    group_by(context) %>%
-    summarise(tests = n(),
-              failed = sum(status %in% "failure"),
-              error = sum(status %in% "error"),
-              skipped = sum(status %in% "skip"),
-              warning = sum(status %in% "warning")) %>%
+    group_by(.data$context) %>%
+    summarise(tests   = n(),
+              failed  = sum(.data$status %in% "failure"),
+              error   = sum(.data$status %in% "error"),
+              skipped = sum(.data$status %in% "skip"),
+              warning = sum(.data$status %in% "warning")) %>%
     ungroup %>%
-    mutate(context = glue::glue("=HYPERLINK(\"#'{str_sub(context, 1, 30)}'!A1\",\"{context}\")"))
+    mutate(context = glue::glue("=HYPERLINK(\"#'{str_sub(.data$context, 1, 30)}'!A1\",\"{.data$context}\")"))
 
   openxlsx::writeData(wb, "__Summary", summary,
                       headerStyle = openxlsx::createStyle(textDecoration = "bold"))
@@ -61,7 +61,7 @@ output_results_excel <- function(results, file) {
   for (sheet in unique(results_df$context)) {
     openxlsx::addWorksheet(wb, str_sub(sheet, 1, 30))
     openxlsx::writeData(wb, str_sub(sheet, 1, 30),
-                        results_df %>% filter(context == sheet, status != "success"),
+                        results_df %>% filter(.data$context == sheet, .data$status != "success"),
                         headerStyle = openxlsx::createStyle(textDecoration = "bold"))
   }
   openxlsx::saveWorkbook(wb, file, overwrite = TRUE)

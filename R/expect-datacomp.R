@@ -35,8 +35,8 @@ expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
   by_var <- structure(quo_text(var), names = quo_text(var2))
   act$result <-
     left_join(data_tb, data2_tb, by = by_var) %>%
-    mutate(prop_diff = abs(freq.x - freq.y) / freq.x,
-           pass = prop_diff < threshold | freq.x < min)
+    mutate(prop_diff = abs(.data$freq.x - .data$freq.y) / .data$freq.x,
+           pass = .data$prop_diff < threshold | .data$freq.x < min)
 
   expect_custom(
     all(act$result$pass, na.rm = TRUE),
@@ -56,7 +56,7 @@ expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
 # #' @rdname datacomp-expectations
 expect_labels_identical <- function(data2, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$data2_desc <- quo_label(enquo(var))
+  act$data2_desc <- quo_label(enquo(data2))
 
   act$result <- FALSE
 
@@ -89,8 +89,11 @@ expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get
 
   comp = ifelse(not, "%!=%", "%==%")
 
-  var_expr <- var_list %>%
-    structure(lapply(glue("{.}.x {comp} {.}.y"), parse_expr), names = .)
+  var_expr <-
+    var_list %>%
+    lapply(function(x) { glue("{x}.x {comp} {x}.y") }) %>%
+    lapply(parse_expr) %>%
+    set_names(var_list)
 
   flt <- enquo(flt)
   act$result <- data %>%
@@ -131,8 +134,8 @@ expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_te
                 mutate(`__result` = TRUE) %>%
                 unique,
               by = by) %>%
-    mutate(`__result` = ifelse(is.na(`__result`), FALSE, `__result`)) %>%
-    pull(`__result`)
+    mutate(`__result` = ifelse(is.na(.data$`__result`), FALSE, .data$`__result`)) %>%
+    pull(.data$`__result`)
 
   if (not) act$result <- !act$result
 
