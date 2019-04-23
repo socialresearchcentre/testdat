@@ -5,6 +5,7 @@
 \alias{set_testdata}
 \alias{get_testdata}
 \alias{context_data}
+\alias{with_testdata}
 \title{Get/set test data}
 \usage{
 set_testdata(data)
@@ -12,9 +13,13 @@ set_testdata(data)
 get_testdata()
 
 context_data(data)
+
+with_testdata(data, code)
 }
 \arguments{
-\item{data}{data to be used}
+\item{data}{Data to be used.}
+
+\item{code}{Code to execute.}
 }
 \description{
 A global test data set is used to avoid having to re-specify the testing

@@ -5,7 +5,8 @@
 #' dataset in every test. These functions get and set the global data or set the
 #' data for the current context.
 #'
-#' @param data data to be used
+#' @param data Data to be used.
+#' @param code Code to execute.
 #' @examples
 #' set_testdata(mtcars)
 #' get_testdata()
@@ -35,11 +36,21 @@ get_testdata <- function() {
   return(dat)
 }
 
-
 #' @export
 #' @rdname global-data
 context_data <- function(data) {
   set_testdata(data)
+}
+
+#' @export
+#' @rdname global-data
+with_testdata <- function(data, code) {
+  old <- set_testdata(data)
+  on.exit(set_testdata(old), add = TRUE)
+
+  force(code)
+
+  invisible(data)
 }
 
 data_reporter <- function() {

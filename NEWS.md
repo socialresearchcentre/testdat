@@ -4,9 +4,11 @@ Initial release.
 
 ## Major changes from early development releases
 
-* Removed `start_data_test` and `end_data_test` as they don't have a clear use case.
+* Removed `start_data_test()` and `end_data_test()` as they don't have a clear use case.
 
-* Moved `use_testdat` into srcproj, it's a more natural home.
+* Added a new `with_testdata()` function for simpler interactive testing.
+
+* Moved `use_testdat()` into srcproj, it's a more natural home.
 
 * Removed `ExcelReporter`, it is unnecessary since we have Excel output from a ListReporter.
 
