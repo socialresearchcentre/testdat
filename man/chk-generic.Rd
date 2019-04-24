@@ -7,9 +7,9 @@
 \alias{chk_equals}
 \alias{chk_range}
 \alias{chk_pattern}
-\alias{chk_length}
-\alias{chk_miss}
-\alias{chk_nmiss}
+\alias{chk_max_length}
+\alias{chk_text_miss}
+\alias{chk_text_nmiss}
 \alias{chk_unique}
 \alias{chk_date_yyyymmdd}
 \alias{chk_date_yyyymm}
@@ -28,11 +28,11 @@ chk_range(x, min, max)
 
 chk_pattern(x, pattern)
 
-chk_length(x, len)
+chk_max_length(x, len)
 
-chk_miss(x, miss = getOption("testdat.miss_text"))
+chk_text_miss(x, miss = getOption("testdat.miss_text"))
 
-chk_nmiss(x, miss = getOption("testdat.miss_text"))
+chk_text_nmiss(x, miss = getOption("testdat.miss_text"))
 
 chk_unique(x)
 
@@ -44,7 +44,7 @@ chk_date_yyyy(x)
 
 chk_ascii(x)
 
-chk_values(x, ..., miss = TRUE)
+chk_values(x, ..., miss = getOption("testdat.miss"))
 }
 \arguments{
 \item{x}{vector to check}

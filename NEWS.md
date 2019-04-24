@@ -1,4 +1,4 @@
-# testdat 0.0.1
+# testdat 0.1.0
 
 Initial release.
 
@@ -13,6 +13,16 @@ Initial release.
 * Removed `ExcelReporter`, it is unnecessary since we have Excel output from a ListReporter.
 
 * New expectation factory function `expect_make()` allows users to automagically convert a logical check function of the form used by `chk_*()` into an expectation.
+
+* `chk_values()` now takes the vector of missing values as an argument instead of a logical.
+
+* Renamed some `chk_*()` functions for clarity. For the moment the old names are soft-deprecated and will give a warning, _these will be hard-deprecated in the next minor release_.
+
+  * `chk_length()` => `chk_max_length()`
+
+  * `chk_miss()` => `chk_text_miss()`
+
+  * `chk_nmiss()` => `chk_text_nmiss()`
 
 ## Minor changes
 

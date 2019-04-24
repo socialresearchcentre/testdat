@@ -3,6 +3,7 @@
 #' These functions provide common, simple data checks.
 #'
 #' @param x vector to check
+#' @param miss vector of values to be treated as missing
 #' @return A logical vector flagging records that have passed or failed the check
 #' @seealso [Checking Helper Functions][chk-helper]
 #' @name chk-generic
@@ -48,20 +49,19 @@ chk_pattern <- function(x, pattern) {
 #' @param len maximum string length for checking string variables
 #' @importFrom stringr str_length
 #' @export
-chk_length <- function(x, len) {
+chk_max_length <- function(x, len) {
   chk_blank(x) | str_length(x) <= len
 }
 
 #' @rdname chk-generic
-#' @param miss vector of values to be treated as missing
 #' @export
-chk_miss <- function(x, miss = getOption("testdat.miss_text")) {
+chk_text_miss <- function(x, miss = getOption("testdat.miss_text")) {
   tolower(x) %in% miss
 }
 
 #' @rdname chk-generic
 #' @export
-chk_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
+chk_text_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
   !chk_miss(x, miss)
 }
 
@@ -104,9 +104,8 @@ chk_ascii <- function(x) {
 #' @rdname chk-generic
 #' @param ... vectors of valid values
 #' @export
-chk_values <- function(x, ..., miss = TRUE) {
-  x %in% c(unlist(list(...)),
-           ifelse(miss, getOption("testdat.miss"), NULL))
+chk_values <- function(x, ..., miss = getOption("testdat.miss")) {
+  x %in% c(unlist(list(...)), miss)
 }
 
 #' Checking helper functions
