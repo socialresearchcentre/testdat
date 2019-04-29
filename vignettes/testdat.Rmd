@@ -31,17 +31,101 @@ Features include:
 
 * Data-focused reporting of test results
 
-## Getting started
+# Getting started
 
 As an extension of testthat, testdat uses the same basic testing framework.
 Before using testdat (and reading this documentation), make sure you're familiar
 with the introduction to testthat in
 [R packages](http://r-pkgs.had.co.nz/tests.html).
 
-The main addition in testdat is a set of expectations designed for testing data
-frames and a mechanism to attach a data frame to a testing context.
+The main addition provided by testdat is a set of expectations designed for
+testing data frames and a context-esque mechanism to set a current testing data
+frame.
 
-### Data Expectations
+# Data expectations
+
+In general, our approach to data testing is variable-centric.
+The standard form of a data expectation is:
+```r
+expect_*(var(s), ..., flt = TRUE, data = get_testdata())
+```
+testdat uses dplyr at its core, and thus supports tidy evaluation.
+
+## Variables
+
+Most operations act on one or more variables There are two variants of the
+variable argument:
+
+* `var` requires an unquoted variable name.
+
+* `vars` require a variable set specified by dplyr's `vars()` function.
+
+## Filter
+
+The `flt` argument takes a logical predicate defined in terms of the variables
+in `data`. Only rows where the condition evaluates to `TRUE` are included in the test.
+
+```{r}
+set_testdata(iris)
+
+test_that("iris range checks", {
+  expect_range(Petal.Width, 0, 1)
+})
+
+test_that("iris range checks filtered", {
+  # Test passes for setosa rows
+  expect_range(Petal.Width, 0, 1, flt = Species == "setosa")
+  # Failures will provide the filter
+  expect_range(Petal.Width, 0, 0.5, flt = Species == "setosa")
+})
+```
+
+## Data
+
+The `data` argument takes a data frame to test. To avoid redundant code the
+data argument defaults to a global test data set retrieved using
+`get_testdata()`. This can be used in two ways:
+
+* Setting the global test data using `set_testdata()`.
+
+```{r}
+set_testdata(iris)
+identical(get_testdata(), iris)
+
+test_that("Versicolor has sepal length greater than 5 - will fail", {
+  expect_cond(Species %in% "versicolor", Sepal.Length >= 5)
+})
+```
+
+* Using the `with_testdata()` wrapper to temporarily set the global test data for a block of code.
+
+```{r}
+set_testdata(mtcars)
+identical(get_testdata(), mtcars)
+
+with_testdata(iris, {
+  test_that("Versicolor has sepal length greater than 5 - will fail", {
+    expect_cond(Species %in% "versicolor", Sepal.Length >= 5)
+  })
+})
+
+identical(get_testdata(), mtcars)
+```
+
+Both approaches are equivalent to:
+
+```{r}
+test_that("Versicolor has sepal length greater than 5 - will fail", {
+  expect_cond(Species %in% "versicolor", Sepal.Length >= 5, data = iris)
+})
+```
+
+## `...`
+
+Additional arguments are specific to the expectation. See the man page for the
+function for details.
+
+# Data expectation categories
 
 Data expectations fall into a few main classes.
 
@@ -79,7 +163,9 @@ Dataset Comparison
     example ensuring similar frequencies between similar variables in different
     datasets.
 
-### Data Context
+# Testing files
+
+## Data Context
 
 Each set of tests in testthat has a `context()`. In testdat, each context has an
 associated dataset, specified with a call to `context_data()`.
