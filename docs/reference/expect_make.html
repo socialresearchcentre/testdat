@@ -64,7 +64,7 @@ allow simple generation of domain specific data checks." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9013</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9014</span>
       </span>
     </div>
 
@@ -157,13 +157,14 @@ environment of <code>expect_make()</code></p></td>
 #&gt;         !!enquo(data), args = list(pattern = pattern), allany = chk_filter_all, 
 #&gt;         func_desc = NULL)
 #&gt; }
-#&gt; &lt;environment: 0x55b0af0ab0f8&gt;</div><div class='input'><span class='fu'>expect_make</span>(<span class='no'>chk_values</span>)</div><div class='output co'>#&gt; function (var, ..., miss = TRUE, flt = TRUE, data = get_testdata()) 
+#&gt; &lt;environment: 0x55c44df923c0&gt;</div><div class='input'><span class='fu'>expect_make</span>(<span class='no'>chk_values</span>)</div><div class='output co'>#&gt; function (var, ..., miss = getOption("testdat.miss"), flt = TRUE, 
+#&gt;     data = get_testdata()) 
 #&gt; {
 #&gt;     expect_allany(vars(!!ensym(var)), chk_values, !!enquo(flt), 
 #&gt;         !!enquo(data), args = list(... = ..., miss = miss), allany = chk_filter_all, 
 #&gt;         func_desc = NULL)
 #&gt; }
-#&gt; &lt;environment: 0x55b0af0ab0f8&gt;</div></pre>
+#&gt; &lt;environment: 0x55c44df923c0&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

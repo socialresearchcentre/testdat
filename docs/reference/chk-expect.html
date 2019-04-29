@@ -64,7 +64,7 @@ same name." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9013</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9014</span>
       </span>
     </div>
 
@@ -119,7 +119,13 @@ same name.</p>
 
 <span class='fu'>expect_date_yyyymmdd</span>(<span class='no'>var</span>, <span class='kw'>flt</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span>())
 
-<span class='fu'>expect_max_length</span>(<span class='no'>var</span>, <span class='no'>len</span>, <span class='kw'>flt</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span>())</pre>
+<span class='fu'>expect_max_length</span>(<span class='no'>var</span>, <span class='no'>len</span>, <span class='kw'>flt</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span>())
+
+<span class='fu'>expect_text_miss</span>(<span class='no'>var</span>, <span class='kw'>miss</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"testdat.miss_text"</span>),
+  <span class='kw'>flt</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span>())
+
+<span class='fu'>expect_text_nmiss</span>(<span class='no'>var</span>, <span class='kw'>miss</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"testdat.miss_text"</span>),
+  <span class='kw'>flt</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,6 +146,10 @@ by default.</p></td>
     <tr>
       <th>len</th>
       <td><p>maximum string length for checking string variables</p></td>
+    </tr>
+    <tr>
+      <th>miss</th>
+      <td><p>vector of values to be treated as missing</p></td>
     </tr>
     </table>
     
