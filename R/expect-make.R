@@ -79,3 +79,13 @@ expect_date_yyyymmdd <- expect_make(chk_date_yyyymmdd)
 #' @inheritParams chk_length
 #' @export
 expect_max_length <- expect_make(chk_max_length)
+
+#' @rdname chk-expect
+#' @inheritParams chk_text_miss
+#' @export
+expect_text_miss <- expect_make(chk_text_miss)
+
+#' @rdname chk-expect
+#' @inheritParams chk_text_nmiss
+#' @export
+expect_text_nmiss <- expect_make(chk_text_nmiss)

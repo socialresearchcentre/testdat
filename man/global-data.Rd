@@ -28,5 +28,10 @@ data for the current context.
 }
 \examples{
 set_testdata(mtcars)
-get_testdata()
+head(get_testdata())
+
+with_testdata(iris, {
+  x <- get_testdata()
+  print(head(x))
+})
 }

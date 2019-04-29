@@ -9,7 +9,12 @@
 #' @param code Code to execute.
 #' @examples
 #' set_testdata(mtcars)
-#' get_testdata()
+#' head(get_testdata())
+#'
+#' with_testdata(iris, {
+#'   x <- get_testdata()
+#'   print(head(x))
+#' })
 #' @name global-data
 NULL
 

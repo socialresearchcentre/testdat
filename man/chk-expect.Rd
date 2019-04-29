@@ -6,6 +6,8 @@
 \alias{expect_date_yyyymm}
 \alias{expect_date_yyyymmdd}
 \alias{expect_max_length}
+\alias{expect_text_miss}
+\alias{expect_text_nmiss}
 \title{Expectations: auto-generated}
 \usage{
 expect_date_yyyy(var, flt = TRUE, data = get_testdata())
@@ -15,6 +17,12 @@ expect_date_yyyymm(var, flt = TRUE, data = get_testdata())
 expect_date_yyyymmdd(var, flt = TRUE, data = get_testdata())
 
 expect_max_length(var, len, flt = TRUE, data = get_testdata())
+
+expect_text_miss(var, miss = getOption("testdat.miss_text"),
+  flt = TRUE, data = get_testdata())
+
+expect_text_nmiss(var, miss = getOption("testdat.miss_text"),
+  flt = TRUE, data = get_testdata())
 }
 \arguments{
 \item{var}{an unquoted variable name}
@@ -25,6 +33,8 @@ expect_max_length(var, len, flt = TRUE, data = get_testdata())
 by default.}
 
 \item{len}{maximum string length for checking string variables}
+
+\item{miss}{vector of values to be treated as missing}
 }
 \description{
 These expectations are auto-generated from the \code{chk_*()} functions of the

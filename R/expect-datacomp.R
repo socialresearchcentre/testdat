@@ -5,7 +5,8 @@
 #' @inheritParams data-params
 #' @param data2 the dataset to compare against
 #' @param not reverse the results of the check
-#' @param by a character vector of variables to join by. For details see the man page for dplyr [join][dplyr::join].
+#' @param by a character vector of variables to join by. For details see dplyr
+#'   [join()][dplyr::join].
 #' @family data expectations
 #' @name datacomp-expectations
 NULL
