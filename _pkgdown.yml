@@ -19,11 +19,10 @@ reference:
   - '`chk-generic`'
   - '`chk-helper`'
 
-- title: Configuration
+- title: Configuration and reporting
   desc: ~
   contents:
   - '`global-data`'
-  - '`use_testdat`'
   - '`output_results_excel`'
 
 - title: Advanced

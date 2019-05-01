@@ -1,7 +1,7 @@
 Type: Package
 Package: testdat
 Title: Data Unit Testing for R
-Version: 0.0.0.9014
+Version: 0.0.0.9015
 Authors@R: 
     c(person(given = "Danny",
              family = "Smith",
@@ -21,7 +21,6 @@ Imports:
     lubridate,
     openxlsx,
     rlang,
-    rstudioapi,
     stringr,
     tidyselect
 Suggests:
