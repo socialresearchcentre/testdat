@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9014</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -101,9 +101,9 @@
       
     </div>
 
-    <div id="testdat-0-1-0" class="section level1">
+    <div id="testdat-010" class="section level1">
 <h1 class="page-header">
-<a href="#testdat-0-1-0" class="anchor"></a>testdat 0.1.0</h1>
+<a href="#testdat-010" class="anchor"></a>testdat 0.1.0</h1>
 <p>Initial release.</p>
 <div id="major-changes-from-early-development-releases" class="section level2">
 <h2 class="hasAnchor">
@@ -111,9 +111,9 @@
 <ul>
 <li><p>Removed <code>start_data_test()</code> and <code>end_data_test()</code> as they don’t have a clear use case.</p></li>
 <li><p>Added a new <code><a href="../reference/global-data.html">with_testdata()</a></code> function for simpler interactive testing.</p></li>
-<li><p>Moved <code><a href="../reference/use_testdat.html">use_testdat()</a></code> into srcproj, it’s a more natural home.</p></li>
+<li><p>Moved <code>use_testdat()</code> into srcproj, it’s a more natural home.</p></li>
 <li><p>Removed <code>ExcelReporter</code>, it is unnecessary since we have Excel output from a ListReporter.</p></li>
-<li><p>New expectation factory function <code><a href="../reference/expect_make.html">expect_make()</a></code> allows users to automagically convert a logical check function of the form used by <code>chk_*()</code> into an expectation.</p></li>
+<li><p>New expectation function factory <code><a href="../reference/expect_make.html">expect_make()</a></code> allows users to automagically convert a logical check function of the form used by <code>chk_*()</code> into an expectation. See <code><a href="../reference/expect_make.html">?expect_make</a></code> for details.</p></li>
 <li><p><code><a href="../reference/chk-generic.html">chk_values()</a></code> now takes the vector of missing values as an argument instead of a logical.</p></li>
 <li>
 <p>Renamed some <code>chk_*()</code> functions for clarity. For the moment the old names are soft-deprecated and will give a warning, <em>these will be hard-deprecated in the next minor release</em>.</p>
@@ -150,7 +150,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#testdat-0-1-0">0.1.0</a></li>
+        <li><a href="#testdat-010">0.1.0</a></li>
       </ul>
     </div>
   </div>
