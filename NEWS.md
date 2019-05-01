@@ -12,7 +12,7 @@ Initial release.
 
 * Removed `ExcelReporter`, it is unnecessary since we have Excel output from a ListReporter.
 
-* New expectation factory function `expect_make()` allows users to automagically convert a logical check function of the form used by `chk_*()` into an expectation.
+* New expectation function factory `expect_make()` allows users to automagically convert a logical check function of the form used by `chk_*()` into an expectation. See `?expect_make` for details.
 
 * `chk_values()` now takes the vector of missing values as an argument instead of a logical.
 

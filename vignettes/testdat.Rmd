@@ -10,9 +10,10 @@ vignette: >
 ---
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
-knitr::opts_chunk$set(collapse = T, comment = "#>", error = T)
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", error = TRUE)
 options(tibble.print_min = 4L, tibble.print_max = 4L)
 library(testdat)
+library(dplyr)
 ```
 
 testdat is a package designed to ease data validation, particularly for complex
@@ -44,43 +45,57 @@ frame.
 
 # Data expectations
 
-In general, our approach to data testing is variable-centric.
+## Overview
+
+In general, our approach to data testing is variable-centric - the majority of expectations perform a check on one or more variables in a given dataset.
+
 The standard form of a data expectation is:
 ```r
 expect_*(var(s), ..., flt = TRUE, data = get_testdata())
 ```
+
 testdat uses dplyr at its core, and thus supports tidy evaluation.
 
-## Variables
+### Variables
 
 Most operations act on one or more variables There are two variants of the
 variable argument:
 
 * `var` requires an unquoted variable name.
 
-* `vars` require a variable set specified by dplyr's `vars()` function.
+```{r}
+test_that("hour values are valid", {
+  expect_range(hour, 0, 23, data = storms)
+})
+```
 
-## Filter
+* `vars` requires a variable set specified by dplyr's `vars()` function.
+
+```{r}
+test_that("multi-variable identifier is unique", {
+  expect_unique(vars(name, year, month, day, hour), data = storms)
+})
+```
+
+### Filter
 
 The `flt` argument takes a logical predicate defined in terms of the variables
 in `data`. Only rows where the condition evaluates to `TRUE` are included in the test.
 
 ```{r}
-set_testdata(iris)
-
 test_that("iris range checks", {
-  expect_range(Petal.Width, 0, 1)
+  expect_range(Petal.Width, 0, 1, data = iris)
 })
 
 test_that("iris range checks filtered", {
   # Test passes for setosa rows
-  expect_range(Petal.Width, 0, 1, flt = Species == "setosa")
+  expect_range(Petal.Width, 0, 1, flt = Species == "setosa", data = iris)
   # Failures will provide the filter
-  expect_range(Petal.Width, 0, 0.5, flt = Species == "setosa")
+  expect_range(Petal.Width, 0, 0.5, flt = Species == "setosa", data = iris)
 })
 ```
 
-## Data
+### Data
 
 The `data` argument takes a data frame to test. To avoid redundant code the
 data argument defaults to a global test data set retrieved using
@@ -120,55 +135,146 @@ test_that("Versicolor has sepal length greater than 5 - will fail", {
 })
 ```
 
-## `...`
+### `...`
 
 Additional arguments are specific to the expectation. See the man page for the
 function for details.
 
-# Data expectation categories
+## Categories
 
 Data expectations fall into a few main classes.
 
+Value
+
+:   `` ?`value-expectations` ``
+    
+    Value expectations test variable values for valid data. Tests include
+    explicit value checks, uniqueness and others.
+
+Conditional
+
+:   `` ?`conditional-expectations` ``
+    
+    Conditional expectations check for the co-existence of multiple conditions.
+
+Dataset comparison
+
+:   `` ?`datacomp-expectations` ``
+    
+    Dataset comparison expectations test for consistency between datasets, for
+    example ensuring similar frequencies between similar variables in different
+    datasets.
+
 Generic
 
-:   Man page: [generic-expectations](../help/generic-expectations)
-
+:   `` ?`generic-expectations` ``
+    
     Generic expectations allow for testing of a dataset using an arbitrary
     function. The function provided should take a single vector as its first
     argument and return a logical vector showing whether each element has passed
     or failed. Additional arguments to the checking function can be passed as a
     list using the `args` argument.
+    
+    testdat includes a set of useful checking functions. See `` ?`chk-generic`
+    `` for details. Several of the checking functions have a corresponding
+    expectation. These are listed in `` ?`chk-expect` ``.
+
+# Using tests
+
+## Testing inside a script
+
+The easiest way to use data testing is directly inside an R script. Expecations and test blocks throw an error if they fail, so it is very clear to the user that something needs to be checked, and the script will fail when sourced.
+
+The example below shows how to adapt a script from exploratory "print and check" to a testing approach, using a simple sample processing exercise.
+
+### Print and check
+
+```{r}
+library(dplyr)
+
+x <- tribble(~id, ~pcode, ~state, ~nsw_only,
+             1,   2000,   "NSW",  1,
+             2,   3123,   "VIC",  NA,
+             3,   2123,   "NSW",  3,
+             4,   12345,  "VIC",  3)
+
+# check id is unique
+x %>% filter(duplicated(id))
+
+# check values
+x %>% filter(!pcode %in% 2000:3999)
+x %>% count(state)
+x %>% count(nsw_only)
+
+# check base for nsw_only variable
+x %>% filter(state != "NSW") %>% count(nsw_only)
+
+x <- x %>% mutate(market = case_when(pcode %in% 2000:2999 ~ 1,
+                                     pcode %in% 3000:3999 ~ 2))
+
+x %>% count(market)
+```
+
+### testdat
+
+```{r}
+library(testdat)
+library(dplyr)
+
+x <- tribble(~id, ~pcode, ~state, ~nsw_only,
+             1,   2000,   "NSW",  1,
+             2,   3123,   "VIC",  NA,
+             3,   2123,   "NSW",  3,
+             4,   12345,  "VIC",  3)
+
+with_testdata(x, {
+  test_that("id is unique", {
+    expect_unique(vars(id))
+  })
   
-    testdat includes a set of useful checking functions, a list can be found on
-    the [chk-generic](../help/chk-generic) man page.
+  test_that("variable values are correct", {
+    expect_values(pcode, 2000:2999, 3000:3999)
+    expect_values(state, c("NSW", "VIC"))
+    expect_values(nsw_only, 1:3) # by default expect_values allows NAs
+  })
   
-Conditional
+  test_that("filters applied correctly", {
+    expect_base(nsw_only, state == "NSW")
+  })
+})
 
-:   Man page: [conditional-expectations](../help/conditional-expectations)
+x <- x %>% mutate(market = case_when(pcode %in% 2000:2999 ~ 1,
+                                     pcode %in% 3000:3999 ~ 2))
 
-    Conditional expectations check for the co-existence of multiple conditions.
+with_testdata(x, {
+  test_that("market derived correctly", {
+    expect_values(market, 1:2, miss = NULL) # miss = NULL excludes NAs from valid values
+  })
+})
+```
 
-Value
 
-:   Man page: [value-expectations](../help/value-expectations)
+Note that:
 
-    Value expectations test variable values for valid data. Tests include
-    explicit value checks, uniqueness and others.
+* The global dataset must be reset after changes are made, either with `set_testdata()` or `with_testdata()`.
 
-Dataset Comparison
+* The `test_that()` wrapper is not strictly necessary, but it provides more informative error messaging and logically groups a set of expectations.
 
-:   Man page: [datacomp-expectations](../help/datacomp-expectations)
+* Each `with_testdata()` block will fail on the first `test_that()` block that fails. The "filters applied correctly" test block is not run in the example.
 
-    Dataset comparison expectations test for consistency between datasets, for
-    example ensuring similar frequencies between similar variables in different
-    datasets.
+## Using a test suite
 
-# Testing files
+Setting up a proper project test suite can be useful for automatically
+validating final outputs before delivery.
 
-## Data Context
+Setting up proper file based testing infrastructure is out of the scope of this
+vignette. See [R packages](http://r-pkgs.had.co.nz/tests.html) for a brief
+introduction to testing infrastructure.
 
 Each set of tests in testthat has a `context()`. In testdat, each context has an
 associated dataset, specified with a call to `context_data()`.
+
+`context_data()` sets the value of the global test data as outlined above.
 
 ```{r}
 context("Example")
@@ -181,14 +287,4 @@ test_that("Variable format checks", {
 test_that("Versicolor has sepal length greater than 5 - will fail", {
   expect_cond(Species %in% "versicolor", Sepal.Length >= 5)
 })
-```
-
-A call to `context_data()` sets the value of the "global test data set", which
-is used as the default for the `data` argument of the various data expectations.
-`set_testdata()` can also be used to modify the global test data outside of a
-testing context.
-
-```{r}
-set_testdata(mtcars)
-identical(get_testdata(), mtcars)
 ```
