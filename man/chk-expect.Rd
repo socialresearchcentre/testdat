@@ -18,11 +18,19 @@ expect_date_yyyymmdd(var, flt = TRUE, data = get_testdata())
 
 expect_max_length(var, len, flt = TRUE, data = get_testdata())
 
-expect_text_miss(var, miss = getOption("testdat.miss_text"),
-  flt = TRUE, data = get_testdata())
+expect_text_miss(
+  var,
+  miss = getOption("testdat.miss_text"),
+  flt = TRUE,
+  data = get_testdata()
+)
 
-expect_text_nmiss(var, miss = getOption("testdat.miss_text"),
-  flt = TRUE, data = get_testdata())
+expect_text_nmiss(
+  var,
+  miss = getOption("testdat.miss_text"),
+  flt = TRUE,
+  data = get_testdata()
+)
 }
 \arguments{
 \item{var}{an unquoted variable name}
@@ -37,6 +45,6 @@ by default.}
 \item{miss}{vector of values to be treated as missing}
 }
 \description{
-These expectations are auto-generated from the \code{chk_*()} functions of the
+These expectations are auto-generated from the \verb{chk_*()} functions of the
 same name.
 }

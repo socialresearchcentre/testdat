@@ -4,8 +4,13 @@
 \alias{expect_make}
 \title{Create an expectation from a check function}
 \usage{
-expect_make(func, func_desc = NULL, vars = FALSE, all = TRUE,
-  env = caller_env())
+expect_make(
+  func,
+  func_desc = NULL,
+  vars = FALSE,
+  all = TRUE,
+  env = caller_env()
+)
 }
 \arguments{
 \item{func}{A function whose first argument takes a vector to check, and
@@ -23,7 +28,7 @@ failure message.}
 environment of \code{expect_make()}}
 }
 \value{
-An \code{expect_*()} style function.
+An \verb{expect_*()} style function.
 }
 \description{
 \code{expect_make()} creates an expection from a vectorised checking function to

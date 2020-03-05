@@ -8,9 +8,15 @@
 \alias{expect_func}
 \title{Expectations: generic expectation helpers}
 \usage{
-expect_allany(vars, func, flt = TRUE, data = get_testdata(),
-  args = list(), allany = c(chk_filter_all, chk_filter_any),
-  func_desc = NULL)
+expect_allany(
+  vars,
+  func,
+  flt = TRUE,
+  data = get_testdata(),
+  args = list(),
+  allany = c(chk_filter_all, chk_filter_any),
+  func_desc = NULL
+)
 
 expect_all(...)
 
@@ -47,8 +53,9 @@ These functions allow for testing of a dataset using an arbitrary function.
 \seealso{
 \link{chk-generic} for a set of generic checking functions
 
-Other data expectations: \code{\link{conditional-expectations}},
-  \code{\link{datacomp-expectations}},
-  \code{\link{value-expectations}}
+Other data expectations: 
+\code{\link{conditional-expectations}},
+\code{\link{datacomp-expectations}},
+\code{\link{value-expectations}}
 }
 \concept{data expectations}

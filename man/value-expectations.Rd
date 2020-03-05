@@ -10,15 +10,24 @@
 \alias{expect_unique_across}
 \title{Expectations: value checks}
 \usage{
-expect_values(var, ..., miss = getOption("testdat.miss"),
-  data = get_testdata())
+expect_values(
+  var,
+  ...,
+  miss = getOption("testdat.miss"),
+  data = get_testdata()
+)
 
 expect_regex(var, pattern, flt = TRUE, data = get_testdata())
 
 expect_range(var, min, max, ..., flt = TRUE, data = get_testdata())
 
-expect_exclusive(vars, exc_vars, exc_val = 1, flt = TRUE,
-  data = get_testdata())
+expect_exclusive(
+  vars,
+  exc_vars,
+  exc_val = 1,
+  flt = TRUE,
+  data = get_testdata()
+)
 
 expect_unique(vars, flt = TRUE, data = get_testdata())
 
@@ -54,8 +63,9 @@ should include all variables specified in the \code{vars} argument}
 These functions test variable values
 }
 \seealso{
-Other data expectations: \code{\link{conditional-expectations}},
-  \code{\link{datacomp-expectations}},
-  \code{\link{generic-expectations}}
+Other data expectations: 
+\code{\link{conditional-expectations}},
+\code{\link{datacomp-expectations}},
+\code{\link{generic-expectations}}
 }
 \concept{data expectations}

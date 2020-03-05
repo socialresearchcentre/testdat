@@ -6,8 +6,13 @@
 \alias{expect_cond}
 \title{Expectations: consistency checks}
 \usage{
-expect_base(var, base, miss = getOption("testdat.miss"),
-  missing_valid = FALSE, data = get_testdata())
+expect_base(
+  var,
+  base,
+  miss = getOption("testdat.miss"),
+  missing_valid = FALSE,
+  data = get_testdata()
+)
 
 expect_cond(cond1, cond2, data = get_testdata())
 }
@@ -41,8 +46,9 @@ condition. It can be read as "if \code{base} then \code{var} not missing, if not
 then \code{var} missing".
 }
 \seealso{
-Other data expectations: \code{\link{datacomp-expectations}},
-  \code{\link{generic-expectations}},
-  \code{\link{value-expectations}}
+Other data expectations: 
+\code{\link{datacomp-expectations}},
+\code{\link{generic-expectations}},
+\code{\link{value-expectations}}
 }
 \concept{data expectations}

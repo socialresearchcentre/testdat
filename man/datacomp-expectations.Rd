@@ -7,14 +7,27 @@
 \alias{expect_join}
 \title{Expectations: cross-dataset expectations}
 \usage{
-expect_similar(var, data2, var2, flt = TRUE, flt2 = flt,
-  threshold = 0.05, min = 100, data = get_testdata())
+expect_similar(
+  var,
+  data2,
+  var2,
+  flt = TRUE,
+  flt2 = flt,
+  threshold = 0.05,
+  min = 100,
+  data = get_testdata()
+)
 
-expect_valmatch(data2, vars, by, not = FALSE, flt = TRUE,
-  data = get_testdata())
+expect_valmatch(
+  data2,
+  vars,
+  by,
+  not = FALSE,
+  flt = TRUE,
+  data = get_testdata()
+)
 
-expect_join(data2, by = NULL, not = FALSE, flt = TRUE,
-  data = get_testdata())
+expect_join(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata())
 }
 \arguments{
 \item{var}{an unquoted variable name}
@@ -47,8 +60,9 @@ by default.}
 These functions allow for dataset comparisons
 }
 \seealso{
-Other data expectations: \code{\link{conditional-expectations}},
-  \code{\link{generic-expectations}},
-  \code{\link{value-expectations}}
+Other data expectations: 
+\code{\link{conditional-expectations}},
+\code{\link{generic-expectations}},
+\code{\link{value-expectations}}
 }
 \concept{data expectations}
