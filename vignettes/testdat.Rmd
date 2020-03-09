@@ -135,6 +135,20 @@ test_that("Versicolor has sepal length greater than 5 - will fail", {
 })
 ```
 
+By default, `set_testdata()` stores a reference to the provided dataset rather than the data itself, so changes made to the dataset will be reflected in the test results.
+
+```{r}
+tmp_data <- tibble(x = c(1, 0), y = c(1, NA))
+
+set_testdata(tmp_data)
+print(get_testdata())
+expect_base(y, x == 1)
+
+tmp_data$y <- 1
+print(get_testdata())
+expect_base(y, x == 1)
+```
+
 ### `...`
 
 Additional arguments are specific to the expectation. See the man page for the

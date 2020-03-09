@@ -25,12 +25,17 @@ test_that("with_testdat temporarily sets test dataset", {
 
 
 test_that("check that modifications to the dataframe are picked up by get_testdata", {
-  skip("not yet implemented")
-
-  tmp_data <- tibble(x = c(1, 0), y = c(1, NA))
+  tmp_data_orig <- tmp_data <- tibble(x = c(1, 0), y = c(1, NA))
   set_testdata(tmp_data)
-  expect_success(expect_base(y, x == 1))
 
   tmp_data <- tibble(x = c(1, 0), y = c(1, 1))
-  expect_failure(expect_base(y, x == 1))
+  expect_identical(get_testdata(), tmp_data)
+})
+
+test_that("check that the `quosure` argument works in set_testdata", {
+  tmp_data_orig <- tmp_data <- tibble(x = c(1, 0), y = c(1, NA))
+  set_testdata(tmp_data, quosure = FALSE)
+
+  tmp_data <- tibble(x = c(1, 0), y = c(1, 1))
+  expect_identical(get_testdata(), tmp_data_orig)
 })

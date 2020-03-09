@@ -6,7 +6,11 @@
 #' data for the current context.
 #'
 #' @param data Data to be used.
-#' @param code Code to execute.
+#' @param quosure If `TRUE`, the default, the dataset is stored as a quosure and
+#'   `get_testdata()` will return the current state of the dataset.
+#'
+#'   If `FALSE`, the dataset will be copied and `get_testdata()` will return the
+#'   state of the dataset at the time `set_testdata()` was called.
 #' @examples
 #' set_testdata(mtcars)
 #' head(get_testdata())
@@ -22,10 +26,11 @@ testdat_env <- new.env(parent = emptyenv())
 
 #' @export
 #' @rdname global-data
-set_testdata <- function(data) {
+set_testdata <- function(data, quosure = TRUE) {
   old <- testdat_env$test_data
+  if (quosure) data <- enquo(data)
   assign("test_data", data, testdat_env)
-  invisible(old)
+  invisible(eval_tidy(old))
 }
 
 #' @export
@@ -38,7 +43,7 @@ get_testdata <- function() {
          "Use `context_data()` to set the dataset.",
          call. = FALSE)
 
-  return(dat)
+  return(eval_tidy(dat))
 }
 
 #' @export
@@ -49,8 +54,9 @@ context_data <- function(data) {
 
 #' @export
 #' @rdname global-data
-with_testdata <- function(data, code) {
-  old <- set_testdata(data)
+#' @param code Code to execute.
+with_testdata <- function(data, code, quosure = TRUE) {
+  old <- set_testdata(data, quosure = quosure)
   on.exit(set_testdata(old), add = TRUE)
 
   force(code)

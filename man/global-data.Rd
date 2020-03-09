@@ -8,16 +8,22 @@
 \alias{with_testdata}
 \title{Get/set test data}
 \usage{
-set_testdata(data)
+set_testdata(data, quosure = TRUE)
 
 get_testdata()
 
 context_data(data)
 
-with_testdata(data, code)
+with_testdata(data, code, quosure = TRUE)
 }
 \arguments{
 \item{data}{Data to be used.}
+
+\item{quosure}{If \code{TRUE}, the default, the dataset is stored as a quosure and
+\code{get_testdata()} will return the current state of the dataset.
+
+If \code{FALSE}, the dataset will be copied and \code{get_testdata()} will return the
+state of the dataset at the time \code{set_testdata()} was called.}
 
 \item{code}{Code to execute.}
 }
