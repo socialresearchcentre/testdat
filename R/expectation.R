@@ -49,7 +49,7 @@
 #' }
 #' @importFrom testthat expectation is.expectation quasi_label
 #' @export
-expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, ...) {
+expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, trace = NULL, ...) {
   type <- if (ok) "success" else "failure"
 
   # Preserve existing API which appear to be used in package test code
@@ -66,20 +66,10 @@ expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, ...) 
     }
   }
 
-  exp <- expectation(type, message, srcref = srcref)
+  exp <- expectation(type, message, srcref = srcref, trace = trace)
   exp[["custom"]] <- list(...)
 
-  withRestarts(
-    if (ok)
-      signalCondition(exp)
-    else if (getOption("testdat.stop_on_fail"))
-      stop(exp)
-    else
-      warning(exp),
-    continue_test = function(e) NULL
-  )
-
-  invisible(exp)
+  exp_signal(exp)
 }
 
 #' Filter data to expectation result
