@@ -4,7 +4,14 @@
 \alias{expect_custom}
 \title{Extension of 'expect' to allow inclusion of custom fields}
 \usage{
-expect_custom(ok, failure_message, info = NULL, srcref = NULL, ...)
+expect_custom(
+  ok,
+  failure_message,
+  info = NULL,
+  srcref = NULL,
+  trace = NULL,
+  ...
+)
 }
 \arguments{
 \item{ok}{\code{TRUE} or \code{FALSE} indicating if the expectation was successful.}
