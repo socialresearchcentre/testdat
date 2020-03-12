@@ -42,6 +42,7 @@ chk_range <- function(x, min, max) {
 #' @importFrom stringr str_detect
 #' @export
 chk_pattern <- function(x, pattern) {
+  x <- as_char_scipen(x)
   chk_blank(x) | str_detect(x, pattern)
 }
 
@@ -50,6 +51,7 @@ chk_pattern <- function(x, pattern) {
 #' @importFrom stringr str_length
 #' @export
 chk_max_length <- function(x, len) {
+  x <- as_char_scipen(x)
   chk_blank(x) | str_length(x) <= len
 }
 
@@ -98,6 +100,7 @@ chk_date_yyyy <- function(x) {
 #' @rdname chk-generic
 #' @export
 chk_ascii <- function(x) {
+  x <- as_char_scipen(x)
   chk_blank(x) | !any(grepl("[^\x20-\x7E]", x))
 }
 
@@ -105,6 +108,8 @@ chk_ascii <- function(x) {
 #' @param ... vectors of valid values
 #' @export
 chk_values <- function(x, ..., miss = getOption("testdat.miss")) {
+  old <- options(scipen = getOption("testdat.scipen"))
+  on.exit(options(old))
   x %in% c(unlist(list(...)), miss)
 }
 
