@@ -1,5 +1,11 @@
 # testdat (development version)
 
+* Added `quosure` argument to `use_testdata()` (#1). This allows the dataset to be specified as a quosure, so all tests will be run against the current version.
+
+* Added a new `testdat.scipen` (default: `999`) to avoid issues from checks converting numeric variables to scientific notation (#3).
+
+* Added >= 0.8.0 dplyr version dependency (#2).
+
 # testdat 0.1.0
 
 Initial release.

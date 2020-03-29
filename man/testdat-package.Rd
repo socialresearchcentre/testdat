@@ -16,6 +16,8 @@ An adaptation of \link{testthat} for data. See vigenttes for details.
 (default: \code{c("error", "null", "0", ".", "-", ",", "na", "#n/a", "", NA)}).
 \item \code{testdat.stop_on_fail}: Should an expectation raise an error on failure?
 Useful for interactive use of expectation functions (default: \code{TRUE}).
+\item \code{testdat.scipen}: When it is necessary to convert a numeric vector to
+character for checking, this value will be used for \code{scipen} (default: \code{999}).
 }
 }
 

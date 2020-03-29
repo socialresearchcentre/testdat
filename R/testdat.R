@@ -8,6 +8,8 @@
 #'    (default: `c("error", "null", "0", ".", "-", ",", "na", "#n/a", "", NA)`).
 #' - `testdat.stop_on_fail`: Should an expectation raise an error on failure?
 #'    Useful for interactive use of expectation functions (default: `TRUE`).
+#' - `testdat.scipen`: When it is necessary to convert a numeric vector to
+#'    character for checking, this value will be used for `scipen` (default: `999`).
 #'
 #' @import rlang
 #' @import dplyr
