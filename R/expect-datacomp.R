@@ -22,18 +22,18 @@ NULL
 expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
                            threshold = 0.05, min = 100, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc   <- quo_label_vars(enquo(var))
-  act$data2_desc <- quo_label(enquo(data2))
-  act$var2_desc  <- quo_label_vars(enquo(var2))
-  act$flt_desc   <- quo_label_flt(enquo(flt))
-  act$flt2_desc  <- quo_label_flt(enquo(flt2))
+  act$var_desc   <- as_label_vars(enquo(var))
+  act$data2_desc <- as_label(enquo(data2))
+  act$var2_desc  <- as_label_vars(enquo(var2))
+  act$flt_desc   <- as_label_flt(enquo(flt))
+  act$flt2_desc  <- as_label_flt(enquo(flt2))
 
   var <- enquo(var)
   var2 <- enquo(var2)
   data_tb  <- data  %>% group_by(!!var)  %>% summarise(freq = n())
   data2_tb <- data2 %>% group_by(!!var2) %>% summarise(freq = n())
 
-  by_var <- structure(quo_text(var), names = quo_text(var2))
+  by_var <- structure(as_name(var), names = as_name(var2))
   act$result <-
     left_join(data_tb, data2_tb, by = by_var) %>%
     mutate(prop_diff = abs(.data$freq.x - .data$freq.y) / .data$freq.x,
@@ -43,7 +43,7 @@ expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
     all(act$result$pass, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result$pass, na.rm = TRUE)} \\
           values breaking the {threshold} similarity threshold for variable \\
-          {act$var_desc}
+          `{act$var_desc}`
           Values: {glue::collapse(act$result %>% filter(!pass) %>% pull(!!var), ', ')}
           Filter: {act$flt_desc}"),
     table = act$result
@@ -57,7 +57,7 @@ expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
 # #' @rdname datacomp-expectations
 expect_labels_identical <- function(data2, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$data2_desc <- quo_label(enquo(data2))
+  act$data2_desc <- as_label(enquo(data2))
 
   act$result <- FALSE
 
@@ -75,10 +75,10 @@ expect_labels_identical <- function(data2, data = get_testdata()) {
 #' @rdname datacomp-expectations
 expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc   <- quo_label_vars(enquo(vars))
-  act$data2_desc <- quo_label(enquo(data2))
-  act$flt_desc   <- quo_label_flt(enquo(flt))
-  act$by_desc    <- quo_label_repl(enquo(by), "(^`c\\()|(\\)`$)", "`")
+  act$var_desc   <- as_label_vars(enquo(vars))
+  act$data2_desc <- as_label(enquo(data2))
+  act$flt_desc   <- as_label_flt(enquo(flt))
+  act$by_desc    <- as_label_repl(enquo(by), "(^c\\()|(\\)$)", "")
 
   var_list <- vars_select(tbl_vars(data), !!!vars) %>% unname
 
@@ -106,14 +106,14 @@ expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get
 
   expect_custom(
     all(act$result, na.rm = TRUE),
-    glue("The join of {act$lab} and {act$data2_desc} by {act$by_desc} has \\
+    glue("The join of {act$lab} and `{act$data2_desc}` by `{act$by_desc}` has \\
           {sum(!act$result, na.rm = TRUE)} records with a mismatch on \\
-          variables {act$var_desc}.
+          variables `{act$var_desc}`.
           Filter: {act$flt_desc}
-          Comparison: {comp}"),
+          Comparison: `{comp}`"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result))
-    )
+  )
 
   invisible(act$result)
 }
@@ -122,9 +122,9 @@ expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get
 #' @rdname datacomp-expectations
 expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc   <- quo_label_vars(enquo(vars))
-  act$data2_desc <- quo_label(enquo(data2))
-  act$flt_desc   <- quo_label_flt(enquo(flt))
+  act$var_desc   <- as_label_vars(enquo(vars))
+  act$data2_desc <- as_label(enquo(data2))
+  act$flt_desc   <- as_label_flt(enquo(flt))
 
   flt <- enquo(flt)
 
@@ -143,7 +143,7 @@ expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_te
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records that\\
-          {ifelse(not, '', ' do not')} exist in dataset {act$data2_desc}.
+          {ifelse(not, '', ' do not')} exist in dataset `{act$data2_desc}`.
           Filter: {act$flt_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result))

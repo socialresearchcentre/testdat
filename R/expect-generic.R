@@ -23,10 +23,10 @@ expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
                           allany = c(chk_filter_all, chk_filter_any),
                           func_desc = NULL) {
   act <- quasi_label(enquo(data))
-  act$func_desc <- if (is.null(func_desc)) quo_label(enquo(func)) else func_desc
-  act$var_desc  <- quo_label_vars(enquo(vars))
-  act$flt_desc  <- quo_label_flt(enquo(flt))
-  act$args_desc <- quo_label_repl(args, "(^`list\\()|(\\)`$)", "`")
+  act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
+  act$var_desc  <- as_label_vars(enquo(vars))
+  act$flt_desc  <- as_label_flt(enquo(flt))
+  act$args_desc <- as_label_repl(args, "(^list\\()|(\\)$)", "")
   # act$args_desc <- lapply(args, as_label) %>% paste0(collapse = ", ")
 
   act$result <- allany(eval_tidy(enquo(data)),
@@ -38,9 +38,9 @@ expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records failing \\
-          {act$func_desc} on variable {act$var_desc}.
+          {act$func_desc} on variable `{act$var_desc}`.
           Filter: {act$flt_desc}
-          Arguments: {act$args_desc}"),
+          Arguments: `{act$args_desc}`"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result)),
     var_desc = act$var_desc,

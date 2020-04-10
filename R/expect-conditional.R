@@ -22,11 +22,11 @@ NULL
 expect_base <- function(var, base, miss = getOption("testdat.miss"), missing_valid = FALSE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
 
-  act$var_desc <- quo_label(ensym(var))
+  act$var_desc <- as_label(ensym(var))
   act$var <- as_name(ensym(var))
 
   base <- enquo(base)
-  act$base_desc <- quo_label(base)
+  act$base_desc <- as_label(base)
   act$base <- act$val %>% transmute(!!base) %>% pull(1)
   act$base[is.na(act$base)] <- FALSE
 
@@ -36,9 +36,9 @@ expect_base <- function(var, base, miss = getOption("testdat.miss"), missing_val
 
   expect_custom(
     all(act$result, na.rm = TRUE),
-    glue("{act$lab} has a base mismatch in variable {act$var_desc}.
-          {sum(act$miss)} cases have {act$base_desc} but {act$var_desc} is missing.
-          {sum(act$nmiss)} cases do not have {act$base_desc} but {act$var_desc} is non missing."),
+    glue("{act$lab} has a base mismatch in variable `{act$var_desc}`.
+          {sum(act$miss)} cases have `{act$base_desc}` but `{act$var_desc}` is missing.
+          {sum(act$nmiss)} cases do not have `{act$base_desc}` but `{act$var_desc}` is non missing."),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result)),
     var_desc = act$var,
@@ -56,12 +56,12 @@ expect_cond <- function(cond1, cond2, data = get_testdata()) {
   act <- quasi_label(enquo(data))
 
   cond1 <- enquo(cond1)
-  act$cond1_desc <- quo_label(cond1)
+  act$cond1_desc <- as_label(cond1)
   act$cond1 <- act$val %>% transmute(!!cond1) %>% pull(1)
   act$cond1[is.na(act$cond1)] <- FALSE
 
   cond2 <- enquo(cond2)
-  act$cond2_desc <- quo_label(cond2)
+  act$cond2_desc <- as_label(cond2)
   act$cond2 <- act$val %>% transmute(!!cond2) %>% pull(1)
   act$cond2[is.na(act$cond2)] <- FALSE
 
@@ -70,7 +70,7 @@ expect_cond <- function(cond1, cond2, data = get_testdata()) {
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} failed consistency check. {sum(!act$result, na.rm = TRUE)} \\
-          cases have {act$cond1_desc} but not {act$cond2_desc}."),
+          cases have `{act$cond1_desc}` but not `{act$cond2_desc}`."),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result)),
     result = act$result

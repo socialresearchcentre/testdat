@@ -91,19 +91,19 @@ filter_expect <- function(data, expect_function, ..., not = TRUE) {
 
 # labelling helpers ----
 
-#' @importFrom stringr str_replace_all
-quasi_repl <- function(quo, pattern = NULL, replace = "", label = TRUE) {
-  desc <- quo_label(quo)
-  if (!is.null(pattern)) desc <- str_replace_all(desc, pattern, replace)
-  desc
+as_label_repl <- function(quo, pattern, replace = "") {
+  stringr::str_replace_all(as_label(quo), pattern, replace)
 }
 
-quo_label_repl <- function(quo, pattern, replace = "") {
-  str_replace_all(quo_label(quo), pattern, replace)
-}
+as_label_vars <- function(quo) as_label_repl(quo, "(^vars\\()|(\\)$)", "")
 
-quo_label_vars <- function(quo) quo_label_repl(quo, "(^`vars\\()|(\\)`$)", "`")
-quo_label_flt  <- function(quo) quo_label_repl(quo, "^TRUE$", "None")
+as_label_flt  <- function(quo) {
+  quo_lab <- as_label(quo)
+  if (quo_lab == "TRUE")
+    "None"
+  else
+    paste0("`", quo_lab, "`")
+}
 
 # expectation_type ----
 

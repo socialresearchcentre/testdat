@@ -13,17 +13,17 @@ NULL
 expect_values <- function(var, ..., miss = getOption("testdat.miss"), data = get_testdata()) {
   act <- quasi_label(enquo(data))
 
-  act$var_desc <- quo_label(ensym(var))
+  act$var_desc <- as_label(ensym(var))
   act$var <- as_name(ensym(var))
-  act$vals_desc <- lapply(enexprs(...), quo_text)
-  act$vals_desc <- paste0("`", paste0(act$vals_desc, collapse = ", "), "`")
+  act$vals_desc <- lapply(enexprs(...), as_label)
+  act$vals_desc <- paste0(act$vals_desc, collapse = ", ")
   act$result <- act$val[[act$var]] %in% c(unlist(list(...)), miss)
 
   expect_custom(
     all(act$result, na.rm = TRUE),
-    glue("{act$lab} has invalid values in variable {act$var_desc}. \\
-          {sum(!act$result, na.rm = TRUE)} cases have values other than {act$vals_desc}."),
-    data = list(table(act$val[[act$var]][!act$val[[act$var]] %in% unlist(list(...))])),
+    glue("{act$lab} has invalid values in variable `{act$var_desc}`. \\
+          {sum(!act$result, na.rm = TRUE)} cases have values other than `{act$vals_desc}`."),
+    data = list(table(act$val[[act$var]][!act$result], useNA = "ifany")),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result)),
     var_desc = act$var,
@@ -56,18 +56,19 @@ expect_range <- expect_make(
 #' @param exc_val The value to check for exclusivity (default: `1`)
 expect_exclusive <- function(vars, exc_vars, exc_val = 1, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc     <- quo_label_vars(enquo(vars))
-  act$exc_var_desc <- quo_label_vars(enquo(exc_vars))
-  act$exc_val_desc <- quo_label(enquo(exc_val))
-  act$flt_desc     <- quo_label_flt(enquo(flt))
+  act$var_desc     <- as_label_vars(enquo(vars))
+  act$exc_var_desc <- as_label_vars(enquo(exc_vars))
+  act$exc_val_desc <- as_label(enquo(exc_val))
+  act$flt_desc     <- as_label_flt(enquo(flt))
 
   vars_list <- vars_select(tbl_vars(data), !!!vars) %>% unname
   exc_list <- vars_select(tbl_vars(data), !!!exc_vars) %>% unname
 
   if (any(!vars_list %in% exc_list)) {
     exc_vars <- c(exc_vars, vars)
-    warning("Some variables in vars ", act$var_desc, " do not exist in exc_vars ",
-            act$exc_var_desc, ". Variable lists will be combined.",
+    warning("Some variables in `vars(", act$var_desc, ")` do not exist in ",
+            "exc_vars `vars(", act$exc_var_desc, ")`. ",
+            "Variable lists will be combined.",
             call. = FALSE)
   }
 
@@ -95,12 +96,12 @@ expect_exclusive <- function(vars, exc_vars, exc_val = 1, flt = TRUE, data = get
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records with \\
-          non-exclusive values in variables {act$var_desc} in variable set \\
-          {act$exc_var_desc}.
+          non-exclusive values in variables `{act$var_desc}` in variable set \\
+          `{act$exc_var_desc}`.
           Filter: {act$flt_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result))
-    )
+  )
 
   invisible(act$result)
 }
@@ -110,8 +111,8 @@ expect_exclusive <- function(vars, exc_vars, exc_val = 1, flt = TRUE, data = get
 #' @rdname value-expectations
 expect_unique <- function(vars, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc <- quo_label_vars(enquo(vars))
-  act$flt_desc <- quo_label_flt(enquo(flt))
+  act$var_desc <- as_label_vars(enquo(vars))
+  act$flt_desc <- as_label_flt(enquo(flt))
 
   flt <- enquo(flt)
   act$result_data <- data %>%
@@ -129,7 +130,7 @@ expect_unique <- function(vars, flt = TRUE, data = get_testdata()) {
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} duplicate records \\
-          on variable {act$var_desc}.
+          on variable `{act$var_desc}`.
           Filter: {act$flt_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result)),
@@ -143,8 +144,8 @@ expect_unique <- function(vars, flt = TRUE, data = get_testdata()) {
 #' @rdname value-expectations
 expect_unique_across <- function(vars, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
-  act$var_desc <- quo_label_vars(enquo(vars))
-  act$flt_desc <- quo_label_flt(enquo(flt))
+  act$var_desc <- as_label_vars(enquo(vars))
+  act$flt_desc <- as_label_flt(enquo(flt))
 
   flt <- enquo(flt)
   act$result <- data %>%
@@ -155,7 +156,7 @@ expect_unique_across <- function(vars, flt = TRUE, data = get_testdata()) {
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records with \\
-          duplicates across variables {act$var_desc}.
+          duplicates across variables `{act$var_desc}`.
           Filter: {act$flt_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result))
@@ -171,8 +172,8 @@ expect_unique_across <- function(vars, flt = TRUE, data = get_testdata()) {
 expect_unique_combine <- function(vars, flt = TRUE, data = get_testdata()) {
   browser()
   act <- quasi_label(enquo(data))
-  act$var_desc <- quo_label_vars(enquo(vars))
-  act$flt_desc <- quo_label_flt(enquo(flt))
+  act$var_desc <- as_label_vars(enquo(vars))
+  act$flt_desc <- as_label_flt(enquo(flt))
 
   flt <- enquo(flt)
   act$result <- data %>%
@@ -182,11 +183,11 @@ expect_unique_combine <- function(vars, flt = TRUE, data = get_testdata()) {
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records with \\
-          duplicates across variables {act$var_desc}.
+          duplicates across variables `{act$var_desc}`.
           Filter: {act$flt_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result))
-    )
+  )
 
   invisible(act$result)
 }

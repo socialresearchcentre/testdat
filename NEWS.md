@@ -6,6 +6,8 @@
 
 * Added >= 0.8.0 dplyr version dependency (#2).
 
+* All calls to `quo_label()` now use `as_label()` instead as recommended by rlang (#10). This may cause minor changes to printing of test results.
+
 # testdat 0.1.0
 
 Initial release.
