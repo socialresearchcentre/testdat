@@ -70,6 +70,25 @@ A logical vector flagging records that have passed or failed the check
 \description{
 These functions provide common, simple data checks.
 }
+\examples{
+sales <- data.frame(
+  sale_id = 1:5,
+  date = c("20200101", "20200101", "20200102", "20200103", "2020003"),
+  sale_price = c(10, 20, 30, 40, -1),
+  book_title = c("Phenomenology of Spirit", NA, "Critique of Practical Reason", "Spirit of Trust", "Empiricism and the Philosophy of Mind"),
+  stringsAsFactors = FALSE
+)
+
+lapply(sales, function(x) any(chk_blank(x))) # Any data missing?
+
+with(sales, date[!chk_date_yyyymmdd(date)]) # Examine invalid dates
+
+all(chk_unique(sales$sale_id)) # Valid key?
+
+sales$sale_price[!chk_range(sales$sale_price, 0, Inf)] <- NA # Clean out invalid prices
+sales
+
+}
 \seealso{
 \link[=chk-helper]{Checking Helper Functions}
 }

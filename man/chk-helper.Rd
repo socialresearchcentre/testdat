@@ -35,6 +35,18 @@ A logical vector flagging records that have passed or failed the check, with \co
 \description{
 These helper functions allowing easy checking over multiple columns and filtering to subsets of the data.
 }
+\examples{
+
+# Check that every 4-cylinder car has an engine displacement of < 100 cubic
+# inches
+x <- chk_filter(mtcars, disp, chk_range, cyl == 4, list(min = 0, max = 100))
+all(x, na.rm = TRUE)
+
+# Check that every 4-cylinder car has an engine displacement of < 100 cubic
+# inches AND < 100 horsepower
+chk_filter_all(mtcars, c("disp", "hp"), chk_range, cyl == 4, list(min = 0, max = 100))
+
+}
 \seealso{
 \link[=chk-generic]{Generic Checking Functions}
 }

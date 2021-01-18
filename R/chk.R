@@ -5,6 +5,24 @@
 #' @param x vector to check
 #' @param miss vector of values to be treated as missing
 #' @return A logical vector flagging records that have passed or failed the check
+#' @examples
+#' sales <- data.frame(
+#'   sale_id = 1:5,
+#'   date = c("20200101", "20200101", "20200102", "20200103", "2020003"),
+#'   sale_price = c(10, 20, 30, 40, -1),
+#'   book_title = c("Phenomenology of Spirit", NA, "Critique of Practical Reason", "Spirit of Trust", "Empiricism and the Philosophy of Mind"),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' lapply(sales, function(x) any(chk_blank(x))) # Any data missing?
+#'
+#' with(sales, date[!chk_date_yyyymmdd(date)]) # Examine invalid dates
+#'
+#' all(chk_unique(sales$sale_id)) # Valid key?
+#'
+#' sales$sale_price[!chk_range(sales$sale_price, 0, Inf)] <- NA # Clean out invalid prices
+#' sales
+#'
 #' @seealso [Checking Helper Functions][chk-helper]
 #' @name chk-generic
 NULL
@@ -124,6 +142,17 @@ chk_values <- function(x, ..., miss = getOption("testdat.miss")) {
 #' @param .flt a logical expression to be applied as a filter for the check. This will be evaluated in the context of .dat
 #' @param .args a list of additional arguments to be added to the function calls.
 #' @return A logical vector flagging records that have passed or failed the check, with `NA` where records do not meet the filter
+#' @examples
+#'
+#' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
+#' # inches
+#' x <- chk_filter(mtcars, disp, chk_range, cyl == 4, list(min = 0, max = 100))
+#' all(x, na.rm = TRUE)
+#'
+#' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
+#' # inches AND < 100 horsepower
+#' chk_filter_all(mtcars, c("disp", "hp"), chk_range, cyl == 4, list(min = 0, max = 100))
+#'
 #' @seealso [Generic Checking Functions][chk-generic]
 #' @name chk-helper
 NULL
