@@ -35,6 +35,19 @@ An \verb{expect_*()} style function.
 allow simple generation of domain specific data checks.
 }
 \examples{
-expect_make(chk_pattern)
-expect_make(chk_values)
+# Create a custom check
+chk_binary <- function(x) {
+  suppressWarnings(as.integer(x) \%in\% 0:1)
+}
+
+# Create custom expectation function
+expect_binary <- expect_make(chk_binary)
+
+# Validate a dataset
+\dontrun{
+expect_binary(vs, data = mtcars)
+expect_binary(cyl, data = mtcars)
+}
+
+
 }

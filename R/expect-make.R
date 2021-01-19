@@ -15,8 +15,21 @@
 #'   environment of `expect_make()`
 #' @return An `expect_*()` style function.
 #' @examples
-#' expect_make(chk_pattern)
-#' expect_make(chk_values)
+#' # Create a custom check
+#' chk_binary <- function(x) {
+#'   suppressWarnings(as.integer(x) %in% 0:1)
+#' }
+#'
+#' # Create custom expectation function
+#' expect_binary <- expect_make(chk_binary)
+#'
+#' # Validate a dataset
+#' \dontrun{
+#' expect_binary(vs, data = mtcars)
+#' expect_binary(cyl, data = mtcars)
+#' }
+#'
+#'
 #' @export
 expect_make <- function(func, func_desc = NULL, vars = FALSE, all = TRUE, env = caller_env()) {
   enfunc <- enexpr(func)
@@ -57,7 +70,22 @@ expect_make <- function(func, func_desc = NULL, vars = FALSE, all = TRUE, env = 
 #' same name.
 #'
 #' @inheritParams expect_allany
+#' @seealso [Generic Checking Functions][chk-generic]
 #' @name chk-expect
+#' @examples
+#' sales <- data.frame(
+#'   sale_id = 1:5,
+#'   date = c("20200101", "20200101", "20200102", "20200103", "2020003"),
+#'   sale_price = c(10, 20, 30, 40, -1),
+#'   book_title = c("Phenomenology of Spirit", NA, "Critique of Practical Reason", "Spirit of Trust", "Empiricism and the Philosophy of Mind"),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # Validate sales
+#' \dontrun{
+#' expect_text_nmiss(book_title, data = sales) # Titles non-missing
+#' expect_date_yyyymmdd(date, data = sales) # Dates in correct format
+#' }
 NULL
 
 #' @rdname chk-expect

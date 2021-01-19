@@ -48,3 +48,21 @@ by default.}
 These expectations are auto-generated from the \verb{chk_*()} functions of the
 same name.
 }
+\examples{
+sales <- data.frame(
+  sale_id = 1:5,
+  date = c("20200101", "20200101", "20200102", "20200103", "2020003"),
+  sale_price = c(10, 20, 30, 40, -1),
+  book_title = c("Phenomenology of Spirit", NA, "Critique of Practical Reason", "Spirit of Trust", "Empiricism and the Philosophy of Mind"),
+  stringsAsFactors = FALSE
+)
+
+# Validate sales
+\dontrun{
+expect_text_nmiss(book_title, data = sales) # Titles non-missing
+expect_date_yyyymmdd(date, data = sales) # Dates in correct format
+}
+}
+\seealso{
+\link[=chk-generic]{Generic Checking Functions}
+}
