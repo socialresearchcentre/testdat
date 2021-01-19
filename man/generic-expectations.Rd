@@ -50,6 +50,29 @@ failure message.}
 \description{
 These functions allow for testing of a dataset using an arbitrary function.
 }
+\examples{
+\dontrun{
+set_testdata(mtcars)
+# Check that every 4-cylinder car has an engine displacement of < 100 cubic
+# inches *AND* < 100 horsepower
+expect_all(
+  vars = c("disp", "hp"),
+  func = chk_range,
+  flt = (cyl == 4),
+  args = list(min = 0, max = 100),
+)
+
+# Check that every 4-cylinder car has an engine displacement of < 100 cubic
+# inches *OR* < 100 horsepower
+expect_any(
+  vars = c("disp", "hp"),
+  func = chk_range,
+  flt = (cyl == 4),
+  args = list(min = 0, max = 100),
+)
+}
+
+}
 \seealso{
 \link{chk-generic} for a set of generic checking functions
 
