@@ -88,7 +88,7 @@ chk_text_miss <- function(x, miss = getOption("testdat.miss_text")) {
 #' @rdname chk-generic
 #' @export
 chk_text_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
-  !chk_miss(x, miss)
+  !chk_text_miss(x, miss)
 }
 
 #' @rdname chk-generic
