@@ -33,7 +33,7 @@ expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
   data_tb  <- data  %>% group_by(!!var)  %>% summarise(freq = n())
   data2_tb <- data2 %>% group_by(!!var2) %>% summarise(freq = n())
 
-  by_var <- structure(as_name(var), names = as_name(var2))
+  by_var <- structure(as_name(var2), names = as_name(var))
   act$result <-
     left_join(data_tb, data2_tb, by = by_var) %>%
     mutate(prop_diff = abs(.data$freq.x - .data$freq.y) / .data$freq.x,
@@ -44,7 +44,7 @@ expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
     glue("{act$lab} has {sum(!act$result$pass, na.rm = TRUE)} \\
           values breaking the {threshold} similarity threshold for variable \\
           `{act$var_desc}`
-          Values: {glue::collapse(act$result %>% filter(!pass) %>% pull(!!var), ', ')}
+          Values: {glue::glue_collapse(act$result %>% filter(!pass) %>% pull(!!var), ', ')}
           Filter: {act$flt_desc}"),
     table = act$result
   )
