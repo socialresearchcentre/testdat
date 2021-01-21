@@ -52,24 +52,6 @@ expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
   invisible(act$result$pass)
 }
 
-# TODO
-# #' @export
-# #' @rdname datacomp-expectations
-expect_labels_identical <- function(data2, data = get_testdata()) {
-  act <- quasi_label(enquo(data))
-  act$data2_desc <- as_label(enquo(data2))
-
-  act$result <- FALSE
-
-  expect_custom(
-    all(act$result, na.rm = TRUE),
-    glue(""),
-    table = act$result
-  )
-
-  invisible(act$result)
-}
-
 #' @importFrom tidyselect vars_select
 #' @export
 #' @rdname datacomp-expectations

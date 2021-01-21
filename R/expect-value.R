@@ -165,29 +165,4 @@ expect_unique_across <- function(vars, flt = TRUE, data = get_testdata()) {
   invisible(act$result)
 }
 
-# TODO - check if any values exist more than once across multiple variables in
-# the entire dataset
-# #' @export
-# #' @rdname value-expectations
-expect_unique_combine <- function(vars, flt = TRUE, data = get_testdata()) {
-  browser()
-  act <- quasi_label(enquo(data))
-  act$var_desc <- as_label_vars(enquo(vars))
-  act$flt_desc <- as_label_flt(enquo(flt))
 
-  flt <- enquo(flt)
-  act$result <- data %>%
-    filter(!!flt) %>%
-    select(!!!vars)
-
-  expect_custom(
-    all(act$result, na.rm = TRUE),
-    glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records with \\
-          duplicates across variables `{act$var_desc}`.
-          Filter: {act$flt_desc}"),
-    failed_count = sum(!act$result, na.rm = TRUE),
-    total_count = sum(!is.na(act$result))
-  )
-
-  invisible(act$result)
-}
