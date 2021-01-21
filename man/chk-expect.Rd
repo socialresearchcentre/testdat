@@ -53,7 +53,13 @@ sales <- data.frame(
   sale_id = 1:5,
   date = c("20200101", "20200101", "20200102", "20200103", "2020003"),
   sale_price = c(10, 20, 30, 40, -1),
-  book_title = c("Phenomenology of Spirit", NA, "Critique of Practical Reason", "Spirit of Trust", "Empiricism and the Philosophy of Mind"),
+  book_title = c(
+    "Phenomenology of Spirit",
+    NA,
+    "Critique of Practical Reason",
+    "Spirit of Trust",
+    "Empiricism and the Philosophy of Mind"
+  ),
   stringsAsFactors = FALSE
 )
 

@@ -1,4 +1,4 @@
-library(dplyr)
+suppressWarnings(library(dplyr))
 context("expect_exclusive")
 
 dat <- tribble(
