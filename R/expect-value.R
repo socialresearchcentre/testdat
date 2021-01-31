@@ -1,10 +1,83 @@
 #' Expectations: value checks
 #'
-#' These functions test variable values
+#' These functions test variable values:
+#'   * `expect_values` tests one variable (`var`) against a set of values
+#'     (`...`) and fails if there are any other values in the variable
+#'   * `expect_regex` tests one variable (`var`) against a regex pattern
+#'     (`pattern`) and fails if there are any values not conforming to that
+#'     pattern in the variable
+#'   * `expect_range` tests one variable (`var`) against a range (defined by
+#'     `min`/`max` values) and fails if there are any values in the variable
+#'     outside this range
+#'   * `expect_exclusive` tests one set of variables (`exc_vars`) against
+#'     another (`vars`) with reference to a value (`exc_val`) and fails if any
+#'     observation has *all* of the variables in `vars` equal to `exc_val` and
+#'     and *any* of the variables in `exc_vars` (aside from those which are
+#'     also in `vars`) equal to `exc_val`.
+#'   * `expect_unique` tests a set of variables (`vars`) and fails if the
+#'     variables collectively do not uniquely identify the observations
+#'   * `expect_unique_across` tests a set of variables (`vars`) and fails if
+#'     each observation does not have different values in each of the variables
+#'     in `vars`.
+#'
+#'
 #'
 #' @inheritParams data-params
 #' @family data expectations
 #' @name value-expectations
+#' @examples
+#'
+#' # Single variable checks ----
+#'
+#' # Check that all values in a variable fall into a given set
+#' expect_values(vs, 0:1, data = mtcars)
+#'
+#' # Check that all values in a variable conform to a certain regex pattern
+#' expect_regex(vs, "[01]", data = mtcars)
+#'
+#' # Check that all values in a variable fall into a given range
+#' expect_range(mpg, 10, 40, data = mtcars)
+#'
+#'
+#' # Multi variable checks ----
+#'
+#' my_q_block <- data.frame(
+#'   resp_id = 1:5, # Unique to respondent
+#'   q10_1 = c(1, 1, 0, 0, 0),
+#'   q10_2 = c(0, 1, 0, 0, 0),
+#'   q10_3 = c(0, 0, 1, 0, 0),
+#'   q10_98 = c(1, 0, 0, 1, 0), # None of the above
+#'   q10_99 = c(0, 0, 0, 0, 1)  # Item not answered
+#' )
+#'
+#' # Make sure that if "None of the above" and "Item skipped" are selected
+#' # none of the other question options are selected:
+#' \dontrun{expect_exclusive(
+#'   vars(q10_98, q10_99),
+#'   vars(starts_with("q10_")),
+#'   data = my_q_block
+#' )}
+#'
+#' my_sales <- data.frame(
+#'   purchaser_id = c(1, 1, 1, 2, 3),
+#'   purchase_number = c(1, 2, 3, 1, 1),
+#'   item_id = 1:5
+#' )
+#'
+#' # Check that all values in a combination of variables are unique
+#' expect_unique(vars(purchaser_id, purchase_number), data = my_sales)
+#'
+#' student_fruit_preferences <- data.frame(
+#'   student_id = 1:5,
+#'   apple = c(1, 1, 1, 1, 1),
+#'   orange = c(2, 3, 2, 3, 2),
+#'   banana = c(3, 2, 3, 2, 3)
+#' )
+#'
+#' # Check that every observation has a different value across a set of variables
+#' expect_unique_across(vars(apple, orange, banana), data = student_fruit_preferences)
+#'
+#'
 NULL
 
 #' @export
