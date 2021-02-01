@@ -23,4 +23,25 @@ expect_func <- function(var, ...) {
   expect_allany(vars(!!ensym(var)), ..., allany = chk_filter_all)
 }
 
+
+#' Filter data to expectation result
+#'
+#' \Sexpr[results=rd, stage=render]{testdat:::lifecycle("defunct")}
+#'
+#' This function is defunct
+#'
+#' @param data A data frame to test.
+#' @param expect_function An expectation function.
+#' @param ... Arguments to pass to expect_function.
+#' @param not Reverse the results of the check.
+#' @return The input data frame filtered to records failing the expectation.
+#' @export
+filter_expect <- function(data, expect_function, ..., not = TRUE) {
+  stop_defunct("`filter_expect()` is defunct as of testdat 0.2.0.")
+  expect_result <- expect_function(..., data = data)
+  if (not) expect_result <- !expect_result
+
+  data %>% filter(expect_result)
+}
+
 # nocov end

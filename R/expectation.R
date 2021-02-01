@@ -72,23 +72,6 @@ expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, trace
   exp_signal(exp)
 }
 
-#' Filter data to expectation result
-#'
-#' \Sexpr[results=rd, stage=render]{testdat:::lifecycle("experimental")}
-#'
-#' @param data A data frame to test.
-#' @param expect_function An expectation function.
-#' @param ... Arguments to pass to expect_function.
-#' @param not Reverse the results of the check.
-#' @return The input data frame filtered to records failing the expectation.
-#' @export
-filter_expect <- function(data, expect_function, ..., not = TRUE) {
-  expect_result <- expect_function(..., data = data)
-  if (not) expect_result <- !expect_result
-
-  data %>% filter(expect_result)
-}
-
 # labelling helpers ----
 
 as_label_repl <- function(quo, pattern, replace = "") {
