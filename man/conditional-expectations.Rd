@@ -45,6 +45,28 @@ These functions test whether multiple conditions coexist.
 condition. It can be read as "if \code{base} then \code{var} not missing, if not \code{base}
 then \code{var} missing".
 }
+\examples{
+
+my_survey <- data.frame(
+  resp_id = 1:5,
+  q1a = c(0, 1, 0, 1, 0),
+  q1b = c(NA, NA, NA, 1, 0), # Asked if q1a \%in\% 1
+  q2a = c(90, 80, 60, 40, 90),
+  q2b = c("", "", NA, "Some reason for low rating", "") # Asked if q2a < 50
+)
+
+# Check that q1b has a value if and only if q1a \%in\% 1
+\dontrun{
+expect_base(q1b, q1a \%in\% 1, data = my_survey) # Fails for resp_id 2 and 5
+}
+
+# Check that q2b has a value if and only if q2a < 50
+expect_base(q2b, q2a < 50, data = my_survey)
+
+# Check that if q1a \%in\% 0 then q2a > 50 (but not vice-versa)
+expect_cond(q1a \%in\% 0, q2a > 50, data = my_survey)
+
+}
 \seealso{
 Other data expectations: 
 \code{\link{datacomp-expectations}},
