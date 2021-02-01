@@ -1,6 +1,13 @@
 #' Expectations: generic expectation helpers
 #'
 #' These functions allow for testing of a dataset using an arbitrary function.
+#' Both `expect_all` and `expect_any` are wrappers around `expect_allany`. The
+#' former, `expect_all`, tests the variables in `vars` to see whether `func`
+#' returns TRUE for *all* of them (i.e. whether the conjunction of results of
+#' applying `func` to each of the `vars` is TRUE). The latter, `expect_any`,
+#' tests the `vars` to see whether `func` returns TRUE for *any* of them (i.e.
+#' whether the disjunction of the results of applying `func` to each of the `vars`
+#' is TRUE).
 #'
 #' @inheritParams data-params
 #' @param func a function that takes a vector as the first argument and returns

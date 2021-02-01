@@ -49,6 +49,13 @@ failure message.}
 }
 \description{
 These functions allow for testing of a dataset using an arbitrary function.
+Both \code{expect_all} and \code{expect_any} are wrappers around \code{expect_allany}. The
+former, \code{expect_all}, tests the variables in \code{vars} to see whether \code{func}
+returns TRUE for \emph{all} of them (i.e. whether the conjunction of results of
+applying \code{func} to each of the \code{vars} is TRUE). The latter, \code{expect_any},
+tests the \code{vars} to see whether \code{func} returns TRUE for \emph{any} of them (i.e.
+whether the disjunction of the results of applying \code{func} to each of the \code{vars}
+is TRUE).
 }
 \examples{
 \dontrun{
