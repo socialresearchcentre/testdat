@@ -1,3 +1,4 @@
+# nocov start
 .onLoad <- function(libname, pkgname) {
   op <- options()
   op.testdat <- list(
@@ -13,3 +14,4 @@
 
   invisible()
 }
+# nocov end
