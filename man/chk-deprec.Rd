@@ -24,7 +24,7 @@ chk_nmiss(x, miss = getOption("testdat.miss_text"))
 A logical vector flagging records that have passed or failed the check
 }
 \description{
-\Sexpr[results=rd, stage=render]{testdat:::lifecycle("soft-deprecated")}
+\Sexpr[results=rd, stage=render]{testdat:::lifecycle("deprecated")}
 
 These functions are deprecated. See \link[=chk-generic]{Generic Checking Functions} for current checking functions.
 }

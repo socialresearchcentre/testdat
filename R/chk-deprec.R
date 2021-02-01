@@ -4,7 +4,7 @@
 #'
 #' @description
 #'
-#' \Sexpr[results=rd, stage=render]{testdat:::lifecycle("soft-deprecated")}
+#' \Sexpr[results=rd, stage=render]{testdat:::lifecycle("deprecated")}
 #'
 #' These functions are deprecated. See [Generic Checking Functions][chk-generic] for current checking functions.
 #'
@@ -19,21 +19,21 @@ NULL
 #' @importFrom stringr str_length
 #' @export
 chk_length <- function(x, len) {
-  signal_soft_deprecated("`chk_length()` is soft-deprecated as of testdat 0.1.0. Use `chk_max_length()` instead.")
+  warn_deprecated("`chk_length()` is deprecated as of testdat 0.2.0. Use `chk_max_length()` instead.")
   chk_blank(x) | str_length(x) <= len
 }
 
 #' @rdname chk-deprec
 #' @export
 chk_miss <- function(x, miss = getOption("testdat.miss_text")) {
-  signal_soft_deprecated("`chk_miss()` is soft-deprecated as of testdat 0.1.0. Use `chk_text_miss()` instead.")
+  warn_deprecated("`chk_miss()` is deprecated as of testdat 0.2.0. Use `chk_text_miss()` instead.")
   tolower(x) %in% miss
 }
 
 #' @rdname chk-deprec
 #' @export
 chk_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
-  signal_soft_deprecated("`chk_nmiss()` is soft-deprecated as of testdat 0.1.0. Use `chk_text_nmiss()` instead.")
+  warn_deprecated("`chk_nmiss()` is deprecated as of testdat 0.2.0. Use `chk_text_nmiss()` instead.")
   !chk_miss(x, miss)
 }
 
