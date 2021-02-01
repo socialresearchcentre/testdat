@@ -70,6 +70,7 @@ expect_make <- function(func, func_desc = NULL, vars = FALSE, all = TRUE, env = 
 #' same name.
 #'
 #' @inheritParams expect_allany
+#' @param var an unquoted variable name
 #' @seealso [Generic Checking Functions][chk-generic]
 #' @name chk-expect
 #' @examples

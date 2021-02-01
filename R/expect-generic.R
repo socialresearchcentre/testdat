@@ -90,9 +90,3 @@ expect_all <- function(...) {
 expect_any <- function(...) {
   expect_allany(..., allany = chk_filter_any)
 }
-
-#' @export
-#' @rdname generic-expectations
-expect_func <- function(var, ...) {
-  expect_allany(vars(!!ensym(var)), ..., allany = chk_filter_all)
-}
