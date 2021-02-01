@@ -57,7 +57,49 @@ by default.}
 \item{not}{reverse the results of the check}
 }
 \description{
-These functions allow for dataset comparisons
+These functions allow for dataset comparisons:
+\itemize{
+\item \code{expect_similar} compares the distribution of a categorical variable
+(\code{var}) from the one dataset (\code{data}) to that of a categorical variable
+(\code{var2}) from another dataset (\code{data2}). The test fails if the
+distributions are sufficiently dissimilar.
+\item \code{expect_valmatch} compares the observations appearing in one dataset
+(\code{data}) to the same observations, as picked out by a key (\code{by}), in
+another dataset (\code{data2}). It fails if the selected variables (\code{vars})
+aren't the same for those observations in both datasets.
+\item \code{expect_join} compares one dataset (\code{data}) to another (\code{data2}) and
+fails if all of the observations in the first, as picked out by a key
+(\code{by}), do not appear in the second
+}
+}
+\examples{
+
+df1 <- data.frame(
+  id = 0:99,
+  binomial = sample(0:1, 100, TRUE),
+  even = abs(0:99\%\%2 - 1) * 0:99
+)
+
+df2 <- data.frame(
+  id = 0:99,
+  binomial = sample(0:1, 100, TRUE),
+  odd = 0:99\%\%2 *0:99
+)
+
+
+# Check categorical distribution is similar across data frames
+\dontrun{expect_similar(binomial, df2, binomial, data = df1)}
+
+# Check that same records 'succeeded' across data frames
+\dontrun{expect_valmatch(df2, vars(binomial), by = "id", data = df1)}
+
+# Check that a left join of df1 and df2 on "id" would not produce any NAs
+expect_join(df2, by = "id", data = df1)
+
+# Note:
+expect_join(df2, by = c("even" = "id"), data = df1) # Passes
+\dontrun{expect_join(df2, by = c("id" = "odd"), data = df1) # Fails}
+
 }
 \seealso{
 Other data expectations: 
