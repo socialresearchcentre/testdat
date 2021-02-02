@@ -139,7 +139,21 @@ chk_values <- function(x, ..., miss = getOption("testdat.miss")) {
 
 #' Checking helper functions
 #'
-#' These helper functions allowing easy checking over multiple columns and filtering to subsets of the data.
+#' These helper functions allowing easy checking over multiple columns and
+#' filtering to subsets of the data:
+#'   * `chk_filter` applies `.func` with `.args` to `.var` in `.dat` filtered
+#'     with `.flt` and returns the resulting logical vector.
+#'   * `chk_filter_vars` applies `.func` with `.args` to `.vars` in `.dat`
+#'     filtered with `.flt` and returns a dataframe containing the resulting
+#'     logical vectors.
+#'   * `chk_filter_all` and `chk_filter_any` are wrappers around
+#'     `chk_filter_vars` which return a single logical vector produced by
+#'     taking the conjunction and disjunction, respectively, of the columns
+#'     in the output of `chk_filter_vars`
+#'   * `chk_filter_where` works exactly the same as `chk_filter_all` except that
+#'     the variables are specified not using `dplyr::vars()` (`.vars`) but using
+#'     bare [`tidy-select`][dplyr_tidy_select] functions (`.where`).
+#'
 #'
 #' @param .dat a `tbl`
 #' @param .var a single column to check
@@ -158,6 +172,9 @@ chk_values <- function(x, ..., miss = getOption("testdat.miss")) {
 #' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
 #' # inches AND < 100 horsepower
 #' chk_filter_all(mtcars, c("disp", "hp"), chk_range, cyl == 4, list(min = 0, max = 100))
+#'
+#' # Check that columns made up of whole numbers are binary
+#' chk_filter_where
 #'
 #' @seealso [Generic Checking Functions][chk-generic]
 #' @name chk-helper
@@ -207,3 +224,20 @@ chk_filter_any <- function(.dat, .vars, .func, .flt = TRUE, .args = list()) {
     apply(1, any)
 }
 
+#' @rdname chk-helper
+#' @param .where <[`tidy-select`][dplyr_tidy_select]> columns to check
+#' @export
+chk_filter_where <- function(.dat, .where, .func, .flt = TRUE, .args = list()) {
+  .flt <- enquo(.flt)
+  .where <- enquo(.where)
+
+  .dat <- .dat %>%
+    mutate(.cond = !!.flt) %>%
+    select(!!.where, .data$.cond)
+
+  .dat %>%
+    mutate(across(-.data$.cond, .func, !!!.args)) %>%
+    mutate(across(-.data$.cond, ~ifelse(.data$.cond, ., NA))) %>%
+    select(-.data$.cond) %>%
+    apply(1, all)
+}
