@@ -184,11 +184,13 @@ chk_filter_vars <- function(.dat, .vars, .func, .flt = TRUE, .args = list()) {
   # .vars <- enquo(.vars)
   .flt <- enquo(.flt)
 
+  .flt <- .dat %>%
+    transmute(.cond = !!.flt)
+
   .dat %>%
-    mutate(.cond = !!.flt) %>%
     mutate_at(.vars, .func, !!!.args) %>%
-    mutate_at(.vars, ~ifelse(.cond, ., NA)) %>%
-    select(!!!.vars)
+    select(!!!.vars) %>%
+    mutate_all(~ifelse(.flt$.cond, ., NA))
 }
 
 #' @rdname chk-helper

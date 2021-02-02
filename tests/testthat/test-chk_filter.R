@@ -20,4 +20,8 @@ test_that("chk_filter", {
     c(rep(TRUE, 5), rep(NA, 5))
   )
 
+  expect_true(
+    all(chk_filter_all(mtcars, vars(everything()), is.numeric)),
+    label = "Ensure `everything()` works in chk_filter functions"
+  )
 })
