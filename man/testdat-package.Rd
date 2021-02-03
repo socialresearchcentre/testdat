@@ -24,6 +24,11 @@ character for checking, this value will be used for \code{scipen} (default: \cod
 \author{
 \strong{Maintainer}: Danny Smith \email{daniel.smith@srcentre.com.au}
 
+Authors:
+\itemize{
+  \item Kinto Behr \email{kinto.behr@srcentre.com.au}
+}
+
 Other contributors:
 \itemize{
   \item The Social Research Centre [copyright holder]

@@ -1,12 +1,16 @@
 Type: Package
 Package: testdat
 Title: Data Unit Testing for R
-Version: 0.1.0.9001
+Version: 0.1.0.9002
 Authors@R: 
     c(person(given = "Danny",
              family = "Smith",
              role = c("aut", "cre"),
              email = "daniel.smith@srcentre.com.au"),
+      person(given = "Kinto",
+             family = "Behr",
+             role = c("aut"),
+             email = "kinto.behr@srcentre.com.au"),
       person(given = "The Social Research Centre",
              role = "cph"))
 Description: An extension of 'testthat' made for checking data
