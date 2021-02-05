@@ -32,12 +32,12 @@ test_that("chk_filter", {
     chk_filter_where(test_df, everything(), chk_range, a <= 5, list(min = 0, max = 1))
   )
   expect_identical(
-    chk_filter_all(test_df, vars(starts_with("a")), chk_values, .args = list(1:10)),
-    chk_filter_where(test_df, starts_with("a"), chk_values, .args = list(1:10))
+    chk_filter_all(test_df, vars(starts_with("a")), chk_values, args = list(1:10)),
+    chk_filter_where(test_df, starts_with("a"), chk_values, args = list(1:10))
   )
   expect_identical(
-    chk_filter_all(test_df, vars(a, alpha), chk_values, .args = list(1:10)),
-    chk_filter_where(test_df, where(is.integer), chk_values, .args = list(1:10))
+    chk_filter_all(test_df, vars(a, alpha), chk_values, args = list(1:10)),
+    chk_filter_where(test_df, where(is.integer), chk_values, args = list(1:10))
   )
 })
 
