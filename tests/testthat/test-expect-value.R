@@ -25,3 +25,16 @@ test_that("expect_unique_across", {
   expect_success(expect_unique_across(vars(a,b), data = df1))
   expect_failure(expect_unique_across(vars(a,c), data = df1))
 })
+
+
+test_that("expect_unique_combine", {
+  df1 <- data.frame(
+    a = 1:10,
+    b = 11:20,
+    c = as.character(c(1:3, 14:16, 27:30)),
+    e = rep(1, 10)
+  )
+  expect_success(expect_unique_combine(vars(a, b), data = df1))
+  expect_failure(expect_unique_combine(vars(a, b, c), data = df1))
+  expect_failure(expect_unique_combine(vars(e), data = df1))
+})

@@ -8,6 +8,7 @@
 \alias{expect_exclusive}
 \alias{expect_unique}
 \alias{expect_unique_across}
+\alias{expect_unique_combine}
 \title{Expectations: value checks}
 \usage{
 expect_values(
@@ -32,6 +33,8 @@ expect_exclusive(
 expect_unique(vars, flt = TRUE, data = get_testdata())
 
 expect_unique_across(vars, flt = TRUE, data = get_testdata())
+
+expect_unique_combine(vars, flt = TRUE, data = get_testdata())
 }
 \arguments{
 \item{var}{an unquoted variable name}
@@ -80,6 +83,8 @@ variables collectively do not uniquely identify the observations
 \item \code{expect_unique_across} tests a set of variables (\code{vars}) and fails if
 each observation does not have different values in each of the variables
 in \code{vars}.
+\item \code{expect_unique_combine} tests a set of variables (\code{vars}) and fails if
+any values appear more than once across all of them.
 }
 }
 \examples{
@@ -128,12 +133,16 @@ student_fruit_preferences <- data.frame(
   student_id = 1:5,
   apple = c(1, 1, 1, 1, 1),
   orange = c(2, 3, 2, 3, 2),
-  banana = c(3, 2, 3, 2, 3)
+  banana = c(3, 2, 3, 2, 3),
+  phone1 = c(123, 456, 789, 987, 654),
+  phone2 = c(345, 678, 987, 567, 000)
 )
 
 # Check that every observation has a different value across a set of variables
 expect_unique_across(vars(apple, orange, banana), data = student_fruit_preferences)
 
+# Check that each phone number appears at most once
+\dontrun{expect_unique_combine(vars(phone1, phone2), data = student_fruit_preferences)}
 
 }
 \seealso{
