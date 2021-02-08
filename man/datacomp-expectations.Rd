@@ -104,7 +104,9 @@ expect_join(df2, by = c("even" = "id"), data = df1) # Passes
 \seealso{
 Other data expectations: 
 \code{\link{conditional-expectations}},
+\code{\link{exclusivity-expectations}},
 \code{\link{generic-expectations}},
+\code{\link{uniqueness-expectations}},
 \code{\link{value-expectations}}
 }
 \concept{data expectations}

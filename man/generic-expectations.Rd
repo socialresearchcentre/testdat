@@ -104,6 +104,8 @@ expect_where(
 Other data expectations: 
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
+\code{\link{exclusivity-expectations}},
+\code{\link{uniqueness-expectations}},
 \code{\link{value-expectations}}
 }
 \concept{data expectations}
