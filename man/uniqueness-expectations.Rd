@@ -55,10 +55,10 @@ expect_unique_across(vars(apple, orange, banana), data = student_fruit_preferenc
 }
 \seealso{
 Other data expectations: 
+\code{\link{chk-expectations}},
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
 \code{\link{exclusivity-expectations}},
-\code{\link{generic-expectations}},
-\code{\link{value-expectations}}
+\code{\link{generic-expectations}}
 }
 \concept{data expectations}

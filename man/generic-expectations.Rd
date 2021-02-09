@@ -102,10 +102,10 @@ expect_where(
 \link{chk-generic} for a set of generic checking functions
 
 Other data expectations: 
+\code{\link{chk-expectations}},
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
 \code{\link{exclusivity-expectations}},
-\code{\link{uniqueness-expectations}},
-\code{\link{value-expectations}}
+\code{\link{uniqueness-expectations}}
 }
 \concept{data expectations}

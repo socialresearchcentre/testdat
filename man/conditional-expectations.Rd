@@ -69,10 +69,10 @@ expect_cond(q1a \%in\% 0, q2a > 50, data = my_survey)
 }
 \seealso{
 Other data expectations: 
+\code{\link{chk-expectations}},
 \code{\link{datacomp-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{generic-expectations}},
-\code{\link{uniqueness-expectations}},
-\code{\link{value-expectations}}
+\code{\link{uniqueness-expectations}}
 }
 \concept{data expectations}

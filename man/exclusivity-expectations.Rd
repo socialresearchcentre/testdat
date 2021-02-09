@@ -54,10 +54,10 @@ my_q_block <- data.frame(
 }
 \seealso{
 Other data expectations: 
+\code{\link{chk-expectations}},
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
 \code{\link{generic-expectations}},
-\code{\link{uniqueness-expectations}},
-\code{\link{value-expectations}}
+\code{\link{uniqueness-expectations}}
 }
 \concept{data expectations}

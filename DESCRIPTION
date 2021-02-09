@@ -37,3 +37,24 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Collate: 
+    'chk-deprec.R'
+    'chk-filter.R'
+    'chk.R'
+    'comparison.R'
+    'compat-lifecycle.R'
+    'expect-make.R'
+    'expect-chk.R'
+    'expect-conditional.R'
+    'expect-data.R'
+    'expect-datacomp.R'
+    'expect-deprec.R'
+    'expect-generic.R'
+    'expect-unique.R'
+    'expect_exclusive.R'
+    'expectation.R'
+    'reporter-excel.R'
+    'reporter-zzz.R'
+    'testdat.R'
+    'utils.R'
+    'zzz.R'

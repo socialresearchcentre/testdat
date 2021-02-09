@@ -24,7 +24,7 @@ chk_blank(x)
 
 chk_equals(x, val)
 
-chk_range(x, min, max)
+chk_range(x, min, max, ...)
 
 chk_pattern(x, pattern)
 
@@ -55,14 +55,14 @@ chk_values(x, ..., miss = getOption("testdat.miss"))
 
 \item{max}{maximum value for range check}
 
+\item{...}{vectors of valid values}
+
 \item{pattern}{pattern to look for as defined in
 \link[stringr:str_detect]{str_detect()}}
 
 \item{len}{maximum string length for checking string variables}
 
 \item{miss}{vector of values to be treated as missing}
-
-\item{...}{vectors of valid values}
 }
 \value{
 A logical vector flagging records that have passed or failed the check
