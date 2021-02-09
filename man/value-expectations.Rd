@@ -11,6 +11,7 @@ expect_values(
   var,
   ...,
   miss = getOption("testdat.miss"),
+  flt = TRUE,
   data = get_testdata()
 )
 
@@ -26,12 +27,12 @@ expect_range(var, min, max, ..., flt = TRUE, data = get_testdata())
 \item{miss}{a vector of values to be treated as missing. The
 \link[=testdat]{testdat.miss} option is used by default}
 
+\item{flt}{a filter specifying a subset of the dataset to test}
+
 \item{data}{data frame to test. The \link[=global-data]{global test data} is used
 by default.}
 
 \item{pattern}{a regex to check}
-
-\item{flt}{a filter specifying a subset of the dataset to test}
 
 \item{min}{minimum value for range check}
 

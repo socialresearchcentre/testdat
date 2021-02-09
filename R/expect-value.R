@@ -29,28 +29,7 @@ NULL
 #' @export
 #' @rdname value-expectations
 #' @param ... vectors of valid values
-expect_values <- function(var, ..., miss = getOption("testdat.miss"), data = get_testdata()) {
-  act <- quasi_label(enquo(data))
-
-  act$var_desc <- as_label(ensym(var))
-  act$var <- as_name(ensym(var))
-  act$vals_desc <- lapply(enexprs(...), as_label)
-  act$vals_desc <- paste0(act$vals_desc, collapse = ", ")
-  act$result <- act$val[[act$var]] %in% c(unlist(list(...)), miss)
-
-  expect_custom(
-    all(act$result, na.rm = TRUE),
-    glue("{act$lab} has invalid values in variable `{act$var_desc}`. \\
-          {sum(!act$result, na.rm = TRUE)} cases have values other than `{act$vals_desc}`."),
-    data = list(table(act$val[[act$var]][!act$result], useNA = "ifany")),
-    failed_count = sum(!act$result, na.rm = TRUE),
-    total_count = sum(!is.na(act$result)),
-    var_desc = act$var,
-    result = act$result
-  )
-
-  invisible(act$result)
-}
+expect_values <- expect_make(chk_values, "value_check")
 
 #' @export
 #' @rdname value-expectations
