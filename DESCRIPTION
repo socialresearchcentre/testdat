@@ -28,6 +28,7 @@ Imports:
     stringr,
     tidyselect
 Suggests:
+    labelled,
     crayon,
     knitr,
     rmarkdown
@@ -50,6 +51,7 @@ Collate:
     'expect-datacomp.R'
     'expect-deprec.R'
     'expect-generic.R'
+    'expect-labels.R'
     'expect-proportion.R'
     'expect-unique.R'
     'expect_exclusive.R'
