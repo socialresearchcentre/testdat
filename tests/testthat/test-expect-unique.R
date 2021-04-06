@@ -27,3 +27,24 @@ test_that("expect_unique_combine", {
   expect_failure(expect_unique_combine(vars(a, b, c), data = df1))
   expect_failure(expect_unique_combine(vars(e), data = df1))
 })
+
+test_that("exclude argument works as expected", {
+  df2 <- data.frame(
+    var1 = c(9999L, 1234L, 1234L),
+    var2 = c(9999L, 9999L, 1234L),
+    var3 = c(9999L, 9999L, 9999L),
+    var4 = c(9999L, 9998L, 9997L)
+  )
+
+  # expect_unique
+  expect_success(expect_unique(vars(var2), exclude = 9999, data = df2))
+  expect_failure(expect_unique(vars(var1), exclude = 9999, data = df2))
+
+  # expect_unique_across
+  expect_success(expect_unique_across(vars(var1, var2, var3), exclude = 9999, flt = var2 %in% 9999, data = df2))
+  expect_failure(expect_unique_across(vars(var1, var2, var3), exclude = 9999, data = df2))
+
+  # expect_unique_combine
+  expect_success(expect_unique_combine(vars(var2, var4), exclude = 9999, data = df2))
+  expect_failure(expect_unique_combine(vars(var1, var4), exclude = 9999, data = df2))
+})

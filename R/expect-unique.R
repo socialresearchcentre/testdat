@@ -11,15 +11,16 @@
 #'
 #'
 #' @inheritParams data-params
+#' @param exclude values to exclude from uniqueness check
 #' @family data expectations
 #' @name uniqueness-expectations
 #' @examples
 #'
 #' student_fruit_preferences <- data.frame(
 #'   student_id = 1:5,
-#'   apple = c(1, 1, 1, 1, 1),
-#'   orange = c(2, 3, 2, 3, 2),
-#'   banana = c(3, 2, 3, 2, 3),
+#'   apple = c(1, 1, 1, 1, 99),
+#'   orange = c(2, 3, 2, 3, 99),
+#'   banana = c(3, 2, 3, 2, 99),
 #'   phone1 = c(123, 456, 789, 987, 654),
 #'   phone2 = c(345, 678, 987, 567, 000)
 #' )
@@ -28,7 +29,7 @@
 #' expect_unique(vars(student_id), data = student_fruit_preferences)
 #'
 #' # Check that every observation has a different value across a set of variables
-#' expect_unique_across(vars(apple, orange, banana), data = student_fruit_preferences)
+#' expect_unique_across(vars(apple, orange, banana), exclude = 99, data = student_fruit_preferences)
 #'
 #' # Check that each phone number appears at most once
 #' \dontrun{expect_unique_combine(vars(phone1, phone2), data = student_fruit_preferences)}
@@ -37,7 +38,7 @@ NULL
 #' @importFrom tidyselect vars_select
 #' @export
 #' @rdname uniqueness-expectations
-expect_unique <- function(vars, flt = TRUE, data = get_testdata()) {
+expect_unique <- function(vars, exclude = getOption("testdat.miss"), flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
   act$var_desc <- as_label_vars(enquo(vars))
   act$flt_desc <- as_label_flt(enquo(flt))
@@ -48,10 +49,8 @@ expect_unique <- function(vars, flt = TRUE, data = get_testdata()) {
     group_by(!!!vars) %>%
     mutate(count = n()) %>%
     ungroup() %>%
-    select(!!!vars, count)
-  # select(!!!vars) %>%
-  # duplicated %>%
-  # `!`
+    select(!!!vars, count) %>%
+    filter(across(-count, .fns = function(x) {!x %in% exclude}))
 
   act$result <- act$result_data$count == 1
 
@@ -70,7 +69,7 @@ expect_unique <- function(vars, flt = TRUE, data = get_testdata()) {
 
 #' @export
 #' @rdname uniqueness-expectations
-expect_unique_across <- function(vars, flt = TRUE, data = get_testdata()) {
+expect_unique_across <- function(vars, exclude = getOption("testdat.miss"), flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
   act$var_desc <- as_label_vars(enquo(vars))
   act$flt_desc <- as_label_flt(enquo(flt))
@@ -79,7 +78,10 @@ expect_unique_across <- function(vars, flt = TRUE, data = get_testdata()) {
   act$result <- data %>%
     filter(!!flt) %>%
     select(!!!vars) %>%
-    apply(1, function(x) { all(chk_unique(x)) })
+    apply(1, function(x) {
+    # Number non-na equal to the number unique non-na
+    sum(!x %in% exclude) == length(unique(x[!x %in% exclude]))
+  })
 
   expect_custom(
     all(act$result, na.rm = TRUE),
@@ -95,7 +97,7 @@ expect_unique_across <- function(vars, flt = TRUE, data = get_testdata()) {
 
 #' @export
 #' @rdname uniqueness-expectations
-expect_unique_combine <- function(vars, flt = TRUE, data = get_testdata()) {
+expect_unique_combine <- function(vars, exclude = getOption("testdat.miss"), flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
   act$var_desc <- as_label_vars(enquo(vars))
   act$flt_desc <- as_label_flt(enquo(flt))
@@ -106,7 +108,7 @@ expect_unique_combine <- function(vars, flt = TRUE, data = get_testdata()) {
     select(!!!vars)
 
   all_values <- unlist(lapply(test_data, function(x) as.character(x)))
-  duplicate_values <- all_values[duplicated(all_values)]
+  duplicate_values <- setdiff(all_values[duplicated(all_values)], exclude)
 
   act$result <- test_data %>%
     filter(if_any(everything(), ~ .x %in% duplicate_values))
