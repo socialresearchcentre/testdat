@@ -8,7 +8,8 @@
 #'
 #' These functions are deprecated.
 #'
-#' See [Generic Expectation Functions][generic-expectations] for current expectation functions.
+#' See [Generic Expectation Functions][generic-expectations] and [Cross-dataset
+#' Expectations][datacomp-expectations] for current expectation functions.
 #'
 #' @inheritParams data-params
 #' @param ... arguments to pass to `expect_allany()`
@@ -23,6 +24,14 @@ expect_func <- function(var, ...) {
   expect_allany(vars(!!ensym(var)), ..., allany = chk_filter_all)
 }
 
+#' @export
+#' @rdname expect-deprec
+#' @inheritParams datacomp-expectations
+#' @seealso [Cross-dataset Expectations][datacomp-expectations]
+expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata()) {
+  signal_soft_deprecated("`expect_join()` is soft-deprecated as of testdat 0.2.0. Use `expect_subset()` instead.")
+  expect_subset(data2 = data2, by = by, not = not, flt = flt, data = data)
+}
 
 #' Filter data to expectation result
 #'

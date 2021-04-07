@@ -1,5 +1,7 @@
 #' Expectations: cross-dataset expectations
 #'
+#' \Sexpr[results=rd, stage=render]{testdat:::lifecycle("experimental")}
+#'
 #' These functions allow for dataset comparisons:
 #'   * `expect_similar` compares the distribution of a categorical variable
 #'     (`var`) from the one dataset (`data`) to that of a categorical variable
@@ -9,7 +11,7 @@
 #'     (`data`) to the same observations, as picked out by a key (`by`), in
 #'     another dataset (`data2`). It fails if the selected variables (`vars`)
 #'     aren't the same for those observations in both datasets.
-#'   * `expect_join` compares one dataset (`data`) to another (`data2`) and
+#'   * `expect_subset` compares one dataset (`data`) to another (`data2`) and
 #'     fails if all of the observations in the first, as picked out by a key
 #'     (`by`), do not appear in the second
 #'
@@ -41,12 +43,8 @@
 #' # Check that same records 'succeeded' across data frames
 #' \dontrun{expect_valmatch(df2, vars(binomial), by = "id", data = df1)}
 #'
-#' # Check that a left join of df1 and df2 on "id" would not produce any NAs
-#' expect_join(df2, by = "id", data = df1)
-#'
-#' # Note:
-#' expect_join(df2, by = c("even" = "id"), data = df1) # Passes
-#' \dontrun{expect_join(df2, by = c("id" = "odd"), data = df1) # Fails}
+#' # Check that all records in `df1`, as picked out by `id`, exist in `df2`
+#' expect_subset(df2, by = "id", data = df1)
 #'
 NULL
 
@@ -141,7 +139,7 @@ expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get
 
 #' @export
 #' @rdname datacomp-expectations
-expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata()) {
+expect_subset <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
   act$var_desc   <- as_label_vars(enquo(vars))
   act$data2_desc <- as_label(enquo(data2))
