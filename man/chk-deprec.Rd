@@ -31,3 +31,4 @@ These functions are deprecated. See \link[=chk-generic]{Generic Checking Functio
 \seealso{
 \link[=chk-generic]{Generic Checking Functions}
 }
+\keyword{internal}

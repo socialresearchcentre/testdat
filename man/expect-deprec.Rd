@@ -39,3 +39,4 @@ See \link[=generic-expectations]{Generic Expectation Functions} and \link[=datac
 
 \link[=datacomp-expectations]{Cross-dataset Expectations}
 }
+\keyword{internal}

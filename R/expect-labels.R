@@ -1,4 +1,4 @@
-#' Testing data labels
+#' Expectations: data label checks
 #'
 #' @inheritParams data-params
 #' @inheritParams chk-generic

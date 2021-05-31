@@ -4,7 +4,7 @@
 \alias{label-expectations}
 \alias{chk_labels}
 \alias{expect_labels}
-\title{Testing data labels}
+\title{Expectations: data label checks}
 \usage{
 chk_labels(x, val_labels = NULL, var_label = NULL)
 
@@ -35,7 +35,7 @@ by default.}
 A logical vector flagging records that have passed or failed the check
 }
 \description{
-Testing data labels
+Expectations: data label checks
 }
 \examples{
 

@@ -12,6 +12,7 @@
 #' @return A logical vector flagging records that have passed or failed the check
 #' @seealso [Generic Checking Functions][chk-generic]
 #' @name chk-deprec
+#' @keywords internal
 NULL
 
 #' @rdname chk-deprec

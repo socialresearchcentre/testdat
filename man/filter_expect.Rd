@@ -24,3 +24,4 @@ The input data frame filtered to records failing the expectation.
 \details{
 This function is defunct
 }
+\keyword{internal}

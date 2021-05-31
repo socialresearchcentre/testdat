@@ -8,10 +8,14 @@ reference:
   desc: ~
   contents:
   - '`conditional-expectations`'
-  - '`value-expectations`'
   - '`datacomp-expectations`'
-  - '`chk-expect`'
+  - '`chk-expectations`'
   - '`generic-expectations`'
+  - '`exclusivity-expectations`'
+  - '`label-expectations`'
+  - '`proportion-expectations`'
+  - '`uniqueness-expectations`'
+
 
 - title: Vectorised checking functions
   desc: ~
@@ -30,3 +34,8 @@ reference:
   contents:
   - '`expect_make`'
   - '`filter_expect`'
+
+articles:
+- title: Introduction
+  contents:
+  - 'testdat'

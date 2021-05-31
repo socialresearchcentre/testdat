@@ -14,6 +14,7 @@
 #' @inheritParams data-params
 #' @param ... arguments to pass to `expect_allany()`
 #' @name expect-deprec
+#' @keywords internal
 NULL
 
 #' @export
@@ -45,6 +46,7 @@ expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_te
 #' @param not Reverse the results of the check.
 #' @return The input data frame filtered to records failing the expectation.
 #' @export
+#' @keywords internal
 filter_expect <- function(data, expect_function, ..., not = TRUE) {
   stop_defunct("`filter_expect()` is defunct as of testdat 0.2.0.")
   expect_result <- expect_function(..., data = data)
