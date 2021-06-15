@@ -31,7 +31,8 @@ expect_func <- function(var, ...) {
 #' @seealso [Cross-dataset Expectations][datacomp-expectations]
 expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata()) {
   signal_soft_deprecated("`expect_join()` is soft-deprecated as of testdat 0.2.0. Use `expect_subset()` instead.")
-  expect_subset(data2 = data2, by = by, not = not, flt = flt, data = data)
+  flt <- rlang::enexpr(flt)
+  expect_subset(data2 = data2, by = by, not = not, flt = !!flt, data = data)
 }
 
 #' Filter data to expectation result
