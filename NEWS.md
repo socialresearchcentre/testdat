@@ -1,4 +1,12 @@
-# testdat (development version)
+# testdat 0.2.0
+
+In addition to minor updates and bug fixes, this release does three main things:
+  * Behind the scenes, it (a) reorganises and refactors the code base to reduce
+  redundancies and improve clarity, and (b) significantly builds out the testing
+  infrastructure.
+  * On the wings, it expands the documentation for existing functions considerably.
+  * At centre stage, it extends the `expect_*()` framework, e.g. by introducing
+  'fuzzy' expectations in the form of `expect_prop_*()`.
 
 ## Breaking changes 
 
@@ -16,7 +24,7 @@
 
 ## Additions
 
-* Added `check_filter_where()` and `expect_where()` which can be used to perform scoped expectations (#8).
+* Added `chk_filter_where()` and `expect_where()` which can be used to perform scoped expectations (#8).
 
 * Added `expect_unique_combine()` for checking uniqueness across a combination of variables (#22).
 
