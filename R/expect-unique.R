@@ -4,32 +4,51 @@
 #'   * `expect_unique` tests a set of variables (`vars`) and fails if the
 #'     variables collectively do not uniquely identify the observations
 #'   * `expect_unique_across` tests a set of variables (`vars`) and fails if
-#'     each observation does not have different values in each of the variables
-#'     in `vars`.
+#'   each observation does not have different values in each of the variables in
+#'   `vars`.
 #'   * `expect_unique_combine` tests a set of variables (`vars`) and fails if
-#'     any values appear more than once across all of them.
+#'   any values appear more than once across all of them.
+#'
+#' By default the uniqueness check excludes missing values (as specified by
+#' `getOption("testdat.miss")`). Setting `exclude=NULL` will include all values.
 #'
 #'
 #' @inheritParams data-params
-#' @param exclude values to exclude from uniqueness check
+#' @param exclude a vector of values to exclude from uniqueness check, defaults
+#'   to `getOption("testdat.miss")` which is `c(NA, "")` by default. To include
+#'   all values, set `exclude=NULL`.
 #' @family data expectations
 #' @name uniqueness-expectations
 #' @examples
 #'
 #' student_fruit_preferences <- data.frame(
-#'   student_id = 1:5,
-#'   apple = c(1, 1, 1, 1, 99),
-#'   orange = c(2, 3, 2, 3, 99),
-#'   banana = c(3, 2, 3, 2, 99),
-#'   phone1 = c(123, 456, 789, 987, 654),
-#'   phone2 = c(345, 678, 987, 567, 000)
+#'   student_id = c(1:5, NA, NA),
+#'   apple = c(1, 1, 1, 1, 99, NA, NA),
+#'   orange = c(2, 3, 2, 3, 99, NA, NA),
+#'   banana = c(3, 2, 3, 2, 99, NA, NA),
+#'   phone1 = c(123, 456, 789, 987, 654, NA, NA),
+#'   phone2 = c(345, 678, 987, 567, 000, NA, NA)
 #' )
 #'
-#' #' # Check that key is unique
+#' # Check that key is unique, excluding NAs by default
 #' expect_unique(vars(student_id), data = student_fruit_preferences)
 #'
-#' # Check that every observation has a different value across a set of variables
-#' expect_unique_across(vars(apple, orange, banana), exclude = 99, data = student_fruit_preferences)
+#' # Check that key is unique, including NAs
+#' \dontrun{expect_unique(vars(student_id), exclude = NULL, data = student_fruit_preferences)}
+#'
+#' # Check each fruit has unique preference number
+#' \dontrun{
+#' expect_unique_across(
+#'   vars(apple, orange, banana),
+#'   data = student_fruit_preferences
+#' )
+#' }
+#'
+#' # Check each fruit has unique preference number, allowing multiple 99 (item skipped) codes
+#' expect_unique_across(
+#'   vars(apple, orange, banana),
+#'   exclude = c(99, NA), data = student_fruit_preferences
+#' )
 #'
 #' # Check that each phone number appears at most once
 #' \dontrun{expect_unique_combine(vars(phone1, phone2), data = student_fruit_preferences)}

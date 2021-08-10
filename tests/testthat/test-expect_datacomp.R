@@ -16,7 +16,7 @@ test_that("expect_valmatch", {
 })
 
 
-test_that("expect_join", {
+test_that("expect_subset", {
   df <- data.frame(
     k1 = c(1:8, 1),
     k2 = c(rep("a", 3), rep("b", 3), rep("c", 3)),

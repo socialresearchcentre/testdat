@@ -55,17 +55,17 @@ expect_range <- expect_make(chk_range, "range check")
 #' @rdname chk-expectations
 #' @inheritParams chk_date_yyyy
 #' @export
-expect_date_yyyy <- expect_make(chk_date_yyyy, "date check")
+expect_date_yyyy <- expect_make(chk_date_yyyy, "YYYY date format check")
 
 #' @rdname chk-expectations
 #' @inheritParams chk_date_yyyymm
 #' @export
-expect_date_yyyymm <- expect_make(chk_date_yyyymm, "date check")
+expect_date_yyyymm <- expect_make(chk_date_yyyymm, "YYYYMM date format check")
 
 #' @rdname chk-expectations
 #' @inheritParams chk_date_yyyymmdd
 #' @export
-expect_date_yyyymmdd <- expect_make(chk_date_yyyymmdd, "date check")
+expect_date_yyyymmdd <- expect_make(chk_date_yyyymmdd, "YYYYMMDD date format check")
 
 #' @rdname chk-expectations
 #' @inheritParams chk_length
