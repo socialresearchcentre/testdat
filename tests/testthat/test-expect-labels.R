@@ -1,7 +1,10 @@
 df <- data.frame(
   x = labelled::labelled(c("M", "M", "F"), c(Male = "M", Female = "F"), "Sex"),
   y = labelled::labelled(c("M", "F", "F"), c(Male = "M", Female = "F", Other = "X")),
-  z = labelled::labelled(c("M", "X", "F"), c(Male = "M", Female = "F", Other = "X"))
+  z = labelled::labelled(c("M", "X", "F"), c(Male = "M", Female = "F", Other = "X")),
+  no_labels = c("M", "X", "F"),
+  no_val_labels = labelled::labelled(c("M", "M", "F"), label = "Sex"),
+  no_var_label = labelled::labelled(c("M", "M", "F"), c(Male = "M", Female = "F", Other = "X"))
 )
 
 test_that("Basic use", {
@@ -35,6 +38,56 @@ test_that("Basic use", {
     data = df
   ), "`df` has 1 records failing label check on variable `x`")
 })
+
+test_that("Weak label checks work", {
+  # Sucesses
+  expect_success(expect_labels(
+    x,
+    val_labels = TRUE,
+    var_label = TRUE,
+    data = df
+  ))
+
+  expect_success(expect_labels(
+    no_labels,
+    val_labels = FALSE,
+    var_label = FALSE,
+    data = df
+  ))
+
+  expect_success(expect_labels(
+    no_val_labels,
+    val_labels = FALSE,
+    data = df
+  ))
+
+  expect_success(expect_labels(
+    no_var_label,
+    var_label = FALSE,
+    data = df
+  ))
+
+  # Failures
+  expect_failure(expect_labels(
+    no_labels,
+    val_labels = TRUE,
+    var_label = TRUE,
+    data = df
+  ))
+
+  expect_failure(expect_labels(
+    no_val_labels,
+    val_labels = TRUE,
+    data = df
+  ))
+
+  expect_failure(expect_labels(
+    no_var_label,
+    var_label = TRUE,
+    data = df
+  ))
+})
+
 
 test_that("All records fail where variable labels don't match", {
   expect_failure(expect_labels(

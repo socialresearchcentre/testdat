@@ -19,10 +19,11 @@ expect_labels(
 \arguments{
 \item{x}{vector to check}
 
-\item{val_labels}{a character vector of expected labels or a named vector of
-expected label-value pairs.}
+\item{val_labels}{a character vector of expected labels, or a named vector of
+expected label-value pairs, or \code{TRUE}, or \code{FALSE}.}
 
-\item{var_label}{a character vector, the variable label to test for}
+\item{var_label}{a character vector, the variable label to test for, or
+\code{TRUE}, or \code{FALSE}}
 
 \item{var}{an unquoted variable name}
 
@@ -35,20 +36,34 @@ by default.}
 A logical vector flagging records that have passed or failed the check
 }
 \description{
-Expectations: data label checks
+These expectations test whether or not a variable is labelled as expected.
 }
 \examples{
 
 \dontrun{
   df <- data.frame(
     x = labelled::labelled(c("M", "M", "F"), c(Male = "M", Female = "F"), "Sex"),
-    y = labelled::labelled(c("M", "M", "F"), c(Male = "M", Female = "F", Other = "X"))
+    y = labelled::labelled(c("M", "M", "F"), c(Male = "M", Female = "F", Other = "X")),
+    z = c("M", "M", "F")
   )
 
+  # Check for a value-label pairing
   expect_labels(x, c(Male = "M"), data = df)
+
+  # Check that two variables have the same values
   expect_labels(x, labelled::val_labels(df$y), data = df) # N.B. This passes!
+
+  # Check for the presence of a particular label
   expect_labels(x, "Male", data = df)
   expect_labels(x, var_label = "Sex", data = df)
+
+  # Check that a variable is labelled at all
+  expect_labels(z, val_labels = TRUE, data = df)
+  expect_labels(z, var_label = TRUE, data = df)
+
+  # Check that a variable isn't labelled
+  expect_labels(z, val_labels = FALSE, data = df)
+  expect_labels(z, var_label = FALSE, data = df)
 }
 
 }
