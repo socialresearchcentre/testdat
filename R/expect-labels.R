@@ -6,12 +6,15 @@
 #'
 #' @inheritParams data-params
 #' @inheritParams chk-generic
-#' @param val_labels a character vector of expected labels, or a named vector of
-#'   expected label-value pairs, or `TRUE`, or `FALSE`.
-#' @param var_label a character vector, the variable label to test for, or
-#'   `TRUE`, or `FALSE`
+#' @param val_labels a character vector of expected labels; or a named vector of
+#'   expected label-value pairs; or `TRUE`, to test for the presence of value
+#'   labels in general; or `FALSE`, to test for the absence of value labels.
+#' @param var_label a character vector, the variable label to test for; or
+#'   `TRUE`, to test for the presence of a variable label in general; or
+#'   `FALSE`, to test for the absence of a variable label.
 #'
-#' @return A logical vector flagging records that have passed or failed the check
+#' @return A logical vector flagging records that have passed or failed the
+#'   check
 #'
 #' @name label-expectations
 #'

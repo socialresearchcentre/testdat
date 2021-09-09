@@ -19,11 +19,13 @@ expect_labels(
 \arguments{
 \item{x}{vector to check}
 
-\item{val_labels}{a character vector of expected labels, or a named vector of
-expected label-value pairs, or \code{TRUE}, or \code{FALSE}.}
+\item{val_labels}{a character vector of expected labels; or a named vector of
+expected label-value pairs; or \code{TRUE}, to test for the presence of value
+labels in general; or \code{FALSE}, to test for the absence of value labels.}
 
-\item{var_label}{a character vector, the variable label to test for, or
-\code{TRUE}, or \code{FALSE}}
+\item{var_label}{a character vector, the variable label to test for; or
+\code{TRUE}, to test for the presence of a variable label in general; or
+\code{FALSE}, to test for the absence of a variable label.}
 
 \item{var}{an unquoted variable name}
 
@@ -33,7 +35,8 @@ expected label-value pairs, or \code{TRUE}, or \code{FALSE}.}
 by default.}
 }
 \value{
-A logical vector flagging records that have passed or failed the check
+A logical vector flagging records that have passed or failed the
+check
 }
 \description{
 These expectations test whether or not a variable is labelled as expected.
