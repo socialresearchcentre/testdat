@@ -4,7 +4,7 @@
 \alias{datacomp-expectations}
 \alias{expect_similar}
 \alias{expect_valmatch}
-\alias{expect_join}
+\alias{expect_subset}
 \title{Expectations: cross-dataset expectations}
 \usage{
 expect_similar(
@@ -27,7 +27,7 @@ expect_valmatch(
   data = get_testdata()
 )
 
-expect_join(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata())
+expect_subset(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata())
 }
 \arguments{
 \item{var}{an unquoted variable name}
@@ -57,6 +57,9 @@ by default.}
 \item{not}{reverse the results of the check}
 }
 \description{
+\Sexpr[results=rd, stage=render]{testdat:::lifecycle("experimental")}
+}
+\details{
 These functions allow for dataset comparisons:
 \itemize{
 \item \code{expect_similar} compares the distribution of a categorical variable
@@ -67,7 +70,7 @@ distributions are sufficiently dissimilar.
 (\code{data}) to the same observations, as picked out by a key (\code{by}), in
 another dataset (\code{data2}). It fails if the selected variables (\code{vars})
 aren't the same for those observations in both datasets.
-\item \code{expect_join} compares one dataset (\code{data}) to another (\code{data2}) and
+\item \code{expect_subset} compares one dataset (\code{data}) to another (\code{data2}) and
 fails if all of the observations in the first, as picked out by a key
 (\code{by}), do not appear in the second
 }
@@ -93,18 +96,16 @@ df2 <- data.frame(
 # Check that same records 'succeeded' across data frames
 \dontrun{expect_valmatch(df2, vars(binomial), by = "id", data = df1)}
 
-# Check that a left join of df1 and df2 on "id" would not produce any NAs
-expect_join(df2, by = "id", data = df1)
-
-# Note:
-expect_join(df2, by = c("even" = "id"), data = df1) # Passes
-\dontrun{expect_join(df2, by = c("id" = "odd"), data = df1) # Fails}
+# Check that all records in `df1`, as picked out by `id`, exist in `df2`
+expect_subset(df2, by = "id", data = df1)
 
 }
 \seealso{
 Other data expectations: 
+\code{\link{chk-expectations}},
 \code{\link{conditional-expectations}},
+\code{\link{exclusivity-expectations}},
 \code{\link{generic-expectations}},
-\code{\link{value-expectations}}
+\code{\link{uniqueness-expectations}}
 }
 \concept{data expectations}
