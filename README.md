@@ -7,6 +7,9 @@
 
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![R-CMD-check](https://github.com/socialresearchcentre/testdat/workflows/R-CMD-check/badge.svg)](https://github.com/socialresearchcentre/testdat/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/socialresearchcentre/testdat/branch/master/graph/badge.svg)](https://codecov.io/gh/socialresearchcentre/testdat?branch=master)
 <!-- badges: end -->
 
 ## Overview
@@ -19,15 +22,15 @@ reporting tools focused on checking of data frames.
 
 Features include:
 
-  - A fully fledged test framework so you can spend more time specifying
+-   A fully fledged test framework so you can spend more time specifying
     tests and less time running them
 
-  - A set of common methods for simply specifying data validation rules
+-   A set of common methods for simply specifying data validation rules
 
-  - Repeatability of data tests (avoid unintentionally breaking your
-    dataset\!)
+-   Repeatability of data tests (avoid unintentionally breaking your
+    dataset!)
 
-  - Data-focused reporting of test results
+-   Data-focused reporting of test results
 
 ## Installation
 
