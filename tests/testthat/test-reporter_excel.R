@@ -15,9 +15,11 @@ test_that("excel_results", {
   x_xl_failing <- openxlsx::read.xlsx(file_out, "failing_tests")
   file.remove(file_out)
 
-  # Check that .xslx file looks good
+  # Check that .xlsx file looks good
+  hlink <- function(x) glue::glue("=HYPERLINK(\"#'{str_sub(x, 1, 30)}'!A1\",\"{x}\")")
+
   xl_summary <- data.frame(
-    context = c(NA_real_, NA_real_),
+    context = c(hlink("failing_tests"), hlink("passing_tests")),
     tests = c(2L, 3L),
     failed = c(2L, 0L),
     error = c(0L, 0L),
