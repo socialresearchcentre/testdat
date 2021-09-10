@@ -6,7 +6,7 @@ Authors@R:
     c(person(given = "Danny",
              family = "Smith",
              role = c("aut", "cre"),
-             email = "daniel.smith@srcentre.com.au"),
+             email = "danny@gorcha.org"),
       person(given = "Kinto",
              family = "Behr",
              role = c("aut"),

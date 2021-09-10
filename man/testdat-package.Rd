@@ -22,7 +22,7 @@ character for checking, this value will be used for \code{scipen} (default: \cod
 }
 
 \author{
-\strong{Maintainer}: Danny Smith \email{daniel.smith@srcentre.com.au}
+\strong{Maintainer}: Danny Smith \email{danny@gorcha.org}
 
 Authors:
 \itemize{
