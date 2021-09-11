@@ -37,7 +37,7 @@ Features include:
 As an extension of testthat, testdat uses the same basic testing framework.
 Before using testdat (and reading this documentation), make sure you're familiar
 with the introduction to testthat in
-[R packages](http://r-pkgs.had.co.nz/tests.html).
+[R packages](https://r-pkgs.org/tests.html).
 
 The main addition provided by testdat is a set of expectations designed for
 testing data frames and a context-esque mechanism to set a current testing data
@@ -281,7 +281,7 @@ Setting up a proper project test suite can be useful for automatically
 validating final outputs before delivery.
 
 Setting up proper file based testing infrastructure is out of the scope of this
-vignette. See [R packages](http://r-pkgs.had.co.nz/tests.html) for a brief
+vignette. See [R packages](https://r-pkgs.org/tests.html) for a brief
 introduction to testing infrastructure.
 
 Each set of tests in testthat has a `context()`. In testdat, each context has an
