@@ -1,5 +1,3 @@
-context("expect_base")
-
 test_that("basic examples", {
   expect_success(expect_base(y, x == 1, data = tibble(x = c(1, 0), y = c(1, NA))))
   expect_failure(expect_base(y, x == 1, data = tibble(x = c(1, 0), y = c(1, 1))))
