@@ -19,6 +19,7 @@ test_that("excel_results", {
   hlink <- function(x) glue::glue("=HYPERLINK(\"#'{str_sub(x, 1, 30)}'!A1\",\"{x}\")")
 
   xl_summary <- data.frame(
+    stringsAsFactors = FALSE,
     context = c(hlink("failing_tests"), hlink("passing_tests")),
     tests = c(2L, 3L),
     failed = c(2L, 0L),
