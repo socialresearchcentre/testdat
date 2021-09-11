@@ -11,11 +11,11 @@
 \alias{chk_text_miss}
 \alias{chk_text_nmiss}
 \alias{chk_unique}
+\alias{chk_ascii}
+\alias{chk_values}
 \alias{chk_date_yyyymmdd}
 \alias{chk_date_yyyymm}
 \alias{chk_date_yyyy}
-\alias{chk_ascii}
-\alias{chk_values}
 \title{Generic checking functions}
 \usage{
 chk_dummy(x)
@@ -36,15 +36,15 @@ chk_text_nmiss(x, miss = getOption("testdat.miss_text"))
 
 chk_unique(x)
 
+chk_ascii(x)
+
+chk_values(x, ..., miss = getOption("testdat.miss"))
+
 chk_date_yyyymmdd(x)
 
 chk_date_yyyymm(x)
 
 chk_date_yyyy(x)
-
-chk_ascii(x)
-
-chk_values(x, ..., miss = getOption("testdat.miss"))
 }
 \arguments{
 \item{x}{vector to check}
