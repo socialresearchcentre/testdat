@@ -4,9 +4,11 @@
 \name{testdat-package}
 \alias{testdat}
 \alias{testdat-package}
-\title{R package for data unit testing}
+\title{testdat: Data Unit Testing for R}
 \description{
-An adaptation of \link{testthat} for data. See vigenttes for details.
+Test your data! An extension of the 'testthat' unit testing
+    framework with a family of functions and reporting tools for checking
+    and validating data frames.
 }
 \section{Options}{
 
@@ -21,6 +23,15 @@ character for checking, this value will be used for \code{scipen} (default: \cod
 }
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://socialresearchcentre.github.io/testdat/}
+  \item \url{https://github.com/socialresearchcentre/testdat}
+  \item Report bugs at \url{https://github.com/socialresearchcentre/testdat/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Danny Smith \email{danny@gorcha.org}
 

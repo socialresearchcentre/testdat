@@ -36,6 +36,11 @@ summarise_results_excel <- function(results) {
 #' }
 #' @export
 output_results_excel <- function(results, file) {
+  if (!requireNamespace("openxlsx", quietly = TRUE)) {
+    stop("Package \"openxlsx\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+
   wb <- openxlsx::createWorkbook()
   openxlsx::modifyBaseFont(wb, fontSize = 8, fontName = "Arial")
 

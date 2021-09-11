@@ -102,30 +102,6 @@ chk_unique <- function(x) {
 }
 
 #' @rdname chk-generic
-#' @importFrom stringr str_detect
-#' @importFrom lubridate ymd
-#' @export
-chk_date_yyyymmdd <- function(x) {
-  chk_blank(x) | (str_detect(x, "[0-9]{8}") & !is.na(lubridate::ymd(x, quiet = TRUE)))
-}
-
-#' @rdname chk-generic
-#' @importFrom stringr str_detect
-#' @importFrom lubridate ymd
-#' @export
-chk_date_yyyymm <- function(x) {
-  chk_blank(x) | (str_detect(x, "[0-9]{6}") & !is.na(lubridate::ymd(paste0(x, "01"), quiet = TRUE)))
-}
-
-#' @rdname chk-generic
-#' @importFrom stringr str_detect
-#' @importFrom lubridate ymd
-#' @export
-chk_date_yyyy <- function(x) {
-  chk_blank(x) | (str_detect(x, "[0-9]{4}") & !is.na(lubridate::ymd(paste0(x, "0101"), quiet = TRUE)))
-}
-
-#' @rdname chk-generic
 #' @export
 chk_ascii <- function(x) {
   x <- as_char_scipen(x)
@@ -138,4 +114,35 @@ chk_values <- function(x, ..., miss = getOption("testdat.miss")) {
   old <- options(scipen = getOption("testdat.scipen"))
   on.exit(options(old))
   x %in% c(unlist(list(...)), miss)
+}
+
+#' @rdname chk-generic
+#' @importFrom stringr str_detect
+#' @export
+chk_date_yyyymmdd <- function(x) {
+  check_lubridate_installed()
+  chk_blank(x) | (str_detect(x, "[0-9]{8}") & !is.na(lubridate::ymd(x, quiet = TRUE)))
+}
+
+#' @rdname chk-generic
+#' @importFrom stringr str_detect
+#' @export
+chk_date_yyyymm <- function(x) {
+  check_lubridate_installed()
+  chk_blank(x) | (str_detect(x, "[0-9]{6}") & !is.na(lubridate::ymd(paste0(x, "01"), quiet = TRUE)))
+}
+
+#' @rdname chk-generic
+#' @importFrom stringr str_detect
+#' @export
+chk_date_yyyy <- function(x) {
+  check_lubridate_installed()
+  chk_blank(x) | (str_detect(x, "[0-9]{4}") & !is.na(lubridate::ymd(paste0(x, "0101"), quiet = TRUE)))
+}
+
+check_lubridate_installed <- function() {
+  if (!requireNamespace("lubridate", quietly = TRUE)) {
+    stop("Package \"lubridate\" is needed for date format validation. Please install it.",
+         call. = FALSE)
+  }
 }

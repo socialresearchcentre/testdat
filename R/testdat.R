@@ -1,7 +1,3 @@
-#' R package for data unit testing
-#'
-#' An adaptation of [testthat] for data. See vigenttes for details.
-#'
 #' @section Options:
 #' - `testdat.miss`: A vector of values to consider missing (default: `c(NA, "")`).
 #' - `testdat.miss_text`: A vector of values to consider missing in text variables
