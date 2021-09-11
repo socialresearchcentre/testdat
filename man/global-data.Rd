@@ -4,15 +4,12 @@
 \alias{global-data}
 \alias{set_testdata}
 \alias{get_testdata}
-\alias{context_data}
 \alias{with_testdata}
 \title{Get/set test data}
 \usage{
 set_testdata(data, quosure = TRUE)
 
 get_testdata()
-
-context_data(data)
 
 with_testdata(data, code, quosure = TRUE)
 }
