@@ -1,5 +1,7 @@
 # testdat (development version)
 
+* Soft deprecated `context_data()` (#43). `context_data()` is just a wrapper for `set_testdata()`, which has a much more intuitive name.
+
 # testdat 0.2.0
 
 In addition to minor updates and bug fixes, this release does three main things:
