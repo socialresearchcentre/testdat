@@ -1,5 +1,3 @@
-# nocov start --- chk-deprec --- 2019-04-24 Wed 17:53
-
 #' Deprecated checking functions
 #'
 #' @description
@@ -37,5 +35,3 @@ chk_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
   warn_deprecated("`chk_nmiss()` is deprecated as of testdat 0.2.0. Use `chk_text_nmiss()` instead.")
   !chk_miss(x, miss)
 }
-
-# nocov end

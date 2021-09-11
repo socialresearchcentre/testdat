@@ -1,5 +1,3 @@
-# nocov start --- compat-lifecycle --- 2019-01-02 Wed 13:22
-
 # This file serves as a reference for currently unexported rlang
 # lifecycle functions. Please find the most recent version in rlang's
 # repository. These functions require rlang in your `Imports`
@@ -247,5 +245,3 @@ upcase1 <- function(x) {
   x
 }
 
-
-# nocov end

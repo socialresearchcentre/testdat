@@ -1,5 +1,3 @@
-# nocov start --- chk-deprec --- 2021-02-01 Wed 14:53
-
 #' Deprecated expectation functions
 #'
 #' @description
@@ -55,5 +53,3 @@ filter_expect <- function(data, expect_function, ..., not = TRUE) {
 
   data %>% filter(expect_result)
 }
-
-# nocov end
