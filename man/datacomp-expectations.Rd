@@ -62,9 +62,6 @@ df2 <- data.frame(
 )
 
 
-# Check categorical distribution is similar across data frames
-\dontrun{expect_similar(binomial, df2, binomial, data = df1)}
-
 # Check that same records 'succeeded' across data frames
 \dontrun{expect_valmatch(df2, vars(binomial), by = "id", data = df1)}
 
