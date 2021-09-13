@@ -43,7 +43,11 @@ chk_dummy <- function(x) {
 #' @rdname chk-generic
 #' @export
 chk_blank <- function(x) {
-  x %in% c("", NA)
+  if (is.character(x) | is.factor(x)) {
+    is.na(x) | x == ""
+  } else {
+    is.na(x)
+  }
 }
 
 #' @rdname chk-generic

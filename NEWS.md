@@ -4,6 +4,8 @@
 
 * Soft deprecated `expect_similar()` (#18). It was a silly way of comparing data frames and we're better off making something new.
 
+* `chk_blank()` performs checks slightly differently and is much faster as a result (#46).
+
 # testdat 0.2.0
 
 In addition to minor updates and bug fixes, this release does three main things:
