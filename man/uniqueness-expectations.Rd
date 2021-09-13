@@ -71,15 +71,15 @@ student_fruit_preferences <- data.frame(
 expect_unique(vars(student_id), data = student_fruit_preferences)
 
 # Check that key is unique, including NAs
-\dontrun{expect_unique(vars(student_id), exclude = NULL, data = student_fruit_preferences)}
+try(expect_unique(vars(student_id), exclude = NULL, data = student_fruit_preferences))
 
 # Check each fruit has unique preference number
-\dontrun{
+try(
 expect_unique_across(
   vars(apple, orange, banana),
   data = student_fruit_preferences
 )
-}
+)
 
 # Check each fruit has unique preference number, allowing multiple 99 (item skipped) codes
 expect_unique_across(
@@ -88,7 +88,7 @@ expect_unique_across(
 )
 
 # Check that each phone number appears at most once
-\dontrun{expect_unique_combine(vars(phone1, phone2), data = student_fruit_preferences)}
+try(expect_unique_combine(vars(phone1, phone2), data = student_fruit_preferences))
 }
 \seealso{
 Other data expectations: 

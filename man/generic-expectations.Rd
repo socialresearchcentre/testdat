@@ -67,9 +67,9 @@ that variables are specified not using \code{dplyr::vars()} (\code{vars}) but us
 bare \code{\link[=dplyr_tidy_select]{tidy-select}} functions (\code{where}).
 }
 \examples{
-\dontrun{
 # Check that every 4-cylinder car has an engine displacement of < 100 cubic
 # inches *AND* < 100 horsepower
+try(
 expect_all(
   vars = vars(disp, hp),
   func = chk_range,
@@ -77,9 +77,11 @@ expect_all(
   args = list(min = 0, max = 100),
   data = mtcars
 )
+)
 
 # Check that every 4-cylinder car has an engine displacement of < 100 cubic
 # inches *OR* < 100 horsepower
+try(
 expect_any(
   vars = vars(disp, hp),
   func = chk_range,
@@ -87,7 +89,7 @@ expect_any(
   args = list(min = 0, max = 100),
   data = mtcars
 )
-}
+)
 
 # Check petal dimensions are positive
 expect_where(

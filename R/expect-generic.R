@@ -21,9 +21,9 @@
 #'   failure message.
 #' @param ... arguments to pass to `expect_allany()`
 #' @examples
-#' \dontrun{
 #' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
 #' # inches *AND* < 100 horsepower
+#' try(
 #' expect_all(
 #'   vars = vars(disp, hp),
 #'   func = chk_range,
@@ -31,9 +31,11 @@
 #'   args = list(min = 0, max = 100),
 #'   data = mtcars
 #' )
+#' )
 #'
 #' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
 #' # inches *OR* < 100 horsepower
+#' try(
 #' expect_any(
 #'   vars = vars(disp, hp),
 #'   func = chk_range,
@@ -41,7 +43,7 @@
 #'   args = list(min = 0, max = 100),
 #'   data = mtcars
 #' )
-#' }
+#' )
 #'
 #' # Check petal dimensions are positive
 #' expect_where(

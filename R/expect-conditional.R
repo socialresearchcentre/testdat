@@ -23,9 +23,7 @@
 #' )
 #'
 #' # Check that q1b has a value if and only if q1a %in% 1
-#' \dontrun{
-#' expect_base(q1b, q1a %in% 1, data = my_survey) # Fails for resp_id 2 and 5
-#' }
+#' try(expect_base(q1b, q1a %in% 1, data = my_survey)) # Fails for resp_id 2 and 5
 #'
 #' # Check that q2b has a value if and only if q2a < 50
 #' expect_base(q2b, q2a < 50, data = my_survey)

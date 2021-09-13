@@ -2,8 +2,6 @@
 #'
 #' These expectations test whether or not a variable is labelled as expected.
 #'
-#'
-#'
 #' @inheritParams data-params
 #' @inheritParams chk-generic
 #' @param val_labels a character vector of expected labels; or a named vector of
@@ -22,31 +20,29 @@
 #'
 #' @examples
 #'
-#' \dontrun{
-#'   df <- data.frame(
-#'     x = labelled::labelled(c("M", "M", "F"), c(Male = "M", Female = "F"), "Sex"),
-#'     y = labelled::labelled(c("M", "M", "F"), c(Male = "M", Female = "F", Other = "X")),
-#'     z = c("M", "M", "F")
-#'   )
+#' df <- data.frame(
+#'   x = labelled::labelled(c("M", "M", "F"), c(Male = "M", Female = "F"), "Sex"),
+#'   y = labelled::labelled(c("M", "M", "F"), c(Male = "M", Female = "F", Other = "X")),
+#'   z = c("M", "M", "F")
+#' )
 #'
-#'   # Check for a value-label pairing
-#'   expect_labels(x, c(Male = "M"), data = df)
+#' # Check for a value-label pairing
+#' try(expect_labels(x, c(Male = "M"), data = df))
 #'
-#'   # Check that two variables have the same values
-#'   expect_labels(x, labelled::val_labels(df$y), data = df) # N.B. This passes!
+#' # Check that two variables have the same values
+#' expect_labels(x, labelled::val_labels(df$y), data = df) # N.B. This passes!
 #'
-#'   # Check for the presence of a particular label
-#'   expect_labels(x, "Male", data = df)
-#'   expect_labels(x, var_label = "Sex", data = df)
+#' # Check for the presence of a particular label
+#' try(expect_labels(x, "Male", data = df))
+#' expect_labels(x, var_label = "Sex", data = df)
 #'
-#'   # Check that a variable is labelled at all
-#'   expect_labels(z, val_labels = TRUE, data = df)
-#'   expect_labels(z, var_label = TRUE, data = df)
+#' # Check that a variable is labelled at all
+#' try(expect_labels(z, val_labels = TRUE, data = df))
+#' try(expect_labels(z, var_label = TRUE, data = df))
 #'
-#'   # Check that a variable isn't labelled
-#'   expect_labels(z, val_labels = FALSE, data = df)
-#'   expect_labels(z, var_label = FALSE, data = df)
-#' }
+#' # Check that a variable isn't labelled
+#' expect_labels(z, val_labels = FALSE, data = df)
+#' expect_labels(z, var_label = FALSE, data = df)
 #'
 chk_labels <- function(x, val_labels = NULL, var_label = NULL) {
   match <- chk_dummy(x)

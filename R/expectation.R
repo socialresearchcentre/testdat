@@ -22,7 +22,6 @@
 #' x <- expect_custom(TRUE, "Test", extra_data = 1:5, more_data = "Hello")
 #' str(x)
 #'
-#' \dontrun{
 #' # an example expectation (note additional libraries used)
 #' library(rlang)
 #'
@@ -45,8 +44,7 @@
 #'   invisible(act$result)
 #' }
 #'
-#' expect_example(x, data = data.frame(x = c(NA, -2:2)))
-#' }
+#' try(expect_example(x, data = data.frame(x = c(NA, -2:2))))
 #' @importFrom testthat expectation is.expectation quasi_label exp_signal
 #' @export
 expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, trace = NULL, ...) {

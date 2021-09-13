@@ -44,10 +44,7 @@ chk_binary <- function(x) {
 expect_binary <- expect_make(chk_binary)
 
 # Validate a dataset
-\dontrun{
-expect_binary(vs, data = mtcars)
-expect_binary(cyl, data = mtcars)
-}
-
+try(expect_binary(vs, data = mtcars))
+try(expect_binary(cyl, data = mtcars))
 
 }

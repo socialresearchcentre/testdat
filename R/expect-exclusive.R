@@ -26,11 +26,13 @@
 #'
 #' # Make sure that if "None of the above" and "Item skipped" are selected
 #' # none of the other question options are selected:
-#' \dontrun{expect_exclusive(
+#' try(
+#' expect_exclusive(
 #'   vars(q10_98, q10_99),
 #'   vars(starts_with("q10_")),
 #'   data = my_q_block
-#' )}
+#' )
+#' )
 NULL
 
 #' @export

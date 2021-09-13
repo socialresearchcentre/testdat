@@ -31,7 +31,6 @@ summarise_results_excel <- function(results) {
 #' \dontrun{
 #' # Output the results from running all tests in a directory
 #' x <- test_dir(".")
-#' class(x)
 #' output_results_excel(x, "Test results.xlsx")
 #' }
 #' @export
