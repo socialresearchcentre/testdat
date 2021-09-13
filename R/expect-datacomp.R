@@ -48,46 +48,6 @@
 #'
 NULL
 
-#' @export
-#' @rdname datacomp-expectations
-#' @param var2 an unquoted variable name from data2
-#' @param flt2 a filter specifying a subset of data2 to test
-#' @param threshold the maximum proportional difference allowed between the two
-#'   categories
-#' @param min the minimum number of responses for a category to allow
-#'   comparison. This avoidmall categories raising spurious errors
-expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
-                           threshold = 0.05, min = 100, data = get_testdata()) {
-  act <- quasi_label(enquo(data))
-  act$var_desc   <- as_label_vars(enquo(var))
-  act$data2_desc <- as_label(enquo(data2))
-  act$var2_desc  <- as_label_vars(enquo(var2))
-  act$flt_desc   <- as_label_flt(enquo(flt))
-  act$flt2_desc  <- as_label_flt(enquo(flt2))
-
-  var <- enquo(var)
-  var2 <- enquo(var2)
-  data_tb  <- data  %>% group_by(!!var)  %>% summarise(freq = n())
-  data2_tb <- data2 %>% group_by(!!var2) %>% summarise(freq = n())
-
-  by_var <- structure(as_name(var2), names = as_name(var))
-  act$result <-
-    left_join(data_tb, data2_tb, by = by_var) %>%
-    mutate(prop_diff = abs(.data$freq.x - .data$freq.y) / .data$freq.x,
-           pass = .data$prop_diff < threshold | .data$freq.x < min)
-
-  expect_custom(
-    all(act$result$pass, na.rm = TRUE),
-    glue("{act$lab} has {sum(!act$result$pass, na.rm = TRUE)} \\
-          values breaking the {threshold} similarity threshold for variable \\
-          `{act$var_desc}`
-          Values: {glue::glue_collapse(act$result %>% filter(!pass) %>% pull(!!var), ', ')}
-          Filter: {act$flt_desc}"),
-    table = act$result
-  )
-
-  invisible(act$result$pass)
-}
 
 #' @importFrom tidyselect vars_select
 #' @export

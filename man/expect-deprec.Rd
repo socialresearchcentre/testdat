@@ -4,11 +4,23 @@
 \alias{expect-deprec}
 \alias{expect_func}
 \alias{expect_join}
+\alias{expect_similar}
 \title{Deprecated expectation functions}
 \usage{
 expect_func(var, ...)
 
 expect_join(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata())
+
+expect_similar(
+  var,
+  data2,
+  var2,
+  flt = TRUE,
+  flt2 = flt,
+  threshold = 0.05,
+  min = 100,
+  data = get_testdata()
+)
 }
 \arguments{
 \item{var}{an unquoted variable name}
@@ -26,6 +38,16 @@ expect_join(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata())
 
 \item{data}{data frame to test. The \link[=global-data]{global test data} is used
 by default.}
+
+\item{var2}{an unquoted variable name from data2}
+
+\item{flt2}{a filter specifying a subset of data2 to test}
+
+\item{threshold}{the maximum proportional difference allowed between the two
+categories}
+
+\item{min}{the minimum number of responses for a category to allow
+comparison. This avoidmall categories raising spurious errors}
 }
 \description{
 \Sexpr[results=rd, stage=render]{testdat:::lifecycle("soft-deprecated")}
