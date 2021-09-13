@@ -34,8 +34,8 @@ test_that("excel_results", {
     test = c("fails", "fails"),
     status = c("failure", "failure"),
     variable = c("my_string", "my_real"),
-    description = c("`mydf` has 7 records failing pattern check on variable `my_string`. Filter: None Arguments: `<named list>`",
-                    "`mydf` has 4 records failing range check on variable `my_real`. Filter: None Arguments: `<named list>`"),
+    description = c("`mydf` has 7 records failing pattern check on variable `my_string`. Filter: None Arguments: `pattern = \"Merc\"`",
+                    "`mydf` has 4 records failing range check on variable `my_real`. Filter: None Arguments: `min = 0, max = 0.4`"),
     failed_records = c(7L, 4L),
     total_records = c(10L, 10L),
     call = c("NULL", "NULL")
