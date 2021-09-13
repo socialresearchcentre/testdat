@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' \Sexpr[results=rd, stage=render]{testdat:::lifecycle("soft-deprecated")}
+#' `r lifecycle::badge("soft-deprecated")`
 #'
 #' These functions are deprecated.
 #'
@@ -19,7 +19,7 @@ NULL
 #' @rdname expect-deprec
 #' @seealso [Generic Expectation Functions][generic-expectations]
 expect_func <- function(var, ...) {
-  signal_soft_deprecated("`expect_func()` is soft-deprecated as of testdat 0.2.0. Use `expect_all()` instead.")
+  lifecycle::deprecate_soft("0.2.0", "expect_func()", "expect_all()")
   expect_allany(vars(!!ensym(var)), ..., allany = chk_filter_all)
 }
 
@@ -28,7 +28,7 @@ expect_func <- function(var, ...) {
 #' @inheritParams datacomp-expectations
 #' @seealso [Cross-dataset Expectations][datacomp-expectations]
 expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata()) {
-  signal_soft_deprecated("`expect_join()` is soft-deprecated as of testdat 0.2.0. Use `expect_subset()` instead.")
+  lifecycle::deprecate_soft("0.2.0", "expect_join()", "expect_subset()")
   flt <- rlang::enexpr(flt)
   expect_subset(data2 = data2, by = by, not = not, flt = !!flt, data = data)
 }
@@ -44,7 +44,7 @@ expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_te
 #'   comparison. This avoidmall categories raising spurious errors
 expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
                            threshold = 0.05, min = 100, data = get_testdata()) {
-  signal_soft_deprecated("`expect_similar()` is soft-deprecated as of testdat 0.3.0.")
+  lifecycle::deprecate_soft("0.3.0", "expect_similar()")
   act <- quasi_label(enquo(data))
   act$var_desc   <- as_label_vars(enquo(var))
   act$data2_desc <- as_label(enquo(data2))
@@ -78,9 +78,11 @@ expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
 
 #' Filter data to expectation result
 #'
-#' \Sexpr[results=rd, stage=render]{testdat:::lifecycle("defunct")}
+#' @description
 #'
-#' This function is defunct
+#' `r lifecycle::badge("defunct")`
+#'
+#' This function is defunct.
 #'
 #' @param data A data frame to test.
 #' @param expect_function An expectation function.
@@ -90,7 +92,7 @@ expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
 #' @export
 #' @keywords internal
 filter_expect <- function(data, expect_function, ..., not = TRUE) {
-  stop_defunct("`filter_expect()` is defunct as of testdat 0.2.0.")
+  lifecycle::deprecate_stop("0.2.0", "filter_expect()")
   expect_result <- expect_function(..., data = data)
   if (not) expect_result <- !expect_result
 

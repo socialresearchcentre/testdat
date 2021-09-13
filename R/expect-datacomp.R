@@ -1,6 +1,6 @@
 #' Expectations: cross-dataset expectations
 #'
-#' \Sexpr[results=rd, stage=render]{testdat:::lifecycle("experimental")}
+#' `r lifecycle::badge("experimental")`
 #'
 #' These functions allow for dataset comparisons:
 #'   * `expect_valmatch` compares the observations appearing in one dataset

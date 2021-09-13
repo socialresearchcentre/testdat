@@ -11,7 +11,7 @@ context_data(data)
 \item{data}{Data to be used.}
 }
 \description{
-\Sexpr[results=rd, stage=render]{testdat:::lifecycle("soft-deprecated")}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated}{\figure{lifecycle-soft-deprecated.svg}{options: alt='[Soft-deprecated]'}}}{\strong{[Soft-deprecated]}}
 
 These functions are deprecated.
 

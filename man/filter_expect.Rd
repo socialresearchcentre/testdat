@@ -19,9 +19,8 @@ filter_expect(data, expect_function, ..., not = TRUE)
 The input data frame filtered to records failing the expectation.
 }
 \description{
-\Sexpr[results=rd, stage=render]{testdat:::lifecycle("defunct")}
-}
-\details{
-This function is defunct
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#defunct}{\figure{lifecycle-defunct.svg}{options: alt='[Defunct]'}}}{\strong{[Defunct]}}
+
+This function is defunct.
 }
 \keyword{internal}

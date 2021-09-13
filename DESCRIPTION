@@ -26,6 +26,7 @@ Depends:
 Imports:
     dplyr (>= 0.8.0),
     glue,
+    lifecycle,
     rlang,
     stringr,
     tidyselect
@@ -46,7 +47,6 @@ Collate:
     'chk-filter.R'
     'chk.R'
     'comparison.R'
-    'compat-lifecycle.R'
     'deprec-chk.R'
     'deprec-expect.R'
     'deprec-reporter.R'

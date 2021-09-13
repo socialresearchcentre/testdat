@@ -3,7 +3,7 @@
 #'
 #' @description
 #'
-#' \Sexpr[results=rd, stage=render]{testdat:::lifecycle("soft-deprecated")}
+#' `r lifecycle::badge("soft-deprecated")`
 #'
 #' These functions are deprecated.
 #'
@@ -18,6 +18,6 @@ NULL
 #' @rdname reporter-deprec
 #' @seealso [Get/set test data][global-data]
 context_data <- function(data) {
-  signal_soft_deprecated("`context_data()` is soft-deprecated as of testdat 0.3.0. Use `set_testdata()` instead.")
+  lifecycle::deprecate_soft("0.3.0", "context_data()", "set_testdata()")
   set_testdata(data)
 }
