@@ -66,7 +66,7 @@ expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
   act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
   act$var_desc  <- as_label_vars(enquo(vars))
   act$flt_desc  <- as_label_flt(enquo(flt))
-  act$args_desc <- as_label_repl(args, "(^list\\()|(\\)$)", "")
+  act$args_desc <- expr_deparse_repl(args, "(^<list: |>$)", "")
   # act$args_desc <- lapply(args, as_label) %>% paste0(collapse = ", ")
 
   act$result <- allany(eval_tidy(enquo(data)),
@@ -112,7 +112,7 @@ expect_where <- function(where, func, flt = TRUE, data = get_testdata(), args = 
   act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
   act$var_desc  <- data %>% select(!!where) %>% names() %>% paste(collapse = ", ")
   act$flt_desc  <- as_label_flt(enquo(flt))
-  act$args_desc <- as_label_repl(args, "(^list\\()|(\\)$)", "")
+  act$args_desc <- expr_deparse_repl(args, "(^<list: |>$)", "")
 
   act$result <- chk_filter_where(eval_tidy(enquo(data)),
                                  !!where,
