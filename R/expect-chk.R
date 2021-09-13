@@ -39,7 +39,7 @@ NULL
 #' @export
 #' @rdname chk-expectations
 #' @param ... vectors of valid values
-expect_values <- expect_make(chk_values, "value_check")
+expect_values <- expect_make(chk_values, "value check")
 
 #' @export
 #' @rdname chk-expectations

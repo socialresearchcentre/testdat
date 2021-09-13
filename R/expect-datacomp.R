@@ -3,10 +3,6 @@
 #' \Sexpr[results=rd, stage=render]{testdat:::lifecycle("experimental")}
 #'
 #' These functions allow for dataset comparisons:
-#'   * `expect_similar` compares the distribution of a categorical variable
-#'     (`var`) from the one dataset (`data`) to that of a categorical variable
-#'     (`var2`) from another dataset (`data2`). The test fails if the
-#'     distributions are sufficiently dissimilar.
 #'   * `expect_valmatch` compares the observations appearing in one dataset
 #'     (`data`) to the same observations, as picked out by a key (`by`), in
 #'     another dataset (`data2`). It fails if the selected variables (`vars`)

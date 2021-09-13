@@ -38,10 +38,6 @@ by default.}
 \details{
 These functions allow for dataset comparisons:
 \itemize{
-\item \code{expect_similar} compares the distribution of a categorical variable
-(\code{var}) from the one dataset (\code{data}) to that of a categorical variable
-(\code{var2}) from another dataset (\code{data2}). The test fails if the
-distributions are sufficiently dissimilar.
 \item \code{expect_valmatch} compares the observations appearing in one dataset
 (\code{data}) to the same observations, as picked out by a key (\code{by}), in
 another dataset (\code{data2}). It fails if the selected variables (\code{vars})
