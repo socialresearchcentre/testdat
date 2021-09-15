@@ -65,7 +65,8 @@ chk_date_yyyy(x)
 \item{miss}{vector of values to be treated as missing}
 }
 \value{
-A logical vector flagging records that have passed or failed the check
+A logical vector flagging records that have passed or failed the
+check
 }
 \description{
 These functions provide common, simple data checks.
@@ -91,7 +92,8 @@ with(sales, date[!chk_date_yyyymmdd(date)]) # Examine invalid dates
 
 all(chk_unique(sales$sale_id)) # Valid key?
 
-sales$sale_price[!chk_range(sales$sale_price, 0, Inf)] <- NA # Clean out invalid prices
+# Clean out invalid prices
+sales$sale_price[!chk_range(sales$sale_price, 0, Inf)] <- NA
 sales
 
 # detect non-ASCII characters

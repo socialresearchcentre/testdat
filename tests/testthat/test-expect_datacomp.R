@@ -14,7 +14,7 @@ test_that("expect_subset", {
     k2 = c(rep("a", 3), rep("b", 3), rep("c", 3)),
     x = runif(9)
   )
-  df_subset <- df[df$k1<4, ]
+  df_subset <- df[df$k1 < 4, ]
   df_nonsubset <- rbind(
     df_subset,
     data.frame(k1 = 99, k2 = "z", x = 0)

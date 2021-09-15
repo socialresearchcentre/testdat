@@ -8,5 +8,3 @@ test_that("expect_values", {
   expect_failure(expect_values(b, 1:5, data = df1))
   expect_success(expect_values(b, 1:5, "NA", data = df1))
 })
-
-

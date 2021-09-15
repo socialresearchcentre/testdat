@@ -13,13 +13,16 @@ Test your data! An extension of the 'testthat' unit testing
 \section{Options}{
 
 \itemize{
-\item \code{testdat.miss}: A vector of values to consider missing (default: \code{c(NA, "")}).
-\item \code{testdat.miss_text}: A vector of values to consider missing in text variables
+\item \code{testdat.miss}: A vector of values to consider missing
+(default: \code{c(NA, "")}).
+\item \code{testdat.miss_text}: A vector of values to consider missing in text
+variables
 (default: \code{c("error", "null", "0", ".", "-", ",", "na", "#n/a", "", NA)}).
 \item \code{testdat.stop_on_fail}: Should an expectation raise an error on failure?
 Useful for interactive use of expectation functions (default: \code{TRUE}).
 \item \code{testdat.scipen}: When it is necessary to convert a numeric vector to
-character for checking, this value will be used for \code{scipen} (default: \code{999}).
+character for checking, this value will be used for \code{scipen}
+(default: \code{999}).
 }
 }
 

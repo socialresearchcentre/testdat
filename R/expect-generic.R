@@ -6,10 +6,10 @@
 #' returns TRUE for *all* of them (i.e. whether the conjunction of results of
 #' applying `func` to each of the `vars` is TRUE). The latter, `expect_any`,
 #' tests the `vars` to see whether `func` returns TRUE for *any* of them (i.e.
-#' whether the disjunction of the results of applying `func` to each of the `vars`
-#' is TRUE). The `expect_where` function works exactly like `expect_all` except
-#' that variables are specified not using `dplyr::vars()` (`vars`) but using
-#' bare [`tidy-select`][dplyr_tidy_select] functions (`where`).
+#' whether the disjunction of the results of applying `func` to each of the
+#' `vars` is TRUE). The `expect_where` function works exactly like `expect_all`
+#' except that variables are specified not using `dplyr::vars()` (`vars`) but
+#' using bare [`tidy-select`][dplyr_tidy_select] functions (`where`).
 #'
 #' @inheritParams data-params
 #' @param func a function that takes a vector as the first argument and returns
@@ -69,7 +69,6 @@ expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
   act$var_desc  <- as_label_vars(enquo(vars))
   act$flt_desc  <- as_label_flt(enquo(flt))
   act$args_desc <- expr_deparse_repl(args, "(^<list: |>$)", "")
-  # act$args_desc <- lapply(args, as_label) %>% paste0(collapse = ", ")
 
   act$result <- allany(eval_tidy(enquo(data)),
                        vars,

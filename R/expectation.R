@@ -96,4 +96,3 @@ expectation_type <- function(exp) {
   stopifnot(is.expectation(exp))
   gsub("^expectation_", "", class(exp)[[1]])
 }
-

@@ -26,7 +26,7 @@ test_that("proportion missing", {
 
   expect_success(expect_prop_nmiss(names, prop = 0.9, data = df1))
   expect_failure(expect_prop_nmiss(names, prop = 0.9, miss = getOption("testdat.miss_text"), data = df1))
-  expect_failure(expect_prop_nmiss(answers, prop = 3/4, data = df1))
+  expect_failure(expect_prop_nmiss(answers, prop = 3 / 4, data = df1))
 })
 
 

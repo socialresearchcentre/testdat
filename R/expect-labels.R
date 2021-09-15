@@ -48,7 +48,7 @@ chk_labels <- function(x, val_labels = NULL, var_label = NULL) {
   match <- chk_dummy(x)
 
   if (!is.null(val_labels)) {
-    if(!is.null(names(val_labels))) {
+    if (!is.null(names(val_labels))) {
       x_test <- labelled::labelled(labelled::remove_val_labels(x), labels = val_labels)
       match <- match & (labelled::to_character(x_test) %==% labelled::to_character(x))
     } else if (isFALSE(val_labels)) {

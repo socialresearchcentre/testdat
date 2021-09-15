@@ -8,7 +8,7 @@
     testdat.scipen = 999
   )
   toset <- !(names(op.testdat) %in% names(op))
-  if(any(toset)) options(op.testdat[toset])
+  if (any(toset)) options(op.testdat[toset])
 
   invisible()
 }

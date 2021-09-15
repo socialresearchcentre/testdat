@@ -5,7 +5,8 @@
 #' @param x vector to check
 #' @param miss vector of values to be treated as missing
 #' @param ... vectors of valid values
-#' @return A logical vector flagging records that have passed or failed the check
+#' @return A logical vector flagging records that have passed or failed the
+#'   check
 #' @examples
 #' sales <- data.frame(
 #'   sale_id = 1:5,
@@ -27,7 +28,8 @@
 #'
 #' all(chk_unique(sales$sale_id)) # Valid key?
 #'
-#' sales$sale_price[!chk_range(sales$sale_price, 0, Inf)] <- NA # Clean out invalid prices
+#' # Clean out invalid prices
+#' sales$sale_price[!chk_range(sales$sale_price, 0, Inf)] <- NA
 #' sales
 #'
 #' # detect non-ASCII characters
@@ -66,7 +68,11 @@ chk_equals <- function(x, val) {
 #' @export
 chk_range <- function(x, min, max, ...) {
   is_blank <- chk_blank(x)
-  in_interval <- ifelse(suppressWarnings((as.numeric(x) >= min & as.numeric(x) <= max)) %in% NA, FALSE, suppressWarnings((as.numeric(x) >= min & as.numeric(x) <= max)))
+  in_interval <- ifelse(
+    suppressWarnings((as.numeric(x) >= min & as.numeric(x) <= max)) %in% NA,
+    FALSE,
+    suppressWarnings((as.numeric(x) >= min & as.numeric(x) <= max))
+  )
 
   is_blank | in_interval | chk_values(x, ...)
 }
@@ -105,7 +111,7 @@ chk_text_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
 #' @rdname chk-generic
 #' @export
 chk_unique <- function(x) {
-  chk_blank(x) | !(duplicated(x, fromLast = T) | duplicated(x, fromLast = F))
+  chk_blank(x) | !(duplicated(x, fromLast = TRUE) | duplicated(x, fromLast = FALSE))
 }
 
 #' @rdname chk-generic
@@ -149,7 +155,8 @@ chk_date_yyyy <- function(x) {
 
 check_lubridate_installed <- function() {
   if (!requireNamespace("lubridate", quietly = TRUE)) {
-    stop("Package \"lubridate\" is needed for date format validation. Please install it.",
+    stop("Package \"lubridate\" is needed for date format validation. ",
+         "Please install it.",
          call. = FALSE)
   }
 }
