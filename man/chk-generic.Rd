@@ -94,6 +94,9 @@ all(chk_unique(sales$sale_id)) # Valid key?
 sales$sale_price[!chk_range(sales$sale_price, 0, Inf)] <- NA # Clean out invalid prices
 sales
 
+# detect non-ASCII characters
+chk_ascii(c("a", "\U1f642"))
+
 }
 \seealso{
 \link[=chk-helper]{Checking Helper Functions}

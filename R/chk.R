@@ -30,6 +30,9 @@
 #' sales$sale_price[!chk_range(sales$sale_price, 0, Inf)] <- NA # Clean out invalid prices
 #' sales
 #'
+#' # detect non-ASCII characters
+#' chk_ascii(c("a", "\U1f642"))
+#'
 #' @seealso [Checking Helper Functions][chk-helper]
 #' @name chk-generic
 NULL
@@ -109,7 +112,7 @@ chk_unique <- function(x) {
 #' @export
 chk_ascii <- function(x) {
   x <- as_char_scipen(x)
-  chk_blank(x) | !any(grepl("[^\x20-\x7E]", x))
+  chk_blank(x) | !grepl("[^\x20-\x7E]", x)
 }
 
 #' @rdname chk-generic

@@ -6,6 +6,8 @@
 
 * `chk_blank()` performs checks slightly differently and is much faster as a result (#46).
 
+* `chk_ascii()` was returning `FALSE` if it detected non-ASCII printable characters anywhere in the input vector. It now checks each element of the vector individually.
+
 # testdat 0.2.0
 
 In addition to minor updates and bug fixes, this release does three main things:
