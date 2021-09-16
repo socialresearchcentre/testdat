@@ -104,7 +104,7 @@ expect_prop_length <- function(var, len, prop, data) {
 expect_prop_length(date, 8, 0.9, sales)
 
 # Check price values mostly between 0 and 100
-\dontrun{expect_prop_values(sale_price, 0.9, 1:100, data = sales)}
+try(expect_prop_values(sale_price, 0.9, 1:100, data = sales))
 
 }
 \seealso{

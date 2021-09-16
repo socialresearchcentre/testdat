@@ -89,12 +89,10 @@ sales <- data.frame(
 )
 
 # Validate sales
-\dontrun{
-expect_text_nmiss(book_title, data = sales) # Titles non-missing
-expect_date_yyyymmdd(date, data = sales) # Dates in correct format
-expect_values(date, 20000000:20210000, data = sales) # Dates between 2000 and 2021
-expect_range(sale_price, min = 0, max = Inf, data = sales) # Prices non-negative
-}
+try(expect_text_nmiss(book_title, data = sales)) # Titles non-missing
+try(expect_date_yyyymmdd(date, data = sales)) # Dates in correct format
+try(expect_values(date, 20000000:20210000, data = sales)) # Dates between 2000 and 2021
+try(expect_range(sale_price, min = 0, max = Inf, data = sales)) # Prices non-negative
 }
 \seealso{
 \link[=chk-generic]{Generic Checking Functions}

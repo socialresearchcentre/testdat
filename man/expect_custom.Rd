@@ -43,7 +43,6 @@ reporting of test results.
 x <- expect_custom(TRUE, "Test", extra_data = 1:5, more_data = "Hello")
 str(x)
 
-\dontrun{
 # an example expectation (note additional libraries used)
 library(rlang)
 
@@ -66,7 +65,6 @@ expect_example <- function(var, data = get_testdata()) {
   invisible(act$result)
 }
 
-expect_example(x, data = data.frame(x = c(NA, -2:2)))
-}
+try(expect_example(x, data = data.frame(x = c(NA, -2:2))))
 }
 \keyword{internal}

@@ -8,3 +8,7 @@
 ^docs$
 ^pkgdown$
 ^README\.Rmd$
+^codecov\.yml$
+^\.covrignore$
+^\.github$
+^cran-comments\.md$

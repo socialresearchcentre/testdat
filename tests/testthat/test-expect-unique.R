@@ -11,8 +11,8 @@ test_that("expect_unique", {
 
 test_that("expect_unique_across", {
   df1 <- data.frame(a = 1:10, b = 99, c = 1)
-  expect_success(expect_unique_across(vars(a,b), data = df1))
-  expect_failure(expect_unique_across(vars(a,c), data = df1))
+  expect_success(expect_unique_across(vars(a, b), data = df1))
+  expect_failure(expect_unique_across(vars(a, c), data = df1))
 })
 
 

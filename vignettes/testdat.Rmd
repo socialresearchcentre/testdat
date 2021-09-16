@@ -37,7 +37,7 @@ Features include:
 As an extension of testthat, testdat uses the same basic testing framework.
 Before using testdat (and reading this documentation), make sure you're familiar
 with the introduction to testthat in
-[R packages](http://r-pkgs.had.co.nz/tests.html).
+[R packages](https://r-pkgs.org/tests.html).
 
 The main addition provided by testdat is a set of expectations designed for
 testing data frames and a context-esque mechanism to set a current testing data
@@ -47,7 +47,8 @@ frame.
 
 ## Overview
 
-In general, our approach to data testing is variable-centric - the majority of expectations perform a check on one or more variables in a given dataset.
+In general, our approach to data testing is variable-centric - the majority of
+expectations perform a check on one or more variables in a given dataset.
 
 The standard form of a data expectation is:
 ```r
@@ -80,7 +81,8 @@ test_that("multi-variable identifier is unique", {
 ### Filter
 
 The `flt` argument takes a logical predicate defined in terms of the variables
-in `data`. Only rows where the condition evaluates to `TRUE` are included in the test.
+in `data`. Only rows where the condition evaluates to `TRUE` are included in the
+test.
 
 ```{r}
 test_that("iris range checks", {
@@ -97,9 +99,9 @@ test_that("iris range checks filtered", {
 
 ### Data
 
-The `data` argument takes a data frame to test. To avoid redundant code the
-data argument defaults to a global test data set retrieved using
-`get_testdata()`. This can be used in two ways:
+The `data` argument takes a data frame to test. To avoid redundant code the data
+argument defaults to a global test data set retrieved using `get_testdata()`.
+This can be used in two ways:
 
 * Setting the global test data using `set_testdata()`.
 
@@ -112,7 +114,8 @@ test_that("Versicolor has sepal length greater than 5 - will fail", {
 })
 ```
 
-* Using the `with_testdata()` wrapper to temporarily set the global test data for a block of code.
+* Using the `with_testdata()` wrapper to temporarily set the global test data
+for a block of code.
 
 ```{r}
 set_testdata(mtcars)
@@ -135,7 +138,9 @@ test_that("Versicolor has sepal length greater than 5 - will fail", {
 })
 ```
 
-By default, `set_testdata()` stores a reference to the provided dataset rather than the data itself, so changes made to the dataset will be reflected in the test results.
+By default, `set_testdata()` stores a reference to the provided dataset rather
+than the data itself, so changes made to the dataset will be reflected in the
+test results.
 
 ```{r}
 tmp_data <- tibble(x = c(1, 0), y = c(1, NA))
@@ -197,9 +202,12 @@ Generic
 
 ## Testing inside a script
 
-The easiest way to use data testing is directly inside an R script. Expecations and test blocks throw an error if they fail, so it is very clear to the user that something needs to be checked, and the script will fail when sourced.
+The easiest way to use data testing is directly inside an R script. Expecations
+and test blocks throw an error if they fail, so it is very clear to the user
+that something needs to be checked, and the script will fail when sourced.
 
-The example below shows how to adapt a script from exploratory "print and check" to a testing approach, using a simple sample processing exercise.
+The example below shows how to adapt a script from exploratory "print and check"
+to a testing approach, using a simple sample processing exercise.
 
 ### Print and check
 
@@ -269,11 +277,14 @@ with_testdata(x, {
 
 Note that:
 
-* The global dataset must be reset after changes are made, either with `set_testdata()` or `with_testdata()`.
+* The global dataset must be reset after changes are made, either with
+`set_testdata()` or `with_testdata()`.
 
-* The `test_that()` wrapper is not strictly necessary, but it provides more informative error messaging and logically groups a set of expectations.
+* The `test_that()` wrapper is not strictly necessary, but it provides more
+informative error messaging and logically groups a set of expectations.
 
-* Each `with_testdata()` block will fail on the first `test_that()` block that fails. The "filters applied correctly" test block is not run in the example.
+* Each `with_testdata()` block will fail on the first `test_that()` block that
+fails. The "filters applied correctly" test block is not run in the example.
 
 ## Using a test suite
 
@@ -281,17 +292,14 @@ Setting up a proper project test suite can be useful for automatically
 validating final outputs before delivery.
 
 Setting up proper file based testing infrastructure is out of the scope of this
-vignette. See [R packages](http://r-pkgs.had.co.nz/tests.html) for a brief
+vignette. See [R packages](https://r-pkgs.org/tests.html) for a brief
 introduction to testing infrastructure.
 
-Each set of tests in testthat has a `context()`. In testdat, each context has an
-associated dataset, specified with a call to `context_data()`.
-
-`context_data()` sets the value of the global test data as outlined above.
+In testthat, related tests are grouped into files. When using testdat, each file
+should have a test data set specified with a call to `set_testdata()`.
 
 ```{r}
-context("Example")
-context_data(iris)
+set_testdata(iris)
 
 test_that("Variable format checks", {
   expect_regex(Species, "^[a-z]+$")

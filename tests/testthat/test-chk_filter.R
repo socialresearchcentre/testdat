@@ -40,4 +40,3 @@ test_that("chk_filter", {
     chk_filter_where(test_df, where(is.integer), chk_values, args = list(1:10))
   )
 })
-

@@ -31,5 +31,3 @@ test_that("automatically generated expectations", {
   expect_success(expect_date_yyyymm(yyyymm_good, data = my_dates))
   expect_success(expect_date_yyyymmdd(yyyymmdd_good, data = my_dates))
 })
-
-

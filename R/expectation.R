@@ -22,7 +22,6 @@
 #' x <- expect_custom(TRUE, "Test", extra_data = 1:5, more_data = "Hello")
 #' str(x)
 #'
-#' \dontrun{
 #' # an example expectation (note additional libraries used)
 #' library(rlang)
 #'
@@ -45,8 +44,7 @@
 #'   invisible(act$result)
 #' }
 #'
-#' expect_example(x, data = data.frame(x = c(NA, -2:2)))
-#' }
+#' try(expect_example(x, data = data.frame(x = c(NA, -2:2))))
 #' @importFrom testthat expectation is.expectation quasi_label exp_signal
 #' @export
 expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, trace = NULL, ...) {
@@ -74,6 +72,10 @@ expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, trace
 
 # labelling helpers ----
 
+expr_deparse_repl <- function(quo, pattern, replace = "") {
+  stringr::str_replace_all(expr_deparse(quo), pattern, replace)
+}
+
 as_label_repl <- function(quo, pattern, replace = "") {
   stringr::str_replace_all(as_label(quo), pattern, replace)
 }
@@ -94,4 +96,3 @@ expectation_type <- function(exp) {
   stopifnot(is.expectation(exp))
   gsub("^expectation_", "", class(exp)[[1]])
 }
-

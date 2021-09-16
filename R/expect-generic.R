@@ -6,10 +6,10 @@
 #' returns TRUE for *all* of them (i.e. whether the conjunction of results of
 #' applying `func` to each of the `vars` is TRUE). The latter, `expect_any`,
 #' tests the `vars` to see whether `func` returns TRUE for *any* of them (i.e.
-#' whether the disjunction of the results of applying `func` to each of the `vars`
-#' is TRUE). The `expect_where` function works exactly like `expect_all` except
-#' that variables are specified not using `dplyr::vars()` (`vars`) but using
-#' bare [`tidy-select`][dplyr_tidy_select] functions (`where`).
+#' whether the disjunction of the results of applying `func` to each of the
+#' `vars` is TRUE). The `expect_where` function works exactly like `expect_all`
+#' except that variables are specified not using `dplyr::vars()` (`vars`) but
+#' using bare [`tidy-select`][dplyr_tidy_select] functions (`where`).
 #'
 #' @inheritParams data-params
 #' @param func a function that takes a vector as the first argument and returns
@@ -21,9 +21,9 @@
 #'   failure message.
 #' @param ... arguments to pass to `expect_allany()`
 #' @examples
-#' \dontrun{
 #' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
 #' # inches *AND* < 100 horsepower
+#' try(
 #' expect_all(
 #'   vars = vars(disp, hp),
 #'   func = chk_range,
@@ -31,9 +31,11 @@
 #'   args = list(min = 0, max = 100),
 #'   data = mtcars
 #' )
+#' )
 #'
 #' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
 #' # inches *OR* < 100 horsepower
+#' try(
 #' expect_any(
 #'   vars = vars(disp, hp),
 #'   func = chk_range,
@@ -41,7 +43,7 @@
 #'   args = list(min = 0, max = 100),
 #'   data = mtcars
 #' )
-#' }
+#' )
 #'
 #' # Check petal dimensions are positive
 #' expect_where(
@@ -66,8 +68,7 @@ expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
   act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
   act$var_desc  <- as_label_vars(enquo(vars))
   act$flt_desc  <- as_label_flt(enquo(flt))
-  act$args_desc <- as_label_repl(args, "(^list\\()|(\\)$)", "")
-  # act$args_desc <- lapply(args, as_label) %>% paste0(collapse = ", ")
+  act$args_desc <- expr_deparse_repl(args, "(^<list: |>$)", "")
 
   act$result <- allany(eval_tidy(enquo(data)),
                        vars,
@@ -112,7 +113,7 @@ expect_where <- function(where, func, flt = TRUE, data = get_testdata(), args = 
   act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
   act$var_desc  <- data %>% select(!!where) %>% names() %>% paste(collapse = ", ")
   act$flt_desc  <- as_label_flt(enquo(flt))
-  act$args_desc <- as_label_repl(args, "(^list\\()|(\\)$)", "")
+  act$args_desc <- expr_deparse_repl(args, "(^<list: |>$)", "")
 
   act$result <- chk_filter_where(eval_tidy(enquo(data)),
                                  !!where,

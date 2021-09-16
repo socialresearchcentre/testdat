@@ -15,9 +15,12 @@ test_that("excel_results", {
   x_xl_failing <- openxlsx::read.xlsx(file_out, "failing_tests")
   file.remove(file_out)
 
-  # Check that .xslx file looks good
+  # Check that .xlsx file looks good
+  hlink <- function(x) glue::glue("=HYPERLINK(\"#'{str_sub(x, 1, 30)}'!A1\",\"{x}\")")
+
   xl_summary <- data.frame(
-    context = c(NA_real_, NA_real_),
+    stringsAsFactors = FALSE,
+    context = c(hlink("failing_tests"), hlink("passing_tests")),
     tests = c(2L, 3L),
     failed = c(2L, 0L),
     error = c(0L, 0L),
@@ -31,8 +34,8 @@ test_that("excel_results", {
     test = c("fails", "fails"),
     status = c("failure", "failure"),
     variable = c("my_string", "my_real"),
-    description = c("`mydf` has 7 records failing pattern check on variable `my_string`. Filter: None Arguments: `<named list>`",
-                    "`mydf` has 4 records failing range check on variable `my_real`. Filter: None Arguments: `<named list>`"),
+    description = c("`mydf` has 7 records failing pattern check on variable `my_string`. Filter: None Arguments: `pattern = \"Merc\"`",
+                    "`mydf` has 4 records failing range check on variable `my_real`. Filter: None Arguments: `min = 0, max = 0.4`"),
     failed_records = c(7L, 4L),
     total_records = c(10L, 10L),
     call = c("NULL", "NULL")

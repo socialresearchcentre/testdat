@@ -55,7 +55,7 @@
 #' expect_prop_length(date, 8, 0.9, sales)
 #'
 #' # Check price values mostly between 0 and 100
-#' \dontrun{expect_prop_values(sale_price, 0.9, 1:100, data = sales)}
+#' try(expect_prop_values(sale_price, 0.9, 1:100, data = sales))
 #'
 NULL
 
@@ -70,7 +70,7 @@ expect_prop <- function(var, func, prop, cmp, flt = TRUE, data = get_testdata(),
   act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
   act$var_desc  <- as_label_vars(enquo(var))
   act$flt_desc  <- as_label_flt(enquo(flt))
-  act$args_desc <- as_label_repl(args, "(^list\\()|(\\)$)", "")
+  act$args_desc <- expr_deparse_repl(args, "(^<list: |>$)", "")
 
   act$result <- data %>%
     filter(!!flt) %>%

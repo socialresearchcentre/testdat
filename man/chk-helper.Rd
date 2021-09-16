@@ -24,9 +24,11 @@ chk_filter_where(data, where, func, flt = TRUE, args = list())
 
 \item{var}{a single column to check}
 
-\item{func}{a function to use use for checking. The provided function should take a single vector as input and return a logical vector.}
+\item{func}{a function to use use for checking. The provided function should
+take a single vector as input and return a logical vector.}
 
-\item{flt}{a logical expression to be applied as a filter for the check. This will be evaluated in the context of data}
+\item{flt}{a logical expression to be applied as a filter for the check. This
+will be evaluated in the context of data}
 
 \item{args}{a list of additional arguments to be added to the function calls.}
 
@@ -35,7 +37,8 @@ chk_filter_where(data, where, func, flt = TRUE, args = list())
 \item{where}{<\code{\link[=dplyr_tidy_select]{tidy-select}}> columns to check}
 }
 \value{
-A logical vector flagging records that have passed or failed the check, with \code{NA} where records do not meet the filter
+A logical vector flagging records that have passed or failed the
+check, with \code{NA} where records do not meet the filter
 }
 \description{
 These helper functions allowing easy checking over multiple columns and
@@ -64,10 +67,22 @@ all(x, na.rm = TRUE)
 
 # Check that every 4-cylinder car has an engine displacement of < 100 cubic
 # inches AND < 100 horsepower
-chk_filter_all(mtcars, c("disp", "hp"), chk_range, cyl == 4, list(min = 0, max = 100))
+chk_filter_all(
+  mtcars,
+  c("disp", "hp"),
+  chk_range,
+  cyl == 4,
+  list(min = 0, max = 100)
+)
 
 # Check that columns made up of whole numbers are binary
-chk_filter_where(mtcars, where(~ all(. \%\% 1 == 0)), chk_values, TRUE, list(0:1))
+chk_filter_where(
+  mtcars,
+  where(~ all(. \%\% 1 == 0)),
+  chk_values,
+  TRUE,
+  list(0:1)
+)
 
 }
 \seealso{

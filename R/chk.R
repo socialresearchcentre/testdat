@@ -5,7 +5,8 @@
 #' @param x vector to check
 #' @param miss vector of values to be treated as missing
 #' @param ... vectors of valid values
-#' @return A logical vector flagging records that have passed or failed the check
+#' @return A logical vector flagging records that have passed or failed the
+#'   check
 #' @examples
 #' sales <- data.frame(
 #'   sale_id = 1:5,
@@ -27,8 +28,12 @@
 #'
 #' all(chk_unique(sales$sale_id)) # Valid key?
 #'
-#' sales$sale_price[!chk_range(sales$sale_price, 0, Inf)] <- NA # Clean out invalid prices
+#' # Clean out invalid prices
+#' sales$sale_price[!chk_range(sales$sale_price, 0, Inf)] <- NA
 #' sales
+#'
+#' # detect non-ASCII characters
+#' chk_ascii(c("a", "\U1f642"))
 #'
 #' @seealso [Checking Helper Functions][chk-helper]
 #' @name chk-generic
@@ -43,7 +48,11 @@ chk_dummy <- function(x) {
 #' @rdname chk-generic
 #' @export
 chk_blank <- function(x) {
-  x %in% c("", NA)
+  if (is.character(x) | is.factor(x)) {
+    is.na(x) | x == ""
+  } else {
+    is.na(x)
+  }
 }
 
 #' @rdname chk-generic
@@ -59,7 +68,11 @@ chk_equals <- function(x, val) {
 #' @export
 chk_range <- function(x, min, max, ...) {
   is_blank <- chk_blank(x)
-  in_interval <- ifelse(suppressWarnings((as.numeric(x) >= min & as.numeric(x) <= max)) %in% NA, FALSE, suppressWarnings((as.numeric(x) >= min & as.numeric(x) <= max)))
+  in_interval <- ifelse(
+    suppressWarnings((as.numeric(x) >= min & as.numeric(x) <= max)) %in% NA,
+    FALSE,
+    suppressWarnings((as.numeric(x) >= min & as.numeric(x) <= max))
+  )
 
   is_blank | in_interval | chk_values(x, ...)
 }
@@ -98,38 +111,14 @@ chk_text_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
 #' @rdname chk-generic
 #' @export
 chk_unique <- function(x) {
-  chk_blank(x) | !(duplicated(x, fromLast = T) | duplicated(x, fromLast = F))
-}
-
-#' @rdname chk-generic
-#' @importFrom stringr str_detect
-#' @importFrom lubridate ymd
-#' @export
-chk_date_yyyymmdd <- function(x) {
-  chk_blank(x) | (str_detect(x, "[0-9]{8}") & !is.na(lubridate::ymd(x, quiet = TRUE)))
-}
-
-#' @rdname chk-generic
-#' @importFrom stringr str_detect
-#' @importFrom lubridate ymd
-#' @export
-chk_date_yyyymm <- function(x) {
-  chk_blank(x) | (str_detect(x, "[0-9]{6}") & !is.na(lubridate::ymd(paste0(x, "01"), quiet = TRUE)))
-}
-
-#' @rdname chk-generic
-#' @importFrom stringr str_detect
-#' @importFrom lubridate ymd
-#' @export
-chk_date_yyyy <- function(x) {
-  chk_blank(x) | (str_detect(x, "[0-9]{4}") & !is.na(lubridate::ymd(paste0(x, "0101"), quiet = TRUE)))
+  chk_blank(x) | !(duplicated(x, fromLast = TRUE) | duplicated(x, fromLast = FALSE))
 }
 
 #' @rdname chk-generic
 #' @export
 chk_ascii <- function(x) {
   x <- as_char_scipen(x)
-  chk_blank(x) | !any(grepl("[^\x20-\x7E]", x))
+  chk_blank(x) | !grepl("[^\x20-\x7E]", x)
 }
 
 #' @rdname chk-generic
@@ -138,4 +127,36 @@ chk_values <- function(x, ..., miss = getOption("testdat.miss")) {
   old <- options(scipen = getOption("testdat.scipen"))
   on.exit(options(old))
   x %in% c(unlist(list(...)), miss)
+}
+
+#' @rdname chk-generic
+#' @importFrom stringr str_detect
+#' @export
+chk_date_yyyymmdd <- function(x) {
+  check_lubridate_installed()
+  chk_blank(x) | (str_detect(x, "[0-9]{8}") & !is.na(lubridate::ymd(x, quiet = TRUE)))
+}
+
+#' @rdname chk-generic
+#' @importFrom stringr str_detect
+#' @export
+chk_date_yyyymm <- function(x) {
+  check_lubridate_installed()
+  chk_blank(x) | (str_detect(x, "[0-9]{6}") & !is.na(lubridate::ymd(paste0(x, "01"), quiet = TRUE)))
+}
+
+#' @rdname chk-generic
+#' @importFrom stringr str_detect
+#' @export
+chk_date_yyyy <- function(x) {
+  check_lubridate_installed()
+  chk_blank(x) | (str_detect(x, "[0-9]{4}") & !is.na(lubridate::ymd(paste0(x, "0101"), quiet = TRUE)))
+}
+
+check_lubridate_installed <- function() {
+  if (!requireNamespace("lubridate", quietly = TRUE)) {
+    stop("Package \"lubridate\" is needed for date format validation. ",
+         "Please install it.",
+         call. = FALSE)
+  }
 }

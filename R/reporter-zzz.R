@@ -39,17 +39,11 @@ get_testdata <- function() {
   dat <- testdat_env$test_data
 
   if (is.null(dat))
-    stop("A dataset has not been specified for the current context. ",
-         "Use `context_data()` to set the dataset.",
+    stop("A test dataset has not been specified. ",
+         "Use `set_testdata()` to set the dataset.",
          call. = FALSE)
 
   return(eval_tidy(dat))
-}
-
-#' @export
-#' @rdname global-data
-context_data <- function(data) {
-  set_testdata(data)
 }
 
 #' @export

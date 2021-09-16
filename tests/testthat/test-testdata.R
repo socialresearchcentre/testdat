@@ -9,9 +9,6 @@ test_that("set_testdata/get_testdata work correctly", {
 
   old_dat <- set_testdata(mdeaths)
   expect_identical(old_dat, iris)
-
-  context_data(mtcars)
-  expect_identical(get_testdata(), mtcars)
 })
 
 test_that("with_testdat temporarily sets test dataset", {

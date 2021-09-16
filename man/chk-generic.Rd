@@ -11,11 +11,11 @@
 \alias{chk_text_miss}
 \alias{chk_text_nmiss}
 \alias{chk_unique}
+\alias{chk_ascii}
+\alias{chk_values}
 \alias{chk_date_yyyymmdd}
 \alias{chk_date_yyyymm}
 \alias{chk_date_yyyy}
-\alias{chk_ascii}
-\alias{chk_values}
 \title{Generic checking functions}
 \usage{
 chk_dummy(x)
@@ -36,15 +36,15 @@ chk_text_nmiss(x, miss = getOption("testdat.miss_text"))
 
 chk_unique(x)
 
+chk_ascii(x)
+
+chk_values(x, ..., miss = getOption("testdat.miss"))
+
 chk_date_yyyymmdd(x)
 
 chk_date_yyyymm(x)
 
 chk_date_yyyy(x)
-
-chk_ascii(x)
-
-chk_values(x, ..., miss = getOption("testdat.miss"))
 }
 \arguments{
 \item{x}{vector to check}
@@ -65,7 +65,8 @@ chk_values(x, ..., miss = getOption("testdat.miss"))
 \item{miss}{vector of values to be treated as missing}
 }
 \value{
-A logical vector flagging records that have passed or failed the check
+A logical vector flagging records that have passed or failed the
+check
 }
 \description{
 These functions provide common, simple data checks.
@@ -91,8 +92,12 @@ with(sales, date[!chk_date_yyyymmdd(date)]) # Examine invalid dates
 
 all(chk_unique(sales$sale_id)) # Valid key?
 
-sales$sale_price[!chk_range(sales$sale_price, 0, Inf)] <- NA # Clean out invalid prices
+# Clean out invalid prices
+sales$sale_price[!chk_range(sales$sale_price, 0, Inf)] <- NA
 sales
+
+# detect non-ASCII characters
+chk_ascii(c("a", "\U1f642"))
 
 }
 \seealso{

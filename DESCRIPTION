@@ -1,60 +1,65 @@
 Type: Package
 Package: testdat
 Title: Data Unit Testing for R
-Version: 0.2.0
+Version: 0.2.0.9000
 Authors@R: 
     c(person(given = "Danny",
              family = "Smith",
              role = c("aut", "cre"),
-             email = "daniel.smith@srcentre.com.au"),
+             email = "danny@gorcha.org"),
       person(given = "Kinto",
              family = "Behr",
-             role = c("aut"),
+             role = "aut",
              email = "kinto.behr@srcentre.com.au"),
       person(given = "The Social Research Centre",
              role = "cph"))
-Description: An extension of 'testthat' made for checking data
-    frames.
+Description: Test your data! An extension of the 'testthat' unit testing
+    framework with a family of functions and reporting tools for checking
+    and validating data frames.
 License: MIT + file LICENSE
+URL: https://socialresearchcentre.github.io/testdat/,
+    https://github.com/socialresearchcentre/testdat
+BugReports: https://github.com/socialresearchcentre/testdat/issues
 Depends:
     R (>= 3.2.2),
     testthat (>= 2.0.0)
 Imports:
     dplyr (>= 0.8.0),
     glue,
-    lubridate,
-    openxlsx,
+    lifecycle,
     rlang,
     stringr,
     tidyselect
 Suggests:
-    labelled,
+    covr,
     crayon,
     knitr,
+    labelled,
+    lubridate,
+    openxlsx,
     rmarkdown
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Collate: 
-    'chk-deprec.R'
     'chk-filter.R'
     'chk.R'
     'comparison.R'
-    'compat-lifecycle.R'
+    'deprec-chk.R'
+    'deprec-expect.R'
+    'deprec-reporter.R'
     'expect-make.R'
     'expect-chk.R'
     'expect-conditional.R'
     'expect-data.R'
     'expect-datacomp.R'
-    'expect-deprec.R'
+    'expect-exclusive.R'
     'expect-generic.R'
     'expect-labels.R'
     'expect-proportion.R'
     'expect-unique.R'
-    'expect_exclusive.R'
     'expectation.R'
     'reporter-excel.R'
     'reporter-zzz.R'
