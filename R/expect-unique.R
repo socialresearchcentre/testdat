@@ -31,27 +31,27 @@
 #' )
 #'
 #' # Check that key is unique, excluding NAs by default
-#' expect_unique(vars(student_id), data = student_fruit_preferences)
+#' expect_unique(student_id, data = student_fruit_preferences)
 #'
 #' # Check that key is unique, including NAs
-#' try(expect_unique(vars(student_id), exclude = NULL, data = student_fruit_preferences))
+#' try(expect_unique(student_id, exclude = NULL, data = student_fruit_preferences))
 #'
 #' # Check each fruit has unique preference number
 #' try(
 #' expect_unique_across(
-#'   vars(apple, orange, banana),
+#'   c(apple, orange, banana),
 #'   data = student_fruit_preferences
 #' )
 #' )
 #'
 #' # Check each fruit has unique preference number, allowing multiple 99 (item skipped) codes
 #' expect_unique_across(
-#'   vars(apple, orange, banana),
+#'   c(apple, orange, banana),
 #'   exclude = c(99, NA), data = student_fruit_preferences
 #' )
 #'
 #' # Check that each phone number appears at most once
-#' try(expect_unique_combine(vars(phone1, phone2), data = student_fruit_preferences))
+#' try(expect_unique_combine(c(phone1, phone2), data = student_fruit_preferences))
 NULL
 
 #' @importFrom tidyselect vars_select
@@ -66,10 +66,10 @@ expect_unique <- function(vars, exclude = getOption("testdat.miss"),
   flt <- enquo(flt)
   act$result_data <- data %>%
     filter(!!flt) %>%
-    group_by(!!!vars) %>%
+    group_by(across({{ vars }})) %>%
     mutate(count = n()) %>%
     ungroup() %>%
-    select(!!!vars, count) %>%
+    select({{ vars }}, count) %>%
     filter(across(-count, .fns = function(x) { !x %in% exclude }))
 
   act$result <- act$result_data$count == 1
@@ -98,7 +98,7 @@ expect_unique_across <- function(vars, exclude = getOption("testdat.miss"),
   flt <- enquo(flt)
   act$result <- data %>%
     filter(!!flt) %>%
-    select(!!!vars) %>%
+    select({{ vars }}) %>%
     apply(1, function(x) {
     # Number non-na equal to the number unique non-na
     sum(!x %in% exclude) == length(unique(x[!x %in% exclude]))
@@ -127,7 +127,7 @@ expect_unique_combine <- function(vars, exclude = getOption("testdat.miss"),
   flt <- enquo(flt)
   test_data <- data %>%
     filter(!!flt) %>%
-    select(!!!vars)
+    select({{ vars }})
 
   all_values <- unlist(lapply(test_data, function(x) as.character(x)))
   duplicate_values <- setdiff(all_values[duplicated(all_values)], exclude)

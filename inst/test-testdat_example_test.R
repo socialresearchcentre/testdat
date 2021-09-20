@@ -9,7 +9,7 @@ test_that("passes", {
   )
 
   expect_values(my_binary, 0:1, data = mydf)
-  expect_unique(vars(my_unique), data = mydf)
+  expect_unique(my_unique, data = mydf)
   expect_range(my_real, 0, 0.5, data = mydf)
 })
 
