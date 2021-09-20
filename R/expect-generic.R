@@ -71,9 +71,9 @@ expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
   act$args_desc <- expr_deparse_repl(args, "(^<list: |>$)", "")
 
   act$result <- allany(eval_tidy(enquo(data)),
-                       vars,
+                       {{ vars }},
                        eval_tidy(enquo(func)),
-                       !!enquo(flt),
+                       {{ flt }},
                        args)
 
   expect_custom(

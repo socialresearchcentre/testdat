@@ -38,18 +38,10 @@ expect_make <- function(func, func_desc = NULL, vars = FALSE, all = TRUE, env = 
   else
     enall <- expr(chk_filter_any)
 
-  if (vars) {
-    var_arg <- alist(vars = )
-    var_expr <- parse_expr("vars")
-  } else {
-    var_arg <- alist(var = )
-    var_expr <- parse_expr("vars(!!ensym(var))")
-  }
-
   new_function(
-    exprs(!!!var_arg, !!!args, flt = TRUE, data = get_testdata()),
+    exprs(vars = , !!!args, flt = TRUE, data = get_testdata()),
     expr({
-      expect_allany(!!var_expr,
+      expect_allany(!!parse_expr("!!enquo(vars)"),
                     !!enfunc,
                     !!parse_expr("!!enquo(flt)"),
                     !!parse_expr("!!enquo(data)"),
