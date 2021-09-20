@@ -80,7 +80,7 @@ as_label_repl <- function(quo, pattern, replace = "") {
   stringr::str_replace_all(as_label(quo), pattern, replace)
 }
 
-as_label_vars <- function(quo) as_label_repl(quo, "(^vars\\()|(\\)$)", "")
+as_label_vars <- function(quo) as_label_repl(quo, "(^(c|vars)\\()|(\\)$)", "")
 
 as_label_flt  <- function(quo) {
   quo_lab <- as_label(quo)
