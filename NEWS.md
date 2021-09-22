@@ -1,10 +1,51 @@
 # testdat (development version)
 
+## Breaking changes
+
+### tidyselect (#36)
+
+As of testdat 0.3.0 we have moved to the [tidyselect](https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html) framework for variable selections instead of `dplyr::vars()`. tidyselect is the successor to `vars()` - it's a bit cleaner, provides some nifty features like selecting columns with a predicate function using `where()` and finally allows us to get rid of the distinction between multi and single variable expectations.
+
+Unfortunately this will break some code, but it's horrendously difficult to support both methods and it's best to switch before publishing to CRAN. Fortunately it's a simple fix - anywhere that you are currently using `vars()`, replace it with `c()`:
+```r
+# Old
+expect_unique(vars(x, y))
+# New
+expect_unique(c(x, y))
+```
+
+The affected expectations are:
+
+* The uniqueness expectations: `expect_unique()`, `expect_unique_across()`, `expect_unique_combine()`
+* The exclusivity expectation: `expect_exclusive()`
+* The generic expectation helpers: `expect_all()`, `expect_any()`, `expect_allany()` 
+* The checking helper functions:  `chk_filter_vars()`, `chk_filter_all()`, `chk_filter_any()`
+
+Auto-generated expectations have also changed slightly - previously they could either accept a single unquoted variable name or a group of variables specified with `vars()`. They now always accept multiple columns using tidyselect syntax. As a result, the name of the first argument for these expect has changed from `var` to `vars`, so be careful if you're using this as a named argument.
+
+tidyselect syntax allows single unquoted variable names as well as arbitrary groups of variable specifications, and all of the auto-generated expectations in the package were the single variable variant so this shouldn't break existing code.
+
+These are all valid column specifications using tidyselect:
+```r
+expect_values(a, 1:10)
+expect_values(c(a, b), 1:10)
+expect_values(a:c, 1:10)
+expect_values(matches("^[ab]$"), 1:10)
+expect_values(c(matches("^[ab]$"), c), 1:10)
+expect_values(where(is.numeric), 1:10)
+```
+
+### Others
+
 * `expect_exclusive()` has much improved documentation, and has had the argument name `exc_vars` updated to `var_set` to better reflect its purpose.
+
+## Deprecations
 
 * Soft deprecated `context_data()` (#43). `context_data()` is just a wrapper for `set_testdata()`, which has a much more intuitive name.
 
 * Soft deprecated `expect_similar()` (#18). It was a silly way of comparing data frames and we're better off making something new.
+
+## Bug fixes / minor updates
 
 * `chk_blank()` performs checks slightly differently and is much faster as a result (#46).
 
