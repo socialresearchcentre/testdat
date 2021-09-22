@@ -45,6 +45,12 @@
 #' expect_labels(z, var_label = FALSE, data = df)
 #'
 chk_labels <- function(x, val_labels = NULL, var_label = NULL) {
+  if (!requireNamespace("labelled", quietly = TRUE)) {
+    stop("Package \"labelled\" is needed for label checks. ",
+         "Please install it.",
+         call. = FALSE)
+  }
+
   match <- chk_dummy(x)
 
   if (!is.null(val_labels)) {
