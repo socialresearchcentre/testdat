@@ -80,12 +80,11 @@ expect_exclusive <- function(vars, var_set, exc_val = 1, flt = TRUE, data = get_
        select({{ vars }}) %>%
        apply(1, any)) &
     # Flags records with more than one var selected
-    (data %>%
+    ((data %>%
        filter(!!flt) %>%
        mutate(across(c({{ var_set }}, {{ vars }}), ~. %==% exc_val)) %>%
        select(c({{ var_set }}, {{ vars }})) %>%
-       apply(1, sum) %>%
-       `>`(., 1))
+       apply(1, sum)) > 1)
     )
 
   expect_custom(
