@@ -34,20 +34,19 @@ NULL
 NULL
 
 
-#' @export
 #' @rdname chk-expectations
-#' @param ... vectors of valid values
+#' @param ... Vectors of valid values.
+#' @export
 expect_values <- expect_make(chk_values, "value check")
 
-#' @export
 #' @rdname chk-expectations
-#' @param pattern a regex to check
+#' @inheritParams chk_pattern
+#' @export
 expect_regex <- expect_make(chk_pattern, "pattern check")
 
-#' @export
 #' @rdname chk-expectations
-#' @param min minimum value for range check
-#' @param max maximum value for range check
+#' @inheritParams chk_range
+#' @export
 expect_range <- expect_make(chk_range, "range check")
 
 #' @rdname chk-expectations

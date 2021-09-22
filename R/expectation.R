@@ -1,22 +1,22 @@
 #' Extension of 'expect' to allow inclusion of custom fields
 #'
 #' Use expect_custom to allow inclusion of arbitrary data in expectation
-#' results. Additional data is stored in a list in an attribute called
-#' \code{custom} in the resulting expectation. This allows data expectations to
-#' store information about the number of failed and successful cases for
-#' reporting of test results.
+#' results. Additional data is stored in a list in an attribute called `custom`
+#' in the resulting expectation. This allows data expectations to store
+#' information about the number of failed and successful cases for reporting of
+#' test results.
 #'
 #' @keywords internal
 #' @param ok `TRUE` or `FALSE` indicating if the expectation was successful.
 #' @param failure_message Message to show if the expectation failed.
-#' @param info Character vector continuing additional information. Included
-#'   for backward compatibility only and new expectations should not use it.
+#' @param info Character vector continuing additional information. Included for
+#'   backward compatibility only and new expectations should not use it.
 #' @param srcref Location of the failure. Should only needed to be explicitly
 #'   supplied when you need to forward a srcref captured elsewhere.
-#' @param ... Additional data to be added to a list in the \code{custom}
-#'   attribute of the resulting expectation.
-#' @return An expectation object. Signals the expectation condition
-#'   with a `continue_test` restart.
+#' @param ... Additional data to be added to a list in the `custom` attribute of
+#'   the resulting expectation.
+#' @return An expectation object. Signals the expectation condition with a
+#'   `continue_test` restart.
 #' @examples
 #' # calling expect_custom directly with some custom data
 #' x <- expect_custom(TRUE, "Test", extra_data = 1:5, more_data = "Hello")
@@ -80,7 +80,7 @@ as_label_repl <- function(quo, pattern, replace = "") {
   stringr::str_replace_all(as_label(quo), pattern, replace)
 }
 
-as_label_vars <- function(quo) as_label_repl(quo, "(^(c|vars)\\()|(\\)$)", "")
+as_label_vars <- function(quo) as_label_repl(quo, "(^(c|vars)\\()(.*)(\\)$)", "\\3")
 
 as_label_flt  <- function(quo) {
   quo_lab <- as_label(quo)

@@ -4,17 +4,19 @@
 #'
 #' `r lifecycle::badge("deprecated")`
 #'
-#' These functions are deprecated. See [Generic Checking Functions][chk-generic] for current checking functions.
+#' These functions are deprecated. See [Generic Checking Functions][chk-generic]
+#' for current checking functions.
 #'
 #' @inheritParams chk-generic
-#' @return A logical vector flagging records that have passed or failed the check
+#' @return A logical vector flagging records that have passed or failed the
+#'   check.
 #' @seealso [Generic Checking Functions][chk-generic]
 #' @name chk-deprec
 #' @keywords internal
 NULL
 
 #' @rdname chk-deprec
-#' @param len maximum string length for checking string variables
+#' @param len Maximum string length for checking string variables.
 #' @importFrom stringr str_length
 #' @export
 chk_length <- function(x, len) {

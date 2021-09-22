@@ -2,18 +2,17 @@
 #'
 #' These functions test whether multiple conditions coexist.
 #'
-#' `expect_cond` checks the coexistence of two conditions. It can be read as "if
-#' `cond1` then `cond2`".
+#' * `expect_cond()` checks the coexistence of two conditions. It can be read as
+#' "if `cond1` then `cond2`".
 #'
-#' `expect_base` is a special case that checks missing data against a specified
-#' condition. It can be read as "if `base` then `var` not missing, if not `base`
-#' then `var` missing".
+#' * `expect_base()` is a special case that checks missing data against a
+#' specified condition. It can be read as "if `base` then `var` not missing, if
+#' not `base` then `var` missing".
 #'
 #' @inheritParams data-params
 #' @family data expectations
 #' @name conditional-expectations
 #' @examples
-#'
 #' my_survey <- data.frame(
 #'   resp_id = 1:5,
 #'   q1a = c(0, 1, 0, 1, 0),
@@ -35,9 +34,11 @@ NULL
 
 #' @export
 #' @rdname conditional-expectations
-#' @param base condition for missing check
-#' @param missing_valid allow missing values for records meeting the condition.
-#'   This allows 'one way' base checks. This is `FALSE` by default.
+#' @param base <[`data-masking`][dplyr::dplyr_data_masking]> The condition that
+#'   determines which records should be non-missing.
+#' @param missing_valid Should missing values be treated as valid for records
+#'   meeting the `base` condition? This allows 'one way' base checks. This is
+#'   `FALSE` by default.
 expect_base <- function(var, base, miss = getOption("testdat.miss"),
                         missing_valid = FALSE, data = get_testdata()) {
   act <- quasi_label(enquo(data))
@@ -70,8 +71,10 @@ expect_base <- function(var, base, miss = getOption("testdat.miss"),
 
 #' @export
 #' @rdname conditional-expectations
-#' @param cond1 first condition for consistency check
-#' @param cond2 second condition for consistency check
+#' @param cond1 <[`data-masking`][dplyr::dplyr_data_masking]> First condition
+#'   (antecedent) for consistency check.
+#' @param cond2 <[`data-masking`][dplyr::dplyr_data_masking]> Second condition
+#'   (consequent) for consistency check.
 expect_cond <- function(cond1, cond2, data = get_testdata()) {
   act <- quasi_label(enquo(data))
 

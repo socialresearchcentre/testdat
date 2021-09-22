@@ -47,26 +47,27 @@ chk_date_yyyymm(x)
 chk_date_yyyy(x)
 }
 \arguments{
-\item{x}{vector to check}
+\item{x}{A vector to check.}
 
-\item{val}{value for equality check}
+\item{val}{A scalar value for the equality check.}
 
-\item{min}{minimum value for range check}
+\item{min}{Minimum value for range check.}
 
-\item{max}{maximum value for range check}
+\item{max}{Maximum value for range check.}
 
-\item{...}{vectors of valid values}
+\item{...}{Vectors of valid values.}
 
-\item{pattern}{pattern to look for as defined in
-\link[stringr:str_detect]{str_detect()}}
+\item{pattern}{A \link[stringr:str_detect]{str_detect()} pattern to match.}
 
-\item{len}{maximum string length for checking string variables}
+\item{len}{Maximum string length.}
 
-\item{miss}{vector of values to be treated as missing}
+\item{miss}{A vector of values to be treated as missing. The
+\link[=testdat]{testdat.miss} or \link[=testdat]{testdat.miss_text} option is used by
+default.}
 }
 \value{
 A logical vector flagging records that have passed or failed the
-check
+check.
 }
 \description{
 These functions provide common, simple data checks.

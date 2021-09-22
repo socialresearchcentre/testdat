@@ -1,7 +1,7 @@
 #' Expectations: exclusivity checks
 #'
 #' `expect_exclusive` tests that `vars` are exclusive - that, if any one of
-#' `vars` is set to `exc_val`, no other variable in `vars` or `var_set` is also
+#' `vars` is set to `exc_val`, no other column in `vars` or `var_set` is also
 #' set to `exc_val`.
 #'
 #' This expectation is designed to check exclusivity in survey multiple response
@@ -18,8 +18,9 @@
 #' `q10_98` selected.
 #'
 #' @inheritParams data-params
-#' @param var_set The full variable set to check, specified using [vars()]. This
-#'   should include all variables specified in the `vars` argument
+#' @param var_set <[`tidy-select`][dplyr::dplyr_tidy_select]> The full set of
+#'   columns to check against. This should include all columns specified in the
+#'   `vars` argument.
 #' @param exc_val The value that flags a variable as "selected" (default: `1`)
 #' @family data expectations
 #' @name exclusivity-expectations
@@ -84,7 +85,7 @@ expect_exclusive <- function(vars, var_set, exc_val = 1, flt = TRUE, data = get_
        mutate(across(c({{ var_set }}, {{ vars }}), ~. %==% exc_val)) %>%
        select(c({{ var_set }}, {{ vars }})) %>%
        apply(1, sum) %>%
-       `>`(1))
+       `>`(., 1))
     )
 
   expect_custom(

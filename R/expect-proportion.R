@@ -1,8 +1,8 @@
 #' Expectations: proportions
 #'
-#' These test the proportion of data in a dataset satisfying some condition. The
-#' generic functions, `expect_prop_lte()` and `expect_prop_gte()` can be used
-#' with any arbitrary function. For details regarding the other functions,
+#' These test the proportion of data in a data frame satisfying some condition.
+#' The generic functions, `expect_prop_lte()` and `expect_prop_gte()` can be
+#' used with any arbitrary function. For details regarding the other functions,
 #' see [Generic Checking Functions][chk-generic].
 #'
 #' Given the use of quasi-quotation within these functions, to make a new
@@ -11,17 +11,18 @@
 #' examples sections for an example.
 #'
 #' @inheritParams data-params
-#' @param func a function that takes a vector as the first argument and returns
-#'   a logical vector of the same length showing whether an element passed or
-#'   failed
-#' @param prop The proportion of the data one expects to satisfy the condition
-#' @param args a named list of arguments to pass to `func`
-#' @param func_desc A character function description to use in the expectation
-#'   failure message.
-#' @param miss vector of values to be treated as missing
-#' @param ... vectors of valid values
+#' @param func A function to use for testing that takes a vector as the first
+#'   argument and returns a logical vector of the same length showing whether an
+#'   element passed or failed.
+#' @param prop The proportion of the data frame expected to satisfy the
+#'   condition.
+#' @param args A named list of arguments to pass to `func`.
+#' @param func_desc A human friendly description of `func` to use in the
+#'   expectation failure message.
+#' @param ... Vectors of valid values.
 #'
 #' @seealso [Generic Checking Functions][chk-generic]
+#' @family data expectations
 #' @name proportion-expectations
 #'
 #' @examples
@@ -116,9 +117,9 @@ expect_prop_gte <- function(var, func, prop, flt = TRUE, data = get_testdata(),
 #' @export
 #' @rdname proportion-expectations
 expect_prop_nmiss <- function(var, prop, miss = getOption("testdat.miss"),
-                             flt = TRUE, data = get_testdata()) {
+                              flt = TRUE, data = get_testdata()) {
   expect_prop_gte(
-    var = {{var}},
+    var = {{ var }},
     func = chk_text_nmiss,
     prop = prop,
     flt = flt,
@@ -132,7 +133,7 @@ expect_prop_nmiss <- function(var, prop, miss = getOption("testdat.miss"),
 #' @rdname proportion-expectations
 expect_prop_values <- function(var, prop, ..., flt = TRUE, data = get_testdata()) {
   expect_prop_gte(
-    var = {{var}},
+    var = {{ var }},
     func = chk_values,
     prop = prop,
     flt = flt,

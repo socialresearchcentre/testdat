@@ -6,11 +6,12 @@
 #'
 #' These functions are deprecated.
 #'
-#' See [Generic Expectation Functions][generic-expectations] and [Cross-dataset
-#' Expectations][datacomp-expectations] for current expectation functions.
+#' See [Generic Expectation Functions][generic-expectations] and [Data Frame
+#' Comparison Expectations][datacomp-expectations] for current expectation
+#' functions.
 #'
 #' @inheritParams data-params
-#' @param ... arguments to pass to `expect_allany()`
+#' @param ... Arguments to pass to `expect_allany()`.
 #' @name expect-deprec
 #' @keywords internal
 NULL
@@ -20,13 +21,13 @@ NULL
 #' @seealso [Generic Expectation Functions][generic-expectations]
 expect_func <- function(var, ...) {
   lifecycle::deprecate_soft("0.2.0", "expect_func()", "expect_all()")
-  expect_allany(vars(!!ensym(var)), ..., allany = chk_filter_all)
+  expect_allany({{ var }}, ..., allany = chk_filter_all)
 }
 
 #' @export
 #' @rdname expect-deprec
 #' @inheritParams datacomp-expectations
-#' @seealso [Cross-dataset Expectations][datacomp-expectations]
+#' @seealso [Data Frame Comparison Expectations][datacomp-expectations]
 expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata()) {
   lifecycle::deprecate_soft("0.2.0", "expect_join()", "expect_subset()")
   flt <- rlang::enexpr(flt)
@@ -36,12 +37,12 @@ expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_te
 #' @export
 #' @rdname expect-deprec
 #' @inheritParams datacomp-expectations
-#' @param var2 an unquoted variable name from data2
-#' @param flt2 a filter specifying a subset of data2 to test
-#' @param threshold the maximum proportional difference allowed between the two
-#'   categories
-#' @param min the minimum number of responses for a category to allow
-#'   comparison. This avoidmall categories raising spurious errors
+#' @param var2 An unquoted column name from data2.
+#' @param flt2 A filter specifying a subset of data2 to test.
+#' @param threshold The maximum proportional difference allowed between the two
+#'   categories.
+#' @param min The minimum number of responses for a category to allow
+#'   comparison. This avoids small categories raising spurious errors.
 expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
                            threshold = 0.05, min = 100, data = get_testdata()) {
   lifecycle::deprecate_soft("0.3.0", "expect_similar()")

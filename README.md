@@ -28,7 +28,7 @@ Features include:
 -   A set of common methods for simply specifying data validation rules
 
 -   Repeatability of data tests (avoid unintentionally breaking your
-    dataset!)
+    data set!)
 
 -   Data-focused reporting of test results
 

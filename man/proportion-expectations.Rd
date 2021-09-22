@@ -39,32 +39,35 @@ expect_prop_nmiss(
 expect_prop_values(var, prop, ..., flt = TRUE, data = get_testdata())
 }
 \arguments{
-\item{var}{an unquoted variable name}
+\item{var}{An unquoted column name to test.}
 
-\item{func}{a function that takes a vector as the first argument and returns
-a logical vector of the same length showing whether an element passed or
-failed}
+\item{func}{A function to use for testing that takes a vector as the first
+argument and returns a logical vector of the same length showing whether an
+element passed or failed.}
 
-\item{prop}{The proportion of the data one expects to satisfy the condition}
+\item{prop}{The proportion of the data frame expected to satisfy the
+condition.}
 
-\item{flt}{a filter specifying a subset of the dataset to test}
+\item{flt}{<\code{\link[dplyr:dplyr_data_masking]{data-masking}}> A filter specifying
+a subset of the data frame to test.}
 
-\item{data}{data frame to test. The \link[=global-data]{global test data} is used
+\item{data}{A data frame to test. The \link[=global-data]{global test data} is used
 by default.}
 
-\item{args}{a named list of arguments to pass to \code{func}}
+\item{args}{A named list of arguments to pass to \code{func}.}
 
-\item{func_desc}{A character function description to use in the expectation
-failure message.}
+\item{func_desc}{A human friendly description of \code{func} to use in the
+expectation failure message.}
 
-\item{miss}{vector of values to be treated as missing}
+\item{miss}{A vector of values to be treated as missing. The
+\link[=testdat]{testdat.miss} option is used by default.}
 
-\item{...}{vectors of valid values}
+\item{...}{Vectors of valid values.}
 }
 \description{
-These test the proportion of data in a dataset satisfying some condition. The
-generic functions, \code{expect_prop_lte()} and \code{expect_prop_gte()} can be used
-with any arbitrary function. For details regarding the other functions,
+These test the proportion of data in a data frame satisfying some condition.
+The generic functions, \code{expect_prop_lte()} and \code{expect_prop_gte()} can be
+used with any arbitrary function. For details regarding the other functions,
 see \link[=chk-generic]{Generic Checking Functions}.
 }
 \details{
@@ -109,4 +112,14 @@ try(expect_prop_values(sale_price, 0.9, 1:100, data = sales))
 }
 \seealso{
 \link[=chk-generic]{Generic Checking Functions}
+
+Other data expectations: 
+\code{\link{chk-expectations}},
+\code{\link{conditional-expectations}},
+\code{\link{datacomp-expectations}},
+\code{\link{exclusivity-expectations}},
+\code{\link{generic-expectations}},
+\code{\link{label-expectations}},
+\code{\link{uniqueness-expectations}}
 }
+\concept{data expectations}

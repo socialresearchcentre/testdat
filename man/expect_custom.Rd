@@ -18,25 +18,25 @@ expect_custom(
 
 \item{failure_message}{Message to show if the expectation failed.}
 
-\item{info}{Character vector continuing additional information. Included
-for backward compatibility only and new expectations should not use it.}
+\item{info}{Character vector continuing additional information. Included for
+backward compatibility only and new expectations should not use it.}
 
 \item{srcref}{Location of the failure. Should only needed to be explicitly
 supplied when you need to forward a srcref captured elsewhere.}
 
-\item{...}{Additional data to be added to a list in the \code{custom}
-attribute of the resulting expectation.}
+\item{...}{Additional data to be added to a list in the \code{custom} attribute of
+the resulting expectation.}
 }
 \value{
-An expectation object. Signals the expectation condition
-with a \code{continue_test} restart.
+An expectation object. Signals the expectation condition with a
+\code{continue_test} restart.
 }
 \description{
 Use expect_custom to allow inclusion of arbitrary data in expectation
-results. Additional data is stored in a list in an attribute called
-\code{custom} in the resulting expectation. This allows data expectations to
-store information about the number of failed and successful cases for
-reporting of test results.
+results. Additional data is stored in a list in an attribute called \code{custom}
+in the resulting expectation. This allows data expectations to store
+information about the number of failed and successful cases for reporting of
+test results.
 }
 \examples{
 # calling expect_custom directly with some custom data

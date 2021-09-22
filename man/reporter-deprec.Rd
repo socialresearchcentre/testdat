@@ -8,7 +8,7 @@
 context_data(data)
 }
 \arguments{
-\item{data}{Data to be used.}
+\item{data}{Data frame to be used.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated}{\figure{lifecycle-soft-deprecated.svg}{options: alt='[Soft-deprecated]'}}}{\strong{[Soft-deprecated]}}

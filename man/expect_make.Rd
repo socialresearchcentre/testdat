@@ -19,19 +19,18 @@ returns a logical vector of the same length with the results.}
 \item{func_desc}{A character function description to use in the expectation
 failure message.}
 
-\item{vars}{Should the generated function take a single variable name or a
-\code{vars()} object?}
+\item{vars}{Included for backwards compatibility only.}
 
 \item{all}{Function to use to combine results for each vector.}
 
 \item{env}{The parent environment of the function, defaults to the calling
-environment of \code{expect_make()}}
+environment of \code{expect_make()}.}
 }
 \value{
 An \verb{expect_*()} style function.
 }
 \description{
-\code{expect_make()} creates an expection from a vectorised checking function to
+\code{expect_make()} creates an expectation from a vectorised checking function to
 allow simple generation of domain specific data checks.
 }
 \examples{
@@ -43,7 +42,7 @@ chk_binary <- function(x) {
 # Create custom expectation function
 expect_binary <- expect_make(chk_binary)
 
-# Validate a dataset
+# Validate a data frame
 try(expect_binary(vs, data = mtcars))
 try(expect_binary(cyl, data = mtcars))
 

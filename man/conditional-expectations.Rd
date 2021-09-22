@@ -17,36 +17,40 @@ expect_base(
 expect_cond(cond1, cond2, data = get_testdata())
 }
 \arguments{
-\item{var}{an unquoted variable name}
+\item{var}{An unquoted column name to test.}
 
-\item{base}{condition for missing check}
+\item{base}{<\code{\link[dplyr:dplyr_data_masking]{data-masking}}> The condition that
+determines which records should be non-missing.}
 
-\item{miss}{a vector of values to be treated as missing. The
-\link[=testdat]{testdat.miss} option is used by default}
+\item{miss}{A vector of values to be treated as missing. The
+\link[=testdat]{testdat.miss} option is used by default.}
 
-\item{missing_valid}{allow missing values for records meeting the condition.
-This allows 'one way' base checks. This is \code{FALSE} by default.}
+\item{missing_valid}{Should missing values be treated as valid for records
+meeting the \code{base} condition? This allows 'one way' base checks. This is
+\code{FALSE} by default.}
 
-\item{data}{data frame to test. The \link[=global-data]{global test data} is used
+\item{data}{A data frame to test. The \link[=global-data]{global test data} is used
 by default.}
 
-\item{cond1}{first condition for consistency check}
+\item{cond1}{<\code{\link[dplyr:dplyr_data_masking]{data-masking}}> First condition
+(antecedent) for consistency check.}
 
-\item{cond2}{second condition for consistency check}
+\item{cond2}{<\code{\link[dplyr:dplyr_data_masking]{data-masking}}> Second condition
+(consequent) for consistency check.}
 }
 \description{
 These functions test whether multiple conditions coexist.
 }
 \details{
-\code{expect_cond} checks the coexistence of two conditions. It can be read as "if
-\code{cond1} then \code{cond2}".
-
-\code{expect_base} is a special case that checks missing data against a specified
-condition. It can be read as "if \code{base} then \code{var} not missing, if not \code{base}
-then \code{var} missing".
+\itemize{
+\item \code{expect_cond()} checks the coexistence of two conditions. It can be read as
+"if \code{cond1} then \code{cond2}".
+\item \code{expect_base()} is a special case that checks missing data against a
+specified condition. It can be read as "if \code{base} then \code{var} not missing, if
+not \code{base} then \code{var} missing".
+}
 }
 \examples{
-
 my_survey <- data.frame(
   resp_id = 1:5,
   q1a = c(0, 1, 0, 1, 0),
@@ -71,6 +75,8 @@ Other data expectations:
 \code{\link{datacomp-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{generic-expectations}},
+\code{\link{label-expectations}},
+\code{\link{proportion-expectations}},
 \code{\link{uniqueness-expectations}}
 }
 \concept{data expectations}

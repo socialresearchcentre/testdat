@@ -4,20 +4,22 @@
 #'
 #' @inheritParams data-params
 #' @inheritParams chk-generic
-#' @param val_labels a character vector of expected labels; or a named vector of
-#'   expected label-value pairs; or `TRUE`, to test for the presence of value
-#'   labels in general; or `FALSE`, to test for the absence of value labels.
-#' @param var_label a character vector, the variable label to test for; or
-#'   `TRUE`, to test for the presence of a variable label in general; or
-#'   `FALSE`, to test for the absence of a variable label.
-#'
+#' @param val_labels What value label check should be performed? One of:
+#'   * A character vector of expected value labels.
+#'   * A named vector of expected label-value pairs.
+#'   * `TRUE` to test for the presence of value labels in general.
+#'   * `FALSE` to test for the absence of value labels.
+#'   * `NULL` to ignore value labels when checking.
+#' @param var_label What variable label check should be performed? One of:
+#'   * A character vector of expected variable labels.
+#'   * `TRUE` to test for the presence of a variable labels.
+#'   * `FALSE` to test for the absence of a variable labels.
+#'   * `NULL` to ignore the variable label when checking.
 #' @return A logical vector flagging records that have passed or failed the
-#'   check
+#'   check.
 #'
+#' @family data expectations
 #' @name label-expectations
-#'
-#' @export
-#'
 #' @examples
 #'
 #' df <- data.frame(
@@ -44,6 +46,10 @@
 #' expect_labels(z, val_labels = FALSE, data = df)
 #' expect_labels(z, var_label = FALSE, data = df)
 #'
+NULL
+
+#' @rdname label-expectations
+#' @export
 chk_labels <- function(x, val_labels = NULL, var_label = NULL) {
   if (!requireNamespace("labelled", quietly = TRUE)) {
     stop("Package \"labelled\" is needed for label checks. ",
@@ -80,6 +86,5 @@ chk_labels <- function(x, val_labels = NULL, var_label = NULL) {
 }
 
 #' @rdname label-expectations
-#' @inheritParams chk-expectations
 #' @export
 expect_labels <- expect_make(chk_labels, "label check")

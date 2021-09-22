@@ -1,33 +1,11 @@
-
-#' @importFrom stringr str_replace_all str_sub
-summarise_results_excel <- function(results) {
-  lapply(results, function(e) {
-    lapply(e$results, function(d) {
-      tibble(
-        test = d$test,
-        status = expectation_type(d),
-        variable = ifelse(is.null(d$custom$var_desc), NA_character_, d$custom$var_desc),
-        description = str_replace_all(d$message, "[[:space:]]", " "),
-        failed_records = ifelse(is.null(d$custom$failed_count), NA_real_, d$custom$failed_count),
-        total_records = ifelse(is.null(d$custom$total_count), NA_real_, d$custom$total_count),
-        call = expr_text(d$expectation_call[[1]])
-      )
-    }) %>%
-      bind_rows %>%
-      mutate(context = e$context)
-  }) %>%
-    bind_rows %>%
-    select(.data$context, everything())
-}
-
-#' Output ListReporter results in Excel format
+#' Output `ListReporter` results in Excel format
 #'
-#' This function outputs ListReporter results to an Excel workbook. The workbook
-#' consists of a summary sheet showing aggregarated results for each context,
+#' Output formatted `ListReporter` results to an Excel workbook. The workbook
+#' consists of a summary sheet showing aggregated results for each context,
 #' and one sheet per context showing details of each unsuccessful test.
 #'
-#' @param results A object of class `testthat_results`, e.g. output from
-#'   [test_dir()] or [test_file()]
+#' @param results An object of class `testthat_results`, e.g. output from
+#'   [test_dir()] or [test_file()].
 #' @param file Output file name
 #' @examples
 #' \dontrun{
@@ -78,4 +56,25 @@ output_results_excel <- function(results, file) {
     )
   }
   openxlsx::saveWorkbook(wb, file, overwrite = TRUE)
+}
+
+#' @importFrom stringr str_replace_all str_sub
+summarise_results_excel <- function(results) {
+  lapply(results, function(e) {
+    lapply(e$results, function(d) {
+      tibble(
+        test = d$test,
+        status = expectation_type(d),
+        variable = ifelse(is.null(d$custom$var_desc), NA_character_, d$custom$var_desc),
+        description = str_replace_all(d$message, "[[:space:]]", " "),
+        failed_records = ifelse(is.null(d$custom$failed_count), NA_real_, d$custom$failed_count),
+        total_records = ifelse(is.null(d$custom$total_count), NA_real_, d$custom$total_count),
+        call = expr_text(d$expectation_call[[1]])
+      )
+    }) %>%
+      bind_rows %>%
+      mutate(context = e$context)
+  }) %>%
+    bind_rows %>%
+    select(.data$context, everything())
 }

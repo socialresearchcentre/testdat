@@ -11,7 +11,7 @@ test_that("set_testdata/get_testdata work correctly", {
   expect_identical(old_dat, iris)
 })
 
-test_that("with_testdat temporarily sets test dataset", {
+test_that("with_testdat temporarily sets test data frame", {
   set_testdata(mtcars)
   expect_identical(get_testdata(), mtcars)
   with_testdata(iris, {
