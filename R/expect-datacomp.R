@@ -34,7 +34,7 @@
 #'
 #'
 #' # Check that same records 'succeeded' across data frames
-#' try(expect_valmatch(df2, vars(binomial), by = "id", data = df1))
+#' try(expect_valmatch(df2, binomial, by = "id", data = df1))
 #'
 #' # Check that all records in `df1`, as picked out by `id`, exist in `df2`
 #' expect_subset(df2, by = "id", data = df1)
@@ -42,7 +42,7 @@
 NULL
 
 
-#' @importFrom tidyselect vars_select
+#' @importFrom tidyselect eval_select
 #' @export
 #' @rdname datacomp-expectations
 expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get_testdata()) {
@@ -52,7 +52,9 @@ expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get
   act$flt_desc   <- as_label_flt(enquo(flt))
   act$by_desc    <- as_label_repl(enquo(by), "(^c\\()|(\\)$)", "")
 
-  var_list <- vars_select(tbl_vars(data), !!!vars) %>% unname
+  var_list <- names(data)[
+    eval_select(enquo(vars), data, allow_rename = FALSE)
+  ]
 
   if (length(var_list) == 0)
     stop("Variable specification `vars(", act$var_desc, ")` does not match any variables in ", act$label, ".", call. = FALSE)
