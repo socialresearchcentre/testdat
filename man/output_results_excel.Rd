@@ -2,19 +2,19 @@
 % Please edit documentation in R/reporter-excel.R
 \name{output_results_excel}
 \alias{output_results_excel}
-\title{Output ListReporter results in Excel format}
+\title{Output \code{ListReporter} results in Excel format}
 \usage{
 output_results_excel(results, file)
 }
 \arguments{
-\item{results}{A object of class \code{testthat_results}, e.g. output from
-\code{\link[=test_dir]{test_dir()}} or \code{\link[=test_file]{test_file()}}}
+\item{results}{An object of class \code{testthat_results}, e.g. output from
+\code{\link[=test_dir]{test_dir()}} or \code{\link[=test_file]{test_file()}}.}
 
 \item{file}{Output file name}
 }
 \description{
-This function outputs ListReporter results to an Excel workbook. The workbook
-consists of a summary sheet showing aggregarated results for each context,
+Output formatted \code{ListReporter} results to an Excel workbook. The workbook
+consists of a summary sheet showing aggregated results for each context,
 and one sheet per context showing details of each unsuccessful test.
 }
 \examples{

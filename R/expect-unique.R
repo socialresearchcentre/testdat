@@ -1,22 +1,25 @@
 #' Expectations: uniqueness checks
 #'
-#' These functions test variables for uniqueness:
-#'   * `expect_unique` tests a set of variables (`vars`) and fails if the
-#'     variables collectively do not uniquely identify the observations
-#'   * `expect_unique_across` tests a set of variables (`vars`) and fails if
-#'   each observation does not have different values in each of the variables in
-#'   `vars`.
-#'   * `expect_unique_combine` tests a set of variables (`vars`) and fails if
-#'   any values appear more than once across all of them.
+#' These functions test variables for uniqueness.
 #'
-#' By default the uniqueness check excludes missing values (as specified by
-#' `getOption("testdat.miss")`). Setting `exclude=NULL` will include all values.
+#' * `expect_unique()` tests a set of columns (`vars`) and fails if the combined
+#' columns do not uniquely identify each row.
 #'
+#' * `expect_unique_across()` tests a set of columns (`vars`) and fails if each
+#' row does not have unique values in each column.
+#'
+#' * `expect_unique_combine()` tests a set of columns (`vars`) and fails if any
+#' value appears more than once across all of them.
+#'
+#' By default the uniqueness check excludes missing values (as specified by the
+#' [testdat.miss][testdat] option). Setting `exclude = NULL` will include all
+#' values.
 #'
 #' @inheritParams data-params
-#' @param exclude a vector of values to exclude from uniqueness check, defaults
-#'   to `getOption("testdat.miss")` which is `c(NA, "")` by default. To include
-#'   all values, set `exclude=NULL`.
+#' @param exclude a vector of values to exclude from uniqueness check.  The
+#'   [testdat.miss][testdat] option is used by default. To include all values,
+#'   set `exclude = NULL`.
+#'
 #' @family data expectations
 #' @name uniqueness-expectations
 #' @examples
@@ -52,9 +55,9 @@
 #'
 #' # Check that each phone number appears at most once
 #' try(expect_unique_combine(c(phone1, phone2), data = student_fruit_preferences))
+#'
 NULL
 
-#' @importFrom tidyselect vars_select
 #' @export
 #' @rdname uniqueness-expectations
 expect_unique <- function(vars, exclude = getOption("testdat.miss"),

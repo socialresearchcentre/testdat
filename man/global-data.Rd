@@ -14,19 +14,20 @@ get_testdata()
 with_testdata(data, code, quosure = TRUE)
 }
 \arguments{
-\item{data}{Data to be used.}
+\item{data}{Data frame to be used.}
 
-\item{quosure}{If \code{TRUE}, the default, the dataset is stored as a quosure and
-\code{get_testdata()} will return the current state of the dataset.
+\item{quosure}{If \code{TRUE}, the default, the data frame is stored as a quosure
+and lazily evaluated when \code{get_testdata()} is called, so \code{get_testdata()}
+will return the current state of the data frame.
 
-If \code{FALSE}, the dataset will be copied and \code{get_testdata()} will return the
-state of the dataset at the time \code{set_testdata()} was called.}
+If \code{FALSE}, the data frame will be copied and \code{get_testdata()} will return
+the state of the data frame at the time \code{set_testdata()} was called.}
 
 \item{code}{Code to execute.}
 }
 \description{
-A global test data set is used to avoid having to re-specify the testing
-dataset in every test. These functions get and set the global data or set the
+A global test data set is used to avoid having to re-specify the testing data
+frame in every test. These functions get and set the global data or set the
 data for the current context.
 }
 \examples{

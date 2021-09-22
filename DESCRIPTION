@@ -63,6 +63,6 @@ Collate:
     'expectation.R'
     'reporter-excel.R'
     'reporter-zzz.R'
-    'testdat.R'
+    'testdat-package.R'
     'utils.R'
     'zzz.R'

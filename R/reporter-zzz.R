@@ -1,16 +1,17 @@
 
 #' Get/set test data
 #'
-#' A global test data set is used to avoid having to re-specify the testing
-#' dataset in every test. These functions get and set the global data or set the
+#' A global test data set is used to avoid having to re-specify the testing data
+#' frame in every test. These functions get and set the global data or set the
 #' data for the current context.
 #'
-#' @param data Data to be used.
-#' @param quosure If `TRUE`, the default, the dataset is stored as a quosure and
-#'   `get_testdata()` will return the current state of the dataset.
+#' @param data Data frame to be used.
+#' @param quosure If `TRUE`, the default, the data frame is stored as a quosure
+#'   and lazily evaluated when `get_testdata()` is called, so `get_testdata()`
+#'   will return the current state of the data frame.
 #'
-#'   If `FALSE`, the dataset will be copied and `get_testdata()` will return the
-#'   state of the dataset at the time `set_testdata()` was called.
+#'   If `FALSE`, the data frame will be copied and `get_testdata()` will return
+#'   the state of the data frame at the time `set_testdata()` was called.
 #' @examples
 #' set_testdata(mtcars)
 #' head(get_testdata())
@@ -39,8 +40,8 @@ get_testdata <- function() {
   dat <- testdat_env$test_data
 
   if (is.null(dat))
-    stop("A test dataset has not been specified. ",
-         "Use `set_testdata()` to set the dataset.",
+    stop("A test data frame has not been specified. ",
+         "Use `set_testdata()` to set the data frame.",
          call. = FALSE)
 
   return(eval_tidy(dat))

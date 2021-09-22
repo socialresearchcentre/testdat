@@ -23,42 +23,44 @@ expect_similar(
 )
 }
 \arguments{
-\item{var}{an unquoted variable name}
+\item{var}{An unquoted column name to test.}
 
-\item{...}{arguments to pass to \code{expect_allany()}}
+\item{...}{Arguments to pass to \code{expect_allany()}.}
 
-\item{data2}{the dataset to compare against}
+\item{data2}{The data frame to compare against.}
 
-\item{by}{a character vector of variables to join by. For details see dplyr
-\link[dplyr:mutate-joins]{join()}.}
+\item{by}{A character vector of columns to join by. See \code{\link[dplyr:mutate-joins]{dplyr::join()}} for
+details.}
 
-\item{not}{reverse the results of the check}
+\item{not}{Reverse the results of the check?}
 
-\item{flt}{a filter specifying a subset of the dataset to test}
+\item{flt}{<\code{\link[dplyr:dplyr_data_masking]{data-masking}}> A filter specifying
+a subset of the data frame to test.}
 
-\item{data}{data frame to test. The \link[=global-data]{global test data} is used
+\item{data}{A data frame to test. The \link[=global-data]{global test data} is used
 by default.}
 
-\item{var2}{an unquoted variable name from data2}
+\item{var2}{An unquoted column name from data2.}
 
-\item{flt2}{a filter specifying a subset of data2 to test}
+\item{flt2}{A filter specifying a subset of data2 to test.}
 
-\item{threshold}{the maximum proportional difference allowed between the two
-categories}
+\item{threshold}{The maximum proportional difference allowed between the two
+categories.}
 
-\item{min}{the minimum number of responses for a category to allow
-comparison. This avoidmall categories raising spurious errors}
+\item{min}{The minimum number of responses for a category to allow
+comparison. This avoids small categories raising spurious errors.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated}{\figure{lifecycle-soft-deprecated.svg}{options: alt='[Soft-deprecated]'}}}{\strong{[Soft-deprecated]}}
 
 These functions are deprecated.
 
-See \link[=generic-expectations]{Generic Expectation Functions} and \link[=datacomp-expectations]{Cross-dataset Expectations} for current expectation functions.
+See \link[=generic-expectations]{Generic Expectation Functions} and \link[=datacomp-expectations]{Data Frame Comparison Expectations} for current expectation
+functions.
 }
 \seealso{
 \link[=generic-expectations]{Generic Expectation Functions}
 
-\link[=datacomp-expectations]{Cross-dataset Expectations}
+\link[=datacomp-expectations]{Data Frame Comparison Expectations}
 }
 \keyword{internal}

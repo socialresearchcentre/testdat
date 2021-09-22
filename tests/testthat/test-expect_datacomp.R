@@ -4,7 +4,7 @@ test_that("expect_valmatch", {
 
   expect_success(expect_valmatch(df2, c(a, c), by = "key", data = df1))
   expect_failure(expect_valmatch(df2, c(a, b), by = "key", data = df1))
-  expect_error(expect_valmatch(df2, c(a, d), by = "key", data = df1), "specifies variables that are not common to both datasets")
+  expect_error(expect_valmatch(df2, c(a, d), by = "key", data = df1), "specifies variables that are not common to both data frames")
 })
 
 

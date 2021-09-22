@@ -1,31 +1,46 @@
 #' Expectations: generic expectation helpers
 #'
-#' These functions allow for testing of a dataset using an arbitrary function.
-#' Both `expect_all` and `expect_any` are wrappers around `expect_allany`. The
-#' former, `expect_all`, tests the variables in `vars` to see whether `func`
-#' returns TRUE for *all* of them (i.e. whether the conjunction of results of
-#' applying `func` to each of the `vars` is TRUE). The latter, `expect_any`,
-#' tests the `vars` to see whether `func` returns TRUE for *any* of them (i.e.
-#' whether the disjunction of the results of applying `func` to each of the
-#' `vars` is TRUE). The `expect_where` function works exactly like `expect_all`
-#' except that variables are specified not using `dplyr::vars()` (`vars`) but
-#' using bare [`tidy-select`][dplyr_tidy_select] functions (`where`).
+#' These functions allow for testing of multiple columns (`vars`) of a data
+#' frame (`data`), with an optional filter (`flt`), using an arbitrary function
+#' (`func`).
+#'
+#' * `expect_allany()` tests the columns in `vars` to see whether `func`
+#' returns `TRUE` for each of them, and combines the results for each row using
+#' the function in `allany`. Both `expect_all()` and `expect_any()` are wrappers
+#' around `expect_allany()`.
+#'
+#' * `expect_all()` tests the `vars` to see whether `func` returns `TRUE` for
+#' *all* of them (i.e. whether the conjunction of results of applying `func` to
+#' each of the `vars` is `TRUE`).
+#'
+#' * `expect_any()` tests the `vars` to see whether `func` returns `TRUE` for
+#' *any* of them (i.e. whether the disjunction of the results of applying `func`
+#' to each of the `vars` is `TRUE`).
+#'
+#' * `expect_where()` works exactly like `expect_all()`. When testdat used
+#' `dplyr::vars()` as standard `expect_where()` provided an alternative
+#' interface using [`tidy-select`][dplyr_tidy_select]. This is included for
+#' backwards compatibility and may be removed in future.
 #'
 #' @inheritParams data-params
-#' @param func a function that takes a vector as the first argument and returns
-#'   a logical vector of the same length showing whether an element passed or
-#'   failed
-#' @param args a named list of arguments to pass to `func`
-#' @param allany function to use to combine results for each vector
-#' @param func_desc A character function description to use in the expectation
-#'   failure message.
-#' @param ... arguments to pass to `expect_allany()`
+#' @param func A function to use for testing that takes a vector as the first
+#'   argument and returns a logical vector of the same length showing whether an
+#'   element passed or failed.
+#' @param args A named list of arguments to pass to `func`.
+#' @param allany The function to combine the `func` results for each row.
+#' @param func_desc A human friendly description of `func` to use in the
+#'   expectation failure message.
+#' @param ... Arguments to pass to `expect_allany()`.
+#'
+#' @seealso [chk-generic] for a set of generic checking functions
+#' @family data expectations
+#' @name generic-expectations
 #' @examples
 #' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
 #' # inches *AND* < 100 horsepower
 #' try(
 #' expect_all(
-#'   vars = vars(disp, hp),
+#'   vars = c(disp, hp),
 #'   func = chk_range,
 #'   flt = (cyl == 4),
 #'   args = list(min = 0, max = 100),
@@ -37,7 +52,7 @@
 #' # inches *OR* < 100 horsepower
 #' try(
 #' expect_any(
-#'   vars = vars(disp, hp),
+#'   vars = c(disp, hp),
 #'   func = chk_range,
 #'   flt = (cyl == 4),
 #'   args = list(min = 0, max = 100),
@@ -53,9 +68,6 @@
 #'   data = iris
 #' )
 #'
-#' @seealso [chk-generic] for a set of generic checking functions
-#' @family data expectations
-#' @name generic-expectations
 NULL
 
 #' @export
@@ -104,7 +116,7 @@ expect_any <- function(...) {
 }
 
 #' @export
-#' @param where <[`tidy-select`][dplyr_tidy_select]> columns to check
+#' @param where <[`tidy-select`][dplyr_tidy_select]> Columns to check
 #' @rdname generic-expectations
 expect_where <- function(where, func, flt = TRUE, data = get_testdata(), args = list(), func_desc = NULL) {
   where <- enquo(where)

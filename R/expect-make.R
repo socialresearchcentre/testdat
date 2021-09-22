@@ -1,18 +1,17 @@
 
 #' Create an expectation from a check function
 #'
-#' `expect_make()` creates an expection from a vectorised checking function to
+#' `expect_make()` creates an expectation from a vectorised checking function to
 #' allow simple generation of domain specific data checks.
 #'
 #' @param func A function whose first argument takes a vector to check, and
 #'   returns a logical vector of the same length with the results.
 #' @param func_desc A character function description to use in the expectation
 #'   failure message.
-#' @param vars Should the generated function take a single variable name or a
-#'   `vars()` object?
+#' @param vars Included for backwards compatibility only.
 #' @param all Function to use to combine results for each vector.
 #' @param env The parent environment of the function, defaults to the calling
-#'   environment of `expect_make()`
+#'   environment of `expect_make()`.
 #' @return An `expect_*()` style function.
 #' @examples
 #' # Create a custom check
@@ -23,7 +22,7 @@
 #' # Create custom expectation function
 #' expect_binary <- expect_make(chk_binary)
 #'
-#' # Validate a dataset
+#' # Validate a data frame
 #' try(expect_binary(vs, data = mtcars))
 #' try(expect_binary(cyl, data = mtcars))
 #'

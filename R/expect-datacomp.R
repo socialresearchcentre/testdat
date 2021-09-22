@@ -1,21 +1,28 @@
-#' Expectations: cross-dataset expectations
+#' Expectations: data frame comparison expectations
+#'
+#' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' These functions allow for dataset comparisons:
-#'   * `expect_valmatch` compares the observations appearing in one dataset
-#'     (`data`) to the same observations, as picked out by a key (`by`), in
-#'     another dataset (`data2`). It fails if the selected variables (`vars`)
-#'     aren't the same for those observations in both datasets.
-#'   * `expect_subset` compares one dataset (`data`) to another (`data2`) and
-#'     fails if all of the observations in the first, as picked out by a key
-#'     (`by`), do not appear in the second
+#' These functions allow for comparison between two data frames.
+#'
+#' @details
+#'
+#' * `expect_valmatch()` compares the observations appearing in one data frame
+#' (`data`) to the same observations, as picked out by a key (`by`), in another
+#' data frame (`data2`). It fails if the selected columns (`vars`) aren't the
+#' same for those observations in both data frames.
+#'
+#' * `expect_subset()` compares one data frame (`data`) to another (`data2`) and
+#' fails if all of the observations in the first, as picked out by a key (`by`),
+#' do not appear in the second.
 #'
 #' @inheritParams data-params
-#' @param data2 the dataset to compare against
-#' @param not reverse the results of the check
-#' @param by a character vector of variables to join by. For details see dplyr
-#'   [join()][dplyr::join].
+#' @param data2 The data frame to compare against.
+#' @param not Reverse the results of the check?
+#' @param by A character vector of columns to join by. See [dplyr::join()] for
+#'   details.
+#'
 #' @family data expectations
 #' @name datacomp-expectations
 #' @examples
@@ -57,10 +64,10 @@ expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get
   ]
 
   if (length(var_list) == 0)
-    stop("Variable specification `vars(", act$var_desc, ")` does not match any variables in ", act$label, ".", call. = FALSE)
+    stop("Variable specification `", act$var_desc, "` does not match any variables in ", act$label, ".", call. = FALSE)
 
   if (any(!var_list %in% names(data)) | any(!var_list %in% names(data2)))
-    stop("Variable specification `vars(", act$var_desc, ")` specifies variables that are not common to both datasets.", call. = FALSE)
+    stop("Variable specification `", act$var_desc, "` specifies variables that are not common to both data frames.", call. = FALSE)
 
   comp = ifelse(not, "%!=%", "%==%")
 
@@ -117,7 +124,7 @@ expect_subset <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records that\\
-          {ifelse(not, '', ' do not')} exist in dataset `{act$data2_desc}`.
+          {ifelse(not, '', ' do not')} exist in data frame `{act$data2_desc}`.
           Filter: {act$flt_desc}"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result))

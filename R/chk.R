@@ -2,11 +2,13 @@
 #'
 #' These functions provide common, simple data checks.
 #'
-#' @param x vector to check
-#' @param miss vector of values to be treated as missing
-#' @param ... vectors of valid values
+#' @param x A vector to check.
+#' @param miss A vector of values to be treated as missing. The
+#'   [testdat.miss][testdat] or [testdat.miss_text][testdat] option is used by
+#'   default.
+#' @param ... Vectors of valid values.
 #' @return A logical vector flagging records that have passed or failed the
-#'   check
+#'   check.
 #' @examples
 #' sales <- data.frame(
 #'   sale_id = 1:5,
@@ -56,15 +58,15 @@ chk_blank <- function(x) {
 }
 
 #' @rdname chk-generic
-#' @param val value for equality check
+#' @param val A scalar value for the equality check.
 #' @export
 chk_equals <- function(x, val) {
   chk_blank(x) | x == val
 }
 
 #' @rdname chk-generic
-#' @param min minimum value for range check
-#' @param max maximum value for range check
+#' @param min Minimum value for range check.
+#' @param max Maximum value for range check.
 #' @export
 chk_range <- function(x, min, max, ...) {
   is_blank <- chk_blank(x)
@@ -78,8 +80,7 @@ chk_range <- function(x, min, max, ...) {
 }
 
 #' @rdname chk-generic
-#' @param pattern pattern to look for as defined in
-#'   [str_detect()][stringr::str_detect()]
+#' @param pattern A [str_detect()][stringr::str_detect()] pattern to match.
 #' @importFrom stringr str_detect
 #' @export
 chk_pattern <- function(x, pattern) {
@@ -88,7 +89,7 @@ chk_pattern <- function(x, pattern) {
 }
 
 #' @rdname chk-generic
-#' @param len maximum string length for checking string variables
+#' @param len Maximum string length.
 #' @importFrom stringr str_length
 #' @export
 chk_max_length <- function(x, len) {
