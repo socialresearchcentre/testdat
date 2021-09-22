@@ -2,9 +2,9 @@ test_that("expect_valmatch", {
   df1 <- data.frame(key = 1:10, a = rep(1:5, 2), b = rep(0:1, 5), c = rep(c("c", "C"), 5), d = 1:10)
   df2 <- data.frame(key = 1:10, a = rep(1:5, 2), b = rep(0:4, 2), c = rep(c("c", "C"), 5))
 
-  expect_success(expect_valmatch(df2, vars(a, c), by = "key", data = df1))
-  expect_failure(expect_valmatch(df2, vars(a, b), by = "key", data = df1))
-  expect_error(expect_valmatch(df2, vars(a, d), by = "key", data = df1), "specifies variables that are not common to both datasets")
+  expect_success(expect_valmatch(df2, c(a, c), by = "key", data = df1))
+  expect_failure(expect_valmatch(df2, c(a, b), by = "key", data = df1))
+  expect_error(expect_valmatch(df2, c(a, d), by = "key", data = df1), "specifies variables that are not common to both datasets")
 })
 
 

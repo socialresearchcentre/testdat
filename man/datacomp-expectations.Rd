@@ -63,7 +63,7 @@ df2 <- data.frame(
 
 
 # Check that same records 'succeeded' across data frames
-try(expect_valmatch(df2, vars(binomial), by = "id", data = df1))
+try(expect_valmatch(df2, binomial, by = "id", data = df1))
 
 # Check that all records in `df1`, as picked out by `id`, exist in `df2`
 expect_subset(df2, by = "id", data = df1)
