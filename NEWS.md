@@ -1,5 +1,7 @@
 # testdat (development version)
 
+* `expect_exclusive()` has much improved documentation, and has had the argument name `exc_vars` updated to `var_set` to better reflect its purpose.
+
 * Soft deprecated `context_data()` (#43). `context_data()` is just a wrapper for `set_testdata()`, which has a much more intuitive name.
 
 * Soft deprecated `expect_similar()` (#18). It was a silly way of comparing data frames and we're better off making something new.

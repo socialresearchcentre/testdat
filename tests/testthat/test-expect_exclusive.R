@@ -16,8 +16,8 @@ dat <- tribble(
 )
 
 test_that("Exclusive check works", {
-  expect_failure(expect_exclusive(vars(a10), vars(matches("^a[0-9]")), data = dat))
-  expect_success(expect_exclusive(vars(a10), vars(matches("^a[0-4]")), data = dat))
-  expect_warning(expect_exclusive(vars(a10), vars(matches("^a[2-4]")), data = dat))
+  expect_failure(expect_exclusive(a10, matches("^a[0-9]"), data = dat))
+  expect_success(expect_exclusive(a10, matches("^a[0-4]"), data = dat))
+  expect_warning(expect_exclusive(a10, matches("^a[2-4]"), data = dat))
 })
 
