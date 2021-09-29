@@ -34,5 +34,7 @@ for current checking functions.
 }
 \seealso{
 \link[=chk-generic]{Generic Checking Functions}
+
+\link[=chk-helper]{Checking Helper Functions}
 }
 \keyword{internal}

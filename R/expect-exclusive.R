@@ -8,7 +8,7 @@
 #' sets, where one response is only valid on its own.
 #'
 #' See the example data set below:
-#' * no record should have `q10_98`, "None of the above", selected while also
+#' * No record should have `q10_98`, "None of the above", selected while also
 #' having any other response selected, so we refer to this an "exclusive"
 #' response.
 #' * `expect_exclusive()` checks whether `q10_98` "None of the above" or

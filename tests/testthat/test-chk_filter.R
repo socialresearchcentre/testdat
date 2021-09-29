@@ -8,7 +8,7 @@ test_that("chk_filter", {
 
   expect_identical(
     chk_filter(test_df, c, chk_range, a <= 5, list(min = 0, max = 1)),
-    c(rep(TRUE, 5), rep(NA, 5))
+    data.frame(c = c(rep(TRUE, 5), rep(NA, 5)))
   )
 
   expect_identical(
@@ -24,23 +24,5 @@ test_that("chk_filter", {
   expect_true(
     all(chk_filter_all(mtcars, everything(), is.numeric)),
     label = "Ensure `everything()` works in chk_filter functions"
-  )
-
-  # chk_filter_where
-  expect_identical(
-    chk_filter_all(test_df, everything(), chk_range, a <= 5, list(min = 0, max = 1)),
-    chk_filter_where(test_df, everything(), chk_range, a <= 5, list(min = 0, max = 1))
-  )
-  expect_identical(
-    chk_filter_all(test_df, starts_with("a"), chk_values, args = list(1:10)),
-    chk_filter_where(test_df, starts_with("a"), chk_values, args = list(1:10))
-  )
-  expect_identical(
-    chk_filter_all(test_df, c(a, alpha), chk_values, args = list(1:10)),
-    chk_filter_where(test_df, where(is.integer), chk_values, args = list(1:10))
-  )
-  expect_identical(
-    chk_filter_all(test_df, where(is.integer), chk_values, args = list(1:10)),
-    chk_filter_where(test_df, where(is.integer), chk_values, args = list(1:10))
   )
 })

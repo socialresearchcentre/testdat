@@ -6,18 +6,14 @@
 #'
 #' These functions are deprecated.
 #'
-#' See [Generic Expectation Functions][generic-expectations] and [Data Frame
-#' Comparison Expectations][datacomp-expectations] for current expectation
-#' functions.
-#'
 #' @inheritParams data-params
-#' @param ... Arguments to pass to `expect_allany()`.
 #' @name expect-deprec
 #' @keywords internal
 NULL
 
 #' @export
 #' @rdname expect-deprec
+#' @param ... Arguments to pass to `expect_allany()`.
 #' @seealso [Generic Expectation Functions][generic-expectations]
 expect_func <- function(var, ...) {
   lifecycle::deprecate_soft("0.2.0", "expect_func()", "expect_all()")
@@ -77,25 +73,37 @@ expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
   invisible(act$result$pass)
 }
 
-#' Filter data to expectation result
+
+#' Defunct expectation functions
 #'
 #' @description
 #'
 #' `r lifecycle::badge("defunct")`
 #'
-#' This function is defunct.
+#' These functions are defunct.
 #'
-#' @param data A data frame to test.
+#' * `expect_where()` works exactly like `expect_all()`. When testdat used
+#' `dplyr::vars()` as standard `expect_where()` provided an alternative
+#' interface using [`tidy-select`][dplyr_tidy_select].
+#'
+#' @inheritParams data-params
+#' @name expect-defunct
+#' @keywords internal
+NULL
+
+#' @export
+#' @rdname expect-defunct
 #' @param expect_function An expectation function.
 #' @param ... Arguments to pass to expect_function.
 #' @param not Reverse the results of the check.
 #' @return The input data frame filtered to records failing the expectation.
-#' @export
-#' @keywords internal
 filter_expect <- function(data, expect_function, ..., not = TRUE) {
   lifecycle::deprecate_stop("0.2.0", "filter_expect()")
-  expect_result <- expect_function(..., data = data)
-  if (not) expect_result <- !expect_result
+}
 
-  data %>% filter(expect_result)
+#' @export
+#' @rdname expect-defunct
+#' @param where <[`tidy-select`][dplyr_tidy_select]> Columns to check
+expect_where <- function(where, func, flt = TRUE, data = get_testdata(), args = list(), func_desc = NULL) {
+  lifecycle::deprecate_stop("0.3.0", "expect_where()", "expect_all()")
 }

@@ -5,7 +5,6 @@
 \alias{expect_allany}
 \alias{expect_all}
 \alias{expect_any}
-\alias{expect_where}
 \title{Expectations: generic expectation helpers}
 \usage{
 expect_allany(
@@ -21,15 +20,6 @@ expect_allany(
 expect_all(...)
 
 expect_any(...)
-
-expect_where(
-  where,
-  func,
-  flt = TRUE,
-  data = get_testdata(),
-  args = list(),
-  func_desc = NULL
-)
 }
 \arguments{
 \item{vars}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}> A set of columns to
@@ -53,8 +43,6 @@ by default.}
 expectation failure message.}
 
 \item{...}{Arguments to pass to \code{expect_allany()}.}
-
-\item{where}{<\code{\link[=dplyr_tidy_select]{tidy-select}}> Columns to check}
 }
 \description{
 These functions allow for testing of multiple columns (\code{vars}) of a data
@@ -73,10 +61,6 @@ each of the \code{vars} is \code{TRUE}).
 \item \code{expect_any()} tests the \code{vars} to see whether \code{func} returns \code{TRUE} for
 \emph{any} of them (i.e. whether the disjunction of the results of applying \code{func}
 to each of the \code{vars} is \code{TRUE}).
-\item \code{expect_where()} works exactly like \code{expect_all()}. When testdat used
-\code{dplyr::vars()} as standard \code{expect_where()} provided an alternative
-interface using \code{\link[=dplyr_tidy_select]{tidy-select}}. This is included for
-backwards compatibility and may be removed in future.
 }
 }
 \examples{
@@ -105,8 +89,8 @@ expect_any(
 )
 
 # Check petal dimensions are positive
-expect_where(
-  where = where(is.numeric),
+expect_all(
+  vars = where(is.numeric),
   func = chk_range,
   args = list(min = 0, max = Inf),
   data = iris

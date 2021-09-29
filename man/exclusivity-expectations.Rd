@@ -34,7 +34,7 @@ sets, where one response is only valid on its own.
 
 See the example data set below:
 \itemize{
-\item no record should have \code{q10_98}, "None of the above", selected while also
+\item No record should have \code{q10_98}, "None of the above", selected while also
 having any other response selected, so we refer to this an "exclusive"
 response.
 \item \code{expect_exclusive()} checks whether \code{q10_98} "None of the above" or
