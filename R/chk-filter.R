@@ -30,9 +30,14 @@
 #' @examples
 #'
 #' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
-#' # inches
-#' x <- chk_filter(mtcars, disp, chk_range, cyl == 4, list(min = 0, max = 100))
-#' all(x, na.rm = TRUE)
+#' # inches AND < 100 horsepower - return a data frame
+#' chk_filter(
+#'   mtcars,
+#'   c("disp", "hp"),
+#'   chk_range,
+#'   cyl == 4,
+#'   list(min = 0, max = 100)
+#' )
 #'
 #' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
 #' # inches AND < 100 horsepower
