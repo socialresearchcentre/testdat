@@ -17,11 +17,6 @@
 #' *any* of them (i.e. whether the disjunction of the results of applying `func`
 #' to each of the `vars` is `TRUE`).
 #'
-#' * `expect_where()` works exactly like `expect_all()`. When testdat used
-#' `dplyr::vars()` as standard `expect_where()` provided an alternative
-#' interface using [`tidy-select`][dplyr_tidy_select]. This is included for
-#' backwards compatibility and may be removed in future.
-#'
 #' @inheritParams data-params
 #' @param func A function to use for testing that takes a vector as the first
 #'   argument and returns a logical vector of the same length showing whether an
@@ -61,8 +56,8 @@
 #' )
 #'
 #' # Check petal dimensions are positive
-#' expect_where(
-#'   where = where(is.numeric),
+#' expect_all(
+#'   vars = where(is.numeric),
 #'   func = chk_range,
 #'   args = list(min = 0, max = Inf),
 #'   data = iris
@@ -115,35 +110,3 @@ expect_any <- function(...) {
   expect_allany(..., allany = chk_filter_any)
 }
 
-#' @export
-#' @param where <[`tidy-select`][dplyr_tidy_select]> Columns to check
-#' @rdname generic-expectations
-expect_where <- function(where, func, flt = TRUE, data = get_testdata(), args = list(), func_desc = NULL) {
-  where <- enquo(where)
-
-  act <- quasi_label(enquo(data))
-  act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
-  act$var_desc  <- data %>% select(!!where) %>% names() %>% paste(collapse = ", ")
-  act$flt_desc  <- as_label_flt(enquo(flt))
-  act$args_desc <- expr_deparse_repl(args, "(^<list: |>$)", "")
-
-  act$result <- chk_filter_where(eval_tidy(enquo(data)),
-                                 !!where,
-                                 eval_tidy(enquo(func)),
-                                 !!enquo(flt),
-                                 args)
-
-  expect_custom(
-    all(act$result, na.rm = TRUE),
-    glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records failing \\
-          {act$func_desc} on variable `{act$var_desc}`.
-          Filter: {act$flt_desc}
-          Arguments: `{act$args_desc}`"),
-    failed_count = sum(!act$result, na.rm = TRUE),
-    total_count = sum(!is.na(act$result)),
-    var_desc = act$var_desc,
-    result = act$result
-  )
-
-  invisible(act$result)
-}

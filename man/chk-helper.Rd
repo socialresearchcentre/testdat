@@ -3,26 +3,21 @@
 \name{chk-helper}
 \alias{chk-helper}
 \alias{chk_filter}
-\alias{chk_filter_vars}
 \alias{chk_filter_all}
 \alias{chk_filter_any}
-\alias{chk_filter_where}
 \title{Checking helper functions}
 \usage{
-chk_filter(data, var, func, flt = TRUE, args = list())
-
-chk_filter_vars(data, vars, func, flt = TRUE, args = list())
+chk_filter(data, vars, func, flt = TRUE, args = list())
 
 chk_filter_all(data, vars, func, flt = TRUE, args = list())
 
 chk_filter_any(data, vars, func, flt = TRUE, args = list())
-
-chk_filter_where(data, where, func, flt = TRUE, args = list())
 }
 \arguments{
 \item{data}{A data frame to check.}
 
-\item{var}{An unquoted column name to check.}
+\item{vars}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}> A set of columns to
+check.}
 
 \item{func}{A function to use for checking that takes a vector as the first
 argument and returns a logical vector of the same length showing whether an
@@ -32,15 +27,11 @@ element passed or failed.}
 a subset of the data frame to test.}
 
 \item{args}{A list of additional arguments to be added to the function calls.}
-
-\item{vars}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}> A set of columns to
-check.}
-
-\item{where}{<\code{\link[=dplyr_tidy_select]{tidy-select}}> Columns to check.}
 }
 \value{
-A logical vector flagging records that have passed or failed the
-check, with \code{NA} where records do not meet the filter condition.
+A logical vector or data frame of logical vectors flagging records
+that have passed or failed the check, with \code{NA} where records do not meet
+the filter condition.
 }
 \description{
 These helper functions allowing easy checking using an arbitrary function
@@ -49,18 +40,12 @@ optional filter (\code{flt}).
 }
 \details{
 \itemize{
-\item \code{chk_filter()} applies \code{func} with \code{args} to \code{var} in \code{data} filtered with
-\code{flt} and returns the resulting logical vector.
-\item \code{chk_filter_vars()} applies \code{func} with \code{args} to \code{vars} in \code{data} filtered
+\item \code{chk_filter()} applies \code{func} with \code{args} to \code{vars} in \code{data} filtered
 with \code{flt} and returns a data frame containing the resulting logical vectors.
-\item \code{chk_filter_all()} and \code{chk_filter_any()} both run \code{chk_filter_vars()} and
+\item \code{chk_filter_all()} and \code{chk_filter_any()} both run \code{chk_filter()} and
 return a single logical vector flagging whether \emph{all} or \emph{any} values in each
 row are \code{TRUE} (i.e. the conjunction and disjunction, respectively, of the
-columns in the output of \code{chk_filter_vars()}).
-\item \code{chk_filter_where()} works exactly like \code{chk_filter_all()}. When testdat
-used \code{dplyr::vars()} as standard \code{chk_filter_where()} provided an alternative
-interface using \code{\link[=dplyr_tidy_select]{tidy-select}}. This is included for
-backwards compatibility and may be removed in future.
+columns in the output of \code{chk_filter()}).
 }
 }
 \examples{
@@ -81,7 +66,7 @@ chk_filter_all(
 )
 
 # Check that columns made up of whole numbers are binary
-chk_filter_where(
+chk_filter_all(
   mtcars,
   where(~ all(. \%\% 1 == 0)),
   chk_values,

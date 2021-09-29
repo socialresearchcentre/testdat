@@ -17,13 +17,22 @@ expect_unique(c(x, y))
 The affected expectations are:
 
 * The uniqueness expectations: `expect_unique()`, `expect_unique_across()`, `expect_unique_combine()`
+
 * The exclusivity expectation: `expect_exclusive()`
+
 * The generic expectation helpers: `expect_all()`, `expect_any()`, `expect_allany()` 
-* The checking helper functions:  `chk_filter_vars()`, `chk_filter_all()`, `chk_filter_any()`
+
+* The checking helper functions:  `chk_filter()`, `chk_filter_vars()`, `chk_filter_all()`, `chk_filter_any()`
+
+A small number of functions have been hard deprecated as they are now redundant:
+
+* `expect_where()` and `chk_filter_where()` have been hard deprecated. They are now equivalent to the correpsonding `*_all()` function.
+
+* `chk_filter_vars()` has been renamed to `chk_filter()` and the existing `chk_filter()` has been removed to simplify the set of generic checking functions.
 
 Auto-generated expectations have also changed slightly - previously they could either accept a single unquoted variable name or a group of variables specified with `vars()`. They now always accept multiple columns using tidyselect syntax. As a result, the name of the first argument for these expect has changed from `var` to `vars`, so be careful if you're using this as a named argument.
 
-tidyselect syntax allows single unquoted variable names as well as arbitrary groups of variable specifications, and all of the auto-generated expectations in the package were the single variable variant so this shouldn't break existing code.
+tidyselect syntax allows single unquoted variable names as well as arbitrary groups of variable specifications, and all of the auto-generated expectations in the package used the single variable variant so this shouldn't break existing code.
 
 These are all valid column specifications using tidyselect:
 ```r

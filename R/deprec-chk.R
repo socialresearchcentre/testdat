@@ -11,6 +11,7 @@
 #' @return A logical vector flagging records that have passed or failed the
 #'   check.
 #' @seealso [Generic Checking Functions][chk-generic]
+#' @seealso [Checking Helper Functions][chk-helper]
 #' @name chk-deprec
 #' @keywords internal
 NULL
@@ -36,4 +37,39 @@ chk_miss <- function(x, miss = getOption("testdat.miss_text")) {
 chk_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
   lifecycle::deprecate_warn("0.2.0", "chk_nmiss()", "chk_text_nmiss()")
   !chk_miss(x, miss)
+}
+
+
+#' Defunct checking functions
+#'
+#' @description
+#'
+#' `r lifecycle::badge("defunct")`
+#'
+#' These functions are defunct.
+#'
+#' * `chk_filter_where()` works exactly like `chk_filter_all()`. When testdat
+#' used `dplyr::vars()` as standard `chk_filter_where()` provided an alternative
+#' interface using [`tidy-select`][dplyr_tidy_select].
+#'
+#' @inheritParams chk-generic
+#' @return A logical vector flagging records that have passed or failed the
+#'   check.
+#' @seealso [Generic Checking Functions][chk-generic]
+#' @seealso [Checking Helper Functions][chk-helper]
+#' @name chk-defunct
+#' @keywords internal
+NULL
+
+#' @rdname chk-defunct
+#' @export
+chk_filter_vars <- function(data, vars, func, flt = TRUE, args = list()) {
+  lifecycle::deprecate_stop("0.3.0", "chk_filter_vars()", "chk_filter()")
+}
+
+#' @rdname chk-defunct
+#' @param where <[`tidy-select`][dplyr_tidy_select]> Columns to check.
+#' @export
+chk_filter_where <- function(data, where, func, flt = TRUE, args = list()) {
+  lifecycle::deprecate_stop("0.3.0", "chk_filter_where()", "chk_filter_all()")
 }
