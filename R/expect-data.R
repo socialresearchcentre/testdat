@@ -1,10 +1,6 @@
 #' @importFrom glue glue glue_data
 NULL
 
-#' @importFrom dplyr vars
-#' @export
-dplyr::vars
-
 # Alias required for help links in downstream packages
 #' @aliases select_helpers
 #' @importFrom tidyselect contains
