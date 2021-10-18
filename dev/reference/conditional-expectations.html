@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
       </span>
     </div>
 
@@ -138,44 +138,52 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>var</th>
-      <td><p>an unquoted variable name</p></td>
+      <td><p>An unquoted column name to test.</p></td>
     </tr>
     <tr>
       <th>base</th>
-      <td><p>condition for missing check</p></td>
+      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_data_masking.html'>data-masking</a></code>&gt; The condition that
+determines which records should be non-missing.</p></td>
     </tr>
     <tr>
       <th>miss</th>
-      <td><p>a vector of values to be treated as missing. The
-<a href='testdat-package.html'>testdat.miss</a> option is used by default</p></td>
+      <td><p>A vector of values to be treated as missing. The
+<a href='testdat-package.html'>testdat.miss</a> option is used by default.</p></td>
     </tr>
     <tr>
       <th>missing_valid</th>
-      <td><p>allow missing values for records meeting the condition.
-This allows 'one way' base checks. This is <code>FALSE</code> by default.</p></td>
+      <td><p>Should missing values be treated as valid for records
+meeting the <code>base</code> condition? This allows 'one way' base checks. This is
+<code>FALSE</code> by default.</p></td>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>data frame to test. The <a href='global-data.html'>global test data</a> is used
+      <td><p>A data frame to test. The <a href='global-data.html'>global test data</a> is used
 by default.</p></td>
     </tr>
     <tr>
       <th>cond1</th>
-      <td><p>first condition for consistency check</p></td>
+      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_data_masking.html'>data-masking</a></code>&gt; First condition
+(antecedent) for consistency check.</p></td>
     </tr>
     <tr>
       <th>cond2</th>
-      <td><p>second condition for consistency check</p></td>
+      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_data_masking.html'>data-masking</a></code>&gt; Second condition
+(consequent) for consistency check.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>expect_cond</code> checks the coexistence of two conditions. It can be read as "if
-<code>cond1</code> then <code>cond2</code>".</p>
-<p><code>expect_base</code> is a special case that checks missing data against a specified
-condition. It can be read as "if <code>base</code> then <code>var</code> not missing, if not <code>base</code>
-then <code>var</code> missing".</p>
+    
+<ul>
+<li><p><code>expect_cond()</code> checks the coexistence of two conditions. It can be read as
+"if <code>cond1</code> then <code>cond2</code>".</p></li>
+<li><p><code>expect_base()</code> is a special case that checks missing data against a
+specified condition. It can be read as "if <code>base</code> then <code>var</code> not missing, if
+not <code>base</code> then <code>var</code> missing".</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other data expectations: 
@@ -183,11 +191,12 @@ then <code>var</code> missing".</p>
 <code><a href='datacomp-expectations.html'>datacomp-expectations</a></code>,
 <code><a href='exclusivity-expectations.html'>exclusivity-expectations</a></code>,
 <code><a href='generic-expectations.html'>generic-expectations</a></code>,
+<code><a href='label-expectations.html'>label-expectations</a></code>,
+<code><a href='proportion-expectations.html'>proportion-expectations</a></code>,
 <code><a href='uniqueness-expectations.html'>uniqueness-expectations</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='va'>my_survey</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
+    <pre class="examples"><div class='input'><span class='va'>my_survey</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
   resp_id <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,
   q1a <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>,
   q1b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='cn'>NA</span>, <span class='cn'>NA</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>, <span class='co'># Asked if q1a %in% 1</span>

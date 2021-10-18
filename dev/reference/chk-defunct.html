@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deprecated expectation functions — expect-deprec • testdat</title>
+<title>Defunct checking functions — chk-defunct • testdat</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,14 @@
 
 
 
-<meta property="og:title" content="Deprecated expectation functions — expect-deprec" />
+<meta property="og:title" content="Defunct checking functions — chk-defunct" />
 <meta property="og:description" content="
-These functions are deprecated." />
+These functions are defunct.
+chk_filter_where() works exactly like chk_filter_all(). When testdat
+used dplyr::vars() as standard chk_filter_where() provided an alternative
+interface using tidy-select.
+
+" />
 
 
 <meta name="robots" content="noindex">
@@ -115,89 +120,42 @@ These functions are deprecated." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Deprecated expectation functions</h1>
-    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/testdat/blob/master/R/deprec-expect.R'><code>R/deprec-expect.R</code></a></small>
-    <div class="hidden name"><code>expect-deprec.Rd</code></div>
+    <h1>Defunct checking functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/testdat/blob/master/R/deprec-chk.R'><code>R/deprec-chk.R</code></a></small>
+    <div class="hidden name"><code>chk-defunct.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated'><img src='figures/lifecycle-soft-deprecated.svg' alt='[Soft-deprecated]' /></a></p>
-<p>These functions are deprecated.</p>
+    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#defunct'><img src='figures/lifecycle-defunct.svg' alt='[Defunct]' /></a></p>
+<p>These functions are defunct.</p><ul>
+<li><p><code>chk_filter_where()</code> works exactly like <code><a href='chk-helper.html'>chk_filter_all()</a></code>. When testdat
+used <code><a href='https://dplyr.tidyverse.org/reference/vars.html'>dplyr::vars()</a></code> as standard <code>chk_filter_where()</code> provided an alternative
+interface using <code>tidy-select</code>.</p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>expect_func</span><span class='op'>(</span><span class='va'>var</span>, <span class='va'>...</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>chk_filter_vars</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>vars</span>, <span class='va'>func</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>expect_join</span><span class='op'>(</span><span class='va'>data2</span>, by <span class='op'>=</span> <span class='cn'>NULL</span>, not <span class='op'>=</span> <span class='cn'>FALSE</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='fu'>expect_similar</span><span class='op'>(</span>
-  <span class='va'>var</span>,
-  <span class='va'>data2</span>,
-  <span class='va'>var2</span>,
-  flt <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  flt2 <span class='op'>=</span> <span class='va'>flt</span>,
-  threshold <span class='op'>=</span> <span class='fl'>0.05</span>,
-  min <span class='op'>=</span> <span class='fl'>100</span>,
-  data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+<span class='fu'>chk_filter_where</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>where</span>, <span class='va'>func</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>var</th>
-      <td><p>An unquoted column name to test.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments to pass to <code><a href='generic-expectations.html'>expect_allany()</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>data2</th>
-      <td><p>The data frame to compare against.</p></td>
-    </tr>
-    <tr>
-      <th>by</th>
-      <td><p>A character vector of columns to join by. See <code><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>dplyr::join()</a></code> for
-details.</p></td>
-    </tr>
-    <tr>
-      <th>not</th>
-      <td><p>Reverse the results of the check?</p></td>
-    </tr>
-    <tr>
-      <th>flt</th>
-      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_data_masking.html'>data-masking</a></code>&gt; A filter specifying
-a subset of the data frame to test.</p></td>
-    </tr>
-    <tr>
-      <th>data</th>
-      <td><p>A data frame to test. The <a href='global-data.html'>global test data</a> is used
-by default.</p></td>
-    </tr>
-    <tr>
-      <th>var2</th>
-      <td><p>An unquoted column name from data2.</p></td>
-    </tr>
-    <tr>
-      <th>flt2</th>
-      <td><p>A filter specifying a subset of data2 to test.</p></td>
-    </tr>
-    <tr>
-      <th>threshold</th>
-      <td><p>The maximum proportional difference allowed between the two
-categories.</p></td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td><p>The minimum number of responses for a category to allow
-comparison. This avoids small categories raising spurious errors.</p></td>
+      <th>where</th>
+      <td><p>&lt;<code>tidy-select</code>&gt; Columns to check.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A logical vector flagging records that have passed or failed the
+check.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='generic-expectations.html'>Generic Expectation Functions</a></p>
-<p><a href='datacomp-expectations.html'>Data Frame Comparison Expectations</a></p></div>
+    <div class='dont-index'><p><a href='chk-generic.html'>Generic Checking Functions</a></p>
+<p><a href='chk-helper.html'>Checking Helper Functions</a></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

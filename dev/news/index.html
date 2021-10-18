@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
       </span>
     </div>
 
@@ -120,12 +120,69 @@
     <div id="testdat-development-version" class="section level1">
 <h1 class="page-header" data-toc-text="development version">
 <a href="#testdat-development-version" class="anchor"></a>testdat (development version)</h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<div id="tidyselect-36" class="section level3">
+<h3 class="hasAnchor">
+<a href="#tidyselect-36" class="anchor"></a>tidyselect (<a href='https://github.com/socialresearchcentre/testdat/issues/36'>#36</a>)</h3>
+<p>As of testdat 0.3.0 we have moved to the <a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html">tidyselect</a> framework for variable selections instead of <code><a href="https://dplyr.tidyverse.org/reference/vars.html">dplyr::vars()</a></code>. tidyselect is the successor to <code><a href="https://dplyr.tidyverse.org/reference/vars.html">vars()</a></code> - it’s a bit cleaner, provides some nifty features like selecting columns with a predicate function using <code>where()</code> and finally allows us to get rid of the distinction between multi and single variable expectations.</p>
+<p>Unfortunately this will break some code, but it’s horrendously difficult to support both methods and it’s best to switch before publishing to CRAN. Fortunately it’s a simple fix - anywhere that you are currently using <code><a href="https://dplyr.tidyverse.org/reference/vars.html">vars()</a></code>, replace it with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># Old</span>
+<span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># New</span>
+<span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>The affected expectations are:</p>
+<ul>
+<li><p>The uniqueness expectations: <code><a href="../reference/uniqueness-expectations.html">expect_unique()</a></code>, <code><a href="../reference/uniqueness-expectations.html">expect_unique_across()</a></code>, <code><a href="../reference/uniqueness-expectations.html">expect_unique_combine()</a></code></p></li>
+<li><p>The exclusivity expectation: <code><a href="../reference/exclusivity-expectations.html">expect_exclusive()</a></code></p></li>
+<li><p>The generic expectation helpers: <code><a href="../reference/generic-expectations.html">expect_all()</a></code>, <code><a href="../reference/generic-expectations.html">expect_any()</a></code>, <code><a href="../reference/generic-expectations.html">expect_allany()</a></code></p></li>
+<li><p>The checking helper functions: <code><a href="../reference/chk-helper.html">chk_filter()</a></code>, <code><a href="../reference/chk-defunct.html">chk_filter_vars()</a></code>, <code><a href="../reference/chk-helper.html">chk_filter_all()</a></code>, <code><a href="../reference/chk-helper.html">chk_filter_any()</a></code></p></li>
+</ul>
+<p>A small number of functions have been hard deprecated as they are now redundant:</p>
+<ul>
+<li><p><code><a href="../reference/expect-defunct.html">expect_where()</a></code> and <code><a href="../reference/chk-defunct.html">chk_filter_where()</a></code> have been hard deprecated. They are now equivalent to the correpsonding <code>*_all()</code> function.</p></li>
+<li><p><code><a href="../reference/chk-defunct.html">chk_filter_vars()</a></code> has been renamed to <code><a href="../reference/chk-helper.html">chk_filter()</a></code> and the existing <code><a href="../reference/chk-helper.html">chk_filter()</a></code> has been removed to simplify the set of generic checking functions.</p></li>
+</ul>
+<p>Auto-generated expectations have also changed slightly - previously they could either accept a single unquoted variable name or a group of variables specified with <code><a href="https://dplyr.tidyverse.org/reference/vars.html">vars()</a></code>. They now always accept multiple columns using tidyselect syntax. As a result, the name of the first argument for these expect has changed from <code>var</code> to <code>vars</code>, so be careful if you’re using this as a named argument.</p>
+<p>tidyselect syntax allows single unquoted variable names as well as arbitrary groups of variable specifications, and all of the auto-generated expectations in the package used the single variable variant so this shouldn’t break existing code.</p>
+<p>These are all valid column specifications using tidyselect:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="../reference/chk-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">a</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="../reference/chk-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="../reference/chk-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">a</span><span class="op">:</span><span class="va">c</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="../reference/chk-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"^[ab]$"</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="../reference/chk-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"^[ab]$"</span><span class="op">)</span>, <span class="va">c</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="../reference/chk-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="others" class="section level3">
+<h3 class="hasAnchor">
+<a href="#others" class="anchor"></a>Others</h3>
+<ul>
+<li>
+<code><a href="../reference/exclusivity-expectations.html">expect_exclusive()</a></code> has much improved documentation, and has had the argument name <code>exc_vars</code> updated to <code>var_set</code> to better reflect its purpose.</li>
+</ul>
+</div>
+</div>
+<div id="deprecations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deprecations" class="anchor"></a>Deprecations</h2>
 <ul>
 <li><p>Soft deprecated <code><a href="../reference/reporter-deprec.html">context_data()</a></code> (<a href='https://github.com/socialresearchcentre/testdat/issues/43'>#43</a>). <code><a href="../reference/reporter-deprec.html">context_data()</a></code> is just a wrapper for <code><a href="../reference/global-data.html">set_testdata()</a></code>, which has a much more intuitive name.</p></li>
 <li><p>Soft deprecated <code><a href="../reference/expect-deprec.html">expect_similar()</a></code> (<a href='https://github.com/socialresearchcentre/testdat/issues/18'>#18</a>). It was a silly way of comparing data frames and we’re better off making something new.</p></li>
+</ul>
+</div>
+<div id="bug-fixes--minor-updates" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes--minor-updates" class="anchor"></a>Bug fixes / minor updates</h2>
+<ul>
 <li><p><code><a href="../reference/chk-generic.html">chk_blank()</a></code> performs checks slightly differently and is much faster as a result (<a href='https://github.com/socialresearchcentre/testdat/issues/46'>#46</a>).</p></li>
 <li><p><code><a href="../reference/chk-generic.html">chk_ascii()</a></code> was returning <code>FALSE</code> if it detected non-ASCII printable characters anywhere in the input vector. It now checks each element of the vector individually.</p></li>
 </ul>
+</div>
 </div>
     <div id="testdat-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
@@ -136,18 +193,18 @@
 <li>On the wings, it expands the documentation for existing functions considerably.</li>
 <li>At centre stage, it extends the <code>expect_*()</code> framework, e.g. by introducing ‘fuzzy’ expectations in the form of <code>expect_prop_*()</code>.</li>
 </ul>
-<div id="breaking-changes" class="section level2">
+<div id="breaking-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>Renamed arguments in <code><a href="../reference/chk-helper.html">chk_filter()</a></code> and <code>chk_filter_*()</code> functions to remove the <code>.</code> prefix to bring them into line with the expectation functions (<a href='https://github.com/socialresearchcentre/testdat/issues/9'>#9</a>).</li>
 </ul>
 </div>
-<div id="deprecations" class="section level2">
+<div id="deprecations-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#deprecations" class="anchor"></a>Deprecations</h2>
+<a href="#deprecations-1" class="anchor"></a>Deprecations</h2>
 <ul>
-<li><p>Retired <code><a href="../reference/filter_expect.html">filter_expect()</a></code> (<a href='https://github.com/socialresearchcentre/testdat/issues/25'>#25</a>).</p></li>
+<li><p>Retired <code><a href="../reference/expect-defunct.html">filter_expect()</a></code> (<a href='https://github.com/socialresearchcentre/testdat/issues/25'>#25</a>).</p></li>
 <li><p>Hard deprecated <code><a href="../reference/chk-deprec.html">chk_length()</a></code>, <code><a href="../reference/chk-deprec.html">chk_miss()</a></code> and <code><a href="../reference/chk-deprec.html">chk_nmiss()</a></code> (<a href='https://github.com/socialresearchcentre/testdat/issues/5'>#5</a>).</p></li>
 <li><p>Soft deprecated <code><a href="../reference/expect-deprec.html">expect_func()</a></code> (<a href='https://github.com/socialresearchcentre/testdat/issues/24'>#24</a>).</p></li>
 <li><p>Soft deprecated <code><a href="../reference/expect-deprec.html">expect_join()</a></code> in favour of <code><a href="../reference/datacomp-expectations.html">expect_subset()</a></code> (<a href='https://github.com/socialresearchcentre/testdat/issues/21'>#21</a>).</p></li>
@@ -157,7 +214,7 @@
 <h2 class="hasAnchor">
 <a href="#additions" class="anchor"></a>Additions</h2>
 <ul>
-<li><p>Added <code><a href="../reference/chk-helper.html">chk_filter_where()</a></code> and <code><a href="../reference/generic-expectations.html">expect_where()</a></code> which can be used to perform scoped expectations (<a href='https://github.com/socialresearchcentre/testdat/issues/8'>#8</a>).</p></li>
+<li><p>Added <code><a href="../reference/chk-defunct.html">chk_filter_where()</a></code> and <code><a href="../reference/expect-defunct.html">expect_where()</a></code> which can be used to perform scoped expectations (<a href='https://github.com/socialresearchcentre/testdat/issues/8'>#8</a>).</p></li>
 <li><p>Added <code><a href="../reference/uniqueness-expectations.html">expect_unique_combine()</a></code> for checking uniqueness across a combination of variables (<a href='https://github.com/socialresearchcentre/testdat/issues/22'>#22</a>).</p></li>
 <li><p>Added <code>expect_prop_*()</code> functions for ‘fuzzy’ expectations. An example is <code><a href="../reference/proportion-expectations.html">expect_prop_nmiss()</a></code> which can be used to validate a dataset allowing for a certain amount of missingness (<a href='https://github.com/socialresearchcentre/testdat/issues/12'>#12</a>).</p></li>
 <li><p>Added <code><a href="../reference/label-expectations.html">expect_labels()</a></code> for testing variable and value labels (<a href='https://github.com/socialresearchcentre/testdat/issues/20'>#20</a>).</p></li>

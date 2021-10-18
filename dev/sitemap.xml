@@ -4,6 +4,9 @@
     <loc>https://socialresearchcentre.github.io/testdat/index.html</loc>
   </url>
   <url>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/chk-defunct.html</loc>
+  </url>
+  <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/chk-deprec.html</loc>
   </url>
   <url>
@@ -28,6 +31,9 @@
     <loc>https://socialresearchcentre.github.io/testdat/reference/exclusivity-expectations.html</loc>
   </url>
   <url>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/expect-defunct.html</loc>
+  </url>
+  <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/expect-deprec.html</loc>
   </url>
   <url>
@@ -35,9 +41,6 @@
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/expect_make.html</loc>
-  </url>
-  <url>
-    <loc>https://socialresearchcentre.github.io/testdat/reference/filter_expect.html</loc>
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/generic-expectations.html</loc>

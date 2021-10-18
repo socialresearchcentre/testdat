@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Create an expectation from a check function — expect_make" />
-<meta property="og:description" content="expect_make() creates an expection from a vectorised checking function to
+<meta property="og:description" content="expect_make() creates an expectation from a vectorised checking function to
 allow simple generation of domain specific data checks." />
 
 
@@ -73,7 +73,7 @@ allow simple generation of domain specific data checks." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
       </span>
     </div>
 
@@ -121,7 +121,7 @@ allow simple generation of domain specific data checks." />
     </div>
 
     <div class="ref-description">
-    <p><code>expect_make()</code> creates an expection from a vectorised checking function to
+    <p><code>expect_make()</code> creates an expectation from a vectorised checking function to
 allow simple generation of domain specific data checks.</p>
     </div>
 
@@ -148,8 +148,7 @@ failure message.</p></td>
     </tr>
     <tr>
       <th>vars</th>
-      <td><p>Should the generated function take a single variable name or a
-<code><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars()</a></code> object?</p></td>
+      <td><p>Included for backwards compatibility only.</p></td>
     </tr>
     <tr>
       <th>all</th>
@@ -158,7 +157,7 @@ failure message.</p></td>
     <tr>
       <th>env</th>
       <td><p>The parent environment of the function, defaults to the calling
-environment of <code>expect_make()</code></p></td>
+environment of <code>expect_make()</code>.</p></td>
     </tr>
     </table>
 
@@ -175,7 +174,7 @@ environment of <code>expect_make()</code></p></td>
 <span class='co'># Create custom expectation function</span>
 <span class='va'>expect_binary</span> <span class='op'>&lt;-</span> <span class='fu'>expect_make</span><span class='op'>(</span><span class='va'>chk_binary</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in eval_tidy(enfunc): object 'chk_binary' not found</span></div><div class='input'>
-<span class='co'># Validate a dataset</span>
+<span class='co'># Validate a data frame</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>expect_binary</span><span class='op'>(</span><span class='va'>vs</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Error in expect_binary(vs, data = mtcars) : 
 #&gt;   could not find function "expect_binary"</div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>expect_binary</span><span class='op'>(</span><span class='va'>cyl</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span>

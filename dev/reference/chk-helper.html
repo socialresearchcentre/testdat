@@ -40,22 +40,9 @@
 
 
 <meta property="og:title" content="Checking helper functions — chk-helper" />
-<meta property="og:description" content="These helper functions allowing easy checking over multiple columns and
-filtering to subsets of the data:
-chk_filter applies func with args to var in data filtered
-with flt and returns the resulting logical vector.
-chk_filter_vars applies func with args to vars in data
-filtered with flt and returns a dataframe containing the resulting
-logical vectors.
-chk_filter_all and chk_filter_any are wrappers around
-chk_filter_vars which return a single logical vector produced by
-taking the conjunction and disjunction, respectively, of the columns
-in the output of chk_filter_vars
-chk_filter_where works exactly the same as chk_filter_all except that
-the variables are specified not using dplyr::vars() (vars) but using
-bare tidy-select functions (where).
-
-" />
+<meta property="og:description" content="These helper functions allowing easy checking using an arbitrary function
+(func) over multiple columns (vars) of a data frame (data), with an
+optional filter (flt)." />
 
 
 <meta name="robots" content="noindex">
@@ -87,7 +74,7 @@ bare tidy-select functions (where).
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
       </span>
     </div>
 
@@ -135,73 +122,63 @@ bare tidy-select functions (where).
     </div>
 
     <div class="ref-description">
-    <p>These helper functions allowing easy checking over multiple columns and
-filtering to subsets of the data:</p><ul>
-<li><p><code>chk_filter</code> applies <code>func</code> with <code>args</code> to <code>var</code> in <code>data</code> filtered
-with <code>flt</code> and returns the resulting logical vector.</p></li>
-<li><p><code>chk_filter_vars</code> applies <code>func</code> with <code>args</code> to <code>vars</code> in <code>data</code>
-filtered with <code>flt</code> and returns a dataframe containing the resulting
-logical vectors.</p></li>
-<li><p><code>chk_filter_all</code> and <code>chk_filter_any</code> are wrappers around
-<code>chk_filter_vars</code> which return a single logical vector produced by
-taking the conjunction and disjunction, respectively, of the columns
-in the output of <code>chk_filter_vars</code></p></li>
-<li><p><code>chk_filter_where</code> works exactly the same as <code>chk_filter_all</code> except that
-the variables are specified not using <code><a href='https://dplyr.tidyverse.org/reference/vars.html'>dplyr::vars()</a></code> (<code>vars</code>) but using
-bare <code>tidy-select</code> functions (<code>where</code>).</p></li>
-</ul>
-
+    <p>These helper functions allowing easy checking using an arbitrary function
+(<code>func</code>) over multiple columns (<code>vars</code>) of a data frame (<code>data</code>), with an
+optional filter (<code>flt</code>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>chk_filter</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var</span>, <span class='va'>func</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='fu'>chk_filter_vars</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>vars</span>, <span class='va'>func</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>chk_filter</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>vars</span>, <span class='va'>func</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='fu'>chk_filter_all</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>vars</span>, <span class='va'>func</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>chk_filter_any</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>vars</span>, <span class='va'>func</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='fu'>chk_filter_where</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>where</span>, <span class='va'>func</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+<span class='fu'>chk_filter_any</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>vars</span>, <span class='va'>func</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>a <code>tbl</code></p></td>
-    </tr>
-    <tr>
-      <th>var</th>
-      <td><p>a single column to check</p></td>
-    </tr>
-    <tr>
-      <th>func</th>
-      <td><p>a function to use use for checking. The provided function should
-take a single vector as input and return a logical vector.</p></td>
-    </tr>
-    <tr>
-      <th>flt</th>
-      <td><p>a logical expression to be applied as a filter for the check. This
-will be evaluated in the context of data</p></td>
-    </tr>
-    <tr>
-      <th>args</th>
-      <td><p>a list of additional arguments to be added to the function calls.</p></td>
+      <td><p>A data frame to check.</p></td>
     </tr>
     <tr>
       <th>vars</th>
-      <td><p>a list of columns to check generated by <a href='https://dplyr.tidyverse.org/reference/vars.html'>vars()</a></p></td>
+      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html'>tidy-select</a></code>&gt; A set of columns to
+check.</p></td>
     </tr>
     <tr>
-      <th>where</th>
-      <td><p>&lt;<code>tidy-select</code>&gt; columns to check</p></td>
+      <th>func</th>
+      <td><p>A function to use for checking that takes a vector as the first
+argument and returns a logical vector of the same length showing whether an
+element passed or failed.</p></td>
+    </tr>
+    <tr>
+      <th>flt</th>
+      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_data_masking.html'>data-masking</a></code>&gt; A filter specifying
+a subset of the data frame to test.</p></td>
+    </tr>
+    <tr>
+      <th>args</th>
+      <td><p>A list of additional arguments to be added to the function calls.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A logical vector flagging records that have passed or failed the
-check, with <code>NA</code> where records do not meet the filter</p>
+    <p>A logical vector or data frame of logical vectors flagging records
+that have passed or failed the check, with <code>NA</code> where records do not meet
+the filter condition.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+<ul>
+<li><p><code>chk_filter()</code> applies <code>func</code> with <code>args</code> to <code>vars</code> in <code>data</code> filtered
+with <code>flt</code> and returns a data frame containing the resulting logical vectors.</p></li>
+<li><p><code>chk_filter_all()</code> and <code>chk_filter_any()</code> both run <code>chk_filter()</code> and
+return a single logical vector flagging whether <em>all</em> or <em>any</em> values in each
+row are <code>TRUE</code> (i.e. the conjunction and disjunction, respectively, of the
+columns in the output of <code>chk_filter()</code>).</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='chk-generic.html'>Generic Checking Functions</a></p></div>
@@ -209,10 +186,47 @@ check, with <code>NA</code> where records do not meet the filter</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span>
-<span class='co'># inches</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>chk_filter</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='va'>disp</span>, <span class='va'>chk_range</span>, <span class='va'>cyl</span> <span class='op'>==</span> <span class='fl'>4</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/all.html'>all</a></span><span class='op'>(</span><span class='va'>x</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='co'># inches AND &lt; 100 horsepower - return a data frame</span>
+<span class='fu'>chk_filter</span><span class='op'>(</span>
+  <span class='va'>mtcars</span>,
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"disp"</span>, <span class='st'>"hp"</span><span class='op'>)</span>,
+  <span class='va'>chk_range</span>,
+  <span class='va'>cyl</span> <span class='op'>==</span> <span class='fl'>4</span>,
+  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt;                      disp    hp
+#&gt; Mazda RX4              NA    NA
+#&gt; Mazda RX4 Wag          NA    NA
+#&gt; Datsun 710          FALSE  TRUE
+#&gt; Hornet 4 Drive         NA    NA
+#&gt; Hornet Sportabout      NA    NA
+#&gt; Valiant                NA    NA
+#&gt; Duster 360             NA    NA
+#&gt; Merc 240D           FALSE  TRUE
+#&gt; Merc 230            FALSE  TRUE
+#&gt; Merc 280               NA    NA
+#&gt; Merc 280C              NA    NA
+#&gt; Merc 450SE             NA    NA
+#&gt; Merc 450SL             NA    NA
+#&gt; Merc 450SLC            NA    NA
+#&gt; Cadillac Fleetwood     NA    NA
+#&gt; Lincoln Continental    NA    NA
+#&gt; Chrysler Imperial      NA    NA
+#&gt; Fiat 128             TRUE  TRUE
+#&gt; Honda Civic          TRUE  TRUE
+#&gt; Toyota Corolla       TRUE  TRUE
+#&gt; Toyota Corona       FALSE  TRUE
+#&gt; Dodge Challenger       NA    NA
+#&gt; AMC Javelin            NA    NA
+#&gt; Camaro Z28             NA    NA
+#&gt; Pontiac Firebird       NA    NA
+#&gt; Fiat X1-9            TRUE  TRUE
+#&gt; Porsche 914-2       FALSE  TRUE
+#&gt; Lotus Europa         TRUE FALSE
+#&gt; Ford Pantera L         NA    NA
+#&gt; Ferrari Dino           NA    NA
+#&gt; Maserati Bora          NA    NA
+#&gt; Volvo 142E          FALSE FALSE</div><div class='input'>
 <span class='co'># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span>
 <span class='co'># inches AND &lt; 100 horsepower</span>
 <span class='fu'>chk_filter_all</span><span class='op'>(</span>
@@ -239,7 +253,7 @@ check, with <code>NA</code> where records do not meet the filter</p>
 #&gt;      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
 #&gt;                  NA                  NA                  NA               FALSE </div><div class='input'>
 <span class='co'># Check that columns made up of whole numbers are binary</span>
-<span class='fu'>chk_filter_where</span><span class='op'>(</span>
+<span class='fu'>chk_filter_all</span><span class='op'>(</span>
   <span class='va'>mtcars</span>,
   <span class='fu'>where</span><span class='op'>(</span><span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/all.html'>all</a></span><span class='op'>(</span><span class='va'>.</span> <span class='op'>%%</span> <span class='fl'>1</span> <span class='op'>==</span> <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>,
   <span class='va'>chk_values</span>,

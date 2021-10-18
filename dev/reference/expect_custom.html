@@ -41,10 +41,10 @@
 
 <meta property="og:title" content="Extension of 'expect' to allow inclusion of custom fields — expect_custom" />
 <meta property="og:description" content="Use expect_custom to allow inclusion of arbitrary data in expectation
-results. Additional data is stored in a list in an attribute called
-custom in the resulting expectation. This allows data expectations to
-store information about the number of failed and successful cases for
-reporting of test results." />
+results. Additional data is stored in a list in an attribute called custom
+in the resulting expectation. This allows data expectations to store
+information about the number of failed and successful cases for reporting of
+test results." />
 
 
 <meta name="robots" content="noindex">
@@ -76,7 +76,7 @@ reporting of test results." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
       </span>
     </div>
 
@@ -125,10 +125,10 @@ reporting of test results." />
 
     <div class="ref-description">
     <p>Use expect_custom to allow inclusion of arbitrary data in expectation
-results. Additional data is stored in a list in an attribute called
-<code>custom</code> in the resulting expectation. This allows data expectations to
-store information about the number of failed and successful cases for
-reporting of test results.</p>
+results. Additional data is stored in a list in an attribute called <code>custom</code>
+in the resulting expectation. This allows data expectations to store
+information about the number of failed and successful cases for reporting of
+test results.</p>
     </div>
 
     <pre class="usage"><span class='fu'>expect_custom</span><span class='op'>(</span>
@@ -153,8 +153,8 @@ reporting of test results.</p>
     </tr>
     <tr>
       <th>info</th>
-      <td><p>Character vector continuing additional information. Included
-for backward compatibility only and new expectations should not use it.</p></td>
+      <td><p>Character vector continuing additional information. Included for
+backward compatibility only and new expectations should not use it.</p></td>
     </tr>
     <tr>
       <th>srcref</th>
@@ -163,15 +163,15 @@ supplied when you need to forward a srcref captured elsewhere.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional data to be added to a list in the <code>custom</code>
-attribute of the resulting expectation.</p></td>
+      <td><p>Additional data to be added to a list in the <code>custom</code> attribute of
+the resulting expectation.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An expectation object. Signals the expectation condition
-with a <code>continue_test</code> restart.</p>
+    <p>An expectation object. Signals the expectation condition with a
+<code>continue_test</code> restart.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># calling expect_custom directly with some custom data</span>

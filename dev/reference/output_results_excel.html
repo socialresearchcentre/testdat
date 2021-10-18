@@ -40,8 +40,8 @@
 
 
 <meta property="og:title" content="Output ListReporter results in Excel format — output_results_excel" />
-<meta property="og:description" content="This function outputs ListReporter results to an Excel workbook. The workbook
-consists of a summary sheet showing aggregarated results for each context,
+<meta property="og:description" content="Output formatted ListReporter results to an Excel workbook. The workbook
+consists of a summary sheet showing aggregated results for each context,
 and one sheet per context showing details of each unsuccessful test." />
 
 
@@ -74,7 +74,7 @@ and one sheet per context showing details of each unsuccessful test." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
       </span>
     </div>
 
@@ -116,14 +116,14 @@ and one sheet per context showing details of each unsuccessful test." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Output ListReporter results in Excel format</h1>
+    <h1>Output <code>ListReporter</code> results in Excel format</h1>
     <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/testdat/blob/master/R/reporter-excel.R'><code>R/reporter-excel.R</code></a></small>
     <div class="hidden name"><code>output_results_excel.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function outputs ListReporter results to an Excel workbook. The workbook
-consists of a summary sheet showing aggregarated results for each context,
+    <p>Output formatted <code>ListReporter</code> results to an Excel workbook. The workbook
+consists of a summary sheet showing aggregated results for each context,
 and one sheet per context showing details of each unsuccessful test.</p>
     </div>
 
@@ -134,8 +134,8 @@ and one sheet per context showing details of each unsuccessful test.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>results</th>
-      <td><p>A object of class <code>testthat_results</code>, e.g. output from
-<code>test_dir()</code> or <code>test_file()</code></p></td>
+      <td><p>An object of class <code>testthat_results</code>, e.g. output from
+<code>test_dir()</code> or <code>test_file()</code>.</p></td>
     </tr>
     <tr>
       <th>file</th>

@@ -40,8 +40,8 @@
 
 
 <meta property="og:title" content="Get/set test data — global-data" />
-<meta property="og:description" content="A global test data set is used to avoid having to re-specify the testing
-dataset in every test. These functions get and set the global data or set the
+<meta property="og:description" content="A global test data set is used to avoid having to re-specify the testing data
+frame in every test. These functions get and set the global data or set the
 data for the current context." />
 
 
@@ -74,7 +74,7 @@ data for the current context." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
       </span>
     </div>
 
@@ -122,8 +122,8 @@ data for the current context." />
     </div>
 
     <div class="ref-description">
-    <p>A global test data set is used to avoid having to re-specify the testing
-dataset in every test. These functions get and set the global data or set the
+    <p>A global test data set is used to avoid having to re-specify the testing data
+frame in every test. These functions get and set the global data or set the
 data for the current context.</p>
     </div>
 
@@ -138,14 +138,15 @@ data for the current context.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>Data to be used.</p></td>
+      <td><p>Data frame to be used.</p></td>
     </tr>
     <tr>
       <th>quosure</th>
-      <td><p>If <code>TRUE</code>, the default, the dataset is stored as a quosure and
-<code>get_testdata()</code> will return the current state of the dataset.</p>
-<p>If <code>FALSE</code>, the dataset will be copied and <code>get_testdata()</code> will return the
-state of the dataset at the time <code>set_testdata()</code> was called.</p></td>
+      <td><p>If <code>TRUE</code>, the default, the data frame is stored as a quosure
+and lazily evaluated when <code>get_testdata()</code> is called, so <code>get_testdata()</code>
+will return the current state of the data frame.</p>
+<p>If <code>FALSE</code>, the data frame will be copied and <code>get_testdata()</code> will return
+the state of the data frame at the time <code>set_testdata()</code> was called.</p></td>
     </tr>
     <tr>
       <th>code</th>

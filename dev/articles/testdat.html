@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@
 <ul>
 <li><p>A fully fledged test framework so you can spend more time specifying tests and less time running them</p></li>
 <li><p>A set of common methods for simply specifying data validation rules</p></li>
-<li><p>Repeatability of data tests (avoid unintentionally breaking your dataset!)</p></li>
+<li><p>Repeatability of data tests (avoid unintentionally breaking your data set!)</p></li>
 <li><p>Data-focused reporting of test results</p></li>
 </ul>
 <div id="getting-started" class="section level1">
@@ -104,14 +104,14 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>In general, our approach to data testing is variable-centric - the majority of expectations perform a check on one or more variables in a given dataset.</p>
+<p>In general, our approach to data testing is variable-centric - the majority of expectations perform a check on one or more variables in a given data frame.</p>
 <p>The standard form of a data expectation is:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>expect_<span class="op">*</span>(<span class="kw">var</span>(s), ..., <span class="dt">flt =</span> <span class="ot">TRUE</span>, <span class="dt">data =</span> <span class="kw">get_testdata</span>())</span></code></pre></div>
 <p>testdat uses dplyr at its core, and thus supports tidy evaluation.</p>
 <div id="variables" class="section level3">
 <h3 class="hasAnchor">
 <a href="#variables" class="anchor"></a>Variables</h3>
-<p>Most operations act on one or more variables There are two variants of the variable argument:</p>
+<p>Most operations act on one or more variables. There are two variants of the variable argument:</p>
 <ul>
 <li>
 <code>var</code> requires an unquoted variable name.</li>
@@ -120,18 +120,19 @@
 <code class="sourceCode R"><span class="fu">test_that</span><span class="op">(</span><span class="st">"hour values are valid"</span>, <span class="op">{</span>
   <span class="fu"><a href="../reference/chk-expectations.html">expect_range</a></span><span class="op">(</span><span class="va">hour</span>, <span class="fl">0</span>, <span class="fl">23</span>, data <span class="op">=</span> <span class="va">storms</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; Test passed 🎉</span></code></pre></div>
+<span class="co">#&gt; Test passed 😀</span></code></pre></div>
 <ul>
 <li>
-<code>vars</code> requires a variable set specified by dplyr’s <code><a href="https://dplyr.tidyverse.org/reference/vars.html">vars()</a></code> function.</li>
+<code>vars</code> requires a set of columns specified as <a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html">tidy selections</a>.</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">test_that</span><span class="op">(</span><span class="st">"multi-variable identifier is unique"</span>, <span class="op">{</span>
-  <span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">year</span>, <span class="va">month</span>, <span class="va">day</span>, <span class="va">hour</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">storms</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">year</span>, <span class="va">month</span>, <span class="va">day</span>, <span class="va">hour</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">storms</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
 <span class="co">#&gt; ── Failure (&lt;text&gt;:2:3): multi-variable identifier is unique ───────────────────</span>
 <span class="co">#&gt; `storms` has 32 duplicate records on variable `name, year, month, day, hour`.</span>
-<span class="co">#&gt; Filter: None</span></code></pre></div>
+<span class="co">#&gt; Filter: None</span>
+<span class="co">#&gt; Error: Test failed</span></code></pre></div>
 </div>
 <div id="filter" class="section level3">
 <h3 class="hasAnchor">
@@ -145,6 +146,8 @@
 <span class="co">#&gt; `iris` has 93 records failing range check on variable `Petal.Width`.</span>
 <span class="co">#&gt; Filter: None</span>
 <span class="co">#&gt; Arguments: `min = 0, max = 1`</span>
+<span class="co">#&gt; Error: Test failed</span>
+
 <span class="fu">test_that</span><span class="op">(</span><span class="st">"iris range checks filtered"</span>, <span class="op">{</span>
   <span class="co"># Test passes for setosa rows</span>
   <span class="fu"><a href="../reference/chk-expectations.html">expect_range</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">0</span>, <span class="fl">1</span>, flt <span class="op">=</span> <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
@@ -154,7 +157,8 @@
 <span class="co">#&gt; ── Failure (&lt;text&gt;:9:3): iris range checks filtered ────────────────────────────</span>
 <span class="co">#&gt; `iris` has 1 records failing range check on variable `Petal.Width`.</span>
 <span class="co">#&gt; Filter: `Species == "setosa"`</span>
-<span class="co">#&gt; Arguments: `min = 0, max = 0.5`</span></code></pre></div>
+<span class="co">#&gt; Arguments: `min = 0, max = 0.5`</span>
+<span class="co">#&gt; Error: Test failed</span></code></pre></div>
 </div>
 <div id="data" class="section level3">
 <h3 class="hasAnchor">
@@ -167,11 +171,13 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/global-data.html">set_testdata</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="fu"><a href="../reference/global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">iris</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span>
+
 <span class="fu">test_that</span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span>
   <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">%in%</span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
 <span class="co">#&gt; ── Failure (&lt;text&gt;:5:3): Versicolor has sepal length greater than 5 - will fail ──</span>
-<span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></code></pre></div>
+<span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span>
+<span class="co">#&gt; Error: Test failed</span></code></pre></div>
 <ul>
 <li>Using the <code><a href="../reference/global-data.html">with_testdata()</a></code> wrapper to temporarily set the global test data for a block of code.</li>
 </ul>
@@ -179,6 +185,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/global-data.html">set_testdata</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="fu"><a href="../reference/global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">mtcars</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span>
+
 <span class="fu"><a href="../reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="va">iris</span>, <span class="op">{</span>
   <span class="fu">test_that</span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span>
     <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">%in%</span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span>
@@ -186,6 +193,8 @@
 <span class="op">}</span><span class="op">)</span>
 <span class="co">#&gt; ── Failure (&lt;text&gt;:6:5): Versicolor has sepal length greater than 5 - will fail ──</span>
 <span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span>
+<span class="co">#&gt; Error: Test failed</span>
+
 <span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="fu"><a href="../reference/global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">mtcars</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
 <p>Both approaches are equivalent to:</p>
@@ -194,8 +203,9 @@
   <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">%in%</span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
 <span class="co">#&gt; ── Failure (&lt;text&gt;:2:3): Versicolor has sepal length greater than 5 - will fail ──</span>
-<span class="co">#&gt; `iris` failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></code></pre></div>
-<p>By default, <code><a href="../reference/global-data.html">set_testdata()</a></code> stores a reference to the provided dataset rather than the data itself, so changes made to the dataset will be reflected in the test results.</p>
+<span class="co">#&gt; `iris` failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span>
+<span class="co">#&gt; Error: Test failed</span></code></pre></div>
+<p>By default, <code><a href="../reference/global-data.html">set_testdata()</a></code> stores a reference to the provided data frame rather than the data itself, so changes made to the data frame will be reflected in the test results.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tmp_data</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span>
 
@@ -242,15 +252,15 @@
 <p><code><a href="../reference/conditional-expectations.html">?`conditional-expectations`</a></code></p>
 <p>Conditional expectations check for the co-existence of multiple conditions.</p>
 </dd>
-<dt>Dataset comparison</dt>
+<dt>Data frame comparison</dt>
 <dd>
 <p><code><a href="../reference/datacomp-expectations.html">?`datacomp-expectations`</a></code></p>
-<p>Dataset comparison expectations test for consistency between datasets, for example ensuring similar frequencies between similar variables in different datasets.</p>
+<p>Data frame comparison expectations test for consistency between data frames, for example ensuring similar frequencies between similar variables in different data frames.</p>
 </dd>
 <dt>Generic</dt>
 <dd>
 <p><code><a href="../reference/generic-expectations.html">?`generic-expectations`</a></code></p>
-<p>Generic expectations allow for testing of a dataset using an arbitrary function. The function provided should take a single vector as its first argument and return a logical vector showing whether each element has passed or failed. Additional arguments to the checking function can be passed as a list using the <code>args</code> argument.</p>
+<p>Generic expectations allow for testing of a data frame using an arbitrary function. The function provided should take a single vector as its first argument and return a logical vector showing whether each element has passed or failed. Additional arguments to the checking function can be passed as a list using the <code>args</code> argument.</p>
 <p>testdat includes a set of useful checking functions. See <code><a href="../reference/chk-generic.html">?`chk-generic`</a></code> for details. Several of the checking functions have a corresponding expectation. These are listed in <code>?`chk-expect`</code>.</p>
 </dd>
 </dl>
@@ -280,6 +290,7 @@
 <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 0 × 4</span>
 <span class="co">#&gt; # … with 4 variables: id &lt;dbl&gt;, pcode &lt;dbl&gt;, state &lt;chr&gt;, nsw_only &lt;dbl&gt;</span>
+
 <span class="co"># check values</span>
 <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">pcode</span> <span class="op">%in%</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">3999</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 1 × 4</span>
@@ -299,6 +310,7 @@
 <span class="co">#&gt; 1        1     1</span>
 <span class="co">#&gt; 2        3     2</span>
 <span class="co">#&gt; 3       NA     1</span>
+
 <span class="co"># check base for nsw_only variable</span>
 <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">state</span> <span class="op">!=</span> <span class="st">"NSW"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">nsw_only</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 × 2</span>
@@ -306,6 +318,7 @@
 <span class="co">#&gt;      &lt;dbl&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1        3     1</span>
 <span class="co">#&gt; 2       NA     1</span>
+
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>market <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">pcode</span> <span class="op">%in%</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2999</span> <span class="op">~</span> <span class="fl">1</span>,
                                      <span class="va">pcode</span> <span class="op">%in%</span> <span class="fl">3000</span><span class="op">:</span><span class="fl">3999</span> <span class="op">~</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
@@ -332,7 +345,7 @@
 
 <span class="fu"><a href="../reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="va">x</span>, <span class="op">{</span>
   <span class="fu">test_that</span><span class="op">(</span><span class="st">"id is unique"</span>, <span class="op">{</span>
-    <span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span>
   
   <span class="fu">test_that</span><span class="op">(</span><span class="st">"variable values are correct"</span>, <span class="op">{</span>
@@ -345,7 +358,7 @@
     <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="va">state</span> <span class="op">==</span> <span class="st">"NSW"</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; Test passed 🥇</span>
+<span class="co">#&gt; Test passed 🌈</span>
 <span class="co">#&gt; ── Failure (&lt;text&gt;:16:5): variable values are correct ──────────────────────────</span>
 <span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span>
 <span class="co">#&gt; Filter: None</span>
@@ -353,11 +366,8 @@
 <span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span>
 <span class="co">#&gt; Filter: None</span>
 <span class="co">#&gt; Arguments: `  3003L, 3004L, ...&gt;, miss = &lt;chr: NA, ""&gt;`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ── Failure (&lt;text&gt;:22:5): filters applied correctly ────────────────────────────</span>
-<span class="co">#&gt; get_testdata() has a base mismatch in variable `nsw_only`.</span>
-<span class="co">#&gt; 0 cases have `state == "NSW"` but `nsw_only` is missing.</span>
-<span class="co">#&gt; 1 cases do not have `state == "NSW"` but `nsw_only` is non missing.</span>
+<span class="co">#&gt; Error: Test failed</span>
+
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>market <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">pcode</span> <span class="op">%in%</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2999</span> <span class="op">~</span> <span class="fl">1</span>,
                                      <span class="va">pcode</span> <span class="op">%in%</span> <span class="fl">3000</span><span class="op">:</span><span class="fl">3999</span> <span class="op">~</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
@@ -369,10 +379,11 @@
 <span class="co">#&gt; ── Failure (&lt;text&gt;:31:5): market derived correctly ─────────────────────────────</span>
 <span class="co">#&gt; get_testdata() has 1 records failing value check on variable `market`.</span>
 <span class="co">#&gt; Filter: None</span>
-<span class="co">#&gt; Arguments: `&lt;int: 1L, 2L&gt;, miss = NULL`</span></code></pre></div>
+<span class="co">#&gt; Arguments: `&lt;int: 1L, 2L&gt;, miss = NULL`</span>
+<span class="co">#&gt; Error: Test failed</span></code></pre></div>
 <p>Note that:</p>
 <ul>
-<li><p>The global dataset must be reset after changes are made, either with <code><a href="../reference/global-data.html">set_testdata()</a></code> or <code><a href="../reference/global-data.html">with_testdata()</a></code>.</p></li>
+<li><p>The global test data must be reset after changes are made, either with <code><a href="../reference/global-data.html">set_testdata()</a></code> or <code><a href="../reference/global-data.html">with_testdata()</a></code>.</p></li>
 <li><p>The <code>test_that()</code> wrapper is not strictly necessary, but it provides more informative error messaging and logically groups a set of expectations.</p></li>
 <li><p>Each <code><a href="../reference/global-data.html">with_testdata()</a></code> block will fail on the first <code>test_that()</code> block that fails. The “filters applied correctly” test block is not run in the example.</p></li>
 </ul>
@@ -390,12 +401,14 @@
 <span class="fu">test_that</span><span class="op">(</span><span class="st">"Variable format checks"</span>, <span class="op">{</span>
   <span class="fu"><a href="../reference/chk-expectations.html">expect_regex</a></span><span class="op">(</span><span class="va">Species</span>, <span class="st">"^[a-z]+$"</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; Test passed 😀</span>
+<span class="co">#&gt; Test passed 🥇</span>
+
 <span class="fu">test_that</span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span>
   <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">%in%</span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
 <span class="co">#&gt; ── Failure (&lt;text&gt;:8:3): Versicolor has sepal length greater than 5 - will fail ──</span>
-<span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></code></pre></div>
+<span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span>
+<span class="co">#&gt; Error: Test failed</span></code></pre></div>
 </div>
 </div>
   </div>

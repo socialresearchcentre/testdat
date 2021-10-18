@@ -74,7 +74,7 @@ details." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
       </span>
     </div>
 
@@ -128,34 +128,34 @@ details.</p>
     </div>
 
     <pre class="usage"><span class='fu'>expect_values</span><span class='op'>(</span>
-  <span class='va'>var</span>,
+  <span class='va'>vars</span>,
   <span class='va'>...</span>,
   miss <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"testdat.miss"</span><span class='op'>)</span>,
   flt <span class='op'>=</span> <span class='cn'>TRUE</span>,
   data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span>
 
-<span class='fu'>expect_regex</span><span class='op'>(</span><span class='va'>var</span>, <span class='va'>pattern</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>expect_regex</span><span class='op'>(</span><span class='va'>vars</span>, <span class='va'>pattern</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>expect_range</span><span class='op'>(</span><span class='va'>var</span>, <span class='va'>min</span>, <span class='va'>max</span>, <span class='va'>...</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>expect_range</span><span class='op'>(</span><span class='va'>vars</span>, <span class='va'>min</span>, <span class='va'>max</span>, <span class='va'>...</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>expect_date_yyyy</span><span class='op'>(</span><span class='va'>var</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>expect_date_yyyy</span><span class='op'>(</span><span class='va'>vars</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>expect_date_yyyymm</span><span class='op'>(</span><span class='va'>var</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>expect_date_yyyymm</span><span class='op'>(</span><span class='va'>vars</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>expect_date_yyyymmdd</span><span class='op'>(</span><span class='va'>var</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>expect_date_yyyymmdd</span><span class='op'>(</span><span class='va'>vars</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>expect_max_length</span><span class='op'>(</span><span class='va'>var</span>, <span class='va'>len</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>expect_max_length</span><span class='op'>(</span><span class='va'>vars</span>, <span class='va'>len</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='fu'>expect_text_miss</span><span class='op'>(</span>
-  <span class='va'>var</span>,
+  <span class='va'>vars</span>,
   miss <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"testdat.miss_text"</span><span class='op'>)</span>,
   flt <span class='op'>=</span> <span class='cn'>TRUE</span>,
   data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span>
 
 <span class='fu'>expect_text_nmiss</span><span class='op'>(</span>
-  <span class='va'>var</span>,
+  <span class='va'>vars</span>,
   miss <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"testdat.miss_text"</span><span class='op'>)</span>,
   flt <span class='op'>=</span> <span class='cn'>TRUE</span>,
   data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span>
@@ -165,42 +165,44 @@ details.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>var</th>
-      <td><p>an unquoted variable name</p></td>
+      <th>vars</th>
+      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html'>tidy-select</a></code>&gt; A set of columns to
+test.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>vectors of valid values</p></td>
+      <td><p>Vectors of valid values.</p></td>
     </tr>
     <tr>
       <th>miss</th>
-      <td><p>a vector of values to be treated as missing. The
-<a href='testdat-package.html'>testdat.miss</a> option is used by default</p></td>
+      <td><p>A vector of values to be treated as missing. The
+<a href='testdat-package.html'>testdat.miss</a> option is used by default.</p></td>
     </tr>
     <tr>
       <th>flt</th>
-      <td><p>a filter specifying a subset of the dataset to test</p></td>
+      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_data_masking.html'>data-masking</a></code>&gt; A filter specifying
+a subset of the data frame to test.</p></td>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>data frame to test. The <a href='global-data.html'>global test data</a> is used
+      <td><p>A data frame to test. The <a href='global-data.html'>global test data</a> is used
 by default.</p></td>
     </tr>
     <tr>
       <th>pattern</th>
-      <td><p>a regex to check</p></td>
+      <td><p>A <a href='https://stringr.tidyverse.org/reference/str_detect.html'>str_detect()</a> pattern to match.</p></td>
     </tr>
     <tr>
       <th>min</th>
-      <td><p>minimum value for range check</p></td>
+      <td><p>Minimum value for range check.</p></td>
     </tr>
     <tr>
       <th>max</th>
-      <td><p>maximum value for range check</p></td>
+      <td><p>Maximum value for range check.</p></td>
     </tr>
     <tr>
       <th>len</th>
-      <td><p>maximum string length for checking string variables</p></td>
+      <td><p>Maximum string length.</p></td>
     </tr>
     </table>
 
@@ -212,6 +214,8 @@ by default.</p></td>
 <code><a href='datacomp-expectations.html'>datacomp-expectations</a></code>,
 <code><a href='exclusivity-expectations.html'>exclusivity-expectations</a></code>,
 <code><a href='generic-expectations.html'>generic-expectations</a></code>,
+<code><a href='label-expectations.html'>label-expectations</a></code>,
+<code><a href='proportion-expectations.html'>proportion-expectations</a></code>,
 <code><a href='uniqueness-expectations.html'>uniqueness-expectations</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

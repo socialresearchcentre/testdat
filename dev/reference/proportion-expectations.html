@@ -40,9 +40,9 @@
 
 
 <meta property="og:title" content="Expectations: proportions — proportion-expectations" />
-<meta property="og:description" content="These test the proportion of data in a dataset satisfying some condition. The
-generic functions, expect_prop_lte() and expect_prop_gte() can be used
-with any arbitrary function. For details regarding the other functions,
+<meta property="og:description" content="These test the proportion of data in a data frame satisfying some condition.
+The generic functions, expect_prop_lte() and expect_prop_gte() can be
+used with any arbitrary function. For details regarding the other functions,
 see Generic Checking Functions." />
 
 
@@ -75,7 +75,7 @@ see Generic Checking Functions." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
       </span>
     </div>
 
@@ -123,9 +123,9 @@ see Generic Checking Functions." />
     </div>
 
     <div class="ref-description">
-    <p>These test the proportion of data in a dataset satisfying some condition. The
-generic functions, <code>expect_prop_lte()</code> and <code>expect_prop_gte()</code> can be used
-with any arbitrary function. For details regarding the other functions,
+    <p>These test the proportion of data in a data frame satisfying some condition.
+The generic functions, <code>expect_prop_lte()</code> and <code>expect_prop_gte()</code> can be
+used with any arbitrary function. For details regarding the other functions,
 see <a href='chk-generic.html'>Generic Checking Functions</a>.</p>
     </div>
 
@@ -164,43 +164,46 @@ see <a href='chk-generic.html'>Generic Checking Functions</a>.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>var</th>
-      <td><p>an unquoted variable name</p></td>
+      <td><p>An unquoted column name to test.</p></td>
     </tr>
     <tr>
       <th>func</th>
-      <td><p>a function that takes a vector as the first argument and returns
-a logical vector of the same length showing whether an element passed or
-failed</p></td>
+      <td><p>A function to use for testing that takes a vector as the first
+argument and returns a logical vector of the same length showing whether an
+element passed or failed.</p></td>
     </tr>
     <tr>
       <th>prop</th>
-      <td><p>The proportion of the data one expects to satisfy the condition</p></td>
+      <td><p>The proportion of the data frame expected to satisfy the
+condition.</p></td>
     </tr>
     <tr>
       <th>flt</th>
-      <td><p>a filter specifying a subset of the dataset to test</p></td>
+      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_data_masking.html'>data-masking</a></code>&gt; A filter specifying
+a subset of the data frame to test.</p></td>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>data frame to test. The <a href='global-data.html'>global test data</a> is used
+      <td><p>A data frame to test. The <a href='global-data.html'>global test data</a> is used
 by default.</p></td>
     </tr>
     <tr>
       <th>args</th>
-      <td><p>a named list of arguments to pass to <code>func</code></p></td>
+      <td><p>A named list of arguments to pass to <code>func</code>.</p></td>
     </tr>
     <tr>
       <th>func_desc</th>
-      <td><p>A character function description to use in the expectation
-failure message.</p></td>
+      <td><p>A human friendly description of <code>func</code> to use in the
+expectation failure message.</p></td>
     </tr>
     <tr>
       <th>miss</th>
-      <td><p>vector of values to be treated as missing</p></td>
+      <td><p>A vector of values to be treated as missing. The
+<a href='testdat-package.html'>testdat.miss</a> option is used by default.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>vectors of valid values</p></td>
+      <td><p>Vectors of valid values.</p></td>
     </tr>
     </table>
 
@@ -212,7 +215,15 @@ defuse the <code>var</code> argument using the embracing operator <code>{{ }}</c
 examples sections for an example.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='chk-generic.html'>Generic Checking Functions</a></p></div>
+    <div class='dont-index'><p><a href='chk-generic.html'>Generic Checking Functions</a></p>
+<p>Other data expectations: 
+<code><a href='chk-expectations.html'>chk-expectations</a></code>,
+<code><a href='conditional-expectations.html'>conditional-expectations</a></code>,
+<code><a href='datacomp-expectations.html'>datacomp-expectations</a></code>,
+<code><a href='exclusivity-expectations.html'>exclusivity-expectations</a></code>,
+<code><a href='generic-expectations.html'>generic-expectations</a></code>,
+<code><a href='label-expectations.html'>label-expectations</a></code>,
+<code><a href='uniqueness-expectations.html'>uniqueness-expectations</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>sales</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
