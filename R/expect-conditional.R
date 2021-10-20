@@ -1,13 +1,6 @@
-#' Expectations: consistency checks
+#' Expectations: consistency
 #'
 #' These functions test whether multiple conditions coexist.
-#'
-#' * `expect_cond()` checks the coexistence of two conditions. It can be read as
-#' "if `cond1` then `cond2`".
-#'
-#' * `expect_base()` is a special case that checks missing data against a
-#' specified condition. It can be read as "if `base` then `var` not missing, if
-#' not `base` then `var` missing".
 #'
 #' @inheritParams data-params
 #' @family data expectations
@@ -33,7 +26,43 @@
 NULL
 
 #' @export
-#' @rdname conditional-expectations
+#' @describeIn conditional-expectations Checks the coexistence of two conditions. It can be read as "if
+#'   `cond1` then `cond2`".
+#' @param cond1 <[`data-masking`][dplyr::dplyr_data_masking]> First condition
+#'   (antecedent) for consistency check.
+#' @param cond2 <[`data-masking`][dplyr::dplyr_data_masking]> Second condition
+#'   (consequent) for consistency check.
+expect_cond <- function(cond1, cond2, data = get_testdata()) {
+  act <- quasi_label(enquo(data))
+
+  cond1 <- enquo(cond1)
+  act$cond1_desc <- as_label(cond1)
+  act$cond1 <- act$val %>% transmute(!!cond1) %>% pull(1)
+  act$cond1[is.na(act$cond1)] <- FALSE
+
+  cond2 <- enquo(cond2)
+  act$cond2_desc <- as_label(cond2)
+  act$cond2 <- act$val %>% transmute(!!cond2) %>% pull(1)
+  act$cond2[is.na(act$cond2)] <- FALSE
+
+  act$result <- !(act$cond1 & !act$cond2)
+
+  expect_custom(
+    all(act$result, na.rm = TRUE),
+    glue("{act$lab} failed consistency check. {sum(!act$result, na.rm = TRUE)} \\
+          cases have `{act$cond1_desc}` but not `{act$cond2_desc}`."),
+    failed_count = sum(!act$result, na.rm = TRUE),
+    total_count = sum(!is.na(act$result)),
+    result = act$result
+  )
+
+  invisible(act$result)
+}
+
+#' @export
+#' @describeIn conditional-expectations A special case that checks missing data against a specified
+#'   condition. It can be read as "if `base` then `var` not missing, if not
+#'   `base` then `var` missing".
 #' @param base <[`data-masking`][dplyr::dplyr_data_masking]> The condition that
 #'   determines which records should be non-missing.
 #' @param missing_valid Should missing values be treated as valid for records
@@ -63,39 +92,6 @@ expect_base <- function(var, base, miss = getOption("testdat.miss"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result)),
     var_desc = act$var,
-    result = act$result
-  )
-
-  invisible(act$result)
-}
-
-#' @export
-#' @rdname conditional-expectations
-#' @param cond1 <[`data-masking`][dplyr::dplyr_data_masking]> First condition
-#'   (antecedent) for consistency check.
-#' @param cond2 <[`data-masking`][dplyr::dplyr_data_masking]> Second condition
-#'   (consequent) for consistency check.
-expect_cond <- function(cond1, cond2, data = get_testdata()) {
-  act <- quasi_label(enquo(data))
-
-  cond1 <- enquo(cond1)
-  act$cond1_desc <- as_label(cond1)
-  act$cond1 <- act$val %>% transmute(!!cond1) %>% pull(1)
-  act$cond1[is.na(act$cond1)] <- FALSE
-
-  cond2 <- enquo(cond2)
-  act$cond2_desc <- as_label(cond2)
-  act$cond2 <- act$val %>% transmute(!!cond2) %>% pull(1)
-  act$cond2[is.na(act$cond2)] <- FALSE
-
-  act$result <- !(act$cond1 & !act$cond2)
-
-  expect_custom(
-    all(act$result, na.rm = TRUE),
-    glue("{act$lab} failed consistency check. {sum(!act$result, na.rm = TRUE)} \\
-          cases have `{act$cond1_desc}` but not `{act$cond2_desc}`."),
-    failed_count = sum(!act$result, na.rm = TRUE),
-    total_count = sum(!is.na(act$result)),
     result = act$result
   )
 

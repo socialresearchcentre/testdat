@@ -1,4 +1,4 @@
-#' Expectations: generic expectation helpers
+#' Expectations: helpers
 #'
 #' These functions allow for testing of multiple columns (`vars`) of a data
 #' frame (`data`), with an optional filter (`flt`), using an arbitrary function
@@ -27,7 +27,7 @@
 #'   expectation failure message.
 #' @param ... Arguments to pass to `expect_allany()`.
 #'
-#' @seealso [chk-generic] for a set of generic checking functions
+#' @seealso `chk_*()` functions such as [`chk_values()`][chk-values]
 #' @family data expectations
 #' @name generic-expectations
 #' @examples

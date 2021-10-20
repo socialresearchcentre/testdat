@@ -1,4 +1,4 @@
-#' Expectations: uniqueness checks
+#' Expectations: uniqueness
 #'
 #' These functions test variables for uniqueness.
 #'
@@ -21,6 +21,7 @@
 #'   set `exclude = NULL`.
 #'
 #' @family data expectations
+#' @seealso [Checks: uniqueness][chk-uniqueness]
 #' @name uniqueness-expectations
 #' @examples
 #'

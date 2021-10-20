@@ -6,7 +6,9 @@
 \alias{testdat-package}
 \title{testdat: Data Unit Testing for R}
 \description{
-Test your data! An extension of the 'testthat' unit testing framework with a family of functions and reporting tools for checking and validating data frames.
+Test your data! An extension of the 'testthat' unit testing
+    framework with a family of functions and reporting tools for checking
+    and validating data frames.
 }
 \section{Options}{
 

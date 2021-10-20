@@ -28,7 +28,7 @@ interface using \code{\link[=dplyr_tidy_select]{tidy-select}}.
 }
 }
 \seealso{
-\link[=chk-generic]{Generic Checking Functions}
+\verb{chk_*()} functions such as \code{\link[=chk-values]{chk_values()}}
 
 \link[=chk-helper]{Checking Helper Functions}
 }

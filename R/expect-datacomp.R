@@ -1,4 +1,4 @@
-#' Expectations: data frame comparison expectations
+#' Expectations: comparisons
 #'
 #' @description
 #'

@@ -5,7 +5,7 @@
 \alias{expect_allany}
 \alias{expect_all}
 \alias{expect_any}
-\title{Expectations: generic expectation helpers}
+\title{Expectations: helpers}
 \usage{
 expect_allany(
   vars,
@@ -98,14 +98,14 @@ expect_all(
 
 }
 \seealso{
-\link{chk-generic} for a set of generic checking functions
+\verb{chk_*()} functions such as \code{\link[=chk-values]{chk_values()}}
 
 Other data expectations: 
-\code{\link{chk-expectations}},
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{label-expectations}},
+\code{\link{pattern-expectations}},
 \code{\link{proportion-expectations}},
 \code{\link{uniqueness-expectations}}
 }

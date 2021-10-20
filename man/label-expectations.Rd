@@ -2,12 +2,9 @@
 % Please edit documentation in R/expect-labels.R
 \name{label-expectations}
 \alias{label-expectations}
-\alias{chk_labels}
 \alias{expect_labels}
-\title{Expectations: data label checks}
+\title{Expectations: labels}
 \usage{
-chk_labels(x, val_labels = NULL, var_label = NULL)
-
 expect_labels(
   vars,
   val_labels = NULL,
@@ -17,7 +14,8 @@ expect_labels(
 )
 }
 \arguments{
-\item{x}{A vector to check.}
+\item{vars}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}> A set of columns to
+test.}
 
 \item{val_labels}{What value label check should be performed? One of:
 \itemize{
@@ -36,21 +34,14 @@ expect_labels(
 \item \code{NULL} to ignore the variable label when checking.
 }}
 
-\item{vars}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}> A set of columns to
-test.}
-
 \item{flt}{<\code{\link[dplyr:dplyr_data_masking]{data-masking}}> A filter specifying
 a subset of the data frame to test.}
 
 \item{data}{A data frame to test. The \link[=global-data]{global test data} is used
 by default.}
 }
-\value{
-A logical vector flagging records that have passed or failed the
-check.
-}
 \description{
-These expectations test whether or not a variable is labelled as expected.
+Test whether variables in a dataframe are labelled in a given way.
 }
 \examples{
 
@@ -80,12 +71,14 @@ expect_labels(z, var_label = FALSE, data = df)
 
 }
 \seealso{
+\link[=chk-labels]{Checks: labels}
+
 Other data expectations: 
-\code{\link{chk-expectations}},
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{generic-expectations}},
+\code{\link{pattern-expectations}},
 \code{\link{proportion-expectations}},
 \code{\link{uniqueness-expectations}}
 }

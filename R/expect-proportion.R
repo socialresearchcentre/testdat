@@ -1,9 +1,9 @@
 #' Expectations: proportions
 #'
 #' These test the proportion of data in a data frame satisfying some condition.
-#' The generic functions, `expect_prop_lte()` and `expect_prop_gte()` can be
-#' used with any arbitrary function. For details regarding the other functions,
-#' see [Generic Checking Functions][chk-generic].
+#' The generic functions, `expect_prop_lte()` and `expect_prop_gte()`, can be
+#' used with any arbitrary function. The `chk_*()` functions, like
+#' `chk_values()`, are useful in this regard.
 #'
 #' Given the use of quasi-quotation within these functions, to make a new
 #' functions using one of the generics such as `expect_prop_gte()` one must
@@ -21,7 +21,7 @@
 #'   expectation failure message.
 #' @param ... Vectors of valid values.
 #'
-#' @seealso [Generic Checking Functions][chk-generic]
+#' @seealso `chk_*()` functions such as [`chk_values()`][chk-values]
 #' @family data expectations
 #' @name proportion-expectations
 #'

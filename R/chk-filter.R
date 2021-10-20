@@ -1,4 +1,4 @@
-#' Checking helper functions
+#' Checks: helpers
 #'
 #' These helper functions allowing easy checking using an arbitrary function
 #' (`func`) over multiple columns (`vars`) of a data frame (`data`), with an
@@ -25,7 +25,7 @@
 #'   that have passed or failed the check, with `NA` where records do not meet
 #'   the filter condition.
 #'
-#' @seealso [Generic Checking Functions][chk-generic]
+#' @seealso Other `chk_*()` functions such as [`chk_values()`][chk-values]
 #' @name chk-helper
 #' @examples
 #'

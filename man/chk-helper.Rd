@@ -5,7 +5,7 @@
 \alias{chk_filter}
 \alias{chk_filter_all}
 \alias{chk_filter_any}
-\title{Checking helper functions}
+\title{Checks: helpers}
 \usage{
 chk_filter(data, vars, func, flt = TRUE, args = list())
 
@@ -81,5 +81,5 @@ chk_filter_all(
 
 }
 \seealso{
-\link[=chk-generic]{Generic Checking Functions}
+Other \verb{chk_*()} functions such as \code{\link[=chk-values]{chk_values()}}
 }

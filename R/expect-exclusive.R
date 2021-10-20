@@ -1,4 +1,4 @@
-#' Expectations: exclusivity checks
+#' Expectations: exclusivity
 #'
 #' `expect_exclusive` tests that `vars` are exclusive - that, if any one of
 #' `vars` is set to `exc_val`, no other column in `vars` or `var_set` is also

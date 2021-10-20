@@ -5,7 +5,7 @@
 \alias{expect_unique}
 \alias{expect_unique_across}
 \alias{expect_unique_combine}
-\title{Expectations: uniqueness checks}
+\title{Expectations: uniqueness}
 \usage{
 expect_unique(
   vars,
@@ -95,13 +95,15 @@ try(expect_unique_combine(c(phone1, phone2), data = student_fruit_preferences))
 
 }
 \seealso{
+\link[=chk-uniqueness]{Checks: uniqueness}
+
 Other data expectations: 
-\code{\link{chk-expectations}},
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{generic-expectations}},
 \code{\link{label-expectations}},
+\code{\link{pattern-expectations}},
 \code{\link{proportion-expectations}}
 }
 \concept{data expectations}

@@ -3,7 +3,7 @@
 \name{exclusivity-expectations}
 \alias{exclusivity-expectations}
 \alias{expect_exclusive}
-\title{Expectations: exclusivity checks}
+\title{Expectations: exclusivity}
 \usage{
 expect_exclusive(vars, var_set, exc_val = 1, flt = TRUE, data = get_testdata())
 }
@@ -67,11 +67,11 @@ expect_exclusive(
 }
 \seealso{
 Other data expectations: 
-\code{\link{chk-expectations}},
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
 \code{\link{generic-expectations}},
 \code{\link{label-expectations}},
+\code{\link{pattern-expectations}},
 \code{\link{proportion-expectations}},
 \code{\link{uniqueness-expectations}}
 }

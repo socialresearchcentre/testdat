@@ -9,29 +9,23 @@ reference:
 - title: Expectations
   desc: ~
   contents:
-  - '`conditional-expectations`'
-  - '`datacomp-expectations`'
-  - '`chk-expectations`'
-  - '`generic-expectations`'
-  - '`exclusivity-expectations`'
-  - '`label-expectations`'
-  - '`proportion-expectations`'
-  - '`uniqueness-expectations`'
+  - starts_with("expect_")
+  - -expect_make
+  - -expect_custom
 
 - title: Vectorised checking functions
   desc: ~
   contents:
-  - '`chk-generic`'
-  - '`chk-helper`'
+  - starts_with("chk_")
 
 - title: Configuration and reporting
   desc: ~
   contents:
   - '`global-data`'
-  - '`output_results_excel`'
+  - output_results_excel
 
 - title: Advanced
   desc: ~
   contents:
-  - '`expect_make`'
-  - '`expect_custom`'
+  - expect_make
+  - expect_custom

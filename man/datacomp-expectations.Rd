@@ -4,7 +4,7 @@
 \alias{datacomp-expectations}
 \alias{expect_valmatch}
 \alias{expect_subset}
-\title{Expectations: data frame comparison expectations}
+\title{Expectations: comparisons}
 \usage{
 expect_valmatch(
   data2,
@@ -74,11 +74,11 @@ expect_subset(df2, by = "id", data = df1)
 }
 \seealso{
 Other data expectations: 
-\code{\link{chk-expectations}},
 \code{\link{conditional-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{generic-expectations}},
 \code{\link{label-expectations}},
+\code{\link{pattern-expectations}},
 \code{\link{proportion-expectations}},
 \code{\link{uniqueness-expectations}}
 }
