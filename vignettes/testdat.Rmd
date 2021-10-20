@@ -165,10 +165,23 @@ Data expectations fall into a few main classes.
 
 Value
 
+:   `` ?`date-expectations` ``
+:   `` ?`label-expectations` ``
+:   `` ?`pattern-expectations` ``
+:   `` ?`proportion-expectations` ``
+:   `` ?`text-expectations` ``
 :   `` ?`value-expectations` ``
     
     Value expectations test variable values for valid data. Tests include
-    explicit value checks, uniqueness and others.
+    explicit value checks, pattern checks and others.
+
+Relationships
+
+:   `` ?`exclusivity-expectations` ``
+:   `` ?`uniqueness-expectations` ``
+
+    Relationship expectations test for relationships among variables. Tests
+    include uniqueness and exclusivity checks.
 
 Conditional
 
