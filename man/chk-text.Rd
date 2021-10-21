@@ -32,7 +32,9 @@ placeholders
 
 chk_ascii(c("a", "\U1f642")) # detect non-ASCII characters
 
-# TODO
+imported_data <- c(1, "#n/a", 2, "", 3, NA)
+chk_text_miss(imported_data)
+chk_text_nmiss(imported_data) # Equivalent to !chk_text_miss(imported_data)
 
 }
 \seealso{

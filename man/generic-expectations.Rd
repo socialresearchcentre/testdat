@@ -89,10 +89,11 @@ expect_any(
 )
 
 # Check petal dimensions are positive
-expect_all(
+expect_allany(
   vars = where(is.numeric),
   func = chk_range,
   args = list(min = 0, max = Inf),
+  allany = chk_filter_all,
   data = iris
 )
 

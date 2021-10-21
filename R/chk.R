@@ -99,7 +99,9 @@ chk_unique <- function(x) {
 #'
 #' chk_ascii(c("a", "\U1f642")) # detect non-ASCII characters
 #'
-#' # TODO
+#' imported_data <- c(1, "#n/a", 2, "", 3, NA)
+#' chk_text_miss(imported_data)
+#' chk_text_nmiss(imported_data) # Equivalent to !chk_text_miss(imported_data)
 #'
 #' @seealso [Checking Helper Functions][chk-helper]
 #' @seealso [Expectations: text][text-expectations]
@@ -140,6 +142,7 @@ chk_text_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
 #' @examples
 #'
 #' x <- c(NA, 0, 1, 0.5, 0, NA, 99)
+#' chk_blank(x) # Blank
 #' chk_equals(x, 0) # Either blank or 0
 #' chk_values(x, 0, 1) # Either blank, 0, 1, or 99
 #' chk_range(x, 0, 1) # Either blank or in [0,1]

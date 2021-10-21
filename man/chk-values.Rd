@@ -41,6 +41,7 @@ Check that a vector contains only certain values.
 \examples{
 
 x <- c(NA, 0, 1, 0.5, 0, NA, 99)
+chk_blank(x) # Blank
 chk_equals(x, 0) # Either blank or 0
 chk_values(x, 0, 1) # Either blank, 0, 1, or 99
 chk_range(x, 0, 1) # Either blank or in [0,1]
