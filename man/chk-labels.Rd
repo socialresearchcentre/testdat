@@ -62,11 +62,11 @@ chk_labels(df$z, var_label = FALSE)
 
 }
 \seealso{
-\link[=chk-helper]{Checking Helper Functions}
+\link[=chk-helper]{Checks: data frame helpers}
 
 \link[=label-expectations]{Expectations: labels}
 
-Other vector checkers: 
+Other vector checks: 
 \code{\link{chk-dates}},
 \code{\link{chk-dummy}},
 \code{\link{chk-patterns}},
@@ -74,4 +74,4 @@ Other vector checkers:
 \code{\link{chk-uniqueness}},
 \code{\link{chk-values}}
 }
-\concept{vector checkers}
+\concept{vector checks}

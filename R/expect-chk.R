@@ -4,7 +4,7 @@ NULL
 # Patterns ---------------------------------------------------------------------
 #' Expectations: patterns
 #'
-#' Test whether variables in a dataframe conform to a given pattern.
+#' Test whether variables in a data frame conform to a given pattern.
 #'
 #' @inheritParams data-params
 #' @family data expectations
@@ -35,9 +35,10 @@ expect_max_length <- expect_make(chk_max_length, "length check")
 # Values -----------------------------------------------------------------------
 #' Expectations: values
 #'
-#' Test whether variables in a dataframe contain only certain values.
+#' Test whether variables in a data frame contain only certain values.
 #'
 #' @inherit pattern-expectations
+#' @family data expectations
 #' @examples
 #'
 #' sales <- data.frame(
@@ -68,9 +69,10 @@ expect_range <- expect_make(chk_range, "range check")
 # Text -------------------------------------------------------------------------
 #' Expectations: text
 #'
-#' Test whether variables in a dataframe contain common NULL placeholders.
+#' Test whether variables in a data frame contain common NULL placeholders.
 #'
 #' @inherit pattern-expectations
+#' @family data expectations
 #' @examples
 #'
 #' sales <- data.frame(
@@ -102,10 +104,11 @@ expect_text_nmiss <- expect_make(chk_text_nmiss, "missing check")
 # Dates ------------------------------------------------------------------------
 #' Expectations: dates
 #'
-#' Test whether variables in a dataframe conform to a given date format such as
+#' Test whether variables in a data frame conform to a given date format such as
 #' YYYYMMDD.
 #'
 #' @inherit pattern-expectations
+#' @family data expectations
 #' @examples
 #'
 #' sales <- data.frame(

@@ -49,11 +49,11 @@ chk_range(x, 0, 1, 99) # Either blank, in [0,1], or equal to 99
 
 }
 \seealso{
-\link[=chk-helper]{Checking Helper Functions}
+\link[=chk-helper]{Checks: data frame helpers}
 
 \link[=value-expectations]{Expectations: values}
 
-Other vector checkers: 
+Other vector checks: 
 \code{\link{chk-dates}},
 \code{\link{chk-dummy}},
 \code{\link{chk-labels}},
@@ -61,4 +61,4 @@ Other vector checkers:
 \code{\link{chk-text}},
 \code{\link{chk-uniqueness}}
 }
-\concept{vector checkers}
+\concept{vector checks}

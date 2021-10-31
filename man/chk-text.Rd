@@ -38,11 +38,11 @@ chk_text_nmiss(imported_data) # Equivalent to !chk_text_miss(imported_data)
 
 }
 \seealso{
-\link[=chk-helper]{Checking Helper Functions}
+\link[=chk-helper]{Checks: data frame helpers}
 
 \link[=text-expectations]{Expectations: text}
 
-Other vector checkers: 
+Other vector checks: 
 \code{\link{chk-dates}},
 \code{\link{chk-dummy}},
 \code{\link{chk-labels}},
@@ -50,4 +50,4 @@ Other vector checkers:
 \code{\link{chk-uniqueness}},
 \code{\link{chk-values}}
 }
-\concept{vector checkers}
+\concept{vector checks}

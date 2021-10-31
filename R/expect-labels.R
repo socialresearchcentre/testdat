@@ -42,9 +42,9 @@
 #' chk_labels(df$z, val_labels = FALSE)
 #' chk_labels(df$z, var_label = FALSE)
 #'
-#' @seealso [Checking Helper Functions][chk-helper]
+#' @seealso [Checks: data frame helpers][chk-helper]
 #' @seealso [Expectations: labels][label-expectations]
-#' @family vector checkers
+#' @family vector checks
 #' @name chk-labels
 #' @export
 chk_labels <- function(x, val_labels = NULL, var_label = NULL) {
@@ -88,7 +88,7 @@ chk_labels <- function(x, val_labels = NULL, var_label = NULL) {
 
 #' Expectations: labels
 #'
-#' Test whether variables in a dataframe are labelled in a given way.
+#' Test whether variables in a data frame are labelled in a given way.
 #'
 #' @inherit pattern-expectations
 #' @inheritParams chk-labels

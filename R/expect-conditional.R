@@ -26,8 +26,8 @@
 NULL
 
 #' @export
-#' @describeIn conditional-expectations Checks the coexistence of two conditions. It can be read as "if
-#'   `cond1` then `cond2`".
+#' @describeIn conditional-expectations Checks the coexistence of two
+#'   conditions. It can be read as "if `cond1` then `cond2`".
 #' @param cond1 <[`data-masking`][dplyr::dplyr_data_masking]> First condition
 #'   (antecedent) for consistency check.
 #' @param cond2 <[`data-masking`][dplyr::dplyr_data_masking]> Second condition
@@ -60,16 +60,20 @@ expect_cond <- function(cond1, cond2, data = get_testdata()) {
 }
 
 #' @export
-#' @describeIn conditional-expectations A special case that checks missing data against a specified
-#'   condition. It can be read as "if `base` then `var` not missing, if not
-#'   `base` then `var` missing".
+#' @describeIn conditional-expectations A special case that checks missing data
+#'   against a specified condition. It can be read as "if `base` then `var` not
+#'   missing, if not `base` then `var` missing".
 #' @param base <[`data-masking`][dplyr::dplyr_data_masking]> The condition that
 #'   determines which records should be non-missing.
 #' @param missing_valid Should missing values be treated as valid for records
 #'   meeting the `base` condition? This allows 'one way' base checks. This is
 #'   `FALSE` by default.
-expect_base <- function(var, base, miss = getOption("testdat.miss"),
-                        missing_valid = FALSE, data = get_testdata()) {
+expect_base <- function(var,
+                        base,
+                        miss = getOption("testdat.miss"),
+                        missing_valid = FALSE,
+                        data = get_testdata()) {
+
   act <- quasi_label(enquo(data))
 
   act$var_desc <- as_label(ensym(var))

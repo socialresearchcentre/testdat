@@ -75,11 +75,14 @@ expect_subset(df2, by = "id", data = df1)
 \seealso{
 Other data expectations: 
 \code{\link{conditional-expectations}},
+\code{\link{date-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{generic-expectations}},
 \code{\link{label-expectations}},
 \code{\link{pattern-expectations}},
 \code{\link{proportion-expectations}},
-\code{\link{uniqueness-expectations}}
+\code{\link{text-expectations}},
+\code{\link{uniqueness-expectations}},
+\code{\link{value-expectations}}
 }
 \concept{data expectations}

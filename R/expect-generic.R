@@ -1,4 +1,4 @@
-#' Expectations: helpers
+#' Expectations: generic helpers
 #'
 #' These functions allow for testing of multiple columns (`vars`) of a data
 #' frame (`data`), with an optional filter (`flt`), using an arbitrary function
@@ -68,10 +68,14 @@ NULL
 
 #' @export
 #' @rdname generic-expectations
-expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
+expect_allany <- function(vars,
+                          func,
+                          flt = TRUE,
+                          data = get_testdata(),
                           args = list(),
                           allany = c(chk_filter_all, chk_filter_any),
                           func_desc = NULL) {
+
   act <- quasi_label(enquo(data))
   act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
   act$var_desc  <- as_label_vars(enquo(vars))
@@ -110,4 +114,3 @@ expect_all <- function(...) {
 expect_any <- function(...) {
   expect_allany(..., allany = chk_filter_any)
 }
-

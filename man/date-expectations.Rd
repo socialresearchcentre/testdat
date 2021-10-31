@@ -24,7 +24,7 @@ a subset of the data frame to test.}
 by default.}
 }
 \description{
-Test whether variables in a dataframe conform to a given date format such as
+Test whether variables in a data frame conform to a given date format such as
 YYYYMMDD.
 }
 \examples{
@@ -43,4 +43,17 @@ try(expect_date_yyyy(published, data = sales)) # Publication years valid
 }
 \seealso{
 \link[=chk-dates]{Checks: date}
+
+Other data expectations: 
+\code{\link{conditional-expectations}},
+\code{\link{datacomp-expectations}},
+\code{\link{exclusivity-expectations}},
+\code{\link{generic-expectations}},
+\code{\link{label-expectations}},
+\code{\link{pattern-expectations}},
+\code{\link{proportion-expectations}},
+\code{\link{text-expectations}},
+\code{\link{uniqueness-expectations}},
+\code{\link{value-expectations}}
 }
+\concept{data expectations}

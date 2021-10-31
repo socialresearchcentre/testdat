@@ -11,8 +11,8 @@
 #'
 #' chk_dummy(LETTERS)
 #'
-#' @seealso [Checking Helper Functions][chk-helper]
-#' @family vector checkers
+#' @seealso [Checks: data frame helpers][chk-helper]
+#' @family vector checks
 #' @name chk-dummy
 #' @export
 chk_dummy <- function(x) {
@@ -32,9 +32,9 @@ chk_dummy <- function(x) {
 #' chk_pattern(x, "[a-z]_[0-9]")
 #' chk_max_length(x, 3)
 #'
-#' @seealso [Checking Helper Functions][chk-helper]
+#' @seealso [Checks: data frame helpers][chk-helper]
 #' @seealso [Expectations: patterns][pattern-expectations]
-#' @family vector checkers
+#' @family vector checks
 #' @name chk-patterns
 NULL
 
@@ -72,9 +72,9 @@ chk_max_length <- function(x, len) {
 #' x <- c(10, 1:10, 10)
 #' chk_unique(x)
 #'
-#' @seealso [Checking Helper Functions][chk-helper]
+#' @seealso [Checks: data frame helpers][chk-helper]
 #' @seealso [Expectations: uniqueness][uniqueness-expectations]
-#' @family vector checkers
+#' @family vector checks
 #' @name chk-uniqueness
 NULL
 
@@ -103,9 +103,9 @@ chk_unique <- function(x) {
 #' chk_text_miss(imported_data)
 #' chk_text_nmiss(imported_data) # Equivalent to !chk_text_miss(imported_data)
 #'
-#' @seealso [Checking Helper Functions][chk-helper]
+#' @seealso [Checks: data frame helpers][chk-helper]
 #' @seealso [Expectations: text][text-expectations]
-#' @family vector checkers
+#' @family vector checks
 #' @name chk-text
 NULL
 
@@ -148,9 +148,9 @@ chk_text_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
 #' chk_range(x, 0, 1) # Either blank or in [0,1]
 #' chk_range(x, 0, 1, 99) # Either blank, in [0,1], or equal to 99
 #'
-#' @seealso [Checking Helper Functions][chk-helper]
+#' @seealso [Checks: data frame helpers][chk-helper]
 #' @seealso [Expectations: values][value-expectations]
-#' @family vector checkers
+#' @family vector checks
 #' @name chk-values
 NULL
 
@@ -212,9 +212,9 @@ chk_blank <- function(x) {
 #' date <- c("0001", "1688", "1775", "1789", "1791", "1848")
 #' chk_date_yyyy(date)
 #'
-#' @seealso [Checking Helper Functions][chk-helper]
+#' @seealso [Checks: data frame helpers][chk-helper]
 #' @seealso [Expectations: dates][date-expectations]
-#' @family vector checkers
+#' @family vector checks
 #' @name chk-dates
 NULL
 

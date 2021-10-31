@@ -5,7 +5,7 @@
 \alias{expect_allany}
 \alias{expect_all}
 \alias{expect_any}
-\title{Expectations: helpers}
+\title{Expectations: generic helpers}
 \usage{
 expect_allany(
   vars,
@@ -104,10 +104,13 @@ expect_allany(
 Other data expectations: 
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
+\code{\link{date-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{label-expectations}},
 \code{\link{pattern-expectations}},
 \code{\link{proportion-expectations}},
-\code{\link{uniqueness-expectations}}
+\code{\link{text-expectations}},
+\code{\link{uniqueness-expectations}},
+\code{\link{value-expectations}}
 }
 \concept{data expectations}

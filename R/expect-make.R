@@ -27,7 +27,12 @@
 #' try(expect_binary(cyl, data = mtcars))
 #'
 #' @export
-expect_make <- function(func, func_desc = NULL, vars = FALSE, all = TRUE, env = caller_env()) {
+expect_make <- function(func,
+                        func_desc = NULL,
+                        vars = FALSE,
+                        all = TRUE,
+                        env = caller_env()) {
+
   enfunc <- enexpr(func)
   args <- formals(eval_tidy(enfunc))[-1] %>% as.list
   args_list <- set_names(lapply(names(args), parse_expr))

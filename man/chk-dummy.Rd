@@ -23,9 +23,9 @@ chk_dummy(LETTERS)
 
 }
 \seealso{
-\link[=chk-helper]{Checking Helper Functions}
+\link[=chk-helper]{Checks: data frame helpers}
 
-Other vector checkers: 
+Other vector checks: 
 \code{\link{chk-dates}},
 \code{\link{chk-labels}},
 \code{\link{chk-patterns}},
@@ -33,4 +33,4 @@ Other vector checkers:
 \code{\link{chk-uniqueness}},
 \code{\link{chk-values}}
 }
-\concept{vector checkers}
+\concept{vector checks}

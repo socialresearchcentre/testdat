@@ -43,12 +43,12 @@ These functions test whether multiple conditions coexist.
 }
 \section{Functions}{
 \itemize{
-\item \code{expect_cond}: Checks the coexistence of two conditions. It can be read as "if
-\code{cond1} then \code{cond2}".
+\item \code{expect_cond}: Checks the coexistence of two
+conditions. It can be read as "if \code{cond1} then \code{cond2}".
 
-\item \code{expect_base}: A special case that checks missing data against a specified
-condition. It can be read as "if \code{base} then \code{var} not missing, if not
-\code{base} then \code{var} missing".
+\item \code{expect_base}: A special case that checks missing data
+against a specified condition. It can be read as "if \code{base} then \code{var} not
+missing, if not \code{base} then \code{var} missing".
 }}
 
 \examples{
@@ -73,11 +73,14 @@ expect_cond(q1a \%in\% 0, q2a > 50, data = my_survey)
 \seealso{
 Other data expectations: 
 \code{\link{datacomp-expectations}},
+\code{\link{date-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{generic-expectations}},
 \code{\link{label-expectations}},
 \code{\link{pattern-expectations}},
 \code{\link{proportion-expectations}},
-\code{\link{uniqueness-expectations}}
+\code{\link{text-expectations}},
+\code{\link{uniqueness-expectations}},
+\code{\link{value-expectations}}
 }
 \concept{data expectations}

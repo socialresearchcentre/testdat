@@ -25,7 +25,7 @@ by default.}
 \item{len}{Maximum string length.}
 }
 \description{
-Test whether variables in a dataframe conform to a given pattern.
+Test whether variables in a data frame conform to a given pattern.
 }
 \examples{
 
@@ -44,10 +44,13 @@ try(expect_max_length(item_code,  3, data = sales)) # Code width <= 3
 Other data expectations: 
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
+\code{\link{date-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{generic-expectations}},
 \code{\link{label-expectations}},
 \code{\link{proportion-expectations}},
-\code{\link{uniqueness-expectations}}
+\code{\link{text-expectations}},
+\code{\link{uniqueness-expectations}},
+\code{\link{value-expectations}}
 }
 \concept{data expectations}

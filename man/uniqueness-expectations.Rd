@@ -84,7 +84,8 @@ expect_unique_across(
 )
 )
 
-# Check each fruit has unique preference number, allowing multiple 99 (item skipped) codes
+# Check each fruit has unique preference number, allowing multiple 99 (item
+# skipped) codes
 expect_unique_across(
   c(apple, orange, banana),
   exclude = c(99, NA), data = student_fruit_preferences
@@ -100,10 +101,13 @@ try(expect_unique_combine(c(phone1, phone2), data = student_fruit_preferences))
 Other data expectations: 
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
+\code{\link{date-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{generic-expectations}},
 \code{\link{label-expectations}},
 \code{\link{pattern-expectations}},
-\code{\link{proportion-expectations}}
+\code{\link{proportion-expectations}},
+\code{\link{text-expectations}},
+\code{\link{value-expectations}}
 }
 \concept{data expectations}

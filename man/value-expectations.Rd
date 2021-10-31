@@ -37,7 +37,7 @@ by default.}
 \item{max}{Maximum value for range check.}
 }
 \description{
-Test whether variables in a dataframe contain only certain values.
+Test whether variables in a data frame contain only certain values.
 }
 \examples{
 
@@ -53,4 +53,17 @@ try(expect_range(sale_price, min = 0, max = Inf, data = sales)) # Prices non-neg
 }
 \seealso{
 \link[=chk-values]{Checks: values}
+
+Other data expectations: 
+\code{\link{conditional-expectations}},
+\code{\link{datacomp-expectations}},
+\code{\link{date-expectations}},
+\code{\link{exclusivity-expectations}},
+\code{\link{generic-expectations}},
+\code{\link{label-expectations}},
+\code{\link{pattern-expectations}},
+\code{\link{proportion-expectations}},
+\code{\link{text-expectations}},
+\code{\link{uniqueness-expectations}}
 }
+\concept{data expectations}

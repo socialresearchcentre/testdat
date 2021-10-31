@@ -47,7 +47,13 @@
 #' try(expect_example(x, data = data.frame(x = c(NA, -2:2))))
 #' @importFrom testthat expectation is.expectation quasi_label exp_signal
 #' @export
-expect_custom <- function(ok, failure_message, info = NULL, srcref = NULL, trace = NULL, ...) {
+expect_custom <- function(ok,
+                          failure_message,
+                          info = NULL,
+                          srcref = NULL,
+                          trace = NULL,
+                          ...) {
+
   type <- if (ok) "success" else "failure"
 
   # Preserve existing API which appear to be used in package test code
@@ -80,7 +86,9 @@ as_label_repl <- function(quo, pattern, replace = "") {
   stringr::str_replace_all(as_label(quo), pattern, replace)
 }
 
-as_label_vars <- function(quo) as_label_repl(quo, "(^(c|vars)\\()(.*)(\\)$)", "\\3")
+as_label_vars <- function(quo) {
+  as_label_repl(quo, "(^(c|vars)\\()(.*)(\\)$)", "\\3")
+}
 
 as_label_flt  <- function(quo) {
   quo_lab <- as_label(quo)

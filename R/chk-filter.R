@@ -1,4 +1,4 @@
-#' Checks: helpers
+#' Checks: data frame helpers
 #'
 #' These helper functions allowing easy checking using an arbitrary function
 #' (`func`) over multiple columns (`vars`) of a data frame (`data`), with an
@@ -49,7 +49,7 @@
 #'   list(min = 0, max = 100)
 #' )
 #'
-#' #' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
+#' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
 #' # inches OR < 100 horsepower
 #' chk_filter_any(
 #'   mtcars,

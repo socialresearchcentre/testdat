@@ -32,11 +32,11 @@ chk_max_length(x, 3)
 
 }
 \seealso{
-\link[=chk-helper]{Checking Helper Functions}
+\link[=chk-helper]{Checks: data frame helpers}
 
 \link[=pattern-expectations]{Expectations: patterns}
 
-Other vector checkers: 
+Other vector checks: 
 \code{\link{chk-dates}},
 \code{\link{chk-dummy}},
 \code{\link{chk-labels}},
@@ -44,4 +44,4 @@ Other vector checkers:
 \code{\link{chk-uniqueness}},
 \code{\link{chk-values}}
 }
-\concept{vector checkers}
+\concept{vector checks}

@@ -41,7 +41,7 @@ a subset of the data frame to test.}
 by default.}
 }
 \description{
-Test whether variables in a dataframe are labelled in a given way.
+Test whether variables in a data frame are labelled in a given way.
 }
 \examples{
 
@@ -76,10 +76,13 @@ expect_labels(z, var_label = FALSE, data = df)
 Other data expectations: 
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
+\code{\link{date-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{generic-expectations}},
 \code{\link{pattern-expectations}},
 \code{\link{proportion-expectations}},
-\code{\link{uniqueness-expectations}}
+\code{\link{text-expectations}},
+\code{\link{uniqueness-expectations}},
+\code{\link{value-expectations}}
 }
 \concept{data expectations}

@@ -27,11 +27,11 @@ chk_unique(x)
 
 }
 \seealso{
-\link[=chk-helper]{Checking Helper Functions}
+\link[=chk-helper]{Checks: data frame helpers}
 
 \link[=uniqueness-expectations]{Expectations: uniqueness}
 
-Other vector checkers: 
+Other vector checks: 
 \code{\link{chk-dates}},
 \code{\link{chk-dummy}},
 \code{\link{chk-labels}},
@@ -39,4 +39,4 @@ Other vector checkers:
 \code{\link{chk-text}},
 \code{\link{chk-values}}
 }
-\concept{vector checkers}
+\concept{vector checks}

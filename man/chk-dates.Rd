@@ -36,11 +36,11 @@ chk_date_yyyy(date)
 
 }
 \seealso{
-\link[=chk-helper]{Checking Helper Functions}
+\link[=chk-helper]{Checks: data frame helpers}
 
 \link[=date-expectations]{Expectations: dates}
 
-Other vector checkers: 
+Other vector checks: 
 \code{\link{chk-dummy}},
 \code{\link{chk-labels}},
 \code{\link{chk-patterns}},
@@ -48,4 +48,4 @@ Other vector checkers:
 \code{\link{chk-uniqueness}},
 \code{\link{chk-values}}
 }
-\concept{vector checkers}
+\concept{vector checks}
