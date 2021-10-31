@@ -386,7 +386,7 @@
     <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="va">state</span> <span class="op">==</span> <span class="st">"NSW"</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; Test passed 😸</span>
+<span class="co">#&gt; Test passed 🥳</span>
 <span class="co">#&gt; ── Failure (&lt;text&gt;:16:5): variable values are correct ──────────────────────────</span>
 <span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span>
 <span class="co">#&gt; Filter: None</span>
@@ -429,7 +429,7 @@
 <span class="fu">test_that</span><span class="op">(</span><span class="st">"Variable format checks"</span>, <span class="op">{</span>
   <span class="fu"><a href="../reference/pattern-expectations.html">expect_regex</a></span><span class="op">(</span><span class="va">Species</span>, <span class="st">"^[a-z]+$"</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; Test passed 🌈</span>
+<span class="co">#&gt; Test passed 🥳</span>
 
 <span class="fu">test_that</span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span>
   <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">%in%</span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span>
