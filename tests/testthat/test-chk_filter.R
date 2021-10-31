@@ -25,4 +25,9 @@ test_that("chk_filter", {
     all(chk_filter_all(mtcars, everything(), is.numeric)),
     label = "Ensure `everything()` works in chk_filter functions"
   )
+
+  expect_equal(
+    ncol(chk_filter(iris, where(is.numeric), chk_range, args = list(min = 1000, max = Inf))),
+    4,
+  )
 })
