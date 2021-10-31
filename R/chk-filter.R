@@ -1,4 +1,4 @@
-#' Checking helper functions
+#' Checks: data frame helpers
 #'
 #' These helper functions allowing easy checking using an arbitrary function
 #' (`func`) over multiple columns (`vars`) of a data frame (`data`), with an
@@ -25,7 +25,7 @@
 #'   that have passed or failed the check, with `NA` where records do not meet
 #'   the filter condition.
 #'
-#' @seealso [Generic Checking Functions][chk-generic]
+#' @seealso Other `chk_*()` functions such as [`chk_values()`][chk-values]
 #' @name chk-helper
 #' @examples
 #'
@@ -42,6 +42,16 @@
 #' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
 #' # inches AND < 100 horsepower
 #' chk_filter_all(
+#'   mtcars,
+#'   c("disp", "hp"),
+#'   chk_range,
+#'   cyl == 4,
+#'   list(min = 0, max = 100)
+#' )
+#'
+#' # Check that every 4-cylinder car has an engine displacement of < 100 cubic
+#' # inches OR < 100 horsepower
+#' chk_filter_any(
 #'   mtcars,
 #'   c("disp", "hp"),
 #'   chk_range,

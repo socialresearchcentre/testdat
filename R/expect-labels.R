@@ -1,9 +1,10 @@
-#' Expectations: data label checks
+# Check ------------------------------------------------------------------------
+
+#' Checks: labels
 #'
-#' These expectations test whether or not a variable is labelled as expected.
+#' Check that a vector is labelled in a given way.
 #'
-#' @inheritParams data-params
-#' @inheritParams chk-generic
+#' @inherit chk-dummy
 #' @param val_labels What value label check should be performed? One of:
 #'   * A character vector of expected value labels.
 #'   * A named vector of expected label-value pairs.
@@ -15,11 +16,6 @@
 #'   * `TRUE` to test for the presence of a variable labels.
 #'   * `FALSE` to test for the absence of a variable labels.
 #'   * `NULL` to ignore the variable label when checking.
-#' @return A logical vector flagging records that have passed or failed the
-#'   check.
-#'
-#' @family data expectations
-#' @name label-expectations
 #' @examples
 #'
 #' df <- data.frame(
@@ -29,26 +25,27 @@
 #' )
 #'
 #' # Check for a value-label pairing
-#' try(expect_labels(x, c(Male = "M"), data = df))
+#' chk_labels(df$x, c(Male = "M"))
 #'
 #' # Check that two variables have the same values
-#' expect_labels(x, labelled::val_labels(df$y), data = df) # N.B. This passes!
+#' chk_labels(df$x, labelled::val_labels(df$y))
 #'
 #' # Check for the presence of a particular label
-#' try(expect_labels(x, "Male", data = df))
-#' expect_labels(x, var_label = "Sex", data = df)
+#' chk_labels(df$x, "Male")
+#' chk_labels(df$x, var_label = "Sex")
 #'
 #' # Check that a variable is labelled at all
-#' try(expect_labels(z, val_labels = TRUE, data = df))
-#' try(expect_labels(z, var_label = TRUE, data = df))
+#' chk_labels(df$z, val_labels = TRUE)
+#' chk_labels(df$z, var_label = TRUE)
 #'
 #' # Check that a variable isn't labelled
-#' expect_labels(z, val_labels = FALSE, data = df)
-#' expect_labels(z, var_label = FALSE, data = df)
+#' chk_labels(df$z, val_labels = FALSE)
+#' chk_labels(df$z, var_label = FALSE)
 #'
-NULL
-
-#' @rdname label-expectations
+#' @seealso [Checks: data frame helpers][chk-helper]
+#' @seealso [Expectations: labels][label-expectations]
+#' @family vector checks
+#' @name chk-labels
 #' @export
 chk_labels <- function(x, val_labels = NULL, var_label = NULL) {
   if (!requireNamespace("labelled", quietly = TRUE)) {
@@ -85,6 +82,44 @@ chk_labels <- function(x, val_labels = NULL, var_label = NULL) {
   match
 }
 
-#' @rdname label-expectations
+
+
+# Expectation ------------------------------------------------------------------
+
+#' Expectations: labels
+#'
+#' Test whether variables in a data frame are labelled in a given way.
+#'
+#' @inherit pattern-expectations
+#' @inheritParams chk-labels
+#' @examples
+#'
+#' df <- data.frame(
+#'   x = labelled::labelled(c("M", "M", "F"), c(Male = "M", Female = "F"), "Sex"),
+#'   y = labelled::labelled(c("M", "M", "F"), c(Male = "M", Female = "F", Other = "X")),
+#'   z = c("M", "M", "F")
+#' )
+#'
+#' # Check for a value-label pairing
+#' try(expect_labels(x, c(Male = "M"), data = df))
+#'
+#' # Check that two variables have the same values
+#' expect_labels(x, labelled::val_labels(df$y), data = df) # N.B. This passes!
+#'
+#' # Check for the presence of a particular label
+#' try(expect_labels(x, "Male", data = df))
+#' expect_labels(x, var_label = "Sex", data = df)
+#'
+#' # Check that a variable is labelled at all
+#' try(expect_labels(z, val_labels = TRUE, data = df))
+#' try(expect_labels(z, var_label = TRUE, data = df))
+#'
+#' # Check that a variable isn't labelled
+#' expect_labels(z, val_labels = FALSE, data = df)
+#' expect_labels(z, var_label = FALSE, data = df)
+#'
+#' @seealso [Checks: labels][chk-labels]
+#' @family data expectations
+#' @name label-expectations
 #' @export
 expect_labels <- expect_make(chk_labels, "label check")

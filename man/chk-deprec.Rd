@@ -17,10 +17,6 @@ chk_nmiss(x, miss = getOption("testdat.miss_text"))
 \item{x}{A vector to check.}
 
 \item{len}{Maximum string length for checking string variables.}
-
-\item{miss}{A vector of values to be treated as missing. The
-\link[=testdat]{testdat.miss} or \link[=testdat]{testdat.miss_text} option is used by
-default.}
 }
 \value{
 A logical vector flagging records that have passed or failed the
@@ -29,11 +25,10 @@ check.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-These functions are deprecated. See \link[=chk-generic]{Generic Checking Functions}
-for current checking functions.
+These functions are deprecated.
 }
 \seealso{
-\link[=chk-generic]{Generic Checking Functions}
+\verb{chk_*()} functions such as \code{\link[=chk-values]{chk_values()}}
 
 \link[=chk-helper]{Checking Helper Functions}
 }

@@ -23,7 +23,7 @@ expect_func <- function(var, ...) {
 #' @export
 #' @rdname expect-deprec
 #' @inheritParams datacomp-expectations
-#' @seealso [Data Frame Comparison Expectations][datacomp-expectations]
+#' @seealso [Expectations: comparisons][datacomp-expectations]
 expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata()) {
   lifecycle::deprecate_soft("0.2.0", "expect_join()", "expect_subset()")
   flt <- rlang::enexpr(flt)

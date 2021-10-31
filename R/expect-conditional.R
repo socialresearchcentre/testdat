@@ -1,13 +1,6 @@
-#' Expectations: consistency checks
+#' Expectations: consistency
 #'
 #' These functions test whether multiple conditions coexist.
-#'
-#' * `expect_cond()` checks the coexistence of two conditions. It can be read as
-#' "if `cond1` then `cond2`".
-#'
-#' * `expect_base()` is a special case that checks missing data against a
-#' specified condition. It can be read as "if `base` then `var` not missing, if
-#' not `base` then `var` missing".
 #'
 #' @inheritParams data-params
 #' @family data expectations
@@ -33,44 +26,8 @@
 NULL
 
 #' @export
-#' @rdname conditional-expectations
-#' @param base <[`data-masking`][dplyr::dplyr_data_masking]> The condition that
-#'   determines which records should be non-missing.
-#' @param missing_valid Should missing values be treated as valid for records
-#'   meeting the `base` condition? This allows 'one way' base checks. This is
-#'   `FALSE` by default.
-expect_base <- function(var, base, miss = getOption("testdat.miss"),
-                        missing_valid = FALSE, data = get_testdata()) {
-  act <- quasi_label(enquo(data))
-
-  act$var_desc <- as_label(ensym(var))
-  act$var <- as_name(ensym(var))
-
-  base <- enquo(base)
-  act$base_desc <- as_label(base)
-  act$base <- act$val %>% transmute(!!base) %>% pull(1)
-  act$base[is.na(act$base)] <- FALSE
-
-  act$miss <- (act$val[[act$var]] %in% miss & !missing_valid) & act$base
-  act$nmiss <- !(act$val[[act$var]] %in% miss) & !act$base
-  act$result <- !(act$miss | act$nmiss)
-
-  expect_custom(
-    all(act$result, na.rm = TRUE),
-    glue("{act$lab} has a base mismatch in variable `{act$var_desc}`.
-          {sum(act$miss)} cases have `{act$base_desc}` but `{act$var_desc}` is missing.
-          {sum(act$nmiss)} cases do not have `{act$base_desc}` but `{act$var_desc}` is non missing."),
-    failed_count = sum(!act$result, na.rm = TRUE),
-    total_count = sum(!is.na(act$result)),
-    var_desc = act$var,
-    result = act$result
-  )
-
-  invisible(act$result)
-}
-
-#' @export
-#' @rdname conditional-expectations
+#' @describeIn conditional-expectations Checks the coexistence of two
+#'   conditions. It can be read as "if `cond1` then `cond2`".
 #' @param cond1 <[`data-masking`][dplyr::dplyr_data_masking]> First condition
 #'   (antecedent) for consistency check.
 #' @param cond2 <[`data-masking`][dplyr::dplyr_data_masking]> Second condition
@@ -96,6 +53,49 @@ expect_cond <- function(cond1, cond2, data = get_testdata()) {
           cases have `{act$cond1_desc}` but not `{act$cond2_desc}`."),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result)),
+    result = act$result
+  )
+
+  invisible(act$result)
+}
+
+#' @export
+#' @describeIn conditional-expectations A special case that checks missing data
+#'   against a specified condition. It can be read as "if `base` then `var` not
+#'   missing, if not `base` then `var` missing".
+#' @param base <[`data-masking`][dplyr::dplyr_data_masking]> The condition that
+#'   determines which records should be non-missing.
+#' @param missing_valid Should missing values be treated as valid for records
+#'   meeting the `base` condition? This allows 'one way' base checks. This is
+#'   `FALSE` by default.
+expect_base <- function(var,
+                        base,
+                        miss = getOption("testdat.miss"),
+                        missing_valid = FALSE,
+                        data = get_testdata()) {
+
+  act <- quasi_label(enquo(data))
+
+  act$var_desc <- as_label(ensym(var))
+  act$var <- as_name(ensym(var))
+
+  base <- enquo(base)
+  act$base_desc <- as_label(base)
+  act$base <- act$val %>% transmute(!!base) %>% pull(1)
+  act$base[is.na(act$base)] <- FALSE
+
+  act$miss <- (act$val[[act$var]] %in% miss & !missing_valid) & act$base
+  act$nmiss <- !(act$val[[act$var]] %in% miss) & !act$base
+  act$result <- !(act$miss | act$nmiss)
+
+  expect_custom(
+    all(act$result, na.rm = TRUE),
+    glue("{act$lab} has a base mismatch in variable `{act$var_desc}`.
+          {sum(act$miss)} cases have `{act$base_desc}` but `{act$var_desc}` is missing.
+          {sum(act$nmiss)} cases do not have `{act$base_desc}` but `{act$var_desc}` is non missing."),
+    failed_count = sum(!act$result, na.rm = TRUE),
+    total_count = sum(!is.na(act$result)),
+    var_desc = act$var,
     result = act$result
   )
 

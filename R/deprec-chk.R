@@ -4,13 +4,12 @@
 #'
 #' `r lifecycle::badge("deprecated")`
 #'
-#' These functions are deprecated. See [Generic Checking Functions][chk-generic]
-#' for current checking functions.
+#' These functions are deprecated.
 #'
-#' @inheritParams chk-generic
+#' @inheritParams chk-dummy
 #' @return A logical vector flagging records that have passed or failed the
 #'   check.
-#' @seealso [Generic Checking Functions][chk-generic]
+#' @seealso `chk_*()` functions such as [`chk_values()`][chk-values]
 #' @seealso [Checking Helper Functions][chk-helper]
 #' @name chk-deprec
 #' @keywords internal
@@ -52,10 +51,10 @@ chk_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
 #' used `dplyr::vars()` as standard `chk_filter_where()` provided an alternative
 #' interface using [`tidy-select`][dplyr_tidy_select].
 #'
-#' @inheritParams chk-generic
+#' @inheritParams chk-dummy
 #' @return A logical vector flagging records that have passed or failed the
 #'   check.
-#' @seealso [Generic Checking Functions][chk-generic]
+#' @seealso `chk_*()` functions such as [`chk_values()`][chk-values]
 #' @seealso [Checking Helper Functions][chk-helper]
 #' @name chk-defunct
 #' @keywords internal

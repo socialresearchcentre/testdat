@@ -66,9 +66,9 @@ expectation failure message.}
 }
 \description{
 These test the proportion of data in a data frame satisfying some condition.
-The generic functions, \code{expect_prop_lte()} and \code{expect_prop_gte()} can be
-used with any arbitrary function. For details regarding the other functions,
-see \link[=chk-generic]{Generic Checking Functions}.
+The generic functions, \code{expect_prop_lte()} and \code{expect_prop_gte()}, can be
+used with any arbitrary function. The \verb{chk_*()} functions, like
+\code{chk_values()}, are useful in this regard.
 }
 \details{
 Given the use of quasi-quotation within these functions, to make a new
@@ -111,15 +111,18 @@ try(expect_prop_values(sale_price, 0.9, 1:100, data = sales))
 
 }
 \seealso{
-\link[=chk-generic]{Generic Checking Functions}
+\verb{chk_*()} functions such as \code{\link[=chk-values]{chk_values()}}
 
 Other data expectations: 
-\code{\link{chk-expectations}},
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
+\code{\link{date-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{generic-expectations}},
 \code{\link{label-expectations}},
-\code{\link{uniqueness-expectations}}
+\code{\link{pattern-expectations}},
+\code{\link{text-expectations}},
+\code{\link{uniqueness-expectations}},
+\code{\link{value-expectations}}
 }
 \concept{data expectations}

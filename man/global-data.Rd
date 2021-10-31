@@ -16,9 +16,10 @@ with_testdata(data, code, quosure = TRUE)
 \arguments{
 \item{data}{Data frame to be used.}
 
-\item{quosure}{If \code{TRUE}, the default, the data frame is stored as a quosure
-and lazily evaluated when \code{get_testdata()} is called, so \code{get_testdata()}
-will return the current state of the data frame.
+\item{quosure}{If \code{TRUE}, the default, the data frame is stored as a
+\link[rlang:quosure]{quosure} and lazily evaluated when \code{get_testdata()} is
+called, so \code{get_testdata()} will return the current state of the data
+frame.
 
 If \code{FALSE}, the data frame will be copied and \code{get_testdata()} will return
 the state of the data frame at the time \code{set_testdata()} was called.}

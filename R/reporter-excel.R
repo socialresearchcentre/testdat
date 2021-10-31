@@ -16,8 +16,10 @@
 #' @export
 output_results_excel <- function(results, file) {
   if (!requireNamespace("openxlsx", quietly = TRUE)) {
-    stop("Package \"openxlsx\" needed for this function to work. Please install it.",
-         call. = FALSE)
+    stop(
+      "Package \"openxlsx\" needed for this function to work.",
+      "Please install it.",
+      call. = FALSE)
   }
 
   wb <- openxlsx::createWorkbook()
@@ -37,7 +39,9 @@ output_results_excel <- function(results, file) {
       warning = sum(.data$status %in% "warning")
     ) %>%
     ungroup %>%
-    mutate(context = glue::glue("=HYPERLINK(\"#'{str_sub(.data$context, 1, 30)}'!A1\",\"{.data$context}\")"))
+    mutate(
+      context = glue::glue("=HYPERLINK(\"#'{str_sub(.data$context, 1, 30)}'!A1\",\"{.data$context}\")")
+    )
 
   openxlsx::writeData(
     wb, "__Summary",

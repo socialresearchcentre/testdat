@@ -1,4 +1,4 @@
-#' Expectations: data frame comparison expectations
+#' Expectations: comparisons
 #'
 #' @description
 #'
@@ -52,7 +52,13 @@ NULL
 #' @importFrom tidyselect eval_select
 #' @export
 #' @rdname datacomp-expectations
-expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get_testdata()) {
+expect_valmatch <- function(data2,
+                            vars,
+                            by,
+                            not = FALSE,
+                            flt = TRUE,
+                            data = get_testdata()) {
+
   act <- quasi_label(enquo(data))
   act$var_desc   <- as_label_vars(enquo(vars))
   act$data2_desc <- as_label(enquo(data2))
@@ -63,11 +69,21 @@ expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get
     eval_select(enquo(vars), data, allow_rename = FALSE)
   ]
 
-  if (length(var_list) == 0)
-    stop("Variable specification `", act$var_desc, "` does not match any variables in ", act$label, ".", call. = FALSE)
+  if (length(var_list) == 0) {
+    stop(
+      "Variable specification `", act$var_desc,
+      "` does not match any variables in ", act$label, ".",
+      call. = FALSE
+    )
+  }
 
-  if (any(!var_list %in% names(data)) | any(!var_list %in% names(data2)))
-    stop("Variable specification `", act$var_desc, "` specifies variables that are not common to both data frames.", call. = FALSE)
+  if (any(!var_list %in% names(data)) | any(!var_list %in% names(data2))) {
+    stop(
+      "Variable specification `", act$var_desc,
+      "` specifies variables that are not common to both data frames.",
+      call. = FALSE
+    )
+  }
 
   comp = ifelse(not, "%!=%", "%==%")
 
@@ -101,7 +117,12 @@ expect_valmatch <- function(data2, vars, by, not = FALSE, flt = TRUE, data = get
 
 #' @export
 #' @rdname datacomp-expectations
-expect_subset <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_testdata()) {
+expect_subset <- function(data2,
+                          by = NULL,
+                          not = FALSE,
+                          flt = TRUE,
+                          data = get_testdata()) {
+
   act <- quasi_label(enquo(data))
   act$var_desc   <- as_label_vars(enquo(vars))
   act$data2_desc <- as_label(enquo(data2))
@@ -111,11 +132,13 @@ expect_subset <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_
 
   act$result <- data %>%
     filter(!!flt) %>%
-    left_join(data2 %>%
-                select(one_of(suppressMessages(common_by(by, data, data2)$y))) %>%
-                mutate(`__result` = TRUE) %>%
-                unique,
-              by = by) %>%
+    left_join(
+      data2 %>%
+        select(one_of(suppressMessages(common_by(by, data, data2)$y))) %>%
+        mutate(`__result` = TRUE) %>%
+        unique,
+      by = by
+    ) %>%
     mutate(`__result` = ifelse(is.na(.data$`__result`), FALSE, .data$`__result`)) %>%
     pull(.data$`__result`)
 

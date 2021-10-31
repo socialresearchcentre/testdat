@@ -1,4 +1,4 @@
-#' Expectations: generic expectation helpers
+#' Expectations: generic helpers
 #'
 #' These functions allow for testing of multiple columns (`vars`) of a data
 #' frame (`data`), with an optional filter (`flt`), using an arbitrary function
@@ -27,7 +27,7 @@
 #'   expectation failure message.
 #' @param ... Arguments to pass to `expect_allany()`.
 #'
-#' @seealso [chk-generic] for a set of generic checking functions
+#' @seealso `chk_*()` functions such as [`chk_values()`][chk-values]
 #' @family data expectations
 #' @name generic-expectations
 #' @examples
@@ -56,10 +56,11 @@
 #' )
 #'
 #' # Check petal dimensions are positive
-#' expect_all(
+#' expect_allany(
 #'   vars = where(is.numeric),
 #'   func = chk_range,
 #'   args = list(min = 0, max = Inf),
+#'   allany = chk_filter_all,
 #'   data = iris
 #' )
 #'
@@ -67,10 +68,14 @@ NULL
 
 #' @export
 #' @rdname generic-expectations
-expect_allany <- function(vars, func, flt = TRUE, data = get_testdata(),
+expect_allany <- function(vars,
+                          func,
+                          flt = TRUE,
+                          data = get_testdata(),
                           args = list(),
                           allany = c(chk_filter_all, chk_filter_any),
                           func_desc = NULL) {
+
   act <- quasi_label(enquo(data))
   act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
   act$var_desc  <- as_label_vars(enquo(vars))
@@ -109,4 +114,3 @@ expect_all <- function(...) {
 expect_any <- function(...) {
   expect_allany(..., allany = chk_filter_any)
 }
-

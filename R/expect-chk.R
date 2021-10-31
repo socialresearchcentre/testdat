@@ -1,80 +1,142 @@
 #' @include expect-make.R
 NULL
 
-#' Expectations: auto-generated
+# Patterns ---------------------------------------------------------------------
+#' Expectations: patterns
 #'
-#' These expectations are auto-generated from the `chk_*()` functions of the
-#' same name. See the [Generic Checking Functions][chk-generic] entry for
-#' details.
+#' Test whether variables in a data frame conform to a given pattern.
 #'
 #' @inheritParams data-params
 #' @family data expectations
-#' @seealso [Generic Checking Functions][chk-generic]
-#' @name chk-expectations
 #' @examples
+#'
 #' sales <- data.frame(
 #'   sale_id = 1:5,
-#'   date = c("20200101", "20200101", "20200102", "20200103", "2020003"),
-#'   sale_price = c(10, 20, 30, 40, -1),
-#'   book_title = c(
-#'     "Phenomenology of Spirit",
-#'     NA,
-#'     "Critique of Practical Reason",
-#'     "Spirit of Trust",
-#'     "Empiricism and the Philosophy of Mind"
-#'   ),
-#'   stringsAsFactors = FALSE
+#'   item_code = c("a_1", "b_2", "c_2", NA, "NULL")
 #' )
 #'
-#' # Validate sales
-#' try(expect_text_nmiss(book_title, data = sales)) # Titles non-missing
-#' try(expect_date_yyyymmdd(date, data = sales)) # Dates in correct format
-#' try(expect_values(date, 20000000:20210000, data = sales)) # Dates between 2000 and 2021
-#' try(expect_range(sale_price, min = 0, max = Inf, data = sales)) # Prices non-negative
+#' try(expect_regex(item_code, "[a-z]_[0-9]", data = sales)) # Codes match regex
+#' try(expect_max_length(item_code,  3, data = sales)) # Code width <= 3
+#'
+#' @seealso [Checks: patterns][chk-patterns]
+#' @name pattern-expectations
 NULL
 
-
-#' @rdname chk-expectations
-#' @param ... Vectors of valid values.
-#' @export
-expect_values <- expect_make(chk_values, "value check")
-
-#' @rdname chk-expectations
+#' @rdname pattern-expectations
 #' @inheritParams chk_pattern
 #' @export
 expect_regex <- expect_make(chk_pattern, "pattern check")
 
-#' @rdname chk-expectations
-#' @inheritParams chk_range
-#' @export
-expect_range <- expect_make(chk_range, "range check")
-
-#' @rdname chk-expectations
-#' @inheritParams chk_date_yyyy
-#' @export
-expect_date_yyyy <- expect_make(chk_date_yyyy, "YYYY date format check")
-
-#' @rdname chk-expectations
-#' @inheritParams chk_date_yyyymm
-#' @export
-expect_date_yyyymm <- expect_make(chk_date_yyyymm, "YYYYMM date format check")
-
-#' @rdname chk-expectations
-#' @inheritParams chk_date_yyyymmdd
-#' @export
-expect_date_yyyymmdd <- expect_make(chk_date_yyyymmdd, "YYYYMMDD date format check")
-
-#' @rdname chk-expectations
+#' @rdname pattern-expectations
 #' @inheritParams chk_length
 #' @export
 expect_max_length <- expect_make(chk_max_length, "length check")
 
-#' @rdname chk-expectations
+# Values -----------------------------------------------------------------------
+#' Expectations: values
+#'
+#' Test whether variables in a data frame contain only certain values.
+#'
+#' @inherit pattern-expectations
+#' @family data expectations
+#' @examples
+#'
+#' sales <- data.frame(
+#'   sale_id = 1:5,
+#'   date = c("20200101", "20200101", "20200102", "20200103", "20220101"),
+#'   sale_price = c(10, 20, 30, 40, -1)
+#' )
+#'
+#' try(expect_values(date, 20000000:20210000, data = sales)) # Dates between 2000 and 2021
+#' try(expect_range(sale_price, min = 0, max = Inf, data = sales)) # Prices non-negative
+#'
+#' @seealso [Checks: values][chk-values]
+#' @name value-expectations
+NULL
+
+#' @rdname value-expectations
+#' @inheritParams chk_values
+#' @export
+expect_values <- expect_make(chk_values, "value check")
+
+#' @rdname value-expectations
+#' @inheritParams chk_range
+#' @export
+expect_range <- expect_make(chk_range, "range check")
+
+
+
+# Text -------------------------------------------------------------------------
+#' Expectations: text
+#'
+#' Test whether variables in a data frame contain common NULL placeholders.
+#'
+#' @inherit pattern-expectations
+#' @family data expectations
+#' @examples
+#'
+#' sales <- data.frame(
+#'   sale_id = 1:5,
+#'   date = c("20200101", "null", "20200102", "20200103", "null"),
+#'   sale_price = c(10, -1, 30, 40, -1)
+#' )
+#'
+#' # Dates not missing
+#' try(expect_text_nmiss(date, data = sales))
+#'
+#' # Date missing if price negative
+#' try(expect_text_miss(date, flt = sale_price %in% -1, data = sales))
+#'
+#' @seealso [Checks: text][chk-text]
+#' @name text-expectations
+NULL
+
+#' @rdname text-expectations
 #' @inheritParams chk_text_miss
 #' @export
 expect_text_miss <- expect_make(chk_text_miss, "missing check")
 
-#' @rdname chk-expectations
+#' @rdname text-expectations
 #' @inheritParams chk_text_nmiss
 #' @export
 expect_text_nmiss <- expect_make(chk_text_nmiss, "missing check")
+
+# Dates ------------------------------------------------------------------------
+#' Expectations: dates
+#'
+#' Test whether variables in a data frame conform to a given date format such as
+#' YYYYMMDD.
+#'
+#' @inherit pattern-expectations
+#' @family data expectations
+#' @examples
+#'
+#' sales <- data.frame(
+#'   sale_id = 1:5,
+#'   date = c("20200101", "20200101", "20200102", "20200103", "20220101"),
+#'   quarter = c(202006, 202009, 202012, 20203, 20200101),
+#'   published = c(1999, 19991, 21, 0001, 20200101)
+#' )
+#'
+#' try(expect_date_yyyymmdd(date, data = sales)) # Full date of sale valid
+#' try(expect_date_yyyymm(quarter, data = sales)) # Quarters given as YYYYMM
+#' try(expect_date_yyyy(published, data = sales)) # Publication years valid
+#'
+#' @seealso [Checks: date][chk-dates]
+#' @name date-expectations
+NULL
+
+#' @rdname date-expectations
+#' @inheritParams chk_date_yyyy
+#' @export
+expect_date_yyyy <- expect_make(chk_date_yyyy, "YYYY date format check")
+
+#' @rdname date-expectations
+#' @inheritParams chk_date_yyyymm
+#' @export
+expect_date_yyyymm <- expect_make(chk_date_yyyymm, "YYYYMM date format check")
+
+#' @rdname date-expectations
+#' @inheritParams chk_date_yyyymmdd
+#' @export
+expect_date_yyyymmdd <- expect_make(chk_date_yyyymmdd, "YYYYMMDD date format check")

@@ -26,7 +26,7 @@ The affected expectations are:
 
 A small number of functions have been hard deprecated as they are now redundant:
 
-* `expect_where()` and `chk_filter_where()` have been hard deprecated. They are now equivalent to the correpsonding `*_all()` function.
+* `expect_where()` and `chk_filter_where()` have been hard deprecated. They are now equivalent to the corresponding `*_all()` function.
 
 * `chk_filter_vars()` has been renamed to `chk_filter()` and the existing `chk_filter()` has been removed to simplify the set of generic checking functions.
 

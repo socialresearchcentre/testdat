@@ -1,4 +1,4 @@
-#' Expectations: exclusivity checks
+#' Expectations: exclusivity
 #'
 #' `expect_exclusive` tests that `vars` are exclusive - that, if any one of
 #' `vars` is set to `exc_val`, no other column in `vars` or `var_set` is also
@@ -9,12 +9,12 @@
 #'
 #' See the example data set below:
 #' * No record should have `q10_98`, "None of the above", selected while also
-#' having any other response selected, so we refer to this an "exclusive"
+#' having any other response selected, so we refer to this as an "exclusive"
 #' response.
 #' * `expect_exclusive()` checks whether `q10_98` "None of the above" or
 #' `q10_99` "Don't know", the exclusive responses, have been selected alongside
 #' any other `q10_*` response.
-#' * The expectations fails, since the first record has both `q10_1` and
+#' * The expectation fails, since the first record has both `q10_1` and
 #' `q10_98` selected.
 #'
 #' @inheritParams data-params
@@ -49,7 +49,12 @@ NULL
 #' @importFrom tidyselect eval_select
 #' @export
 #' @rdname exclusivity-expectations
-expect_exclusive <- function(vars, var_set, exc_val = 1, flt = TRUE, data = get_testdata()) {
+expect_exclusive <- function(vars,
+                             var_set,
+                             exc_val = 1,
+                             flt = TRUE,
+                             data = get_testdata()) {
+
   act <- quasi_label(enquo(data))
   act$var_desc     <- as_label_vars(enquo(vars))
   act$var_set_desc <- as_label_vars(enquo(var_set))

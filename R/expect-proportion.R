@@ -1,9 +1,9 @@
 #' Expectations: proportions
 #'
 #' These test the proportion of data in a data frame satisfying some condition.
-#' The generic functions, `expect_prop_lte()` and `expect_prop_gte()` can be
-#' used with any arbitrary function. For details regarding the other functions,
-#' see [Generic Checking Functions][chk-generic].
+#' The generic functions, `expect_prop_lte()` and `expect_prop_gte()`, can be
+#' used with any arbitrary function. The `chk_*()` functions, like
+#' `chk_values()`, are useful in this regard.
 #'
 #' Given the use of quasi-quotation within these functions, to make a new
 #' functions using one of the generics such as `expect_prop_gte()` one must
@@ -21,7 +21,7 @@
 #'   expectation failure message.
 #' @param ... Vectors of valid values.
 #'
-#' @seealso [Generic Checking Functions][chk-generic]
+#' @seealso `chk_*()` functions such as [`chk_values()`][chk-values]
 #' @family data expectations
 #' @name proportion-expectations
 #'
@@ -64,8 +64,15 @@ NULL
 # Generic ----------------------------------------------------------------------
 
 # internal
-expect_prop <- function(var, func, prop, cmp, flt = TRUE, data = get_testdata(),
-                        args = list(), func_desc = NULL) {
+expect_prop <- function(var,
+                        func,
+                        prop,
+                        cmp,
+                        flt = TRUE,
+                        data = get_testdata(),
+                        args = list(),
+                        func_desc = NULL) {
+
   stopifnot(length(prop) == 1)
   act <- quasi_label(enquo(data))
   act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
@@ -97,16 +104,28 @@ expect_prop <- function(var, func, prop, cmp, flt = TRUE, data = get_testdata(),
 
 #' @export
 #' @rdname proportion-expectations
-expect_prop_lte <- function(var, func, prop, flt = TRUE, data = get_testdata(),
-                            args = list(), func_desc = NULL) {
+expect_prop_lte <- function(var,
+                            func,
+                            prop,
+                            flt = TRUE,
+                            data = get_testdata(),
+                            args = list(),
+                            func_desc = NULL) {
+
   var <- ensym(var)
   expect_prop(var, func, cmp = `<=`, prop, flt, data, args, func_desc)
 }
 
 #' @export
 #' @rdname proportion-expectations
-expect_prop_gte <- function(var, func, prop, flt = TRUE, data = get_testdata(),
-                            args = list(), func_desc = NULL) {
+expect_prop_gte <- function(var,
+                            func,
+                            prop,
+                            flt = TRUE,
+                            data = get_testdata(),
+                            args = list(),
+                            func_desc = NULL) {
+
   var <- ensym(var)
   expect_prop(var, func, cmp = `>=`, prop, flt, data, args, func_desc)
 }
@@ -116,8 +135,12 @@ expect_prop_gte <- function(var, func, prop, flt = TRUE, data = get_testdata(),
 
 #' @export
 #' @rdname proportion-expectations
-expect_prop_nmiss <- function(var, prop, miss = getOption("testdat.miss"),
-                              flt = TRUE, data = get_testdata()) {
+expect_prop_nmiss <- function(var,
+                              prop,
+                              miss = getOption("testdat.miss"),
+                              flt = TRUE,
+                              data = get_testdata()) {
+
   expect_prop_gte(
     var = {{ var }},
     func = chk_text_nmiss,
@@ -131,7 +154,12 @@ expect_prop_nmiss <- function(var, prop, miss = getOption("testdat.miss"),
 
 #' @export
 #' @rdname proportion-expectations
-expect_prop_values <- function(var, prop, ..., flt = TRUE, data = get_testdata()) {
+expect_prop_values <- function(var,
+                               prop,
+                               ...,
+                               flt = TRUE,
+                               data = get_testdata()) {
+
   expect_prop_gte(
     var = {{ var }},
     func = chk_values,

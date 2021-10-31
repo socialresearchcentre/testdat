@@ -1,4 +1,4 @@
-#' Expectations: uniqueness checks
+#' Expectations: uniqueness
 #'
 #' These functions test variables for uniqueness.
 #'
@@ -21,6 +21,7 @@
 #'   set `exclude = NULL`.
 #'
 #' @family data expectations
+#' @seealso [Checks: uniqueness][chk-uniqueness]
 #' @name uniqueness-expectations
 #' @examples
 #'
@@ -47,7 +48,8 @@
 #' )
 #' )
 #'
-#' # Check each fruit has unique preference number, allowing multiple 99 (item skipped) codes
+#' # Check each fruit has unique preference number, allowing multiple 99 (item
+#' # skipped) codes
 #' expect_unique_across(
 #'   c(apple, orange, banana),
 #'   exclude = c(99, NA), data = student_fruit_preferences
@@ -60,8 +62,11 @@ NULL
 
 #' @export
 #' @rdname uniqueness-expectations
-expect_unique <- function(vars, exclude = getOption("testdat.miss"),
-                          flt = TRUE, data = get_testdata()) {
+expect_unique <- function(vars,
+                          exclude = getOption("testdat.miss"),
+                          flt = TRUE,
+                          data = get_testdata()) {
+
   act <- quasi_label(enquo(data))
   act$var_desc <- as_label_vars(enquo(vars))
   act$flt_desc <- as_label_flt(enquo(flt))
@@ -73,7 +78,7 @@ expect_unique <- function(vars, exclude = getOption("testdat.miss"),
     mutate(count = n()) %>%
     ungroup() %>%
     select({{ vars }}, count) %>%
-    filter(across(-count, .fns = function(x) { !x %in% exclude }))
+    filter(across(-count, ~ !.x %in% exclude))
 
   act$result <- act$result_data$count == 1
 
@@ -92,8 +97,11 @@ expect_unique <- function(vars, exclude = getOption("testdat.miss"),
 
 #' @export
 #' @rdname uniqueness-expectations
-expect_unique_across <- function(vars, exclude = getOption("testdat.miss"),
-                                 flt = TRUE, data = get_testdata()) {
+expect_unique_across <- function(vars,
+                                 exclude = getOption("testdat.miss"),
+                                 flt = TRUE,
+                                 data = get_testdata()) {
+
   act <- quasi_label(enquo(data))
   act$var_desc <- as_label_vars(enquo(vars))
   act$flt_desc <- as_label_flt(enquo(flt))
@@ -121,8 +129,11 @@ expect_unique_across <- function(vars, exclude = getOption("testdat.miss"),
 
 #' @export
 #' @rdname uniqueness-expectations
-expect_unique_combine <- function(vars, exclude = getOption("testdat.miss"),
-                                  flt = TRUE, data = get_testdata()) {
+expect_unique_combine <- function(vars,
+                                  exclude = getOption("testdat.miss"),
+                                  flt = TRUE,
+                                  data = get_testdata()) {
+
   act <- quasi_label(enquo(data))
   act$var_desc <- as_label_vars(enquo(vars))
   act$flt_desc <- as_label_flt(enquo(flt))

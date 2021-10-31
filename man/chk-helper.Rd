@@ -5,7 +5,7 @@
 \alias{chk_filter}
 \alias{chk_filter_all}
 \alias{chk_filter_any}
-\title{Checking helper functions}
+\title{Checks: data frame helpers}
 \usage{
 chk_filter(data, vars, func, flt = TRUE, args = list())
 
@@ -70,6 +70,16 @@ chk_filter_all(
   list(min = 0, max = 100)
 )
 
+# Check that every 4-cylinder car has an engine displacement of < 100 cubic
+# inches OR < 100 horsepower
+chk_filter_any(
+  mtcars,
+  c("disp", "hp"),
+  chk_range,
+  cyl == 4,
+  list(min = 0, max = 100)
+)
+
 # Check that columns made up of whole numbers are binary
 chk_filter_all(
   mtcars,
@@ -81,5 +91,5 @@ chk_filter_all(
 
 }
 \seealso{
-\link[=chk-generic]{Generic Checking Functions}
+Other \verb{chk_*()} functions such as \code{\link[=chk-values]{chk_values()}}
 }

@@ -19,7 +19,7 @@ library(dplyr)
 testdat is a package designed to ease data validation, particularly for complex
 data processing, inspired by software unit testing. testdat extends the strong
 and flexible unit testing framework already provided by testthat with a family
-of functions and reporting tools focused on checking of data frames.
+of functions and reporting tools focused on checking data frames.
 
 Features include:
 
@@ -40,8 +40,8 @@ with the introduction to testthat in
 [R packages](https://r-pkgs.org/tests.html).
 
 The main addition provided by testdat is a set of expectations designed for
-testing data frames and a context-esque mechanism to set a current testing data
-frame.
+testing data frames and an accompanying mechanism to globally specify a data set
+for testing.
 
 # Data expectations
 
@@ -62,14 +62,6 @@ testdat uses dplyr at its core, and thus supports tidy evaluation.
 Most operations act on one or more variables. There are two variants of the
 variable argument:
 
-* `var` requires an unquoted variable name.
-
-```{r}
-test_that("hour values are valid", {
-  expect_range(hour, 0, 23, data = storms)
-})
-```
-
 * `vars` requires a set of columns specified as [tidy selections](https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html).
 
 ```{r}
@@ -78,11 +70,21 @@ test_that("multi-variable identifier is unique", {
 })
 ```
 
+* `var` requires an unquoted variable name. This only applies to a small number
+of expectations.
+
+```{r}
+test_that("hour values are valid", {
+  expect_base(ts_diameter, year >= 2004)
+})
+```
+
 ### Filter
 
 The `flt` argument takes a logical predicate defined in terms of the variables
-in `data`. Only rows where the condition evaluates to `TRUE` are included in the
-test.
+in `data` using [data
+masking](https://dplyr.tidyverse.org/reference/dplyr_data_masking.html). Only
+rows where the condition evaluates to `TRUE` are included in the test.
 
 ```{r}
 test_that("iris range checks", {
@@ -138,9 +140,9 @@ test_that("Versicolor has sepal length greater than 5 - will fail", {
 })
 ```
 
-By default, `set_testdata()` stores a reference to the provided data frame
-rather than the data itself, so changes made to the data frame will be reflected
-in the test results.
+By default, `set_testdata()` stores a quosure with a reference to the provided
+data frame rather than the data itself, so changes made to the data frame will
+be reflected in the test results.
 
 ```{r}
 tmp_data <- tibble(x = c(1, 0), y = c(1, NA))
@@ -156,8 +158,8 @@ expect_base(y, x == 1)
 
 ### `...`
 
-Additional arguments are specific to the expectation. See the man page for the
-function for details.
+Additional arguments are specific to the expectation. See the help page for the
+expectation function for details.
 
 ## Categories
 
@@ -165,10 +167,23 @@ Data expectations fall into a few main classes.
 
 Value
 
+:   `` ?`date-expectations` ``
+:   `` ?`label-expectations` ``
+:   `` ?`pattern-expectations` ``
+:   `` ?`proportion-expectations` ``
+:   `` ?`text-expectations` ``
 :   `` ?`value-expectations` ``
     
     Value expectations test variable values for valid data. Tests include
-    explicit value checks, uniqueness and others.
+    explicit value checks, pattern checks and others.
+
+Relationships
+
+:   `` ?`exclusivity-expectations` ``
+:   `` ?`uniqueness-expectations` ``
+
+    Relationship expectations test for relationships among variables. Tests
+    include uniqueness and exclusivity checks.
 
 Conditional
 
@@ -207,7 +222,7 @@ and test blocks throw an error if they fail, so it is very clear to the user
 that something needs to be checked, and the script will fail when sourced.
 
 The example below shows how to adapt a script from exploratory "print and check"
-to a testing approach, using a simple sample processing exercise.
+to a testing approach, using a simple data processing exercise.
 
 ### Print and check
 
@@ -277,19 +292,19 @@ with_testdata(x, {
 
 Note that:
 
-* The global test data must be reset after changes are made, either with
-`set_testdata()` or `with_testdata()`.
+* The global test data can be set with `set_testdata()` or `with_testdata()`.
 
 * The `test_that()` wrapper is not strictly necessary, but it provides more
 informative error messaging and logically groups a set of expectations.
 
-* Each `with_testdata()` block will fail on the first `test_that()` block that
-fails. The "filters applied correctly" test block is not run in the example.
+* The `with_testdata()` block will run all `test_that()` blocks, even if some
+fail. If expectations are not surrounded by a `test_that()` wrapper, the block
+will exit after the first failed test.
 
 ## Using a test suite
 
 Setting up a proper project test suite can be useful for automatically
-validating final outputs before delivery.
+validating final processed data sets.
 
 Setting up proper file based testing infrastructure is out of the scope of this
 vignette. See [R packages](https://r-pkgs.org/tests.html) for a brief

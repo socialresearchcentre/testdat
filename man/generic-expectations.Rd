@@ -5,7 +5,7 @@
 \alias{expect_allany}
 \alias{expect_all}
 \alias{expect_any}
-\title{Expectations: generic expectation helpers}
+\title{Expectations: generic helpers}
 \usage{
 expect_allany(
   vars,
@@ -89,24 +89,28 @@ expect_any(
 )
 
 # Check petal dimensions are positive
-expect_all(
+expect_allany(
   vars = where(is.numeric),
   func = chk_range,
   args = list(min = 0, max = Inf),
+  allany = chk_filter_all,
   data = iris
 )
 
 }
 \seealso{
-\link{chk-generic} for a set of generic checking functions
+\verb{chk_*()} functions such as \code{\link[=chk-values]{chk_values()}}
 
 Other data expectations: 
-\code{\link{chk-expectations}},
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
+\code{\link{date-expectations}},
 \code{\link{exclusivity-expectations}},
 \code{\link{label-expectations}},
+\code{\link{pattern-expectations}},
 \code{\link{proportion-expectations}},
-\code{\link{uniqueness-expectations}}
+\code{\link{text-expectations}},
+\code{\link{uniqueness-expectations}},
+\code{\link{value-expectations}}
 }
 \concept{data expectations}

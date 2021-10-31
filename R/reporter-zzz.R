@@ -6,9 +6,10 @@
 #' data for the current context.
 #'
 #' @param data Data frame to be used.
-#' @param quosure If `TRUE`, the default, the data frame is stored as a quosure
-#'   and lazily evaluated when `get_testdata()` is called, so `get_testdata()`
-#'   will return the current state of the data frame.
+#' @param quosure If `TRUE`, the default, the data frame is stored as a
+#'   [quosure][rlang::quosure()] and lazily evaluated when `get_testdata()` is
+#'   called, so `get_testdata()` will return the current state of the data
+#'   frame.
 #'
 #'   If `FALSE`, the data frame will be copied and `get_testdata()` will return
 #'   the state of the data frame at the time `set_testdata()` was called.

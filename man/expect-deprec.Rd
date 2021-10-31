@@ -58,6 +58,6 @@ These functions are deprecated.
 \seealso{
 \link[=generic-expectations]{Generic Expectation Functions}
 
-\link[=datacomp-expectations]{Data Frame Comparison Expectations}
+\link[=datacomp-expectations]{Expectations: comparisons}
 }
 \keyword{internal}

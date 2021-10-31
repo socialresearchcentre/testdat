@@ -3,7 +3,7 @@
 \name{exclusivity-expectations}
 \alias{exclusivity-expectations}
 \alias{expect_exclusive}
-\title{Expectations: exclusivity checks}
+\title{Expectations: exclusivity}
 \usage{
 expect_exclusive(vars, var_set, exc_val = 1, flt = TRUE, data = get_testdata())
 }
@@ -35,12 +35,12 @@ sets, where one response is only valid on its own.
 See the example data set below:
 \itemize{
 \item No record should have \code{q10_98}, "None of the above", selected while also
-having any other response selected, so we refer to this an "exclusive"
+having any other response selected, so we refer to this as an "exclusive"
 response.
 \item \code{expect_exclusive()} checks whether \code{q10_98} "None of the above" or
 \code{q10_99} "Don't know", the exclusive responses, have been selected alongside
 any other \verb{q10_*} response.
-\item The expectations fails, since the first record has both \code{q10_1} and
+\item The expectation fails, since the first record has both \code{q10_1} and
 \code{q10_98} selected.
 }
 }
@@ -67,12 +67,15 @@ expect_exclusive(
 }
 \seealso{
 Other data expectations: 
-\code{\link{chk-expectations}},
 \code{\link{conditional-expectations}},
 \code{\link{datacomp-expectations}},
+\code{\link{date-expectations}},
 \code{\link{generic-expectations}},
 \code{\link{label-expectations}},
+\code{\link{pattern-expectations}},
 \code{\link{proportion-expectations}},
-\code{\link{uniqueness-expectations}}
+\code{\link{text-expectations}},
+\code{\link{uniqueness-expectations}},
+\code{\link{value-expectations}}
 }
 \concept{data expectations}
