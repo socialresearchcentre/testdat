@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# testdat
+# testdat <a href='https://socialresearchcentre.github.io/testdat/'><img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
 
@@ -80,7 +80,7 @@ with_testdata(x, {
     expect_base(nsw_only, state == "NSW")
   })
 })
-#> Test passed 😀
+#> Test passed 🎊
 #> ── Failure (<text>:16:5): variable values are correct ──────────────────────────
 #> get_testdata() has 1 records failing value check on variable `pcode`.
 #> Filter: None
