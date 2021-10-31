@@ -143,7 +143,7 @@
 </ul>
 <p>A small number of functions have been hard deprecated as they are now redundant:</p>
 <ul>
-<li><p><code><a href="../reference/expect-defunct.html">expect_where()</a></code> and <code><a href="../reference/chk-defunct.html">chk_filter_where()</a></code> have been hard deprecated. They are now equivalent to the correpsonding <code>*_all()</code> function.</p></li>
+<li><p><code><a href="../reference/expect-defunct.html">expect_where()</a></code> and <code><a href="../reference/chk-defunct.html">chk_filter_where()</a></code> have been hard deprecated. They are now equivalent to the corresponding <code>*_all()</code> function.</p></li>
 <li><p><code><a href="../reference/chk-defunct.html">chk_filter_vars()</a></code> has been renamed to <code><a href="../reference/chk-helper.html">chk_filter()</a></code> and the existing <code><a href="../reference/chk-helper.html">chk_filter()</a></code> has been removed to simplify the set of generic checking functions.</p></li>
 </ul>
 <p>Auto-generated expectations have also changed slightly - previously they could either accept a single unquoted variable name or a group of variables specified with <code><a href="https://dplyr.tidyverse.org/reference/vars.html">vars()</a></code>. They now always accept multiple columns using tidyselect syntax. As a result, the name of the first argument for these expect has changed from <code>var</code> to <code>vars</code>, so be careful if you’re using this as a named argument.</p>
@@ -151,12 +151,12 @@
 <p>These are all valid column specifications using tidyselect:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="fu"><a href="../reference/chk-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">a</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
-<span class="fu"><a href="../reference/chk-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
-<span class="fu"><a href="../reference/chk-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">a</span><span class="op">:</span><span class="va">c</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
-<span class="fu"><a href="../reference/chk-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"^[ab]$"</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
-<span class="fu"><a href="../reference/chk-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"^[ab]$"</span><span class="op">)</span>, <span class="va">c</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
-<span class="fu"><a href="../reference/chk-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">a</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">a</span><span class="op">:</span><span class="va">c</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"^[ab]$"</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"^[ab]$"</span><span class="op">)</span>, <span class="va">c</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="others" class="section level3">
 <h3 class="hasAnchor">
@@ -179,8 +179,8 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes--minor-updates" class="anchor"></a>Bug fixes / minor updates</h2>
 <ul>
-<li><p><code><a href="../reference/chk-generic.html">chk_blank()</a></code> performs checks slightly differently and is much faster as a result (<a href='https://github.com/socialresearchcentre/testdat/issues/46'>#46</a>).</p></li>
-<li><p><code><a href="../reference/chk-generic.html">chk_ascii()</a></code> was returning <code>FALSE</code> if it detected non-ASCII printable characters anywhere in the input vector. It now checks each element of the vector individually.</p></li>
+<li><p><code><a href="../reference/chk-values.html">chk_blank()</a></code> performs checks slightly differently and is much faster as a result (<a href='https://github.com/socialresearchcentre/testdat/issues/46'>#46</a>).</p></li>
+<li><p><code><a href="../reference/chk-text.html">chk_ascii()</a></code> was returning <code>FALSE</code> if it detected non-ASCII printable characters anywhere in the input vector. It now checks each element of the vector individually.</p></li>
 </ul>
 </div>
 </div>
@@ -237,8 +237,8 @@
 <a href="#other-minor-changes" class="anchor"></a>Other minor changes</h2>
 <ul>
 <li><p>Documentation for existing functions has been expanded considerably.</p></li>
-<li><p>Added <code>...</code> argument to <code><a href="../reference/chk-generic.html">chk_range()</a></code> to bring it into line with <code><a href="../reference/chk-expectations.html">expect_range()</a></code> (<a href='https://github.com/socialresearchcentre/testdat/issues/28'>#28</a>).</p></li>
-<li><p>Refactored <code><a href="../reference/chk-expectations.html">expect_values()</a></code> to implement it using <code><a href="../reference/expect_make.html">expect_make()</a></code> (<a href='https://github.com/socialresearchcentre/testdat/issues/27'>#27</a>).</p></li>
+<li><p>Added <code>...</code> argument to <code><a href="../reference/chk-values.html">chk_range()</a></code> to bring it into line with <code><a href="../reference/value-expectations.html">expect_range()</a></code> (<a href='https://github.com/socialresearchcentre/testdat/issues/28'>#28</a>).</p></li>
+<li><p>Refactored <code><a href="../reference/value-expectations.html">expect_values()</a></code> to implement it using <code><a href="../reference/expect_make.html">expect_make()</a></code> (<a href='https://github.com/socialresearchcentre/testdat/issues/27'>#27</a>).</p></li>
 <li><p>Added a new <code>testdat.scipen</code> (default: <code>999</code>) to avoid issues from checks converting numeric variables to scientific notation (<a href='https://github.com/socialresearchcentre/testdat/issues/3'>#3</a>).</p></li>
 <li><p>Added &gt;= 0.8.0 dplyr version dependency (<a href='https://github.com/socialresearchcentre/testdat/issues/2'>#2</a>).</p></li>
 <li><p>All calls to <code><a href="https://rlang.r-lib.org/reference/quo_label.html">quo_label()</a></code> now use <code><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">as_label()</a></code> instead as recommended by rlang (<a href='https://github.com/socialresearchcentre/testdat/issues/10'>#10</a>). This may cause minor changes to printing of test results.</p></li>
@@ -258,13 +258,13 @@
 <li><p>Moved <code>use_testdat()</code> into srcproj, it’s a more natural home.</p></li>
 <li><p>Removed <code>ExcelReporter</code>, it is unnecessary since we have Excel output from a ListReporter.</p></li>
 <li><p>New expectation function factory <code><a href="../reference/expect_make.html">expect_make()</a></code> allows users to automagically convert a logical check function of the form used by <code>chk_*()</code> into an expectation. See <code><a href="../reference/expect_make.html">?expect_make</a></code> for details.</p></li>
-<li><p><code><a href="../reference/chk-generic.html">chk_values()</a></code> now takes the vector of missing values as an argument instead of a logical.</p></li>
+<li><p><code><a href="../reference/chk-values.html">chk_values()</a></code> now takes the vector of missing values as an argument instead of a logical.</p></li>
 <li>
 <p>Renamed some <code>chk_*()</code> functions for clarity. For the moment the old names are soft-deprecated and will give a warning, <em>these will be hard-deprecated in the next minor release</em>.</p>
 <ul>
-<li><p><code><a href="../reference/chk-deprec.html">chk_length()</a></code> =&gt; <code><a href="../reference/chk-generic.html">chk_max_length()</a></code></p></li>
-<li><p><code><a href="../reference/chk-deprec.html">chk_miss()</a></code> =&gt; <code><a href="../reference/chk-generic.html">chk_text_miss()</a></code></p></li>
-<li><p><code><a href="../reference/chk-deprec.html">chk_nmiss()</a></code> =&gt; <code><a href="../reference/chk-generic.html">chk_text_nmiss()</a></code></p></li>
+<li><p><code><a href="../reference/chk-deprec.html">chk_length()</a></code> =&gt; <code><a href="../reference/chk-patterns.html">chk_max_length()</a></code></p></li>
+<li><p><code><a href="../reference/chk-deprec.html">chk_miss()</a></code> =&gt; <code><a href="../reference/chk-text.html">chk_text_miss()</a></code></p></li>
+<li><p><code><a href="../reference/chk-deprec.html">chk_nmiss()</a></code> =&gt; <code><a href="../reference/chk-text.html">chk_text_nmiss()</a></code></p></li>
 </ul>
 </li>
 </ul>
@@ -276,7 +276,7 @@
 <li>
 <p>Added new expectations and options:</p>
 <ul>
-<li><p><code><a href="../reference/chk-expectations.html">expect_range()</a></code> now takes extra allowable values in <code>...</code>. Specifically for cases where there is a bounded range with specified values outside (e.g. missing value codes).</p></li>
+<li><p><code><a href="../reference/value-expectations.html">expect_range()</a></code> now takes extra allowable values in <code>...</code>. Specifically for cases where there is a bounded range with specified values outside (e.g. missing value codes).</p></li>
 <li><p><code><a href="../reference/conditional-expectations.html">expect_base()</a></code> has a new flag <code>missing_valid</code>. If set to <code>TRUE</code>, missing values are considered valid responses for records that meet the base condition. This allows for one-way base checks, i.e. records <em>not</em> meeting the base condition should be missing, but for records meeting the base condition we don’t care.</p></li>
 </ul>
 </li>

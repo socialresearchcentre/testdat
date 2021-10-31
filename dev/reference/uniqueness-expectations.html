@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Expectations: uniqueness checks — uniqueness-expectations • testdat</title>
+<title>Expectations: uniqueness — uniqueness-expectations • testdat</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Expectations: uniqueness checks — uniqueness-expectations" />
+<meta property="og:title" content="Expectations: uniqueness — uniqueness-expectations" />
 <meta property="og:description" content="These functions test variables for uniqueness." />
 
 
@@ -114,7 +114,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Expectations: uniqueness checks</h1>
+    <h1>Expectations: uniqueness</h1>
     <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/testdat/blob/master/R/expect-unique.R'><code>R/expect-unique.R</code></a></small>
     <div class="hidden name"><code>uniqueness-expectations.Rd</code></div>
     </div>
@@ -187,14 +187,18 @@ value appears more than once across all of them.</p></li>
 values.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other data expectations: 
-<code><a href='chk-expectations.html'>chk-expectations</a></code>,
+    <div class='dont-index'><p><a href='chk-uniqueness.html'>Checks: uniqueness</a></p>
+<p>Other data expectations: 
 <code><a href='conditional-expectations.html'>conditional-expectations</a></code>,
 <code><a href='datacomp-expectations.html'>datacomp-expectations</a></code>,
+<code><a href='date-expectations.html'>date-expectations</a></code>,
 <code><a href='exclusivity-expectations.html'>exclusivity-expectations</a></code>,
 <code><a href='generic-expectations.html'>generic-expectations</a></code>,
 <code><a href='label-expectations.html'>label-expectations</a></code>,
-<code><a href='proportion-expectations.html'>proportion-expectations</a></code></p></div>
+<code><a href='pattern-expectations.html'>pattern-expectations</a></code>,
+<code><a href='proportion-expectations.html'>proportion-expectations</a></code>,
+<code><a href='text-expectations.html'>text-expectations</a></code>,
+<code><a href='value-expectations.html'>value-expectations</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -223,7 +227,8 @@ values.</p>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; Error : `student_fruit_preferences` has 1 records with duplicates across variables `apple, orange, banana`.
 #&gt; Filter: None</div><div class='input'>
-<span class='co'># Check each fruit has unique preference number, allowing multiple 99 (item skipped) codes</span>
+<span class='co'># Check each fruit has unique preference number, allowing multiple 99 (item</span>
+<span class='co'># skipped) codes</span>
 <span class='fu'>expect_unique_across</span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>apple</span>, <span class='va'>orange</span>, <span class='va'>banana</span><span class='op'>)</span>,
   exclude <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>99</span>, <span class='cn'>NA</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>student_fruit_preferences</span>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Expectations: labels — label-expectations • testdat</title>
+<title>Checks: labels — chk-labels • testdat</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Expectations: labels — label-expectations" />
-<meta property="og:description" content="Test whether variables in a data frame are labelled in a given way." />
+<meta property="og:title" content="Checks: labels — chk-labels" />
+<meta property="og:description" content="Check that a vector is labelled in a given way." />
 
 
 <meta name="robots" content="noindex">
@@ -114,30 +114,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Expectations: labels</h1>
+    <h1>Checks: labels</h1>
     <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/testdat/blob/master/R/expect-labels.R'><code>R/expect-labels.R</code></a></small>
-    <div class="hidden name"><code>label-expectations.Rd</code></div>
+    <div class="hidden name"><code>chk-labels.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Test whether variables in a data frame are labelled in a given way.</p>
+    <p>Check that a vector is labelled in a given way.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>expect_labels</span><span class='op'>(</span>
-  <span class='va'>vars</span>,
-  val_labels <span class='op'>=</span> <span class='cn'>NULL</span>,
-  var_label <span class='op'>=</span> <span class='cn'>NULL</span>,
-  flt <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>chk_labels</span><span class='op'>(</span><span class='va'>x</span>, val_labels <span class='op'>=</span> <span class='cn'>NULL</span>, var_label <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>vars</th>
-      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html'>tidy-select</a></code>&gt; A set of columns to
-test.</p></td>
+      <th>x</th>
+      <td><p>A vector to check.</p></td>
     </tr>
     <tr>
       <th>val_labels</th>
@@ -158,32 +151,23 @@ test.</p></td>
 <li><p><code>NULL</code> to ignore the variable label when checking.</p></li>
 </ul></td>
     </tr>
-    <tr>
-      <th>flt</th>
-      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_data_masking.html'>data-masking</a></code>&gt; A filter specifying
-a subset of the data frame to test.</p></td>
-    </tr>
-    <tr>
-      <th>data</th>
-      <td><p>A data frame to test. The <a href='global-data.html'>global test data</a> is used
-by default.</p></td>
-    </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A logical vector flagging records that have passed or failed the
+check.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='chk-labels.html'>Checks: labels</a></p>
-<p>Other data expectations: 
-<code><a href='conditional-expectations.html'>conditional-expectations</a></code>,
-<code><a href='datacomp-expectations.html'>datacomp-expectations</a></code>,
-<code><a href='date-expectations.html'>date-expectations</a></code>,
-<code><a href='exclusivity-expectations.html'>exclusivity-expectations</a></code>,
-<code><a href='generic-expectations.html'>generic-expectations</a></code>,
-<code><a href='pattern-expectations.html'>pattern-expectations</a></code>,
-<code><a href='proportion-expectations.html'>proportion-expectations</a></code>,
-<code><a href='text-expectations.html'>text-expectations</a></code>,
-<code><a href='uniqueness-expectations.html'>uniqueness-expectations</a></code>,
-<code><a href='value-expectations.html'>value-expectations</a></code></p></div>
+    <div class='dont-index'><p><a href='chk-helper.html'>Checks: data frame helpers</a></p>
+<p><a href='label-expectations.html'>Expectations: labels</a></p>
+<p>Other vector checks: 
+<code><a href='chk-dates.html'>chk-dates</a></code>,
+<code><a href='chk-dummy.html'>chk-dummy</a></code>,
+<code><a href='chk-patterns.html'>chk-patterns</a></code>,
+<code><a href='chk-text.html'>chk-text</a></code>,
+<code><a href='chk-uniqueness.html'>chk-uniqueness</a></code>,
+<code><a href='chk-values.html'>chk-values</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -194,31 +178,23 @@ by default.</p></td>
 <span class='op'>)</span>
 
 <span class='co'># Check for a value-label pairing</span>
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>expect_labels</span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>Male <span class='op'>=</span> <span class='st'>"M"</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Error : `df` has 1 records failing label check on variable `x`.
-#&gt; Filter: None
-#&gt; Arguments: `val_labels = &lt;chr: Male = "M"&gt;, var_label = NULL`</div><div class='input'>
+<span class='fu'>chk_labels</span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>Male <span class='op'>=</span> <span class='st'>"M"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1]  TRUE  TRUE FALSE</div><div class='input'>
 <span class='co'># Check that two variables have the same values</span>
-<span class='fu'>expect_labels</span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'>labelled</span><span class='fu'>::</span><span class='fu'><a href='http://larmarange.github.io/labelled/reference/val_labels.html'>val_labels</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>y</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span> <span class='co'># N.B. This passes!</span>
-
+<span class='fu'>chk_labels</span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>x</span>, <span class='fu'>labelled</span><span class='fu'>::</span><span class='fu'><a href='http://larmarange.github.io/labelled/reference/val_labels.html'>val_labels</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>y</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE TRUE TRUE</div><div class='input'>
 <span class='co'># Check for the presence of a particular label</span>
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>expect_labels</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"Male"</span>, data <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Error : `df` has 1 records failing label check on variable `x`.
-#&gt; Filter: None
-#&gt; Arguments: `val_labels = "Male", var_label = NULL`</div><div class='input'><span class='fu'>expect_labels</span><span class='op'>(</span><span class='va'>x</span>, var_label <span class='op'>=</span> <span class='st'>"Sex"</span>, data <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span>
-
+<span class='fu'>chk_labels</span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>x</span>, <span class='st'>"Male"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1]  TRUE  TRUE FALSE</div><div class='input'><span class='fu'>chk_labels</span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>x</span>, var_label <span class='op'>=</span> <span class='st'>"Sex"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE TRUE TRUE</div><div class='input'>
 <span class='co'># Check that a variable is labelled at all</span>
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>expect_labels</span><span class='op'>(</span><span class='va'>z</span>, val_labels <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Error : `df` has 3 records failing label check on variable `z`.
-#&gt; Filter: None
-#&gt; Arguments: `val_labels = TRUE, var_label = NULL`</div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>expect_labels</span><span class='op'>(</span><span class='va'>z</span>, var_label <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Error : `df` has 3 records failing label check on variable `z`.
-#&gt; Filter: None
-#&gt; Arguments: `val_labels = NULL, var_label = TRUE`</div><div class='input'>
+<span class='fu'>chk_labels</span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z</span>, val_labels <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE FALSE FALSE</div><div class='input'><span class='fu'>chk_labels</span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z</span>, var_label <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE FALSE FALSE</div><div class='input'>
 <span class='co'># Check that a variable isn't labelled</span>
-<span class='fu'>expect_labels</span><span class='op'>(</span><span class='va'>z</span>, val_labels <span class='op'>=</span> <span class='cn'>FALSE</span>, data <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span>
-<span class='fu'>expect_labels</span><span class='op'>(</span><span class='va'>z</span>, var_label <span class='op'>=</span> <span class='cn'>FALSE</span>, data <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span>
-
+<span class='fu'>chk_labels</span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z</span>, val_labels <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE TRUE TRUE</div><div class='input'><span class='fu'>chk_labels</span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z</span>, var_label <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE TRUE TRUE</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

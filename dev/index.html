@@ -104,6 +104,50 @@
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"socialresearchcentre/testdat"</span><span class="op">)</span></code></pre></div>
 </div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
+<p>See the <a href="https://socialresearchcentre.github.io/testdat/articles/testdat.html">Introduction to testdat</a> vignette for a detailed introduction.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://socialresearchcentre.github.io/testdat/">testdat</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: testthat</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span><span class="op">~</span><span class="va">id</span>, <span class="op">~</span><span class="va">pcode</span>, <span class="op">~</span><span class="va">state</span>, <span class="op">~</span><span class="va">nsw_only</span>,
+             <span class="fl">1</span>,   <span class="fl">2000</span>,   <span class="st">"NSW"</span>,  <span class="fl">1</span>,
+             <span class="fl">2</span>,   <span class="fl">3123</span>,   <span class="st">"VIC"</span>,  <span class="cn">NA</span>,
+             <span class="fl">3</span>,   <span class="fl">2123</span>,   <span class="st">"NSW"</span>,  <span class="fl">3</span>,
+             <span class="fl">4</span>,   <span class="fl">12345</span>,  <span class="st">"VIC"</span>,  <span class="fl">3</span><span class="op">)</span>
+
+<span class="fu"><a href="reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="va">x</span>, <span class="op">{</span>
+  <span class="fu">test_that</span><span class="op">(</span><span class="st">"id is unique"</span>, <span class="op">{</span>
+    <span class="fu"><a href="reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>
+  <span class="op">}</span><span class="op">)</span>
+  
+  <span class="fu">test_that</span><span class="op">(</span><span class="st">"variable values are correct"</span>, <span class="op">{</span>
+    <span class="fu"><a href="reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">pcode</span>, <span class="fl">2000</span><span class="op">:</span><span class="fl">2999</span>, <span class="fl">3000</span><span class="op">:</span><span class="fl">3999</span><span class="op">)</span>
+    <span class="fu"><a href="reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">state</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NSW"</span>, <span class="st">"VIC"</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="co"># by default expect_values allows NAs</span>
+  <span class="op">}</span><span class="op">)</span>
+  
+  <span class="fu">test_that</span><span class="op">(</span><span class="st">"filters applied correctly"</span>, <span class="op">{</span>
+    <span class="fu"><a href="reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="va">state</span> <span class="op">==</span> <span class="st">"NSW"</span><span class="op">)</span>
+  <span class="op">}</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed 😀</span>
+<span class="co">#&gt; ── Failure (&lt;text&gt;:16:5): variable values are correct ──────────────────────────</span>
+<span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span>
+<span class="co">#&gt; Filter: None</span>
+<span class="co">#&gt; Arguments: `&lt;int: 2000L, 2001L, 2002L, 2003L, 2004L, ...&gt;, &lt;int: 3000L, 3001L, 3002L,`</span>
+<span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span>
+<span class="co">#&gt; Filter: None</span>
+<span class="co">#&gt; Arguments: `  3003L, 3004L, ...&gt;, miss = &lt;chr: NA, ""&gt;`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ── Failure (&lt;text&gt;:22:5): filters applied correctly ────────────────────────────</span>
+<span class="co">#&gt; get_testdata() has a base mismatch in variable `nsw_only`.</span>
+<span class="co">#&gt; 0 cases have `state == "NSW"` but `nsw_only` is missing.</span>
+<span class="co">#&gt; 1 cases do not have `state == "NSW"` but `nsw_only` is non missing.</span></code></pre></div>
+</div>
 </div>
   </div>
 

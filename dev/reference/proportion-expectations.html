@@ -41,9 +41,9 @@
 
 <meta property="og:title" content="Expectations: proportions — proportion-expectations" />
 <meta property="og:description" content="These test the proportion of data in a data frame satisfying some condition.
-The generic functions, expect_prop_lte() and expect_prop_gte() can be
-used with any arbitrary function. For details regarding the other functions,
-see Generic Checking Functions." />
+The generic functions, expect_prop_lte() and expect_prop_gte(), can be
+used with any arbitrary function. The chk_*() functions, like
+chk_values(), are useful in this regard." />
 
 
 <meta name="robots" content="noindex">
@@ -124,9 +124,9 @@ see Generic Checking Functions." />
 
     <div class="ref-description">
     <p>These test the proportion of data in a data frame satisfying some condition.
-The generic functions, <code>expect_prop_lte()</code> and <code>expect_prop_gte()</code> can be
-used with any arbitrary function. For details regarding the other functions,
-see <a href='chk-generic.html'>Generic Checking Functions</a>.</p>
+The generic functions, <code>expect_prop_lte()</code> and <code>expect_prop_gte()</code>, can be
+used with any arbitrary function. The <code>chk_*()</code> functions, like
+<code><a href='chk-values.html'>chk_values()</a></code>, are useful in this regard.</p>
     </div>
 
     <pre class="usage"><span class='fu'>expect_prop_lte</span><span class='op'>(</span>
@@ -215,15 +215,18 @@ defuse the <code>var</code> argument using the embracing operator <code>{{ }}</c
 examples sections for an example.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='chk-generic.html'>Generic Checking Functions</a></p>
+    <div class='dont-index'><p><code>chk_*()</code> functions such as <code><a href='chk-values.html'>chk_values()</a></code></p>
 <p>Other data expectations: 
-<code><a href='chk-expectations.html'>chk-expectations</a></code>,
 <code><a href='conditional-expectations.html'>conditional-expectations</a></code>,
 <code><a href='datacomp-expectations.html'>datacomp-expectations</a></code>,
+<code><a href='date-expectations.html'>date-expectations</a></code>,
 <code><a href='exclusivity-expectations.html'>exclusivity-expectations</a></code>,
 <code><a href='generic-expectations.html'>generic-expectations</a></code>,
 <code><a href='label-expectations.html'>label-expectations</a></code>,
-<code><a href='uniqueness-expectations.html'>uniqueness-expectations</a></code></p></div>
+<code><a href='pattern-expectations.html'>pattern-expectations</a></code>,
+<code><a href='text-expectations.html'>text-expectations</a></code>,
+<code><a href='uniqueness-expectations.html'>uniqueness-expectations</a></code>,
+<code><a href='value-expectations.html'>value-expectations</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>sales</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>

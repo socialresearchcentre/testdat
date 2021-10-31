@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Expectations: exclusivity — exclusivity-expectations • testdat</title>
+<title>Expectations: text — text-expectations • testdat</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,8 @@
 
 
 
-<meta property="og:title" content="Expectations: exclusivity — exclusivity-expectations" />
-<meta property="og:description" content="expect_exclusive tests that vars are exclusive - that, if any one of
-vars is set to exc_val, no other column in vars or var_set is also
-set to exc_val." />
+<meta property="og:title" content="Expectations: text — text-expectations" />
+<meta property="og:description" content="Test whether variables in a data frame contain common NULL placeholders." />
 
 
 <meta name="robots" content="noindex">
@@ -116,18 +114,28 @@ set to exc_val." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Expectations: exclusivity</h1>
-    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/testdat/blob/master/R/expect-exclusive.R'><code>R/expect-exclusive.R</code></a></small>
-    <div class="hidden name"><code>exclusivity-expectations.Rd</code></div>
+    <h1>Expectations: text</h1>
+    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/testdat/blob/master/R/expect-chk.R'><code>R/expect-chk.R</code></a></small>
+    <div class="hidden name"><code>text-expectations.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>expect_exclusive</code> tests that <code>vars</code> are exclusive - that, if any one of
-<code>vars</code> is set to <code>exc_val</code>, no other column in <code>vars</code> or <code>var_set</code> is also
-set to <code>exc_val</code>.</p>
+    <p>Test whether variables in a data frame contain common NULL placeholders.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>expect_exclusive</span><span class='op'>(</span><span class='va'>vars</span>, <span class='va'>var_set</span>, exc_val <span class='op'>=</span> <span class='fl'>1</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>expect_text_miss</span><span class='op'>(</span>
+  <span class='va'>vars</span>,
+  miss <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"testdat.miss_text"</span><span class='op'>)</span>,
+  flt <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>
+
+<span class='fu'>expect_text_nmiss</span><span class='op'>(</span>
+  <span class='va'>vars</span>,
+  miss <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"testdat.miss_text"</span><span class='op'>)</span>,
+  flt <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,14 +146,10 @@ set to <code>exc_val</code>.</p>
 test.</p></td>
     </tr>
     <tr>
-      <th>var_set</th>
-      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html'>tidy-select</a></code>&gt; The full set of
-columns to check against. This should include all columns specified in the
-<code>vars</code> argument.</p></td>
-    </tr>
-    <tr>
-      <th>exc_val</th>
-      <td><p>The value that flags a variable as "selected" (default: <code>1</code>)</p></td>
+      <th>miss</th>
+      <td><p>A vector of values to be treated as missing. The
+<a href='testdat-package.html'>testdat.miss</a> or <a href='testdat-package.html'>testdat.miss_text</a> option is used by
+default.</p></td>
     </tr>
     <tr>
       <th>flt</th>
@@ -159,57 +163,38 @@ by default.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This expectation is designed to check exclusivity in survey multiple response
-sets, where one response is only valid on its own.</p>
-<p>See the example data set below:</p><ul>
-<li><p>No record should have <code>q10_98</code>, "None of the above", selected while also
-having any other response selected, so we refer to this as an "exclusive"
-response.</p></li>
-<li><p><code>expect_exclusive()</code> checks whether <code>q10_98</code> "None of the above" or
-<code>q10_99</code> "Don't know", the exclusive responses, have been selected alongside
-any other <code>q10_*</code> response.</p></li>
-<li><p>The expectation fails, since the first record has both <code>q10_1</code> and
-<code>q10_98</code> selected.</p></li>
-</ul>
-
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other data expectations: 
+    <div class='dont-index'><p><a href='chk-text.html'>Checks: text</a></p>
+<p>Other data expectations: 
 <code><a href='conditional-expectations.html'>conditional-expectations</a></code>,
 <code><a href='datacomp-expectations.html'>datacomp-expectations</a></code>,
 <code><a href='date-expectations.html'>date-expectations</a></code>,
+<code><a href='exclusivity-expectations.html'>exclusivity-expectations</a></code>,
 <code><a href='generic-expectations.html'>generic-expectations</a></code>,
 <code><a href='label-expectations.html'>label-expectations</a></code>,
 <code><a href='pattern-expectations.html'>pattern-expectations</a></code>,
 <code><a href='proportion-expectations.html'>proportion-expectations</a></code>,
-<code><a href='text-expectations.html'>text-expectations</a></code>,
 <code><a href='uniqueness-expectations.html'>uniqueness-expectations</a></code>,
 <code><a href='value-expectations.html'>value-expectations</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='va'>my_q_block</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
-  resp_id <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='co'># Unique to respondent</span>
-  q10_1  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span>,
-  q10_2  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span>,
-  q10_3  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span>,
-  q10_98 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>, <span class='co'># None of the above</span>
-  q10_99 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>  <span class='co'># Item not answered</span>
+<span class='va'>sales</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
+  sale_id <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,
+  date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"20200101"</span>, <span class='st'>"null"</span>, <span class='st'>"20200102"</span>, <span class='st'>"20200103"</span>, <span class='st'>"null"</span><span class='op'>)</span>,
+  sale_price <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>30</span>, <span class='fl'>40</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
 <span class='op'>)</span>
 
-<span class='co'># Make sure that if "None of the above" and "Item skipped" are selected</span>
-<span class='co'># none of the other question options are selected:</span>
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
-<span class='fu'>expect_exclusive</span><span class='op'>(</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>q10_98</span>, <span class='va'>q10_99</span><span class='op'>)</span>,
-  <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"q10_"</span><span class='op'>)</span>,
-  data <span class='op'>=</span> <span class='va'>my_q_block</span>
-<span class='op'>)</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; Error : `my_q_block` has 1 records with non-exclusive values in variables `q10_98, q10_99` in variable set `starts_with("q10_")`.
-#&gt; Filter: None</div></pre>
+<span class='co'># Dates not missing</span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>expect_text_nmiss</span><span class='op'>(</span><span class='va'>date</span>, data <span class='op'>=</span> <span class='va'>sales</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Error : `sales` has 2 records failing missing check on variable `date`.
+#&gt; Filter: None
+#&gt; Arguments: `miss = &lt;chr: "error", "null", "0", ".", "-", ...&gt;`</div><div class='input'>
+<span class='co'># Date missing if price negative</span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>expect_text_miss</span><span class='op'>(</span><span class='va'>date</span>, flt <span class='op'>=</span> <span class='va'>sale_price</span> <span class='op'>%in%</span> <span class='op'>-</span><span class='fl'>1</span>, data <span class='op'>=</span> <span class='va'>sales</span><span class='op'>)</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

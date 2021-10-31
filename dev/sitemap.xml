@@ -4,19 +4,34 @@
     <loc>https://socialresearchcentre.github.io/testdat/index.html</loc>
   </url>
   <url>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/chk-dates.html</loc>
+  </url>
+  <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/chk-defunct.html</loc>
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/chk-deprec.html</loc>
   </url>
   <url>
-    <loc>https://socialresearchcentre.github.io/testdat/reference/chk-expectations.html</loc>
-  </url>
-  <url>
-    <loc>https://socialresearchcentre.github.io/testdat/reference/chk-generic.html</loc>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/chk-dummy.html</loc>
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/chk-helper.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/chk-labels.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/chk-patterns.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/chk-text.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/chk-uniqueness.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/chk-values.html</loc>
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/conditional-expectations.html</loc>
@@ -26,6 +41,9 @@
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/datacomp-expectations.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/date-expectations.html</loc>
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/exclusivity-expectations.html</loc>
@@ -55,6 +73,9 @@
     <loc>https://socialresearchcentre.github.io/testdat/reference/output_results_excel.html</loc>
   </url>
   <url>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/pattern-expectations.html</loc>
+  </url>
+  <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/proportion-expectations.html</loc>
   </url>
   <url>
@@ -67,7 +88,13 @@
     <loc>https://socialresearchcentre.github.io/testdat/reference/testdat-package.html</loc>
   </url>
   <url>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/text-expectations.html</loc>
+  </url>
+  <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/uniqueness-expectations.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/value-expectations.html</loc>
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/testdat/articles/testdat.html</loc>

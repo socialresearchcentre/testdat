@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Expectations: consistency checks — conditional-expectations • testdat</title>
+<title>Expectations: consistency — conditional-expectations • testdat</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Expectations: consistency checks — conditional-expectations" />
+<meta property="og:title" content="Expectations: consistency — conditional-expectations" />
 <meta property="og:description" content="These functions test whether multiple conditions coexist." />
 
 
@@ -114,7 +114,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Expectations: consistency checks</h1>
+    <h1>Expectations: consistency</h1>
     <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/testdat/blob/master/R/expect-conditional.R'><code>R/expect-conditional.R</code></a></small>
     <div class="hidden name"><code>conditional-expectations.Rd</code></div>
     </div>
@@ -123,19 +123,34 @@
     <p>These functions test whether multiple conditions coexist.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>expect_base</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>expect_cond</span><span class='op'>(</span><span class='va'>cond1</span>, <span class='va'>cond2</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'>expect_base</span><span class='op'>(</span>
   <span class='va'>var</span>,
   <span class='va'>base</span>,
   miss <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"testdat.miss"</span><span class='op'>)</span>,
   missing_valid <span class='op'>=</span> <span class='cn'>FALSE</span>,
   data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='fu'>expect_cond</span><span class='op'>(</span><span class='va'>cond1</span>, <span class='va'>cond2</span>, data <span class='op'>=</span> <span class='fu'><a href='global-data.html'>get_testdata</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>cond1</th>
+      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_data_masking.html'>data-masking</a></code>&gt; First condition
+(antecedent) for consistency check.</p></td>
+    </tr>
+    <tr>
+      <th>cond2</th>
+      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_data_masking.html'>data-masking</a></code>&gt; Second condition
+(consequent) for consistency check.</p></td>
+    </tr>
+    <tr>
+      <th>data</th>
+      <td><p>A data frame to test. The <a href='global-data.html'>global test data</a> is used
+by default.</p></td>
+    </tr>
     <tr>
       <th>var</th>
       <td><p>An unquoted column name to test.</p></td>
@@ -156,44 +171,31 @@ determines which records should be non-missing.</p></td>
 meeting the <code>base</code> condition? This allows 'one way' base checks. This is
 <code>FALSE</code> by default.</p></td>
     </tr>
-    <tr>
-      <th>data</th>
-      <td><p>A data frame to test. The <a href='global-data.html'>global test data</a> is used
-by default.</p></td>
-    </tr>
-    <tr>
-      <th>cond1</th>
-      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_data_masking.html'>data-masking</a></code>&gt; First condition
-(antecedent) for consistency check.</p></td>
-    </tr>
-    <tr>
-      <th>cond2</th>
-      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_data_masking.html'>data-masking</a></code>&gt; Second condition
-(consequent) for consistency check.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     
 <ul>
-<li><p><code>expect_cond()</code> checks the coexistence of two conditions. It can be read as
-"if <code>cond1</code> then <code>cond2</code>".</p></li>
-<li><p><code>expect_base()</code> is a special case that checks missing data against a
-specified condition. It can be read as "if <code>base</code> then <code>var</code> not missing, if
-not <code>base</code> then <code>var</code> missing".</p></li>
+<li><p><code>expect_cond</code>: Checks the coexistence of two
+conditions. It can be read as "if <code>cond1</code> then <code>cond2</code>".</p></li>
+<li><p><code>expect_base</code>: A special case that checks missing data
+against a specified condition. It can be read as "if <code>base</code> then <code>var</code> not
+missing, if not <code>base</code> then <code>var</code> missing".</p></li>
 </ul>
-
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other data expectations: 
-<code><a href='chk-expectations.html'>chk-expectations</a></code>,
 <code><a href='datacomp-expectations.html'>datacomp-expectations</a></code>,
+<code><a href='date-expectations.html'>date-expectations</a></code>,
 <code><a href='exclusivity-expectations.html'>exclusivity-expectations</a></code>,
 <code><a href='generic-expectations.html'>generic-expectations</a></code>,
 <code><a href='label-expectations.html'>label-expectations</a></code>,
+<code><a href='pattern-expectations.html'>pattern-expectations</a></code>,
 <code><a href='proportion-expectations.html'>proportion-expectations</a></code>,
-<code><a href='uniqueness-expectations.html'>uniqueness-expectations</a></code></p></div>
+<code><a href='text-expectations.html'>text-expectations</a></code>,
+<code><a href='uniqueness-expectations.html'>uniqueness-expectations</a></code>,
+<code><a href='value-expectations.html'>value-expectations</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>my_survey</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>

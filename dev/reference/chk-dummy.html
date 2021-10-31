@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Defunct checking functions — chk-defunct • testdat</title>
+<title>Checks: dummy — chk-dummy • testdat</title>
 
 
 <!-- jquery -->
@@ -39,14 +39,8 @@
 
 
 
-<meta property="og:title" content="Defunct checking functions — chk-defunct" />
-<meta property="og:description" content="
-These functions are defunct.
-chk_filter_where() works exactly like chk_filter_all(). When testdat
-used dplyr::vars() as standard chk_filter_where() provided an alternative
-interface using tidy-select.
-
-" />
+<meta property="og:title" content="Checks: dummy — chk-dummy" />
+<meta property="og:description" content="These functions provide common, simple data checks." />
 
 
 <meta name="robots" content="noindex">
@@ -120,31 +114,23 @@ interface using tidy-select.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Defunct checking functions</h1>
-    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/testdat/blob/master/R/deprec-chk.R'><code>R/deprec-chk.R</code></a></small>
-    <div class="hidden name"><code>chk-defunct.Rd</code></div>
+    <h1>Checks: dummy</h1>
+    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/testdat/blob/master/R/chk.R'><code>R/chk.R</code></a></small>
+    <div class="hidden name"><code>chk-dummy.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#defunct'><img src='figures/lifecycle-defunct.svg' alt='[Defunct]' /></a></p>
-<p>These functions are defunct.</p><ul>
-<li><p><code>chk_filter_where()</code> works exactly like <code><a href='chk-helper.html'>chk_filter_all()</a></code>. When testdat
-used <code><a href='https://dplyr.tidyverse.org/reference/vars.html'>dplyr::vars()</a></code> as standard <code>chk_filter_where()</code> provided an alternative
-interface using <code><a href='https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html'>tidy-select</a></code>.</p></li>
-</ul>
-
+    <p>These functions provide common, simple data checks.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>chk_filter_vars</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>vars</span>, <span class='va'>func</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='fu'>chk_filter_where</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>where</span>, <span class='va'>func</span>, flt <span class='op'>=</span> <span class='cn'>TRUE</span>, args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>chk_dummy</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>where</th>
-      <td><p>&lt;<code><a href='https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html'>tidy-select</a></code>&gt; Columns to check.</p></td>
+      <th>x</th>
+      <td><p>A vector to check.</p></td>
     </tr>
     </table>
 
@@ -154,9 +140,21 @@ interface using <code><a href='https://dplyr.tidyverse.org/reference/dplyr_tidy_
 check.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>chk_*()</code> functions such as <code><a href='chk-values.html'>chk_values()</a></code></p>
-<p><a href='chk-helper.html'>Checking Helper Functions</a></p></div>
+    <div class='dont-index'><p><a href='chk-helper.html'>Checks: data frame helpers</a></p>
+<p>Other vector checks: 
+<code><a href='chk-dates.html'>chk-dates</a></code>,
+<code><a href='chk-labels.html'>chk-labels</a></code>,
+<code><a href='chk-patterns.html'>chk-patterns</a></code>,
+<code><a href='chk-text.html'>chk-text</a></code>,
+<code><a href='chk-uniqueness.html'>chk-uniqueness</a></code>,
+<code><a href='chk-values.html'>chk-values</a></code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'>chk_dummy</span><span class='op'>(</span><span class='va'>LETTERS</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+#&gt; [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

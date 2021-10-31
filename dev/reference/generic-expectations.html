@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Expectations: generic expectation helpers — generic-expectations • testdat</title>
+<title>Expectations: generic helpers — generic-expectations • testdat</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Expectations: generic expectation helpers — generic-expectations" />
+<meta property="og:title" content="Expectations: generic helpers — generic-expectations" />
 <meta property="og:description" content="These functions allow for testing of multiple columns (vars) of a data
 frame (data), with an optional filter (flt), using an arbitrary function
 (func)." />
@@ -116,7 +116,7 @@ frame (data), with an optional filter (flt), using an arbitrary function
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Expectations: generic expectation helpers</h1>
+    <h1>Expectations: generic helpers</h1>
     <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/testdat/blob/master/R/expect-generic.R'><code>R/expect-generic.R</code></a></small>
     <div class="hidden name"><code>generic-expectations.Rd</code></div>
     </div>
@@ -202,15 +202,18 @@ to each of the <code>vars</code> is <code>TRUE</code>).</p></li>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='chk-generic.html'>chk-generic</a> for a set of generic checking functions</p>
+    <div class='dont-index'><p><code>chk_*()</code> functions such as <code><a href='chk-values.html'>chk_values()</a></code></p>
 <p>Other data expectations: 
-<code><a href='chk-expectations.html'>chk-expectations</a></code>,
 <code><a href='conditional-expectations.html'>conditional-expectations</a></code>,
 <code><a href='datacomp-expectations.html'>datacomp-expectations</a></code>,
+<code><a href='date-expectations.html'>date-expectations</a></code>,
 <code><a href='exclusivity-expectations.html'>exclusivity-expectations</a></code>,
 <code><a href='label-expectations.html'>label-expectations</a></code>,
+<code><a href='pattern-expectations.html'>pattern-expectations</a></code>,
 <code><a href='proportion-expectations.html'>proportion-expectations</a></code>,
-<code><a href='uniqueness-expectations.html'>uniqueness-expectations</a></code></p></div>
+<code><a href='text-expectations.html'>text-expectations</a></code>,
+<code><a href='uniqueness-expectations.html'>uniqueness-expectations</a></code>,
+<code><a href='value-expectations.html'>value-expectations</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span>
@@ -242,10 +245,11 @@ to each of the <code>vars</code> is <code>TRUE</code>).</p></li>
 #&gt; Filter: `(cyl == 4)`
 #&gt; Arguments: `min = 0, max = 100`</div><div class='input'>
 <span class='co'># Check petal dimensions are positive</span>
-<span class='fu'>expect_all</span><span class='op'>(</span>
+<span class='fu'>expect_allany</span><span class='op'>(</span>
   vars <span class='op'>=</span> <span class='fu'>where</span><span class='op'>(</span><span class='va'>is.numeric</span><span class='op'>)</span>,
   func <span class='op'>=</span> <span class='va'>chk_range</span>,
   args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='cn'>Inf</span><span class='op'>)</span>,
+  allany <span class='op'>=</span> <span class='va'>chk_filter_all</span>,
   data <span class='op'>=</span> <span class='va'>iris</span>
 <span class='op'>)</span>
 

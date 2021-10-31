@@ -142,9 +142,10 @@ data for the current context.</p>
     </tr>
     <tr>
       <th>quosure</th>
-      <td><p>If <code>TRUE</code>, the default, the data frame is stored as a quosure
-and lazily evaluated when <code>get_testdata()</code> is called, so <code>get_testdata()</code>
-will return the current state of the data frame.</p>
+      <td><p>If <code>TRUE</code>, the default, the data frame is stored as a
+<a href='https://rlang.r-lib.org/reference/quosure.html'>quosure</a> and lazily evaluated when <code>get_testdata()</code> is
+called, so <code>get_testdata()</code> will return the current state of the data
+frame.</p>
 <p>If <code>FALSE</code>, the data frame will be copied and <code>get_testdata()</code> will return
 the state of the data frame at the time <code>set_testdata()</code> was called.</p></td>
     </tr>
