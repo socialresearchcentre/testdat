@@ -229,11 +229,13 @@ to a testing approach, using a simple data processing exercise.
 ```{r}
 library(dplyr)
 
-x <- tribble(~id, ~pcode, ~state, ~nsw_only,
-             1,   2000,   "NSW",  1,
-             2,   3123,   "VIC",  NA,
-             3,   2123,   "NSW",  3,
-             4,   12345,  "VIC",  3)
+x <- tribble(
+  ~id, ~pcode, ~state, ~nsw_only,
+  1,   2000,   "NSW",  1,
+  2,   3123,   "VIC",  NA,
+  3,   2123,   "NSW",  3,
+  4,   12345,  "VIC",  3
+)
 
 # check id is unique
 x %>% filter(duplicated(id))
@@ -258,11 +260,13 @@ x %>% count(market)
 library(testdat)
 library(dplyr)
 
-x <- tribble(~id, ~pcode, ~state, ~nsw_only,
-             1,   2000,   "NSW",  1,
-             2,   3123,   "VIC",  NA,
-             3,   2123,   "NSW",  3,
-             4,   12345,  "VIC",  3)
+x <- tribble(
+  ~id, ~pcode, ~state, ~nsw_only,
+  1,   2000,   "NSW",  1,
+  2,   3123,   "VIC",  NA,
+  3,   2123,   "NSW",  3,
+  4,   12345,  "VIC",  3
+)
 
 with_testdata(x, {
   test_that("id is unique", {
@@ -297,9 +301,8 @@ Note that:
 * The `test_that()` wrapper is not strictly necessary, but it provides more
 informative error messaging and logically groups a set of expectations.
 
-* The `with_testdata()` block will run all `test_that()` blocks, even if some
-fail. If expectations are not surrounded by a `test_that()` wrapper, the block
-will exit after the first failed test.
+* Each `with_testdata()` block will fail on the first `test_that()` block that
+fails. The "filters applied correctly" test block is not run in the example.
 
 ## Using a test suite
 

@@ -10,6 +10,8 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lif
 [![R-CMD-check](https://github.com/socialresearchcentre/testdat/workflows/R-CMD-check/badge.svg)](https://github.com/socialresearchcentre/testdat/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/socialresearchcentre/testdat/branch/master/graph/badge.svg)](https://app.codecov.io/gh/socialresearchcentre/testdat?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/testdat)](https://CRAN.R-project.org/package=testdat)
 <!-- badges: end -->
 
 ## Overview
@@ -34,10 +36,10 @@ Features include:
 
 ## Installation
 
-You can install the released version of testdat from srclib with:
+You can install the released version of testdat from
+[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-# srcproj::add_srclib()
 install.packages("testdat")
 ```
 
@@ -59,11 +61,13 @@ library(testdat, warn.conflicts = FALSE)
 #> Loading required package: testthat
 library(dplyr, warn.conflicts = FALSE)
 
-x <- tribble(~id, ~pcode, ~state, ~nsw_only,
-             1,   2000,   "NSW",  1,
-             2,   3123,   "VIC",  NA,
-             3,   2123,   "NSW",  3,
-             4,   12345,  "VIC",  3)
+x <- tribble(
+  ~id, ~pcode, ~state, ~nsw_only,
+  1,   2000,   "NSW",  1,
+  2,   3123,   "VIC",  NA,
+  3,   2123,   "NSW",  3,
+  4,   12345,  "VIC",  3
+)
 
 with_testdata(x, {
   test_that("id is unique", {
@@ -81,16 +85,12 @@ with_testdata(x, {
   })
 })
 #> Test passed 🌈
-#> ── Failure (<text>:16:5): variable values are correct ──────────────────────────
+#> ── Failure (<text>:18:5): variable values are correct ──────────────────────────
 #> get_testdata() has 1 records failing value check on variable `pcode`.
 #> Filter: None
 #> Arguments: `<int: 2000L, 2001L, 2002L, 2003L, 2004L, ...>, <int: 3000L, 3001L, 3002L,`
 #> get_testdata() has 1 records failing value check on variable `pcode`.
 #> Filter: None
 #> Arguments: `  3003L, 3004L, ...>, miss = <chr: NA, "">`
-#> 
-#> ── Failure (<text>:22:5): filters applied correctly ────────────────────────────
-#> get_testdata() has a base mismatch in variable `nsw_only`.
-#> 0 cases have `state == "NSW"` but `nsw_only` is missing.
-#> 1 cases do not have `state == "NSW"` but `nsw_only` is non missing.
+#> Error: Test failed
 ```

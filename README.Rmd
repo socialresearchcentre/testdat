@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
 [![R-CMD-check](https://github.com/socialresearchcentre/testdat/workflows/R-CMD-check/badge.svg)](https://github.com/socialresearchcentre/testdat/actions)
 [![Codecov test coverage](https://codecov.io/gh/socialresearchcentre/testdat/branch/master/graph/badge.svg)](https://app.codecov.io/gh/socialresearchcentre/testdat?branch=master)
+[![CRAN status](https://www.r-pkg.org/badges/version/testdat)](https://CRAN.R-project.org/package=testdat)
 <!-- badges: end -->
 
 ## Overview
@@ -41,10 +42,10 @@ Features include:
 
 ## Installation
 
-You can install the released version of testdat from srclib with:
+You can install the released version of testdat from
+[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-# srcproj::add_srclib()
 install.packages("testdat")
 ```
 
@@ -61,15 +62,17 @@ See the [Introduction to
 testdat](https://socialresearchcentre.github.io/testdat/articles/testdat.html)
 vignette for a detailed introduction.
 
-```{r}
+```{r error=TRUE}
 library(testdat, warn.conflicts = FALSE)
 library(dplyr, warn.conflicts = FALSE)
 
-x <- tribble(~id, ~pcode, ~state, ~nsw_only,
-             1,   2000,   "NSW",  1,
-             2,   3123,   "VIC",  NA,
-             3,   2123,   "NSW",  3,
-             4,   12345,  "VIC",  3)
+x <- tribble(
+  ~id, ~pcode, ~state, ~nsw_only,
+  1,   2000,   "NSW",  1,
+  2,   3123,   "VIC",  NA,
+  3,   2123,   "NSW",  3,
+  4,   12345,  "VIC",  3
+)
 
 with_testdata(x, {
   test_that("id is unique", {
