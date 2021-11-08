@@ -224,44 +224,46 @@ to each of the <code>vars</code> is <code>TRUE</code>).</p></li>
 <code><a href='value-expectations.html'>value-expectations</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span>
-<span class='co'># inches *AND* &lt; 100 horsepower</span>
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
-<span class='fu'>expect_all</span><span class='op'>(</span>
-  vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>disp</span>, <span class='va'>hp</span><span class='op'>)</span>,
-  func <span class='op'>=</span> <span class='va'>chk_range</span>,
-  flt <span class='op'>=</span> <span class='op'>(</span><span class='va'>cyl</span> <span class='op'>==</span> <span class='fl'>4</span><span class='op'>)</span>,
-  args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>,
-  data <span class='op'>=</span> <span class='va'>mtcars</span>
-<span class='op'>)</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; Error : `mtcars` has 7 records failing `chk_range` on variable `disp, hp`.
-#&gt; Filter: `(cyl == 4)`
-#&gt; Arguments: `min = 0, max = 100`</div><div class='input'>
-<span class='co'># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span>
-<span class='co'># inches *OR* &lt; 100 horsepower</span>
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
-<span class='fu'>expect_any</span><span class='op'>(</span>
-  vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>disp</span>, <span class='va'>hp</span><span class='op'>)</span>,
-  func <span class='op'>=</span> <span class='va'>chk_range</span>,
-  flt <span class='op'>=</span> <span class='op'>(</span><span class='va'>cyl</span> <span class='op'>==</span> <span class='fl'>4</span><span class='op'>)</span>,
-  args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>,
-  data <span class='op'>=</span> <span class='va'>mtcars</span>
-<span class='op'>)</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; Error : `mtcars` has 1 records failing `chk_range` on variable `disp, hp`.
-#&gt; Filter: `(cyl == 4)`
-#&gt; Arguments: `min = 0, max = 100`</div><div class='input'>
-<span class='co'># Check petal dimensions are positive</span>
-<span class='fu'>expect_allany</span><span class='op'>(</span>
-  vars <span class='op'>=</span> <span class='fu'>where</span><span class='op'>(</span><span class='va'>is.numeric</span><span class='op'>)</span>,
-  func <span class='op'>=</span> <span class='va'>chk_range</span>,
-  args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='cn'>Inf</span><span class='op'>)</span>,
-  allany <span class='op'>=</span> <span class='va'>chk_filter_all</span>,
-  data <span class='op'>=</span> <span class='va'>iris</span>
-<span class='op'>)</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span>
+<span class='r-in'><span class='co'># inches *AND* &lt; 100 horsepower</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span></span>
+<span class='r-in'><span class='fu'>expect_all</span><span class='op'>(</span></span>
+<span class='r-in'>  vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>disp</span>, <span class='va'>hp</span><span class='op'>)</span>,</span>
+<span class='r-in'>  func <span class='op'>=</span> <span class='va'>chk_range</span>,</span>
+<span class='r-in'>  flt <span class='op'>=</span> <span class='op'>(</span><span class='va'>cyl</span> <span class='op'>==</span> <span class='fl'>4</span><span class='op'>)</span>,</span>
+<span class='r-in'>  args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>,</span>
+<span class='r-in'>  data <span class='op'>=</span> <span class='va'>mtcars</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Error : `mtcars` has 7 records failing `chk_range` on variable `disp, hp`.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Filter: `(cyl == 4)`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Arguments: `min = 0, max = 100`</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span>
+<span class='r-in'><span class='co'># inches *OR* &lt; 100 horsepower</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span></span>
+<span class='r-in'><span class='fu'>expect_any</span><span class='op'>(</span></span>
+<span class='r-in'>  vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>disp</span>, <span class='va'>hp</span><span class='op'>)</span>,</span>
+<span class='r-in'>  func <span class='op'>=</span> <span class='va'>chk_range</span>,</span>
+<span class='r-in'>  flt <span class='op'>=</span> <span class='op'>(</span><span class='va'>cyl</span> <span class='op'>==</span> <span class='fl'>4</span><span class='op'>)</span>,</span>
+<span class='r-in'>  args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>,</span>
+<span class='r-in'>  data <span class='op'>=</span> <span class='va'>mtcars</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Error : `mtcars` has 1 records failing `chk_range` on variable `disp, hp`.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Filter: `(cyl == 4)`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Arguments: `min = 0, max = 100`</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Check petal dimensions are positive</span></span>
+<span class='r-in'><span class='fu'>expect_allany</span><span class='op'>(</span></span>
+<span class='r-in'>  vars <span class='op'>=</span> <span class='fu'>where</span><span class='op'>(</span><span class='va'>is.numeric</span><span class='op'>)</span>,</span>
+<span class='r-in'>  func <span class='op'>=</span> <span class='va'>chk_range</span>,</span>
+<span class='r-in'>  args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='cn'>Inf</span><span class='op'>)</span>,</span>
+<span class='r-in'>  allany <span class='op'>=</span> <span class='va'>chk_filter_all</span>,</span>
+<span class='r-in'>  data <span class='op'>=</span> <span class='va'>iris</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

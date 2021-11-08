@@ -48,7 +48,7 @@
 
 <meta property="og:title" content="Checks: text — chk-text" />
 <meta property="og:description" content="Check character vectors for non-ASCII characters or common NULL value
-placeholders" />
+placeholders." />
 <meta property="og:image" content="https://socialresearchcentre.github.io/testdat/logo.png" />
 
 
@@ -130,7 +130,7 @@ placeholders" />
 
     <div class="ref-description">
     <p>Check character vectors for non-ASCII characters or common NULL value
-placeholders</p>
+placeholders.</p>
     </div>
 
     <pre class="usage"><span class='fu'>chk_ascii</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
@@ -171,14 +171,17 @@ check.</p>
 <code><a href='chk-values.html'>chk-values</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'>chk_ascii</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"\U1f642"</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># detect non-ASCII characters</span>
-</div><div class='output co'>#&gt; [1]  TRUE FALSE</div><div class='input'>
-<span class='va'>imported_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='st'>"#n/a"</span>, <span class='fl'>2</span>, <span class='st'>""</span>, <span class='fl'>3</span>, <span class='cn'>NA</span><span class='op'>)</span>
-<span class='fu'>chk_text_miss</span><span class='op'>(</span><span class='va'>imported_data</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE</div><div class='input'><span class='fu'>chk_text_nmiss</span><span class='op'>(</span><span class='va'>imported_data</span><span class='op'>)</span> <span class='co'># Equivalent to !chk_text_miss(imported_data)</span>
-</div><div class='output co'>#&gt; [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='fu'>chk_ascii</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"\U1f642"</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># detect non-ASCII characters</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1]  TRUE FALSE</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>imported_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='st'>"#n/a"</span>, <span class='fl'>2</span>, <span class='st'>""</span>, <span class='fl'>3</span>, <span class='cn'>NA</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>chk_text_miss</span><span class='op'>(</span><span class='va'>imported_data</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE</span>
+<span class='r-in'><span class='fu'>chk_text_nmiss</span><span class='op'>(</span><span class='va'>imported_data</span><span class='op'>)</span> <span class='co'># Equivalent to !chk_text_miss(imported_data)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

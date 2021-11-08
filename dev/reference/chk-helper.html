@@ -192,124 +192,128 @@ columns in the output of <code>chk_filter()</code>).</p></li>
     <div class='dont-index'><p>Other <code>chk_*()</code> functions such as <code><a href='chk-values.html'>chk_values()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span>
-<span class='co'># inches AND &lt; 100 horsepower - return a data frame</span>
-<span class='fu'>chk_filter</span><span class='op'>(</span>
-  <span class='va'>mtcars</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"disp"</span>, <span class='st'>"hp"</span><span class='op'>)</span>,
-  <span class='va'>chk_range</span>,
-  <span class='va'>cyl</span> <span class='op'>==</span> <span class='fl'>4</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt;                      disp    hp
-#&gt; Mazda RX4              NA    NA
-#&gt; Mazda RX4 Wag          NA    NA
-#&gt; Datsun 710          FALSE  TRUE
-#&gt; Hornet 4 Drive         NA    NA
-#&gt; Hornet Sportabout      NA    NA
-#&gt; Valiant                NA    NA
-#&gt; Duster 360             NA    NA
-#&gt; Merc 240D           FALSE  TRUE
-#&gt; Merc 230            FALSE  TRUE
-#&gt; Merc 280               NA    NA
-#&gt; Merc 280C              NA    NA
-#&gt; Merc 450SE             NA    NA
-#&gt; Merc 450SL             NA    NA
-#&gt; Merc 450SLC            NA    NA
-#&gt; Cadillac Fleetwood     NA    NA
-#&gt; Lincoln Continental    NA    NA
-#&gt; Chrysler Imperial      NA    NA
-#&gt; Fiat 128             TRUE  TRUE
-#&gt; Honda Civic          TRUE  TRUE
-#&gt; Toyota Corolla       TRUE  TRUE
-#&gt; Toyota Corona       FALSE  TRUE
-#&gt; Dodge Challenger       NA    NA
-#&gt; AMC Javelin            NA    NA
-#&gt; Camaro Z28             NA    NA
-#&gt; Pontiac Firebird       NA    NA
-#&gt; Fiat X1-9            TRUE  TRUE
-#&gt; Porsche 914-2       FALSE  TRUE
-#&gt; Lotus Europa         TRUE FALSE
-#&gt; Ford Pantera L         NA    NA
-#&gt; Ferrari Dino           NA    NA
-#&gt; Maserati Bora          NA    NA
-#&gt; Volvo 142E          FALSE FALSE</div><div class='input'>
-<span class='co'># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span>
-<span class='co'># inches AND &lt; 100 horsepower</span>
-<span class='fu'>chk_filter_all</span><span class='op'>(</span>
-  <span class='va'>mtcars</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"disp"</span>, <span class='st'>"hp"</span><span class='op'>)</span>,
-  <span class='va'>chk_range</span>,
-  <span class='va'>cyl</span> <span class='op'>==</span> <span class='fl'>4</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt;           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
-#&gt;                  NA                  NA               FALSE                  NA 
-#&gt;   Hornet Sportabout             Valiant          Duster 360           Merc 240D 
-#&gt;                  NA                  NA                  NA               FALSE 
-#&gt;            Merc 230            Merc 280           Merc 280C          Merc 450SE 
-#&gt;               FALSE                  NA                  NA                  NA 
-#&gt;          Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental 
-#&gt;                  NA                  NA                  NA                  NA 
-#&gt;   Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla 
-#&gt;                  NA                TRUE                TRUE                TRUE 
-#&gt;       Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 
-#&gt;               FALSE                  NA                  NA                  NA 
-#&gt;    Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa 
-#&gt;                  NA                TRUE               FALSE               FALSE 
-#&gt;      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
-#&gt;                  NA                  NA                  NA               FALSE </div><div class='input'>
-<span class='co'># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span>
-<span class='co'># inches OR &lt; 100 horsepower</span>
-<span class='fu'>chk_filter_any</span><span class='op'>(</span>
-  <span class='va'>mtcars</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"disp"</span>, <span class='st'>"hp"</span><span class='op'>)</span>,
-  <span class='va'>chk_range</span>,
-  <span class='va'>cyl</span> <span class='op'>==</span> <span class='fl'>4</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt;           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
-#&gt;                  NA                  NA                TRUE                  NA 
-#&gt;   Hornet Sportabout             Valiant          Duster 360           Merc 240D 
-#&gt;                  NA                  NA                  NA                TRUE 
-#&gt;            Merc 230            Merc 280           Merc 280C          Merc 450SE 
-#&gt;                TRUE                  NA                  NA                  NA 
-#&gt;          Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental 
-#&gt;                  NA                  NA                  NA                  NA 
-#&gt;   Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla 
-#&gt;                  NA                TRUE                TRUE                TRUE 
-#&gt;       Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 
-#&gt;                TRUE                  NA                  NA                  NA 
-#&gt;    Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa 
-#&gt;                  NA                TRUE                TRUE                TRUE 
-#&gt;      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
-#&gt;                  NA                  NA                  NA               FALSE </div><div class='input'>
-<span class='co'># Check that columns made up of whole numbers are binary</span>
-<span class='fu'>chk_filter_all</span><span class='op'>(</span>
-  <span class='va'>mtcars</span>,
-  <span class='fu'>where</span><span class='op'>(</span><span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/all.html'>all</a></span><span class='op'>(</span><span class='va'>.</span> <span class='op'>%%</span> <span class='fl'>1</span> <span class='op'>==</span> <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>,
-  <span class='va'>chk_values</span>,
-  <span class='cn'>TRUE</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt;           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
-#&gt;               FALSE               FALSE               FALSE               FALSE 
-#&gt;   Hornet Sportabout             Valiant          Duster 360           Merc 240D 
-#&gt;               FALSE               FALSE               FALSE               FALSE 
-#&gt;            Merc 230            Merc 280           Merc 280C          Merc 450SE 
-#&gt;               FALSE               FALSE               FALSE               FALSE 
-#&gt;          Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental 
-#&gt;               FALSE               FALSE               FALSE               FALSE 
-#&gt;   Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla 
-#&gt;               FALSE               FALSE               FALSE               FALSE 
-#&gt;       Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 
-#&gt;               FALSE               FALSE               FALSE               FALSE 
-#&gt;    Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa 
-#&gt;               FALSE               FALSE               FALSE               FALSE 
-#&gt;      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
-#&gt;               FALSE               FALSE               FALSE               FALSE </div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span>
+<span class='r-in'><span class='co'># inches AND &lt; 100 horsepower - return a data frame</span></span>
+<span class='r-in'><span class='fu'>chk_filter</span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='va'>mtcars</span>,</span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"disp"</span>, <span class='st'>"hp"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  <span class='va'>chk_range</span>,</span>
+<span class='r-in'>  <span class='va'>cyl</span> <span class='op'>==</span> <span class='fl'>4</span>,</span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                      disp    hp</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mazda RX4              NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mazda RX4 Wag          NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Datsun 710          FALSE  TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Hornet 4 Drive         NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Hornet Sportabout      NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Valiant                NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Duster 360             NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 240D           FALSE  TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 230            FALSE  TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 280               NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 280C              NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 450SE             NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 450SL             NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 450SLC            NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Cadillac Fleetwood     NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Lincoln Continental    NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chrysler Imperial      NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Fiat 128             TRUE  TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Honda Civic          TRUE  TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Toyota Corolla       TRUE  TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Toyota Corona       FALSE  TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Dodge Challenger       NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AMC Javelin            NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Camaro Z28             NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Pontiac Firebird       NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Fiat X1-9            TRUE  TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Porsche 914-2       FALSE  TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Lotus Europa         TRUE FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Ford Pantera L         NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Ferrari Dino           NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Maserati Bora          NA    NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Volvo 142E          FALSE FALSE</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span>
+<span class='r-in'><span class='co'># inches AND &lt; 100 horsepower</span></span>
+<span class='r-in'><span class='fu'>chk_filter_all</span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='va'>mtcars</span>,</span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"disp"</span>, <span class='st'>"hp"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  <span class='va'>chk_range</span>,</span>
+<span class='r-in'>  <span class='va'>cyl</span> <span class='op'>==</span> <span class='fl'>4</span>,</span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  NA                  NA               FALSE                  NA </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Hornet Sportabout             Valiant          Duster 360           Merc 240D </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  NA                  NA                  NA               FALSE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            Merc 230            Merc 280           Merc 280C          Merc 450SE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               FALSE                  NA                  NA                  NA </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  NA                  NA                  NA                  NA </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  NA                TRUE                TRUE                TRUE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               FALSE                  NA                  NA                  NA </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  NA                TRUE               FALSE               FALSE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  NA                  NA                  NA               FALSE </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span>
+<span class='r-in'><span class='co'># inches OR &lt; 100 horsepower</span></span>
+<span class='r-in'><span class='fu'>chk_filter_any</span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='va'>mtcars</span>,</span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"disp"</span>, <span class='st'>"hp"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  <span class='va'>chk_range</span>,</span>
+<span class='r-in'>  <span class='va'>cyl</span> <span class='op'>==</span> <span class='fl'>4</span>,</span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  NA                  NA                TRUE                  NA </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Hornet Sportabout             Valiant          Duster 360           Merc 240D </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  NA                  NA                  NA                TRUE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            Merc 230            Merc 280           Merc 280C          Merc 450SE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                TRUE                  NA                  NA                  NA </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  NA                  NA                  NA                  NA </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  NA                TRUE                TRUE                TRUE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                TRUE                  NA                  NA                  NA </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  NA                TRUE                TRUE                TRUE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  NA                  NA                  NA               FALSE </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Check that columns made up of whole numbers are binary</span></span>
+<span class='r-in'><span class='fu'>chk_filter_all</span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='va'>mtcars</span>,</span>
+<span class='r-in'>  <span class='fu'>where</span><span class='op'>(</span><span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/all.html'>all</a></span><span class='op'>(</span><span class='va'>.</span> <span class='op'><a href='https://rdrr.io/r/base/Arithmetic.html'>%%</a></span> <span class='fl'>1</span> <span class='op'>==</span> <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span class='r-in'>  <span class='va'>chk_values</span>,</span>
+<span class='r-in'>  <span class='cn'>TRUE</span>,</span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               FALSE               FALSE               FALSE               FALSE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Hornet Sportabout             Valiant          Duster 360           Merc 240D </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               FALSE               FALSE               FALSE               FALSE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            Merc 230            Merc 280           Merc 280C          Merc 450SE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               FALSE               FALSE               FALSE               FALSE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               FALSE               FALSE               FALSE               FALSE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               FALSE               FALSE               FALSE               FALSE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               FALSE               FALSE               FALSE               FALSE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               FALSE               FALSE               FALSE               FALSE </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               FALSE               FALSE               FALSE               FALSE </span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

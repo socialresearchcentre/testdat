@@ -237,41 +237,42 @@ examples sections for an example.</p>
 <code><a href='value-expectations.html'>value-expectations</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>sales</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
-  sale_id <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,
-  date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"20200101"</span>, <span class='st'>"20200101"</span>, <span class='st'>"20200102"</span>, <span class='st'>"20200103"</span>, <span class='st'>"2020003"</span><span class='op'>)</span>,
-  sale_price <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>30</span>, <span class='fl'>40</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>,
-  book_title <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-    <span class='st'>"Phenomenology of Spirit"</span>,
-    <span class='cn'>NA</span>,
-    <span class='st'>"Critique of Practical Reason"</span>,
-    <span class='st'>"Spirit of Trust"</span>,
-    <span class='st'>"Empiricism and the Philosophy of Mind"</span>
-  <span class='op'>)</span>,
-  stringsAsFactors <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span>
-
-<span class='co'># Create a custom expectation</span>
-<span class='va'>expect_prop_length</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>var</span>, <span class='va'>len</span>, <span class='va'>prop</span>, <span class='va'>data</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'>expect_prop_gte</span><span class='op'>(</span>
-    var <span class='op'>=</span> <span class='op'>{</span><span class='op'>{</span><span class='va'>var</span><span class='op'>}</span><span class='op'>}</span>, <span class='co'># Notice the use of the embracing operator</span>
-    func <span class='op'>=</span> <span class='va'>chk_max_length</span>,
-    prop <span class='op'>=</span> <span class='va'>prop</span>,
-    data <span class='op'>=</span> <span class='va'>data</span>,
-    args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>len <span class='op'>=</span> <span class='va'>len</span><span class='op'>)</span>,
-    func_desc <span class='op'>=</span> <span class='st'>"length_check"</span>
-  <span class='op'>)</span>
-<span class='op'>}</span>
-
-<span class='co'># Use it to check that dates are mostly &lt;= 8 char wide</span>
-<span class='fu'>expect_prop_length</span><span class='op'>(</span><span class='va'>date</span>, <span class='fl'>8</span>, <span class='fl'>0.9</span>, <span class='va'>sales</span><span class='op'>)</span>
-
-<span class='co'># Check price values mostly between 0 and 100</span>
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>expect_prop_values</span><span class='op'>(</span><span class='va'>sale_price</span>, <span class='fl'>0.9</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, data <span class='op'>=</span> <span class='va'>sales</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Error : `data` has 4 records (0.8 of total) satisfying value check on variable `var`
-#&gt; Filter: `flt`
-#&gt; Arguments: `&lt;int: 1L, 2L, 3L, 4L, 5L, ...&gt;`</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>sales</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span></span>
+<span class='r-in'>  sale_id <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,</span>
+<span class='r-in'>  date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"20200101"</span>, <span class='st'>"20200101"</span>, <span class='st'>"20200102"</span>, <span class='st'>"20200103"</span>, <span class='st'>"2020003"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  sale_price <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>30</span>, <span class='fl'>40</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>,</span>
+<span class='r-in'>  book_title <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span class='r-in'>    <span class='st'>"Phenomenology of Spirit"</span>,</span>
+<span class='r-in'>    <span class='cn'>NA</span>,</span>
+<span class='r-in'>    <span class='st'>"Critique of Practical Reason"</span>,</span>
+<span class='r-in'>    <span class='st'>"Spirit of Trust"</span>,</span>
+<span class='r-in'>    <span class='st'>"Empiricism and the Philosophy of Mind"</span></span>
+<span class='r-in'>  <span class='op'>)</span>,</span>
+<span class='r-in'>  stringsAsFactors <span class='op'>=</span> <span class='cn'>FALSE</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Create a custom expectation</span></span>
+<span class='r-in'><span class='va'>expect_prop_length</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>var</span>, <span class='va'>len</span>, <span class='va'>prop</span>, <span class='va'>data</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='fu'>expect_prop_gte</span><span class='op'>(</span></span>
+<span class='r-in'>    var <span class='op'>=</span> <span class='op'>{</span><span class='op'>{</span><span class='va'>var</span><span class='op'>}</span><span class='op'>}</span>, <span class='co'># Notice the use of the embracing operator</span></span>
+<span class='r-in'>    func <span class='op'>=</span> <span class='va'>chk_max_length</span>,</span>
+<span class='r-in'>    prop <span class='op'>=</span> <span class='va'>prop</span>,</span>
+<span class='r-in'>    data <span class='op'>=</span> <span class='va'>data</span>,</span>
+<span class='r-in'>    args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>len <span class='op'>=</span> <span class='va'>len</span><span class='op'>)</span>,</span>
+<span class='r-in'>    func_desc <span class='op'>=</span> <span class='st'>"length_check"</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Use it to check that dates are mostly &lt;= 8 char wide</span></span>
+<span class='r-in'><span class='fu'>expect_prop_length</span><span class='op'>(</span><span class='va'>date</span>, <span class='fl'>8</span>, <span class='fl'>0.9</span>, <span class='va'>sales</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Check price values mostly between 0 and 100</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'>expect_prop_values</span><span class='op'>(</span><span class='va'>sale_price</span>, <span class='fl'>0.9</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, data <span class='op'>=</span> <span class='va'>sales</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Error : `data` has 4 records (0.8 of total) satisfying value check on variable `var`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Filter: `flt`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Arguments: `&lt;int: 1L, 2L, 3L, 4L, 5L, ...&gt;`</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
