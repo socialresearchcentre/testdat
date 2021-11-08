@@ -26,7 +26,7 @@ check.
 }
 \description{
 Check character vectors for non-ASCII characters or common NULL value
-placeholders
+placeholders.
 }
 \examples{
 

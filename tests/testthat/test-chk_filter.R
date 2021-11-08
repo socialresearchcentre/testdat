@@ -27,7 +27,7 @@ test_that("chk_filter", {
   )
 
   expect_equal(
-    ncol(chk_filter(iris, where(is.numeric), chk_range, args = list(min = 1000, max = Inf))),
+    length(chk_filter(iris, where(is.numeric), chk_range, args = list(min = 1000, max = Inf))),
     4,
   )
 })

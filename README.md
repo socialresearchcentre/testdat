@@ -9,7 +9,7 @@
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
 [![R-CMD-check](https://github.com/socialresearchcentre/testdat/workflows/R-CMD-check/badge.svg)](https://github.com/socialresearchcentre/testdat/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/socialresearchcentre/testdat/branch/master/graph/badge.svg)](https://codecov.io/gh/socialresearchcentre/testdat?branch=master)
+coverage](https://codecov.io/gh/socialresearchcentre/testdat/branch/master/graph/badge.svg)](https://app.codecov.io/gh/socialresearchcentre/testdat?branch=master)
 <!-- badges: end -->
 
 ## Overview
@@ -80,7 +80,7 @@ with_testdata(x, {
     expect_base(nsw_only, state == "NSW")
   })
 })
-#> Test passed 🎊
+#> Test passed 🌈
 #> ── Failure (<text>:16:5): variable values are correct ──────────────────────────
 #> get_testdata() has 1 records failing value check on variable `pcode`.
 #> Filter: None

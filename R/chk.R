@@ -89,7 +89,7 @@ chk_unique <- function(x) {
 #' Checks: text
 #'
 #' Check character vectors for non-ASCII characters or common NULL value
-#' placeholders
+#' placeholders.
 #'
 #' @inherit chk-dummy
 #' @param miss A vector of values to be treated as missing. The
