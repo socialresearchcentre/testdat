@@ -23,9 +23,9 @@ NULL
 NULL
 
 #' @rdname pattern-expectations
-#' @inheritParams chk_pattern
+#' @inheritParams chk_regex
 #' @export
-expect_regex <- expect_make(chk_pattern, "pattern check")
+expect_regex <- expect_make(chk_regex, "pattern check")
 
 #' @rdname pattern-expectations
 #' @inheritParams chk_length

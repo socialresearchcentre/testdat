@@ -29,7 +29,7 @@ chk_dummy <- function(x) {
 #' @examples
 #'
 #' x <- c("a_1", "b_2", "c_2", NA, "NULL")
-#' chk_pattern(x, "[a-z]_[0-9]")
+#' chk_regex(x, "[a-z]_[0-9]")
 #' chk_max_length(x, 3)
 #'
 #' @seealso [Checks: data frame helpers][chk-helper]
@@ -42,7 +42,7 @@ NULL
 #' @param pattern A [str_detect()][stringr::str_detect()] pattern to match.
 #' @importFrom stringr str_detect
 #' @export
-chk_pattern <- function(x, pattern) {
+chk_regex <- function(x, pattern) {
   x <- as_char_scipen(x)
   chk_blank(x) | str_detect(x, pattern)
 }

@@ -2,11 +2,11 @@
 % Please edit documentation in R/chk.R
 \name{chk-patterns}
 \alias{chk-patterns}
-\alias{chk_pattern}
+\alias{chk_regex}
 \alias{chk_max_length}
 \title{Checks: patterns}
 \usage{
-chk_pattern(x, pattern)
+chk_regex(x, pattern)
 
 chk_max_length(x, len)
 }
@@ -27,7 +27,7 @@ Check that a vector conforms to a certain pattern.
 \examples{
 
 x <- c("a_1", "b_2", "c_2", NA, "NULL")
-chk_pattern(x, "[a-z]_[0-9]")
+chk_regex(x, "[a-z]_[0-9]")
 chk_max_length(x, 3)
 
 }

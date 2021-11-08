@@ -48,6 +48,8 @@ expect_values(where(is.numeric), 1:10)
 
 * `expect_exclusive()` has much improved documentation, and has had the argument name `exc_vars` updated to `var_set` to better reflect its purpose.
 
+* `chk_pattern()` has been renamed to `chk_regex()` to better reflect its purpose.
+
 ## Deprecations
 
 * Soft deprecated `context_data()` (#43). `context_data()` is just a wrapper for `set_testdata()`, which has a much more intuitive name.
