@@ -12,10 +12,14 @@ output_results_excel(results, file)
 
 \item{file}{Output file name}
 }
+\value{
+The return value of \code{\link[openxlsx:saveWorkbook]{openxlsx::saveWorkbook()}}.
+}
 \description{
-Output formatted \code{ListReporter} results to an Excel workbook. The workbook
-consists of a summary sheet showing aggregated results for each context,
-and one sheet per context showing details of each unsuccessful test.
+Output formatted \code{ListReporter} results to an Excel workbook using
+\link{openxlsx}. The workbook consists of a summary sheet showing aggregated
+results for each context, and one sheet per context showing details of each
+unsuccessful test.
 }
 \examples{
 \dontrun{

@@ -64,6 +64,13 @@ expectation failure message.}
 
 \item{...}{Vectors of valid values.}
 }
+\value{
+\verb{expect_*()} functions are mainly called for their side effects. The
+expectation signals its result (e.g. "success", "failure"), which is logged
+by the current \link[testthat:Reporter]{test reporter}. In a non-testing
+context the expectation will raise an error with class
+\code{expectation_failure} if it fails.
+}
 \description{
 These test the proportion of data in a data frame satisfying some condition.
 The generic functions, \code{expect_prop_lte()} and \code{expect_prop_gte()}, can be

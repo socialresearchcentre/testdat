@@ -23,6 +23,13 @@ a subset of the data frame to test.}
 \item{data}{A data frame to test. The \link[=global-data]{global test data} is used
 by default.}
 }
+\value{
+\verb{expect_*()} functions are mainly called for their side effects. The
+expectation signals its result (e.g. "success", "failure"), which is logged
+by the current \link[testthat:Reporter]{test reporter}. In a non-testing
+context the expectation will raise an error with class
+\code{expectation_failure} if it fails.
+}
 \description{
 \code{expect_exclusive} tests that \code{vars} are exclusive - that, if any one of
 \code{vars} is set to \code{exc_val}, no other column in \code{vars} or \code{var_set} is also

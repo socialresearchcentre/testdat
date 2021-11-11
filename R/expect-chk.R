@@ -7,6 +7,7 @@ NULL
 #' Test whether variables in a data frame conform to a given pattern.
 #'
 #' @inheritParams data-params
+#' @inherit data-params return
 #' @family data expectations
 #' @examples
 #'

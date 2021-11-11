@@ -92,6 +92,7 @@ chk_labels <- function(x, val_labels = NULL, var_label = NULL) {
 #'
 #' @inherit pattern-expectations
 #' @inheritParams chk-labels
+#' @inherit data-params return
 #' @examples
 #'
 #' df <- data.frame(

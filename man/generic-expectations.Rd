@@ -44,6 +44,13 @@ expectation failure message.}
 
 \item{...}{Arguments to pass to \code{expect_allany()}.}
 }
+\value{
+\verb{expect_*()} functions are mainly called for their side effects. The
+expectation signals its result (e.g. "success", "failure"), which is logged
+by the current \link[testthat:Reporter]{test reporter}. In a non-testing
+context the expectation will raise an error with class
+\code{expectation_failure} if it fails.
+}
 \description{
 These functions allow for testing of multiple columns (\code{vars}) of a data
 frame (\code{data}), with an optional filter (\code{flt}), using an arbitrary function

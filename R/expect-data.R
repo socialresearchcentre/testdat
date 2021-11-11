@@ -45,5 +45,10 @@ tidyselect::all_of
 #'   [testdat.miss][testdat] option is used by default.
 #' @param data A data frame to test. The [global test data][global-data] is used
 #'   by default.
+#' @return `expect_*()` functions are mainly called for their side effects. The
+#'   expectation signals its result (e.g. "success", "failure"), which is logged
+#'   by the current [test reporter][testthat::Reporter]. In a non-testing
+#'   context the expectation will raise an error with class
+#'   `expectation_failure` if it fails.
 #' @name data-params
 NULL

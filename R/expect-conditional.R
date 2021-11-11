@@ -3,6 +3,7 @@
 #' These functions test whether multiple conditions coexist.
 #'
 #' @inheritParams data-params
+#' @inherit data-params return
 #' @family data expectations
 #' @name conditional-expectations
 #' @examples

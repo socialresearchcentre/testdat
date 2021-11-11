@@ -26,6 +26,13 @@ the state of the data frame at the time \code{set_testdata()} was called.}
 
 \item{code}{Code to execute.}
 }
+\value{
+\itemize{
+\item \code{set_testdata()} returns the previous test data frame.
+\item \code{get_testdata()} returns the current test data frame.
+\item \code{with_testdata()} returns the input \code{data} for easy piping.
+}
+}
 \description{
 A global test data set is used to avoid having to re-specify the testing data
 frame in every test. These functions get and set the global data or set the

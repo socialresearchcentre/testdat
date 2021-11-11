@@ -26,6 +26,7 @@
 #' @param func_desc A human friendly description of `func` to use in the
 #'   expectation failure message.
 #' @param ... Arguments to pass to `expect_allany()`.
+#' @inherit data-params return
 #'
 #' @seealso `chk_*()` functions such as [`chk_values()`][chk-values]
 #' @family data expectations

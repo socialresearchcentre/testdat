@@ -36,6 +36,13 @@ by default.}
 
 \item{max}{Maximum value for range check.}
 }
+\value{
+\verb{expect_*()} functions are mainly called for their side effects. The
+expectation signals its result (e.g. "success", "failure"), which is logged
+by the current \link[testthat:Reporter]{test reporter}. In a non-testing
+context the expectation will raise an error with class
+\code{expectation_failure} if it fails.
+}
 \description{
 Test whether variables in a data frame contain only certain values.
 }

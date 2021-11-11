@@ -7,6 +7,7 @@
 #' These functions are deprecated.
 #'
 #' @inheritParams data-params
+#' @inherit data-params return
 #' @name expect-deprec
 #' @keywords internal
 NULL
@@ -87,6 +88,7 @@ expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
 #' interface using [`tidy-select`][dplyr_tidy_select].
 #'
 #' @inheritParams data-params
+#' @inherit data-params return
 #' @name expect-defunct
 #' @keywords internal
 NULL

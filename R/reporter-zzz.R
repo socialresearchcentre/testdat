@@ -13,6 +13,10 @@
 #'
 #'   If `FALSE`, the data frame will be copied and `get_testdata()` will return
 #'   the state of the data frame at the time `set_testdata()` was called.
+#' @return
+#'   * `set_testdata()` returns the previous test data frame.
+#'   * `get_testdata()` returns the current test data frame.
+#'   * `with_testdata()` returns the input `data` for easy piping.
 #' @examples
 #' set_testdata(mtcars)
 #' head(get_testdata())

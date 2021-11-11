@@ -38,6 +38,13 @@ determines which records should be non-missing.}
 meeting the \code{base} condition? This allows 'one way' base checks. This is
 \code{FALSE} by default.}
 }
+\value{
+\verb{expect_*()} functions are mainly called for their side effects. The
+expectation signals its result (e.g. "success", "failure"), which is logged
+by the current \link[testthat:Reporter]{test reporter}. In a non-testing
+context the expectation will raise an error with class
+\code{expectation_failure} if it fails.
+}
 \description{
 These functions test whether multiple conditions coexist.
 }

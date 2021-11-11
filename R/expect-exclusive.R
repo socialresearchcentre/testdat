@@ -22,6 +22,7 @@
 #'   columns to check against. This should include all columns specified in the
 #'   `vars` argument.
 #' @param exc_val The value that flags a variable as "selected" (default: `1`)
+#' @inherit data-params return
 #' @family data expectations
 #' @name exclusivity-expectations
 #' @examples

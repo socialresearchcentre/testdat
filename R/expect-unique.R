@@ -19,6 +19,7 @@
 #' @param exclude a vector of values to exclude from uniqueness check.  The
 #'   [testdat.miss][testdat] option is used by default. To include all values,
 #'   set `exclude = NULL`.
+#' @inherit data-params return
 #'
 #' @family data expectations
 #' @seealso [Checks: uniqueness][chk-uniqueness]

@@ -20,6 +20,7 @@
 #' @param func_desc A human friendly description of `func` to use in the
 #'   expectation failure message.
 #' @param ... Vectors of valid values.
+#' @inherit data-params return
 #'
 #' @seealso `chk_*()` functions such as [`chk_values()`][chk-values]
 #' @family data expectations

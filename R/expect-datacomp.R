@@ -22,6 +22,7 @@
 #' @param not Reverse the results of the check?
 #' @param by A character vector of columns to join by. See [dplyr::join()] for
 #'   details.
+#' @inherit data-params return
 #'
 #' @family data expectations
 #' @name datacomp-expectations
