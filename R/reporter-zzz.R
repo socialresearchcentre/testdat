@@ -18,7 +18,8 @@
 #'   is returned as it was stored - if it was stored with `quosure = TRUE` it
 #'   will be returned as a quosure.
 #'   * `get_testdata()` returns the current test data frame.
-#'   * `with_testdata()` returns the input `data` for easy piping.
+#'   * `with_testdata()` and the test data pipe `%d>%` invisibly return the
+#'   input `data` for easy piping.
 #' @examples
 #' set_testdata(mtcars)
 #' head(get_testdata())
@@ -27,6 +28,11 @@
 #'   x <- get_testdata()
 #'   print(head(x))
 #' })
+#'
+#' mtcars %d>%
+#'   expect_base(mpg, TRUE) %>%
+#'   mutate(mpg = NA) %d>%
+#'   expect_base(mpg, FALSE)
 #' @name global-data
 NULL
 
@@ -56,7 +62,7 @@ get_testdata <- function() {
 
 #' @export
 #' @rdname global-data
-#' @param code Code to execute.
+#' @param code Code to execute with the test data set to `data`.
 with_testdata <- function(data, code, quosure = TRUE) {
   old <- set_testdata(data, quosure = quosure)
   on.exit(set_testdata(old, quosure = FALSE), add = TRUE)
@@ -64,6 +70,12 @@ with_testdata <- function(data, code, quosure = TRUE) {
   force(code)
 
   invisible(data)
+}
+
+#' @rdname global-data
+#' @export
+`%d>%` <- function(data, code) {
+  with_testdata(data, code, quosure = FALSE)
 }
 
 data_reporter <- function() {

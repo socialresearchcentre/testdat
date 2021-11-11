@@ -5,6 +5,7 @@
 \alias{set_testdata}
 \alias{get_testdata}
 \alias{with_testdata}
+\alias{\%d>\%}
 \title{Get/set test data}
 \usage{
 set_testdata(data, quosure = TRUE)
@@ -12,6 +13,8 @@ set_testdata(data, quosure = TRUE)
 get_testdata()
 
 with_testdata(data, code, quosure = TRUE)
+
+data \%d>\% code
 }
 \arguments{
 \item{data}{Data frame to be used.}
@@ -24,7 +27,7 @@ frame.
 If \code{FALSE}, the data frame will be copied and \code{get_testdata()} will return
 the state of the data frame at the time \code{set_testdata()} was called.}
 
-\item{code}{Code to execute.}
+\item{code}{Code to execute with the test data set to \code{data}.}
 }
 \value{
 \itemize{
@@ -32,7 +35,8 @@ the state of the data frame at the time \code{set_testdata()} was called.}
 is returned as it was stored - if it was stored with \code{quosure = TRUE} it
 will be returned as a quosure.
 \item \code{get_testdata()} returns the current test data frame.
-\item \code{with_testdata()} returns the input \code{data} for easy piping.
+\item \code{with_testdata()} and the test data pipe \verb{\%d>\%} invisibly return the
+input \code{data} for easy piping.
 }
 }
 \description{
@@ -48,4 +52,9 @@ with_testdata(iris, {
   x <- get_testdata()
   print(head(x))
 })
+
+mtcars \%d>\%
+  expect_base(mpg, TRUE) \%>\%
+  mutate(mpg = NA) \%d>\%
+  expect_base(mpg, FALSE)
 }
