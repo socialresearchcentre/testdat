@@ -1,9 +1,9 @@
 #' Output `ListReporter` results in Excel format
 #'
 #' Output formatted `ListReporter` results to an Excel workbook using
-#' [openxlsx]. The workbook consists of a summary sheet showing aggregated
-#' results for each context, and one sheet per context showing details of each
-#' unsuccessful test.
+#' [openxlsx][openxlsx::openxlsx]. The workbook consists of a summary sheet
+#' showing aggregated results for each context, and one sheet per context
+#' showing details of each unsuccessful test.
 #'
 #' @param results An object of class `testthat_results`, e.g. output from
 #'   [test_dir()] or [test_file()].
