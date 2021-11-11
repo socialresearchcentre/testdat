@@ -54,7 +54,6 @@ with_testdata(iris, {
 })
 
 mtcars \%d>\%
-  expect_base(mpg, TRUE) \%>\%
-  mutate(mpg = NA) \%d>\%
-  expect_base(mpg, FALSE)
+  expect_base(mpg, TRUE) \%d>\%
+  expect_range(carb, 1, 8)
 }

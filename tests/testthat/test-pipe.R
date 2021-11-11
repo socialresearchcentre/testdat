@@ -1,3 +1,5 @@
+library(dplyr, warn.conflicts = FALSE)
+
 test_that("multiple expectations in a pipe chain work", {
   mtcars %>%
     with_testdata(expect_base(mpg, TRUE)) %>%
