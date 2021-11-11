@@ -1,5 +1,7 @@
 # testdat (development version)
 
+* `set_testdata()` previously always returned a data frame, and evaluated the test data if it was stored as a quosure. It now returns the data as it was stored, to get around a bug when piping data into the `with_testdata()` function (#60).
+
 # testdat 0.3.0
 
 ## Breaking changes

@@ -8,7 +8,7 @@ test_that("set_testdata/get_testdata work correctly", {
   expect_failure(expect_cond(Species %in% "versicolor", Sepal.Length >= 5))
 
   old_dat <- set_testdata(mdeaths)
-  expect_identical(old_dat, iris)
+  expect_identical(eval_tidy(old_dat), iris)
 })
 
 test_that("with_testdat temporarily sets test data frame", {

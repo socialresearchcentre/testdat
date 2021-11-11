@@ -14,7 +14,9 @@
 #'   If `FALSE`, the data frame will be copied and `get_testdata()` will return
 #'   the state of the data frame at the time `set_testdata()` was called.
 #' @return
-#'   * `set_testdata()` returns the previous test data frame.
+#'   * `set_testdata()` invisibly returns the previous test data. The test data
+#'   is returned as it was stored - if it was stored with `quosure = TRUE` it
+#'   will be returned as a quosure.
 #'   * `get_testdata()` returns the current test data frame.
 #'   * `with_testdata()` returns the input `data` for easy piping.
 #' @examples
@@ -36,7 +38,7 @@ set_testdata <- function(data, quosure = TRUE) {
   old <- testdat_env$test_data
   if (quosure) data <- enquo(data)
   assign("test_data", data, testdat_env)
-  invisible(eval_tidy(old))
+  invisible(old)
 }
 
 #' @export
@@ -57,7 +59,7 @@ get_testdata <- function() {
 #' @param code Code to execute.
 with_testdata <- function(data, code, quosure = TRUE) {
   old <- set_testdata(data, quosure = quosure)
-  on.exit(set_testdata(old), add = TRUE)
+  on.exit(set_testdata(old, quosure = FALSE), add = TRUE)
 
   force(code)
 

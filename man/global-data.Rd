@@ -28,7 +28,9 @@ the state of the data frame at the time \code{set_testdata()} was called.}
 }
 \value{
 \itemize{
-\item \code{set_testdata()} returns the previous test data frame.
+\item \code{set_testdata()} invisibly returns the previous test data. The test data
+is returned as it was stored - if it was stored with \code{quosure = TRUE} it
+will be returned as a quosure.
 \item \code{get_testdata()} returns the current test data frame.
 \item \code{with_testdata()} returns the input \code{data} for easy piping.
 }
