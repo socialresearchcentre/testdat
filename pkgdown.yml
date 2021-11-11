@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   testdat: testdat.html
-last_built: 2021-11-08T12:19Z
+last_built: 2021-11-11T07:29Z
 urls:
   reference: https://socialresearchcentre.github.io/testdat/reference
   article: https://socialresearchcentre.github.io/testdat/articles
