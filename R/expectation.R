@@ -87,7 +87,6 @@ as_label_repl <- function(quo, pattern, replace = "") {
 }
 
 as_label_vars <- function(quo) {
-  check_expect_data_in_vars(as_label(quo))
   as_label_repl(quo, "(^(c|vars)\\()(.*)(\\)$)", "\\3")
 }
 
@@ -101,8 +100,8 @@ as_label_flt  <- function(quo) {
 
 # check for data frames provided as vars ----
 
-check_expect_data_in_vars <- function(var_desc) {
-  if (var_desc == ".")
+check_expect_data_pipe <- function(first_arg) {
+  if (as_label(first_arg) == ".")
     stop(
       "Your `vars` argument is a `.`. ",
       "Did you accidentally use a `%>%` pipe into an expectation?\n",

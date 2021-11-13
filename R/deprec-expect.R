@@ -43,6 +43,7 @@ expect_join <- function(data2, by = NULL, not = FALSE, flt = TRUE, data = get_te
 expect_similar <- function(var, data2, var2, flt = TRUE, flt2 = flt,
                            threshold = 0.05, min = 100, data = get_testdata()) {
   lifecycle::deprecate_soft("0.3.0", "expect_similar()")
+  check_expect_data_pipe(enquo(var))
   act <- quasi_label(enquo(data))
   act$var_desc   <- as_label_vars(enquo(var))
   act$data2_desc <- as_label(enquo(data2))

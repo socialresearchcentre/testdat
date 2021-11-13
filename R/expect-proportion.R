@@ -75,6 +75,7 @@ expect_prop <- function(var,
                         func_desc = NULL) {
 
   stopifnot(length(prop) == 1)
+  check_expect_data_pipe(enquo(var))
   act <- quasi_label(enquo(data))
   act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
   act$var_desc  <- as_label_vars(enquo(var))

@@ -1,4 +1,5 @@
 test_that("no testdata specified", {
+  set_testdata(NULL, quosure = FALSE)
   expect_error(get_testdata())
 })
 

@@ -34,6 +34,7 @@ NULL
 #' @param cond2 <[`data-masking`][dplyr::dplyr_data_masking]> Second condition
 #'   (consequent) for consistency check.
 expect_cond <- function(cond1, cond2, data = get_testdata()) {
+  check_expect_data_pipe(enquo(cond1))
   act <- quasi_label(enquo(data))
 
   cond1 <- enquo(cond1)
@@ -75,6 +76,7 @@ expect_base <- function(var,
                         missing_valid = FALSE,
                         data = get_testdata()) {
 
+  check_expect_data_pipe(enquo(var))
   act <- quasi_label(enquo(data))
 
   act$var_desc <- as_label(ensym(var))
