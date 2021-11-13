@@ -18,7 +18,7 @@
 #'   is returned as it was stored - if it was stored with `quosure = TRUE` it
 #'   will be returned as a quosure.
 #'   * `get_testdata()` returns the current test data frame.
-#'   * `with_testdata()` and the test data pipe `%d>%` invisibly return the
+#'   * `with_testdata()` and the test data pipe `%E>%` invisibly return the
 #'   input `data` for easy piping.
 #' @examples
 #' set_testdata(mtcars)
@@ -29,8 +29,8 @@
 #'   print(head(x))
 #' })
 #'
-#' mtcars %d>%
-#'   expect_base(mpg, TRUE) %d>%
+#' mtcars %E>%
+#'   expect_base(mpg, TRUE) %E>%
 #'   expect_range(carb, 1, 8)
 #' @name global-data
 NULL
@@ -73,7 +73,7 @@ with_testdata <- function(data, code, quosure = TRUE) {
 
 #' @rdname global-data
 #' @export
-`%d>%` <- function(data, code) {
+`%E>%` <- function(data, code) {
   with_testdata(data, code, quosure = FALSE)
 }
 

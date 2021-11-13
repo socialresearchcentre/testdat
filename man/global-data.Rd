@@ -5,7 +5,7 @@
 \alias{set_testdata}
 \alias{get_testdata}
 \alias{with_testdata}
-\alias{\%d>\%}
+\alias{\%E>\%}
 \title{Get/set test data}
 \usage{
 set_testdata(data, quosure = TRUE)
@@ -14,7 +14,7 @@ get_testdata()
 
 with_testdata(data, code, quosure = TRUE)
 
-data \%d>\% code
+data \%E>\% code
 }
 \arguments{
 \item{data}{Data frame to be used.}
@@ -35,7 +35,7 @@ the state of the data frame at the time \code{set_testdata()} was called.}
 is returned as it was stored - if it was stored with \code{quosure = TRUE} it
 will be returned as a quosure.
 \item \code{get_testdata()} returns the current test data frame.
-\item \code{with_testdata()} and the test data pipe \verb{\%d>\%} invisibly return the
+\item \code{with_testdata()} and the test data pipe \verb{\%E>\%} invisibly return the
 input \code{data} for easy piping.
 }
 }
@@ -53,7 +53,7 @@ with_testdata(iris, {
   print(head(x))
 })
 
-mtcars \%d>\%
-  expect_base(mpg, TRUE) \%d>\%
+mtcars \%E>\%
+  expect_base(mpg, TRUE) \%E>\%
   expect_range(carb, 1, 8)
 }

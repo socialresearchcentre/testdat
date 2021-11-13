@@ -8,8 +8,8 @@ test_that("multiple expectations in a pipe chain work", {
 })
 
 test_that("test data pipe works", {
-  mtcars %d>%
+  mtcars %E>%
     expect_base(mpg, TRUE) %>%
-    mutate(mpg = NA) %d>%
+    mutate(mpg = NA) %E>%
     expect_base(mpg, FALSE)
 })

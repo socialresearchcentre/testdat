@@ -1,10 +1,10 @@
 # testdat (development version)
 
-* testdat now has a test data pipe (#60)! You can use the test data pipe `%d>%` to add expectations to a pipe chain.
+* testdat now has a test data pipe (#60)! You can use the test data pipe `%E>%` to add expectations to a pipe chain.
 ```r
-mtcars %d>%
+mtcars %E>%
   expect_base(mpg, TRUE) %>%
-  mutate(mpg = NA) %d>%
+  mutate(mpg = NA) %E>%
   expect_base(mpg, FALSE)
 ```
 
