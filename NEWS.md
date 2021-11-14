@@ -188,3 +188,4 @@ Initial release.
 * Remove R CMD Check warnings.
 
 * Improved test coverage
+
