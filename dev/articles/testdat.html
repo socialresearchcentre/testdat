@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9000</span>
       </span>
     </div>
 
@@ -315,11 +315,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span><span class="op">~</span><span class="va">id</span>, <span class="op">~</span><span class="va">pcode</span>, <span class="op">~</span><span class="va">state</span>, <span class="op">~</span><span class="va">nsw_only</span>,
-             <span class="fl">1</span>,   <span class="fl">2000</span>,   <span class="st">"NSW"</span>,  <span class="fl">1</span>,
-             <span class="fl">2</span>,   <span class="fl">3123</span>,   <span class="st">"VIC"</span>,  <span class="cn">NA</span>,
-             <span class="fl">3</span>,   <span class="fl">2123</span>,   <span class="st">"NSW"</span>,  <span class="fl">3</span>,
-             <span class="fl">4</span>,   <span class="fl">12345</span>,  <span class="st">"VIC"</span>,  <span class="fl">3</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+  <span class="op">~</span><span class="va">id</span>, <span class="op">~</span><span class="va">pcode</span>, <span class="op">~</span><span class="va">state</span>, <span class="op">~</span><span class="va">nsw_only</span>,
+  <span class="fl">1</span>,   <span class="fl">2000</span>,   <span class="st">"NSW"</span>,  <span class="fl">1</span>,
+  <span class="fl">2</span>,   <span class="fl">3123</span>,   <span class="st">"VIC"</span>,  <span class="cn">NA</span>,
+  <span class="fl">3</span>,   <span class="fl">2123</span>,   <span class="st">"NSW"</span>,  <span class="fl">3</span>,
+  <span class="fl">4</span>,   <span class="fl">12345</span>,  <span class="st">"VIC"</span>,  <span class="fl">3</span>
+<span class="op">)</span>
 
 <span class="co"># check id is unique</span>
 <span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span><span class="op">)</span>
@@ -372,11 +374,13 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://socialresearchcentre.github.io/testdat/">testdat</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span><span class="op">~</span><span class="va">id</span>, <span class="op">~</span><span class="va">pcode</span>, <span class="op">~</span><span class="va">state</span>, <span class="op">~</span><span class="va">nsw_only</span>,
-             <span class="fl">1</span>,   <span class="fl">2000</span>,   <span class="st">"NSW"</span>,  <span class="fl">1</span>,
-             <span class="fl">2</span>,   <span class="fl">3123</span>,   <span class="st">"VIC"</span>,  <span class="cn">NA</span>,
-             <span class="fl">3</span>,   <span class="fl">2123</span>,   <span class="st">"NSW"</span>,  <span class="fl">3</span>,
-             <span class="fl">4</span>,   <span class="fl">12345</span>,  <span class="st">"VIC"</span>,  <span class="fl">3</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+  <span class="op">~</span><span class="va">id</span>, <span class="op">~</span><span class="va">pcode</span>, <span class="op">~</span><span class="va">state</span>, <span class="op">~</span><span class="va">nsw_only</span>,
+  <span class="fl">1</span>,   <span class="fl">2000</span>,   <span class="st">"NSW"</span>,  <span class="fl">1</span>,
+  <span class="fl">2</span>,   <span class="fl">3123</span>,   <span class="st">"VIC"</span>,  <span class="cn">NA</span>,
+  <span class="fl">3</span>,   <span class="fl">2123</span>,   <span class="st">"NSW"</span>,  <span class="fl">3</span>,
+  <span class="fl">4</span>,   <span class="fl">12345</span>,  <span class="st">"VIC"</span>,  <span class="fl">3</span>
+<span class="op">)</span>
 
 <span class="fu"><a href="../reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="va">x</span>, <span class="op">{</span>
   <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">"id is unique"</span>, <span class="op">{</span>
@@ -393,8 +397,8 @@
     <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="va">state</span> <span class="op">==</span> <span class="st">"NSW"</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; Test passed 🎊</span>
-<span class="co">#&gt; ── Failure (&lt;text&gt;:16:5): variable values are correct ──────────────────────────</span>
+<span class="co">#&gt; Test passed 🌈</span>
+<span class="co">#&gt; ── Failure (&lt;text&gt;:18:5): variable values are correct ──────────────────────────</span>
 <span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span>
 <span class="co">#&gt; Filter: None</span>
 <span class="co">#&gt; Arguments: `&lt;int: 2000L, 2001L, 2002L, 2003L, 2004L, ...&gt;, &lt;int: 3000L, 3001L, 3002L,`</span>
@@ -411,7 +415,7 @@
     <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">market</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, miss <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># miss = NULL excludes NAs from valid values</span>
   <span class="op">}</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; ── Failure (&lt;text&gt;:31:5): market derived correctly ─────────────────────────────</span>
+<span class="co">#&gt; ── Failure (&lt;text&gt;:33:5): market derived correctly ─────────────────────────────</span>
 <span class="co">#&gt; get_testdata() has 1 records failing value check on variable `market`.</span>
 <span class="co">#&gt; Filter: None</span>
 <span class="co">#&gt; Arguments: `&lt;int: 1L, 2L&gt;, miss = NULL`</span>
@@ -420,7 +424,7 @@
 <ul>
 <li><p>The global test data can be set with <code><a href="../reference/global-data.html">set_testdata()</a></code> or <code><a href="../reference/global-data.html">with_testdata()</a></code>.</p></li>
 <li><p>The <code><a href="https://testthat.r-lib.org/reference/test_that.html">test_that()</a></code> wrapper is not strictly necessary, but it provides more informative error messaging and logically groups a set of expectations.</p></li>
-<li><p>The <code><a href="../reference/global-data.html">with_testdata()</a></code> block will run all <code><a href="https://testthat.r-lib.org/reference/test_that.html">test_that()</a></code> blocks, even if some fail. If expectations are not surrounded by a <code><a href="https://testthat.r-lib.org/reference/test_that.html">test_that()</a></code> wrapper, the block will exit after the first failed test.</p></li>
+<li><p>Each <code><a href="../reference/global-data.html">with_testdata()</a></code> block will fail on the first <code><a href="https://testthat.r-lib.org/reference/test_that.html">test_that()</a></code> block that fails. The “filters applied correctly” test block is not run in the example.</p></li>
 </ul>
 </div>
 </div>
@@ -436,7 +440,7 @@
 <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">"Variable format checks"</span>, <span class="op">{</span>
   <span class="fu"><a href="../reference/pattern-expectations.html">expect_regex</a></span><span class="op">(</span><span class="va">Species</span>, <span class="st">"^[a-z]+$"</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; Test passed 🌈</span>
+<span class="co">#&gt; Test passed 🎊</span>
 
 <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span>
   <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span>

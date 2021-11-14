@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9000</span>
       </span>
     </div>
 
@@ -127,7 +127,33 @@
 
     <div id="testdat-development-version" class="section level1">
 <h1 class="page-header" data-toc-text="development version">
-<a href="#testdat-development-version" class="anchor"></a>testdat (development version)</h1>
+<a href="#testdat-development-version" class="anchor"></a>testdat (development version)<small> Unreleased </small>
+</h1>
+<ul>
+<li>testdat now has a test data pipe (<a href='https://github.com/socialresearchcentre/testdat/issues/60'>#60</a>)! You can use the test data pipe <code>%E&gt;%</code> to add expectations to a pipe chain.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">mtcars</span> <span class="op"><a href="../reference/global-data.html">%E&gt;%</a></span>
+  <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mpg <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op"><a href="../reference/global-data.html">%E&gt;%</a></span>
+  <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<p>This is a shorthand way of piping into the <code><a href="../reference/global-data.html">with_testdata()</a></code> function.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mpg <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>
+<code><a href="../reference/global-data.html">set_testdata()</a></code> previously always returned a data frame, and evaluated the test data if it was stored as a quosure. It now returns the data as it was stored, to get around a bug when piping data into the <code><a href="../reference/global-data.html">with_testdata()</a></code> function (<a href='https://github.com/socialresearchcentre/testdat/issues/60'>#60</a>).</li>
+</ul>
+</div>
+    <div id="testdat-030" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#testdat-030" class="anchor"></a>testdat 0.3.0<small> 2021-11-12 </small>
+</h1>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
@@ -136,7 +162,7 @@
 <a href="#tidyselect-36" class="anchor"></a>tidyselect (<a href='https://github.com/socialresearchcentre/testdat/issues/36'>#36</a>)</h3>
 <p>As of testdat 0.3.0 we have moved to the <a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html">tidyselect</a> framework for variable selections instead of <code><a href="https://dplyr.tidyverse.org/reference/vars.html">dplyr::vars()</a></code>. tidyselect is the successor to <code><a href="https://dplyr.tidyverse.org/reference/vars.html">vars()</a></code> - it’s a bit cleaner, provides some nifty features like selecting columns with a predicate function using <code>where()</code> and finally allows us to get rid of the distinction between multi and single variable expectations.</p>
 <p>Unfortunately this will break some code, but it’s horrendously difficult to support both methods and it’s best to switch before publishing to CRAN. Fortunately it’s a simple fix - anywhere that you are currently using <code><a href="https://dplyr.tidyverse.org/reference/vars.html">vars()</a></code>, replace it with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># Old</span>
 <span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
@@ -157,7 +183,7 @@
 <p>Auto-generated expectations have also changed slightly - previously they could either accept a single unquoted variable name or a group of variables specified with <code><a href="https://dplyr.tidyverse.org/reference/vars.html">vars()</a></code>. They now always accept multiple columns using tidyselect syntax. As a result, the name of the first argument for these expect has changed from <code>var</code> to <code>vars</code>, so be careful if you’re using this as a named argument.</p>
 <p>tidyselect syntax allows single unquoted variable names as well as arbitrary groups of variable specifications, and all of the auto-generated expectations in the package used the single variable variant so this shouldn’t break existing code.</p>
 <p>These are all valid column specifications using tidyselect:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">a</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
 <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
@@ -194,7 +220,8 @@
 </div>
     <div id="testdat-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
-<a href="#testdat-020" class="anchor"></a>testdat 0.2.0</h1>
+<a href="#testdat-020" class="anchor"></a>testdat 0.2.0<small> Unreleased </small>
+</h1>
 <p>In addition to minor updates and bug fixes, this release does three main things:</p>
 <ul>
 <li>Behind the scenes, it (a) reorganises and refactors the code base to reduce redundancies and improve clarity, and (b) significantly builds out the testing infrastructure.</li>
@@ -255,7 +282,8 @@
 </div>
     <div id="testdat-010" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0">
-<a href="#testdat-010" class="anchor"></a>testdat 0.1.0</h1>
+<a href="#testdat-010" class="anchor"></a>testdat 0.1.0<small> Unreleased </small>
+</h1>
 <p>Initial release.</p>
 <div id="major-changes-from-early-development-releases" class="section level2">
 <h2 class="hasAnchor">

@@ -82,7 +82,7 @@ data for the current context." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9000</span>
       </span>
     </div>
 
@@ -139,7 +139,9 @@ data for the current context.</p>
 
 <span class='fu'>get_testdata</span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'>with_testdata</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>code</span>, quosure <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+<span class='fu'>with_testdata</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>code</span>, quosure <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='va'>data</span> <span class='op'>%E&gt;%</span> <span class='va'>code</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,9 +161,21 @@ the state of the data frame at the time <code>set_testdata()</code> was called.<
     </tr>
     <tr>
       <th>code</th>
-      <td><p>Code to execute.</p></td>
+      <td><p>Code to execute with the test data set to <code>data</code>.</p></td>
     </tr>
     </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    
+<ul>
+<li><p><code>set_testdata()</code> invisibly returns the previous test data. The test data
+is returned as it was stored - if it was stored with <code>quosure = TRUE</code> it
+will be returned as a quosure.</p></li>
+<li><p><code>get_testdata()</code> returns the current test data frame.</p></li>
+<li><p><code>with_testdata()</code> and the test data pipe <code>%E&gt;%</code> invisibly return the
+input <code>data</code> for easy piping.</p></li>
+</ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -186,6 +200,10 @@ the state of the data frame at the time <code>set_testdata()</code> was called.<
 <span class='r-out co'><span class='r-pr'>#&gt;</span> 4          4.6         3.1          1.5         0.2  setosa</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> 5          5.0         3.6          1.4         0.2  setosa</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> 6          5.4         3.9          1.7         0.4  setosa</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mtcars</span> <span class='op'>%E&gt;%</span></span>
+<span class='r-in'>  <span class='fu'><a href='conditional-expectations.html'>expect_base</a></span><span class='op'>(</span><span class='va'>mpg</span>, <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%E&gt;%</span></span>
+<span class='r-in'>  <span class='fu'><a href='value-expectations.html'>expect_range</a></span><span class='op'>(</span><span class='va'>carb</span>, <span class='fl'>1</span>, <span class='fl'>8</span><span class='op'>)</span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

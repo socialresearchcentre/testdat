@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9000</span>
       </span>
     </div>
 
@@ -103,10 +103,9 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of testdat from srclib with:</p>
+<p>You can install the released version of testdat from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># srcproj::add_srclib()</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"testdat"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"testdat"</span><span class="op">)</span></code></pre></div>
 <p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
@@ -121,11 +120,13 @@
 <span class="co">#&gt; Loading required package: testthat</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span><span class="op">~</span><span class="va">id</span>, <span class="op">~</span><span class="va">pcode</span>, <span class="op">~</span><span class="va">state</span>, <span class="op">~</span><span class="va">nsw_only</span>,
-             <span class="fl">1</span>,   <span class="fl">2000</span>,   <span class="st">"NSW"</span>,  <span class="fl">1</span>,
-             <span class="fl">2</span>,   <span class="fl">3123</span>,   <span class="st">"VIC"</span>,  <span class="cn">NA</span>,
-             <span class="fl">3</span>,   <span class="fl">2123</span>,   <span class="st">"NSW"</span>,  <span class="fl">3</span>,
-             <span class="fl">4</span>,   <span class="fl">12345</span>,  <span class="st">"VIC"</span>,  <span class="fl">3</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+  <span class="op">~</span><span class="va">id</span>, <span class="op">~</span><span class="va">pcode</span>, <span class="op">~</span><span class="va">state</span>, <span class="op">~</span><span class="va">nsw_only</span>,
+  <span class="fl">1</span>,   <span class="fl">2000</span>,   <span class="st">"NSW"</span>,  <span class="fl">1</span>,
+  <span class="fl">2</span>,   <span class="fl">3123</span>,   <span class="st">"VIC"</span>,  <span class="cn">NA</span>,
+  <span class="fl">3</span>,   <span class="fl">2123</span>,   <span class="st">"NSW"</span>,  <span class="fl">3</span>,
+  <span class="fl">4</span>,   <span class="fl">12345</span>,  <span class="st">"VIC"</span>,  <span class="fl">3</span>
+<span class="op">)</span>
 
 <span class="fu"><a href="reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="va">x</span>, <span class="op">{</span>
   <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">"id is unique"</span>, <span class="op">{</span>
@@ -143,18 +144,14 @@
   <span class="op">}</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
 <span class="co">#&gt; Test passed 🌈</span>
-<span class="co">#&gt; ── Failure (&lt;text&gt;:16:5): variable values are correct ──────────────────────────</span>
+<span class="co">#&gt; ── Failure (&lt;text&gt;:18:5): variable values are correct ──────────────────────────</span>
 <span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span>
 <span class="co">#&gt; Filter: None</span>
 <span class="co">#&gt; Arguments: `&lt;int: 2000L, 2001L, 2002L, 2003L, 2004L, ...&gt;, &lt;int: 3000L, 3001L, 3002L,`</span>
 <span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span>
 <span class="co">#&gt; Filter: None</span>
 <span class="co">#&gt; Arguments: `  3003L, 3004L, ...&gt;, miss = &lt;chr: NA, ""&gt;`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ── Failure (&lt;text&gt;:22:5): filters applied correctly ────────────────────────────</span>
-<span class="co">#&gt; get_testdata() has a base mismatch in variable `nsw_only`.</span>
-<span class="co">#&gt; 0 cases have `state == "NSW"` but `nsw_only` is missing.</span>
-<span class="co">#&gt; 1 cases do not have `state == "NSW"` but `nsw_only` is non missing.</span></code></pre></div>
+<span class="co">#&gt; Error: Test failed</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -163,6 +160,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=testdat">https://​cloud.r-project.org/​package=testdat</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/socialresearchcentre/testdat/">https://​github.com/​socialresearchcentre/​testdat/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/socialresearchcentre/testdat/issues">https://​github.com/​socialresearchcentre/​testdat/​issues</a>
@@ -191,6 +190,7 @@
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://github.com/socialresearchcentre/testdat/actions"><img src="https://github.com/socialresearchcentre/testdat/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/socialresearchcentre/testdat?branch=master"><img src="https://codecov.io/gh/socialresearchcentre/testdat/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://CRAN.R-project.org/package=testdat"><img src="https://www.r-pkg.org/badges/version/testdat" alt="CRAN status"></a></li>
 </ul>
 </div>
 </div>
