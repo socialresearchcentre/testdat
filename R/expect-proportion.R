@@ -114,6 +114,7 @@ expect_prop_lte <- function(var,
                             args = list(),
                             func_desc = NULL) {
 
+  check_expect_data_pipe(enquo(var))
   var <- ensym(var)
   expect_prop(var, func, cmp = `<=`, prop, flt, data, args, func_desc)
 }
@@ -128,6 +129,7 @@ expect_prop_gte <- function(var,
                             args = list(),
                             func_desc = NULL) {
 
+  check_expect_data_pipe(enquo(var))
   var <- ensym(var)
   expect_prop(var, func, cmp = `>=`, prop, flt, data, args, func_desc)
 }
