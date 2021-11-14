@@ -60,6 +60,7 @@ expect_valmatch <- function(data2,
                             flt = TRUE,
                             data = get_testdata()) {
 
+  check_expect_data_pipe(enquo(vars))
   act <- quasi_label(enquo(data))
   act$var_desc   <- as_label_vars(enquo(vars))
   act$data2_desc <- as_label(enquo(data2))
@@ -124,6 +125,7 @@ expect_subset <- function(data2,
                           flt = TRUE,
                           data = get_testdata()) {
 
+  check_expect_data_pipe(enquo(data2))
   act <- quasi_label(enquo(data))
   act$var_desc   <- as_label_vars(enquo(vars))
   act$data2_desc <- as_label(enquo(data2))

@@ -1,5 +1,23 @@
 # testdat (development version)
 
+* testdat now has a test data pipe (#60)! You can use the test data pipe `%E>%` to add expectations to a pipe chain.
+```r
+mtcars %E>%
+  expect_base(mpg, TRUE) %>%
+  mutate(mpg = NA) %E>%
+  expect_base(mpg, FALSE)
+```
+
+This is a shorthand way of piping into the `with_testdata()` function.
+```r
+mtcars %>%
+  with_testdata(expect_base(mpg, TRUE)) %>%
+  mutate(mpg = NA) %>%
+  with_testdata(expect_base(mpg, FALSE))
+```
+
+* `set_testdata()` previously always returned a data frame, and evaluated the test data if it was stored as a quosure. It now returns the data as it was stored, to get around a bug when piping data into the `with_testdata()` function (#60).
+
 # testdat 0.3.0
 
 ## Breaking changes
@@ -170,3 +188,4 @@ Initial release.
 * Remove R CMD Check warnings.
 
 * Improved test coverage
+

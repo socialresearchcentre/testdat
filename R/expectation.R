@@ -98,6 +98,24 @@ as_label_flt  <- function(quo) {
     paste0("`", quo_lab, "`")
 }
 
+# check for data frames provided as vars ----
+
+check_expect_data_pipe <- function(first_arg) {
+  if (as_label(first_arg) == ".")
+    stop(
+      "An expectation was called with a `.` as the first argument.\n",
+      "Did you accidentally use a `%>%` pipe into an expectation?\n",
+      "If you're trying to call an expectation in a pipe, ",
+      "use the test data pipe `%E>%`.\n\n",
+      "# Bad:\n",
+      "mtcars %>% expect_base(mpg, TRUE)\n",
+      "\n",
+      "# Good:\n",
+      "mtcars %E>% expect_base(mpg, TRUE)",
+      call. = FALSE
+    )
+}
+
 # expectation_type ----
 
 expectation_type <- function(exp) {

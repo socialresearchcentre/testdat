@@ -77,6 +77,7 @@ expect_allany <- function(vars,
                           allany = c(chk_filter_all, chk_filter_any),
                           func_desc = NULL) {
 
+  check_expect_data_pipe(enquo(vars))
   act <- quasi_label(enquo(data))
   act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
   act$var_desc  <- as_label_vars(enquo(vars))

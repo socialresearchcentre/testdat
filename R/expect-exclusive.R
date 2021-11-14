@@ -56,6 +56,7 @@ expect_exclusive <- function(vars,
                              flt = TRUE,
                              data = get_testdata()) {
 
+  check_expect_data_pipe(enquo(vars))
   act <- quasi_label(enquo(data))
   act$var_desc     <- as_label_vars(enquo(vars))
   act$var_set_desc <- as_label_vars(enquo(var_set))

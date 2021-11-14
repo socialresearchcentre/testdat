@@ -75,6 +75,7 @@ expect_prop <- function(var,
                         func_desc = NULL) {
 
   stopifnot(length(prop) == 1)
+  check_expect_data_pipe(enquo(var))
   act <- quasi_label(enquo(data))
   act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
   act$var_desc  <- as_label_vars(enquo(var))
@@ -113,6 +114,7 @@ expect_prop_lte <- function(var,
                             args = list(),
                             func_desc = NULL) {
 
+  check_expect_data_pipe(enquo(var))
   var <- ensym(var)
   expect_prop(var, func, cmp = `<=`, prop, flt, data, args, func_desc)
 }
@@ -127,6 +129,7 @@ expect_prop_gte <- function(var,
                             args = list(),
                             func_desc = NULL) {
 
+  check_expect_data_pipe(enquo(var))
   var <- ensym(var)
   expect_prop(var, func, cmp = `>=`, prop, flt, data, args, func_desc)
 }
