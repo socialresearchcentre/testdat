@@ -80,7 +80,7 @@ expect_unique <- function(vars,
     mutate(count = n()) %>%
     ungroup() %>%
     select({{ vars }}, count) %>%
-    filter(across(-count, ~ !.x %in% exclude))
+    filter(if_any(-count, ~ !.x %in% exclude))
 
   act$result <- act$result_data$count == 1
 
