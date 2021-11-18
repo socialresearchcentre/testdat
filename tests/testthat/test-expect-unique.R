@@ -48,3 +48,13 @@ test_that("exclude argument works as expected", {
   expect_success(expect_unique_combine(c(var2, var4), exclude = 9999, data = df2))
   expect_failure(expect_unique_combine(c(var1, var4), exclude = 9999, data = df2))
 })
+
+test_that("exclude argument works correctly with multiple vars in expect_unique()", {
+  df2 <- data.frame(
+    var1 = c(1234L, 1234L, 1234L),
+    var2 = c(9999L, 9999L, 1234L)
+  )
+
+  expect_failure(expect_unique(c(var1, var2), data = df2))
+  expect_success(expect_unique(c(var1, var2), exclude = 9999, data = df2))
+})
