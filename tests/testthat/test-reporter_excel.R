@@ -20,7 +20,7 @@ test_that("excel_results", {
 
   xl_summary <- data.frame(
     stringsAsFactors = FALSE,
-    context = c(hlink("failing_tests"), hlink("passing_tests")),
+    context = c(NA_real_, NA_real_),
     tests = c(2L, 3L),
     failed = c(2L, 0L),
     error = c(0L, 0L),
