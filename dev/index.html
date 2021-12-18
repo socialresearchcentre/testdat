@@ -29,6 +29,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -48,12 +50,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="articles/testdat.html">Get started</a>
 </li>
 <li>
@@ -65,7 +61,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/socialresearchcentre/testdat/">
+  <a href="https://github.com/socialresearchcentre/testdat/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -82,16 +78,16 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="testdat-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#testdat-" class="anchor"></a>testdat <a href="https://socialresearchcentre.github.io/testdat/"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<div class="section level1">
+<div class="page-header"><h1 id="testdat-">testdat <a href="https://socialresearchcentre.github.io/testdat/"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<a class="anchor" aria-label="anchor" href="#testdat-"></a>
 </h1></div>
 <!-- badges: start -->
 
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
-<p>testdat is designed to ease data validation, particularly for complex data processing, inspired by software unit testing. testdat extends the strong and flexible unit testing framework already provided by <a href="https://testthat.r-lib.org/">testthat</a> with a family of functions and reporting tools focused on checking of data frames.</p>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>testdat is designed to ease data validation, particularly for complex data processing, inspired by software unit testing. testdat extends the strong and flexible unit testing framework already provided by <a href="https://testthat.r-lib.org/" class="external-link">testthat</a> with a family of functions and reporting tools focused on checking of data frames.</p>
 <p>Features include:</p>
 <ul>
 <li><p>A fully fledged test framework so you can spend more time specifying tests and less time running them</p></li>
@@ -100,27 +96,27 @@
 <li><p>Data-focused reporting of test results</p></li>
 </ul>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of testdat from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the released version of testdat from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"testdat"</span><span class="op">)</span></code></pre></div>
-<p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"testdat"</span><span class="op">)</span></code></pre></div>
+<p>And the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"socialresearchcentre/testdat"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>See the <a href="https://socialresearchcentre.github.io/testdat/articles/testdat.html">Introduction to testdat</a> vignette for a detailed introduction.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://socialresearchcentre.github.io/testdat/">testdat</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://socialresearchcentre.github.io/testdat/">testdat</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: testthat</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
   <span class="op">~</span><span class="va">id</span>, <span class="op">~</span><span class="va">pcode</span>, <span class="op">~</span><span class="va">state</span>, <span class="op">~</span><span class="va">nsw_only</span>,
   <span class="fl">1</span>,   <span class="fl">2000</span>,   <span class="st">"NSW"</span>,  <span class="fl">1</span>,
   <span class="fl">2</span>,   <span class="fl">3123</span>,   <span class="st">"VIC"</span>,  <span class="cn">NA</span>,
@@ -129,17 +125,17 @@
 <span class="op">)</span>
 
 <span class="fu"><a href="reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="va">x</span>, <span class="op">{</span>
-  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">"id is unique"</span>, <span class="op">{</span>
+  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"id is unique"</span>, <span class="op">{</span>
     <span class="fu"><a href="reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span>
   
-  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">"variable values are correct"</span>, <span class="op">{</span>
+  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"variable values are correct"</span>, <span class="op">{</span>
     <span class="fu"><a href="reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">pcode</span>, <span class="fl">2000</span><span class="op">:</span><span class="fl">2999</span>, <span class="fl">3000</span><span class="op">:</span><span class="fl">3999</span><span class="op">)</span>
-    <span class="fu"><a href="reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">state</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NSW"</span>, <span class="st">"VIC"</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">state</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NSW"</span>, <span class="st">"VIC"</span><span class="op">)</span><span class="op">)</span>
     <span class="fu"><a href="reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="co"># by default expect_values allows NAs</span>
   <span class="op">}</span><span class="op">)</span>
   
-  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">"filters applied correctly"</span>, <span class="op">{</span>
+  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"filters applied correctly"</span>, <span class="op">{</span>
     <span class="fu"><a href="reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="va">state</span> <span class="op">==</span> <span class="st">"NSW"</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
@@ -158,51 +154,61 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=testdat">https://​cloud.r-project.org/​package=testdat</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/socialresearchcentre/testdat/">https://​github.com/​socialresearchcentre/​testdat/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/socialresearchcentre/testdat/issues">https://​github.com/​socialresearchcentre/​testdat/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Danny Smith <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Kinto Behr <br><small class="roles"> Author </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="https://cloud.r-project.org/package=testdat" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/socialresearchcentre/testdat/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/socialresearchcentre/testdat/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
-<li><a href="https://github.com/socialresearchcentre/testdat/actions"><img src="https://github.com/socialresearchcentre/testdat/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/socialresearchcentre/testdat?branch=master"><img src="https://codecov.io/gh/socialresearchcentre/testdat/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://CRAN.R-project.org/package=testdat"><img src="https://www.r-pkg.org/badges/version/testdat" alt="CRAN status"></a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing testdat</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Danny Smith <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Kinto Behr <br><small class="roles"> Author </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
+<li><a href="https://github.com/socialresearchcentre/testdat/actions" class="external-link"><img src="https://github.com/socialresearchcentre/testdat/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/socialresearchcentre/testdat?branch=master" class="external-link"><img src="https://codecov.io/gh/socialresearchcentre/testdat/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://CRAN.R-project.org/package=testdat" class="external-link"><img src="https://www.r-pkg.org/badges/version/testdat" alt="CRAN status"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Danny Smith, Kinto Behr.</p>
+  <p></p>
+<p>Developed by Danny Smith, Kinto Behr.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -210,6 +216,8 @@
 
   
 
+
+  
 
   </body>
 </html>

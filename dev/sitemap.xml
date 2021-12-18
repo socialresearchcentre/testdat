@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://socialresearchcentre.github.io/testdat/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/testdat/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/testdat/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/testdat/articles/testdat.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/testdat/authors.html</loc>
+  </url>
+  <url>
     <loc>https://socialresearchcentre.github.io/testdat/index.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/testdat/news/index.html</loc>
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/chk-dates.html</loc>
@@ -67,6 +85,9 @@
     <loc>https://socialresearchcentre.github.io/testdat/reference/global-data.html</loc>
   </url>
   <url>
+    <loc>https://socialresearchcentre.github.io/testdat/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/label-expectations.html</loc>
   </url>
   <url>
@@ -95,8 +116,5 @@
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/testdat/reference/value-expectations.html</loc>
-  </url>
-  <url>
-    <loc>https://socialresearchcentre.github.io/testdat/articles/testdat.html</loc>
   </url>
 </urlset>
