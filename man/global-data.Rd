@@ -20,7 +20,7 @@ data \%E>\% code
 \item{data}{Data frame to be used.}
 
 \item{quosure}{If \code{TRUE}, the default, the data frame is stored as a
-\link[rlang:quosure]{quosure} and lazily evaluated when \code{get_testdata()} is
+\link[rlang:quosure-tools]{quosure} and lazily evaluated when \code{get_testdata()} is
 called, so \code{get_testdata()} will return the current state of the data
 frame.
 
