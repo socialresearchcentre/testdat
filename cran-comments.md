@@ -1,6 +1,7 @@
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 note
 
-* New submission - this is a resubmission with \value tag added to docs for all
-exported functions that were missing it.
+## Notes
+
+* In addition to new features, this submission fixes a failing test on CRAN due to updates to a dependent package.
