@@ -1,4 +1,4 @@
-# testdat (development version)
+# testdat 0.4.0
 
 * testdat now has a test data pipe (#60)! You can use the test data pipe `%E>%` to add expectations to a pipe chain.
 ```r
