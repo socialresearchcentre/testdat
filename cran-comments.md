@@ -4,4 +4,4 @@
 
 ## Notes
 
-* In addition to new features, this submission fixes a failing test on CRAN due to updates to a dependent package.
+* In addition to new features, this submission fixes a failing test on CRAN due to updates to a dependent package. A warning about an incorrect documentation link has been fixed from the previous submission.
