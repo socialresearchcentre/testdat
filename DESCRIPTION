@@ -60,6 +60,7 @@ Collate:
     'expect-labels.R'
     'expect-proportion.R'
     'expect-unique.R'
+    'expect_depends.R'
     'expectation.R'
     'reporter-excel.R'
     'reporter-zzz.R'
