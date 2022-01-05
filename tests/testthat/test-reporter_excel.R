@@ -8,24 +8,25 @@ test_that("excel_results", {
   expect_success(expect_values(status, "success", data = x_summ[x_summ$test == "passes", ]))
   expect_success(expect_values(status, "failure", data = x_summ[x_summ$test == "fails", ]))
 
-  file_out <- paste0("temp_", rlang::hash("temp"), ".xlsx")
+  file_out <- tempfile(fileext = ".xlsx")
   output_results_excel(x, file_out)
   x_xl_summary <- openxlsx::read.xlsx(file_out, "__Summary")
+  x_xl_erroring <- openxlsx::read.xlsx(file_out, "erroring_tests")
   x_xl_passing <- openxlsx::read.xlsx(file_out, "passing_tests")
   x_xl_failing <- openxlsx::read.xlsx(file_out, "failing_tests")
-  file.remove(file_out)
+  unlink(file_out)
 
   # Check that .xlsx file looks good
   hlink <- function(x) glue::glue("=HYPERLINK(\"#'{str_sub(x, 1, 30)}'!A1\",\"{x}\")")
 
   xl_summary <- data.frame(
     stringsAsFactors = FALSE,
-    context = c(NA_real_, NA_real_),
-    tests = c(2L, 3L),
-    failed = c(2L, 0L),
-    error = c(0L, 0L),
-    skipped = c(0L, 0L),
-    warning = c(0L, 0L)
+    context = NA_real_,
+    tests = c(1L, 2L, 3L),
+    failed = c(0L, 2L, 0L),
+    error = c(1L, 0L, 0L),
+    skipped = c(0L, 0L, 0L),
+    warning = c(0L, 0L, 0L)
   )
 
   xl_failing <- data.frame(
@@ -41,6 +42,7 @@ test_that("excel_results", {
     call = c("NULL", "NULL")
   )
 
+  expect_match(x_xl_erroring$description, "Error:")
   expect_equal(x_xl_summary, xl_summary)
   expect_equal(x_xl_failing, xl_failing)
   expect_equal(names(x_xl_passing), names(xl_failing))
