@@ -64,7 +64,7 @@ output_results_excel <- function(results, file) {
   openxlsx::saveWorkbook(wb, file, overwrite = TRUE)
 }
 
-#' @importFrom stringr str_replace_all str_sub
+#' @importFrom stringr str_replace_all str_sub str_remove_all
 summarise_results_excel <- function(results) {
   lapply(results, function(e) {
     lapply(e$results, function(d) {
@@ -72,7 +72,7 @@ summarise_results_excel <- function(results) {
         test = d$test,
         status = expectation_type(d),
         variable = ifelse(is.null(d$custom$var_desc), NA_character_, d$custom$var_desc),
-        description = str_replace_all(d$message, "[[:space:]]", " "),
+        description = str_remove_all(str_replace_all(d$message, "[[:space:]]", " "), "[^ -~]"),
         failed_records = ifelse(is.null(d$custom$failed_count), NA_real_, d$custom$failed_count),
         total_records = ifelse(is.null(d$custom$total_count), NA_real_, d$custom$total_count),
         call = expr_text(d$expectation_call[[1]])
