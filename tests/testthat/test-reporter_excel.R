@@ -8,24 +8,22 @@ test_that("excel_results", {
   expect_success(expect_values(status, "success", data = x_summ[x_summ$test == "passes", ]))
   expect_success(expect_values(status, "failure", data = x_summ[x_summ$test == "fails", ]))
 
-  file_out <- paste0("temp_", rlang::hash("temp"), ".xlsx")
+  file_out <- tempfile(fileext = ".xlsx")
   output_results_excel(x, file_out)
   x_xl_summary <- openxlsx::read.xlsx(file_out, "__Summary")
+  x_xl_erroring <- openxlsx::read.xlsx(file_out, "erroring_tests")
   x_xl_passing <- openxlsx::read.xlsx(file_out, "passing_tests")
   x_xl_failing <- openxlsx::read.xlsx(file_out, "failing_tests")
-  file.remove(file_out)
-
-  # Check that .xlsx file looks good
-  hlink <- function(x) glue::glue("=HYPERLINK(\"#'{str_sub(x, 1, 30)}'!A1\",\"{x}\")")
+  unlink(file_out)
 
   xl_summary <- data.frame(
     stringsAsFactors = FALSE,
-    context = c(hlink("failing_tests"), hlink("passing_tests")),
-    tests = c(2L, 3L),
-    failed = c(2L, 0L),
-    error = c(0L, 0L),
-    skipped = c(0L, 0L),
-    warning = c(0L, 0L)
+    context = NA_real_, # Formulas evaluate to NA if workbook hasn't been opened
+    tests = c(1L, 2L, 3L),
+    failed = c(0L, 2L, 0L),
+    error = c(1L, 0L, 0L),
+    skipped = c(0L, 0L, 0L),
+    warning = c(0L, 0L, 0L)
   )
 
   xl_failing <- data.frame(
@@ -41,6 +39,20 @@ test_that("excel_results", {
     call = c("NULL", "NULL")
   )
 
+  xl_erroring <- data.frame(
+    stringsAsFactors = FALSE,
+    context = "erroring_tests",
+    test = "errors",
+    status = "error",
+    variable = NA_real_,
+    description = "<vctrs_error_subscript_oob/vctrs_error_subscript/rlang_error/error/condition> Error: Can't subset columns that don't exist. [31mx[39m Column `doesnt_exist` doesn't exist.",
+    failed_records = NA_real_,
+    total_records = NA_real_,
+    call = "NULL"
+  )
+
+  expect_equal(x_xl_erroring[-5], xl_erroring[-5]) # Drop description
+  expect_match(x_xl_erroring$description, "Error:")
   expect_equal(x_xl_summary, xl_summary)
   expect_equal(x_xl_failing, xl_failing)
   expect_equal(names(x_xl_passing), names(xl_failing))
