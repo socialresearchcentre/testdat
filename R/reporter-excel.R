@@ -24,6 +24,13 @@ output_results_excel <- function(results, file) {
       call. = FALSE)
   }
 
+  if (!requireNamespace("crayon", quietly = TRUE)) {
+    stop(
+      "Package \"crayon\" needed for this function to work.",
+      "Please install it.",
+      call. = FALSE)
+  }
+
   wb <- openxlsx::createWorkbook()
   openxlsx::modifyBaseFont(wb, fontSize = 8, fontName = "Arial")
 
@@ -72,7 +79,7 @@ summarise_results_excel <- function(results) {
         test = d$test,
         status = expectation_type(d),
         variable = ifelse(is.null(d$custom$var_desc), NA_character_, d$custom$var_desc),
-        description = str_replace_all(d$message, "[[:space:]]", " "),
+        description = crayon::strip_style(str_replace_all(d$message, "[[:space:]]", " ")),
         failed_records = ifelse(is.null(d$custom$failed_count), NA_real_, d$custom$failed_count),
         total_records = ifelse(is.null(d$custom$total_count), NA_real_, d$custom$total_count),
         call = expr_text(d$expectation_call[[1]])

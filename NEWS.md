@@ -1,3 +1,8 @@
+# testdat (development version)
+
+* Fixed a bug that was causing a corrupted excel file to be produced by
+`output_results_excel()` if the test suite encountered an error (#56).
+
 # testdat 0.4.0
 
 * testdat now has a test data pipe (#60)! You can use the test data pipe `%E>%` to add expectations to a pipe chain.
