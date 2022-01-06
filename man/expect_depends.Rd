@@ -31,10 +31,12 @@ Test whether one set of variables functionally depend on another set of
 variables.
 }
 \details{
-One set of variables, X, functionally depends on another, Y, iff each value
-in Y corresponds to exactly one value in X. For instance, \code{course_duration}
-and \code{course_topic} functionally depend on \code{course_code} if each \code{course_code}
-corresponds to just one combination of \code{course_duration} and \verb{course topic}.
+One set of variables, X, functionally depends on another, Y, if and only if
+each value in Y corresponds to exactly one value in X. For instance,
+\code{course_duration} and \code{course_topic} functionally depend on \code{course_code} if
+each \code{course_code} corresponds to just one combination of \code{course_duration}
+and \verb{course topic}. That is, if two records have the same \code{course_code} then
+they must have the same \code{course_duration} and \code{course_topic}.
 
 See the \href{https://en.wikipedia.org/wiki/Functional_dependency}{wikipedia page}
 for more information.

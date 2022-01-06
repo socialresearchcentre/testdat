@@ -3,10 +3,12 @@
 #' Test whether one set of variables functionally depend on another set of
 #' variables.
 #'
-#' One set of variables, X, functionally depends on another, Y, iff each value
-#' in Y corresponds to exactly one value in X. For instance, `course_duration`
-#' and `course_topic` functionally depend on `course_code` if each `course_code`
-#' corresponds to just one combination of `course_duration` and `course topic`.
+#' One set of variables, X, functionally depends on another, Y, if and only if
+#' each value in Y corresponds to exactly one value in X. For instance,
+#' `course_duration` and `course_topic` functionally depend on `course_code` if
+#' each `course_code` corresponds to just one combination of `course_duration`
+#' and `course topic`. That is, if two records have the same `course_code` then
+#' they must have the same `course_duration` and `course_topic`.
 #'
 #' See the [wikipedia page](https://en.wikipedia.org/wiki/Functional_dependency)
 #' for more information.
