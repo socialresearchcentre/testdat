@@ -17,9 +17,23 @@ expect_allany(
   func_desc = NULL
 )
 
-expect_all(...)
+expect_all(
+  vars,
+  func,
+  flt = TRUE,
+  data = get_testdata(),
+  args = list(),
+  func_desc = NULL
+)
 
-expect_any(...)
+expect_any(
+  vars,
+  func,
+  flt = TRUE,
+  data = get_testdata(),
+  args = list(),
+  func_desc = NULL
+)
 }
 \arguments{
 \item{vars}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}> A set of columns to
@@ -41,8 +55,6 @@ by default.}
 
 \item{func_desc}{A human friendly description of \code{func} to use in the
 expectation failure message.}
-
-\item{...}{Arguments to pass to \code{expect_allany()}.}
 }
 \value{
 \verb{expect_*()} functions are mainly called for their side effects. The
