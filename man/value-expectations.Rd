@@ -66,6 +66,7 @@ Other data expectations:
 \code{\link{datacomp-expectations}},
 \code{\link{date-expectations}},
 \code{\link{exclusivity-expectations}},
+\code{\link{expect_depends}()},
 \code{\link{generic-expectations}},
 \code{\link{label-expectations}},
 \code{\link{pattern-expectations}},
