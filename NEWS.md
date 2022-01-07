@@ -1,3 +1,10 @@
+# testdat (development version)
+
+* Added `expect_depends()` which allows you to test for functional dependency
+among variables. See the [wikipedia
+page](https://en.wikipedia.org/wiki/Functional_dependency) for more information
+about functional dependencies.
+
 # testdat 0.4.0
 
 * testdat now has a test data pipe (#60)! You can use the test data pipe `%E>%` to add expectations to a pipe chain.
