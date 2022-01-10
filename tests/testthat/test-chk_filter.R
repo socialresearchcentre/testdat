@@ -26,8 +26,8 @@ test_that("chk_filter", {
     label = "Ensure `everything()` works in chk_filter functions"
   )
 
-  expect_equal(
+  expect_identical(
     length(chk_filter(iris, where(is.numeric), chk_range, args = list(min = 1000, max = Inf))),
-    4,
+    4L,
   )
 })
