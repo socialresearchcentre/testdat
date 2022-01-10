@@ -1,7 +1,17 @@
 # testdat (development version)
 
-* Fixed a bug that was causing a corrupted excel file to be produced by
-`output_results_excel()` if the test suite encountered an error (#56).
+* Updated the error message on `expect_all()` to include more specific information on the location of erring values. In particular, variables failing the test are now highlighted in the error message. If, for instance, only one of three variables passed in as the `vars` argument fails the test, then only that variable will be mentioned as failing the test in the error message. This makes the `expect_all()` function useful for performing class expectations.
+```r
+expect_all(everything(), is.numeric, data = iris):
+#> Error: `iris` has 150 records failing  `is.numeric` on variable `Species`.
+#>  Vars: everything()
+#>  Filter: None
+#>  Arguments: `` 
+```
+
+* Soft deprecated `expect_allany()`.
+
+* Fixed a bug that was causing a corrupted excel file to be produced by `output_results_excel()` if the test suite encountered an error (#56).
 
 # testdat 0.4.0
 
