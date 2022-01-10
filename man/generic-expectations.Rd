@@ -2,21 +2,10 @@
 % Please edit documentation in R/expect-generic.R
 \name{generic-expectations}
 \alias{generic-expectations}
-\alias{expect_allany}
 \alias{expect_all}
 \alias{expect_any}
 \title{Expectations: generic helpers}
 \usage{
-expect_allany(
-  vars,
-  func,
-  flt = TRUE,
-  data = get_testdata(),
-  args = list(),
-  allany = c(chk_filter_all, chk_filter_any),
-  func_desc = NULL
-)
-
 expect_all(
   vars,
   func,
@@ -50,8 +39,6 @@ a subset of the data frame to test.}
 by default.}
 
 \item{args}{A named list of arguments to pass to \code{func}.}
-
-\item{allany}{The function to combine the \code{func} results for each row.}
 
 \item{func_desc}{A human friendly description of \code{func} to use in the
 expectation failure message.}
@@ -107,14 +94,12 @@ expect_any(
 )
 )
 
-# Check petal dimensions are positive
-expect_allany(
-  vars = where(is.numeric),
-  func = chk_range,
-  args = list(min = 0, max = Inf),
-  allany = chk_filter_all,
+# Check that all variables are numeric:
+try(expect_all(
+  vars = everything(),
+  func = is.numeric,
   data = iris
-)
+))
 
 }
 \seealso{
