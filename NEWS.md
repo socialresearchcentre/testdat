@@ -11,6 +11,8 @@ expect_all(everything(), is.numeric, data = iris):
 
 * Soft deprecated `expect_allany()`.
 
+* Added `expect_depends()` which allows you to test for functional dependency among variables. See the [wikipedia page](https://en.wikipedia.org/wiki/Functional_dependency) for more information about functional dependencies.
+
 * Fixed a bug that was causing a corrupted excel file to be produced by `output_results_excel()` if the test suite encountered an error (#56).
 
 # testdat 0.4.0
