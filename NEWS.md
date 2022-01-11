@@ -1,6 +1,7 @@
 # testdat (development version)
 
-* Updated the error message on `expect_all()` to include more specific information on the location of erring values. In particular, variables failing the test are now highlighted in the error message. If, for instance, only one of three variables passed in as the `vars` argument fails the test, then only that variable will be mentioned as failing the test in the error message. This makes the `expect_all()` function useful for performing class expectations.
+* Updated the failure message on `expect_all()` to include more specific information on the location of erring values. In particular, variables failing the test are now highlighted in the error message. If, for instance, only one of three variables passed in as the `vars` argument fails the test, then only that variable will be mentioned as failing the test in the failure message. This makes it easier to track down the cause of expectation failures when checking multiple variables at once. For example,
+
 ```r
 expect_all(everything(), is.numeric, data = iris):
 #> Error: `iris` has 150 records failing  `is.numeric` on variable `Species`.
@@ -9,7 +10,9 @@ expect_all(everything(), is.numeric, data = iris):
 #>  Arguments: `` 
 ```
 
-* Soft deprecated `expect_allany()`.
+`expect_all()` sits behind many other expectations, which will also see a change to their failure message.
+
+* Soft deprecated `expect_allany()`. This function was implemented purely as a back-end for `expect_all()` and `expect_any()`. The change to `expect_all()` mentioned above differentiates it from `expect_any()` so that the two functions can no longer share a common back-end. Hence `expect_allany()` is now redundant.
 
 * Added `expect_depends()` which allows you to test for functional dependency among variables. See the [wikipedia page](https://en.wikipedia.org/wiki/Functional_dependency) for more information about functional dependencies.
 
