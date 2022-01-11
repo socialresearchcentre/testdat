@@ -1,3 +1,6 @@
+#' @include expectation.R
+NULL
+
 #' Expectations: generic helpers
 #'
 #' These functions allow for testing of multiple columns (`vars`) of a data
@@ -22,10 +25,8 @@
 #'   argument and returns a logical vector of the same length showing whether an
 #'   element passed or failed.
 #' @param args A named list of arguments to pass to `func`.
-#' @param allany The function to combine the `func` results for each row.
 #' @param func_desc A human friendly description of `func` to use in the
 #'   expectation failure message.
-#' @param ... Arguments to pass to `expect_allany()`.
 #' @inherit data-params return
 #'
 #' @seealso `chk_*()` functions such as [`chk_values()`][chk-values]
@@ -56,27 +57,23 @@
 #' )
 #' )
 #'
-#' # Check petal dimensions are positive
-#' expect_allany(
-#'   vars = where(is.numeric),
-#'   func = chk_range,
-#'   args = list(min = 0, max = Inf),
-#'   allany = chk_filter_all,
+#' # Check that all variables are numeric:
+#' try(expect_all(
+#'   vars = everything(),
+#'   func = is.numeric,
 #'   data = iris
-#' )
+#' ))
 #'
 NULL
 
 #' @export
 #' @rdname generic-expectations
-expect_allany <- function(vars,
-                          func,
-                          flt = TRUE,
-                          data = get_testdata(),
-                          args = list(),
-                          allany = c(chk_filter_all, chk_filter_any),
-                          func_desc = NULL) {
-
+expect_all <- function(vars,
+                       func,
+                       flt = TRUE,
+                       data = get_testdata(),
+                       args = list(),
+                       func_desc = NULL) {
   check_expect_data_pipe(enquo(vars))
   act <- quasi_label(enquo(data))
   act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
@@ -84,7 +81,53 @@ expect_allany <- function(vars,
   act$flt_desc  <- as_label_flt(enquo(flt))
   act$args_desc <- expr_deparse_repl(args, "(^<list: |>$)", "")
 
-  act$result <- allany(eval_tidy(enquo(data)),
+  act$result <- chk_filter(
+    eval_tidy(enquo(data)),
+    {{ vars }},
+    eval_tidy(enquo(func)),
+    {{ flt }},
+    args
+  )
+
+  act$var_fail <- act$result %>%
+    select_if(~any(!., na.rm=TRUE)) %>%
+    names()
+
+  act$result <- apply(act$result, 1, all)
+
+  expect_custom(
+    all(act$result, na.rm = TRUE),
+    glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records failing \\
+         {act$func_desc} on variable \\
+         {as_english_list(paste0('`', act$var_fail, '`'), 'and/or')}.
+         Variable set: `{act$var_desc}`
+         Filter: {act$flt_desc}
+         Arguments: `{act$args_desc}`"),
+    failed_count = sum(!act$result, na.rm = TRUE),
+    total_count = sum(!is.na(act$result)),
+    var_desc = act$var_desc,
+    result = act$result
+  )
+
+  invisible(act$result)
+}
+
+#' @export
+#' @rdname generic-expectations
+expect_any <- function(vars,
+                       func,
+                       flt = TRUE,
+                       data = get_testdata(),
+                       args = list(),
+                       func_desc = NULL) {
+  check_expect_data_pipe(enquo(vars))
+  act <- quasi_label(enquo(data))
+  act$func_desc <- if (is.null(func_desc)) paste0("`", as_label(enquo(func)), "`") else func_desc
+  act$var_desc  <- as_label_vars(enquo(vars))
+  act$flt_desc  <- as_label_flt(enquo(flt))
+  act$args_desc <- expr_deparse_repl(args, "(^<list: |>$)", "")
+
+  act$result <- chk_filter_any(eval_tidy(enquo(data)),
                        {{ vars }},
                        eval_tidy(enquo(func)),
                        {{ flt }},
@@ -105,14 +148,3 @@ expect_allany <- function(vars,
   invisible(act$result)
 }
 
-#' @export
-#' @rdname generic-expectations
-expect_all <- function(...) {
-  expect_allany(..., allany = chk_filter_all)
-}
-
-#' @export
-#' @rdname generic-expectations
-expect_any <- function(...) {
-  expect_allany(..., allany = chk_filter_any)
-}

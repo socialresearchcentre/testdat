@@ -1,7 +1,7 @@
 Type: Package
 Package: testdat
 Title: Data Unit Testing for R
-Version: 0.4.0.9001
+Version: 0.4.0.9002
 Authors@R: 
     c(person(given = "Danny",
              family = "Smith",
@@ -50,18 +50,18 @@ Collate:
     'deprec-chk.R'
     'deprec-expect.R'
     'deprec-reporter.R'
+    'expectation.R'
+    'expect-generic.R'
     'expect-make.R'
     'expect-chk.R'
     'expect-conditional.R'
     'expect-data.R'
     'expect-datacomp.R'
     'expect-exclusive.R'
-    'expect-generic.R'
     'expect-labels.R'
     'expect-proportion.R'
     'expect-unique.R'
     'expect_depends.R'
-    'expectation.R'
     'reporter-excel.R'
     'reporter-zzz.R'
     'testdat-package.R'

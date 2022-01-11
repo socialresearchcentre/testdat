@@ -5,6 +5,7 @@
 \alias{expect_func}
 \alias{expect_join}
 \alias{expect_similar}
+\alias{expect_allany}
 \title{Deprecated expectation functions}
 \usage{
 expect_func(var, ...)
@@ -20,6 +21,16 @@ expect_similar(
   threshold = 0.05,
   min = 100,
   data = get_testdata()
+)
+
+expect_allany(
+  vars,
+  func,
+  flt = TRUE,
+  data = get_testdata(),
+  args = list(),
+  allany = c(chk_filter_all, chk_filter_any),
+  func_desc = NULL
 )
 }
 \arguments{
@@ -49,6 +60,20 @@ categories.}
 
 \item{min}{The minimum number of responses for a category to allow
 comparison. This avoids small categories raising spurious errors.}
+
+\item{vars}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}> A set of columns to
+test.}
+
+\item{func}{A function to use for testing that takes a vector as the first
+argument and returns a logical vector of the same length showing whether an
+element passed or failed.}
+
+\item{args}{A named list of arguments to pass to \code{func}.}
+
+\item{allany}{The function to combine the \code{func} results for each row.}
+
+\item{func_desc}{A human friendly description of \code{func} to use in the
+expectation failure message.}
 }
 \value{
 \verb{expect_*()} functions are mainly called for their side effects. The

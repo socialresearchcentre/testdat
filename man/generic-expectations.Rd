@@ -2,24 +2,27 @@
 % Please edit documentation in R/expect-generic.R
 \name{generic-expectations}
 \alias{generic-expectations}
-\alias{expect_allany}
 \alias{expect_all}
 \alias{expect_any}
 \title{Expectations: generic helpers}
 \usage{
-expect_allany(
+expect_all(
   vars,
   func,
   flt = TRUE,
   data = get_testdata(),
   args = list(),
-  allany = c(chk_filter_all, chk_filter_any),
   func_desc = NULL
 )
 
-expect_all(...)
-
-expect_any(...)
+expect_any(
+  vars,
+  func,
+  flt = TRUE,
+  data = get_testdata(),
+  args = list(),
+  func_desc = NULL
+)
 }
 \arguments{
 \item{vars}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}> A set of columns to
@@ -37,12 +40,8 @@ by default.}
 
 \item{args}{A named list of arguments to pass to \code{func}.}
 
-\item{allany}{The function to combine the \code{func} results for each row.}
-
 \item{func_desc}{A human friendly description of \code{func} to use in the
 expectation failure message.}
-
-\item{...}{Arguments to pass to \code{expect_allany()}.}
 }
 \value{
 \verb{expect_*()} functions are mainly called for their side effects. The
@@ -95,14 +94,12 @@ expect_any(
 )
 )
 
-# Check petal dimensions are positive
-expect_allany(
-  vars = where(is.numeric),
-  func = chk_range,
-  args = list(min = 0, max = Inf),
-  allany = chk_filter_all,
+# Check that all variables are numeric:
+try(expect_all(
+  vars = everything(),
+  func = is.numeric,
   data = iris
-)
+))
 
 }
 \seealso{
