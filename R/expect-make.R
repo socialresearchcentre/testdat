@@ -1,3 +1,5 @@
+#' @include expect-generic.R
+NULL
 
 #' Create an expectation from a check function
 #'
@@ -38,20 +40,19 @@ expect_make <- function(func,
   args_list <- set_names(lapply(names(args), parse_expr))
 
   if (all)
-    enall <- expr(chk_filter_all)
+    enall <- expect_all
   else
-    enall <- expr(chk_filter_any)
+    enall <- expect_any
 
   new_function(
     exprs(vars = , !!!args, flt = TRUE, data = get_testdata()),
     expr({
-      expect_allany(!!parse_expr("!!enquo(vars)"),
-                    !!enfunc,
-                    !!parse_expr("!!enquo(flt)"),
-                    !!parse_expr("!!enquo(data)"),
-                    args = list(!!!args_list),
-                    allany = !!enall,
-                    func_desc = !!func_desc)
+      (!!enall)(!!parse_expr("!!enquo(vars)"),
+            !!enfunc,
+            !!parse_expr("!!enquo(flt)"),
+            !!parse_expr("!!enquo(data)"),
+            args = list(!!!args_list),
+            func_desc = !!func_desc)
     }),
     env
   )

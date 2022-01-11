@@ -1,3 +1,6 @@
+#' @include expectation.R
+NULL
+
 #' Expectations: generic helpers
 #'
 #' These functions allow for testing of multiple columns (`vars`) of a data
@@ -95,11 +98,11 @@ expect_all <- function(vars,
   expect_custom(
     all(act$result, na.rm = TRUE),
     glue("{act$lab} has {sum(!act$result, na.rm = TRUE)} records failing \\
-          {act$func_desc} on variable \\
+         {act$func_desc} on variable \\
          {as_english_list(paste0('`', act$var_fail, '`'), 'and/or')}.
-          Vars: {act$var_desc}
-          Filter: {act$flt_desc}
-          Arguments: `{act$args_desc}`"),
+         Variable set: `{act$var_desc}`
+         Filter: {act$flt_desc}
+         Arguments: `{act$args_desc}`"),
     failed_count = sum(!act$result, na.rm = TRUE),
     total_count = sum(!is.na(act$result)),
     var_desc = act$var_desc,
