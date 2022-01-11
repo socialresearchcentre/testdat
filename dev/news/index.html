@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.4.0.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.4.0.9002</span>
       </span>
     </div>
 
@@ -52,20 +52,28 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="testdat-development-version">testdat (development version)<a class="anchor" aria-label="anchor" href="#testdat-development-version"></a></h2>
-<ul><li><p>Added <code><a href="../reference/expect_depends.html">expect_depends()</a></code> which allows you to test for functional dependency among variables. See the <a href="https://en.wikipedia.org/wiki/Functional_dependency" class="external-link">wikipedia page</a> for more information about functional dependencies.</p></li>
+<ul><li>Updated the failure message on <code><a href="../reference/generic-expectations.html">expect_all()</a></code> to include more specific information on the location of erring values. In particular, variables failing the test are now highlighted in the error message. If, for instance, only one of three variables passed in as the <code>vars</code> argument fails the test, then only that variable will be mentioned as failing the test in the failure message. This makes it easier to track down the cause of expectation failures when checking multiple variables at once. For example,</li>
+</ul><div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">expect_all</span>(<span class="kw">everything</span>(), is.numeric, <span class="dt">data =</span> iris)<span class="op">:</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co">#&gt; Error: `iris` has 150 records failing  `is.numeric` on variable `Species`.</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">#&gt;  Vars: everything()</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">#&gt;  Filter: None</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#&gt;  Arguments: `` </span></span></code></pre></div>
+<p><code><a href="../reference/generic-expectations.html">expect_all()</a></code> sits behind many other expectations, which will also see a change to their failure message.</p>
+<ul><li><p>Soft deprecated <code><a href="../reference/expect-deprec.html">expect_allany()</a></code>. This function was implemented purely as a back-end for <code><a href="../reference/generic-expectations.html">expect_all()</a></code> and <code><a href="../reference/generic-expectations.html">expect_any()</a></code>. The change to <code><a href="../reference/generic-expectations.html">expect_all()</a></code> mentioned above differentiates it from <code><a href="../reference/generic-expectations.html">expect_any()</a></code> so that the two functions can no longer share a common back-end. Hence <code><a href="../reference/expect-deprec.html">expect_allany()</a></code> is now redundant.</p></li>
+<li><p>Added <code><a href="../reference/expect_depends.html">expect_depends()</a></code> which allows you to test for functional dependency among variables. See the <a href="https://en.wikipedia.org/wiki/Functional_dependency" class="external-link">wikipedia page</a> for more information about functional dependencies.</p></li>
 <li><p>Fixed a bug that was causing a corrupted excel file to be produced by <code><a href="../reference/output_results_excel.html">output_results_excel()</a></code> if the test suite encountered an error (<a href="https://github.com/socialresearchcentre/testdat/issues/56" class="external-link">#56</a>).</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.4.0" id="testdat-040">testdat 0.4.0<small>2022-01-04</small><a class="anchor" aria-label="anchor" href="#testdat-040"></a></h2>
 <ul><li>testdat now has a test data pipe (<a href="https://github.com/socialresearchcentre/testdat/issues/60" class="external-link">#60</a>)! You can use the test data pipe <code>%E&gt;%</code> to add expectations to a pipe chain.</li>
-</ul><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+</ul><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">mtcars</span> <span class="op"><a href="../reference/global-data.html">%E&gt;%</a></span>
   <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>mpg <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op"><a href="../reference/global-data.html">%E&gt;%</a></span>
   <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>This is a shorthand way of piping into the <code><a href="../reference/global-data.html">with_testdata()</a></code> function.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -82,7 +90,7 @@
 <h4 id="tidyselect-0-3-0">tidyselect (<a href="https://github.com/socialresearchcentre/testdat/issues/36" class="external-link">#36</a>)<a class="anchor" aria-label="anchor" href="#tidyselect-0-3-0"></a></h4>
 <p>As of testdat 0.3.0 we have moved to the <a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidyselect</a> framework for variable selections instead of <code><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">dplyr::vars()</a></code>. tidyselect is the successor to <code><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars()</a></code> - it’s a bit cleaner, provides some nifty features like selecting columns with a predicate function using <code>where()</code> and finally allows us to get rid of the distinction between multi and single variable expectations.</p>
 <p>Unfortunately this will break some code, but it’s horrendously difficult to support both methods and it’s best to switch before publishing to CRAN. Fortunately it’s a simple fix - anywhere that you are currently using <code><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars()</a></code>, replace it with <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># Old</span>
 <span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
@@ -91,7 +99,7 @@
 <p>The affected expectations are:</p>
 <ul><li><p>The uniqueness expectations: <code><a href="../reference/uniqueness-expectations.html">expect_unique()</a></code>, <code><a href="../reference/uniqueness-expectations.html">expect_unique_across()</a></code>, <code><a href="../reference/uniqueness-expectations.html">expect_unique_combine()</a></code></p></li>
 <li><p>The exclusivity expectation: <code><a href="../reference/exclusivity-expectations.html">expect_exclusive()</a></code></p></li>
-<li><p>The generic expectation helpers: <code><a href="../reference/generic-expectations.html">expect_all()</a></code>, <code><a href="../reference/generic-expectations.html">expect_any()</a></code>, <code><a href="../reference/generic-expectations.html">expect_allany()</a></code></p></li>
+<li><p>The generic expectation helpers: <code><a href="../reference/generic-expectations.html">expect_all()</a></code>, <code><a href="../reference/generic-expectations.html">expect_any()</a></code>, <code><a href="../reference/expect-deprec.html">expect_allany()</a></code></p></li>
 <li><p>The checking helper functions: <code><a href="../reference/chk-helper.html">chk_filter()</a></code>, <code><a href="../reference/chk-defunct.html">chk_filter_vars()</a></code>, <code><a href="../reference/chk-helper.html">chk_filter_all()</a></code>, <code><a href="../reference/chk-helper.html">chk_filter_any()</a></code></p></li>
 </ul><p>A small number of functions have been hard deprecated as they are now redundant:</p>
 <ul><li><p><code><a href="../reference/expect-defunct.html">expect_where()</a></code> and <code><a href="../reference/chk-defunct.html">chk_filter_where()</a></code> have been hard deprecated. They are now equivalent to the corresponding <code>*_all()</code> function.</p></li>
@@ -99,7 +107,7 @@
 </ul><p>Auto-generated expectations have also changed slightly - previously they could either accept a single unquoted variable name or a group of variables specified with <code><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars()</a></code>. They now always accept multiple columns using tidyselect syntax. As a result, the name of the first argument for these expect has changed from <code>var</code> to <code>vars</code>, so be careful if you’re using this as a named argument.</p>
 <p>tidyselect syntax allows single unquoted variable names as well as arbitrary groups of variable specifications, and all of the auto-generated expectations in the package used the single variable variant so this shouldn’t break existing code.</p>
 <p>These are all valid column specifications using tidyselect:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">a</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
 <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
