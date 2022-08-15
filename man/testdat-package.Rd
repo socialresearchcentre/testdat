@@ -6,7 +6,7 @@
 \alias{testdat-package}
 \title{testdat: Data Unit Testing for R}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
 Test your data! An extension of the 'testthat' unit testing framework with a family of functions and reporting tools for checking and validating data frames.
 }
