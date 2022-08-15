@@ -58,79 +58,112 @@ These functions are deprecated."><meta property="og:image" content="https://soci
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">expect_func</span><span class="op">(</span><span class="va">var</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">expect_join</span><span class="op">(</span><span class="va">data2</span>, by <span class="op">=</span> <span class="cn">NULL</span>, not <span class="op">=</span> <span class="cn">FALSE</span>, flt <span class="op">=</span> <span class="cn">TRUE</span>, data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">expect_similar</span><span class="op">(</span>
-  <span class="va">var</span>,
-  <span class="va">data2</span>,
-  <span class="va">var2</span>,
-  flt <span class="op">=</span> <span class="cn">TRUE</span>,
-  flt2 <span class="op">=</span> <span class="va">flt</span>,
-  threshold <span class="op">=</span> <span class="fl">0.05</span>,
-  min <span class="op">=</span> <span class="fl">100</span>,
-  data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu">expect_allany</span><span class="op">(</span>
-  <span class="va">vars</span>,
-  <span class="va">func</span>,
-  flt <span class="op">=</span> <span class="cn">TRUE</span>,
-  data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>,
-  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  allany <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">chk_filter_all</span>, <span class="va">chk_filter_any</span><span class="op">)</span>,
-  func_desc <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">expect_func</span><span class="op">(</span><span class="va">var</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">expect_join</span><span class="op">(</span><span class="va">data2</span>, by <span class="op">=</span> <span class="cn">NULL</span>, not <span class="op">=</span> <span class="cn">FALSE</span>, flt <span class="op">=</span> <span class="cn">TRUE</span>, data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">expect_similar</span><span class="op">(</span></span>
+<span>  <span class="va">var</span>,</span>
+<span>  <span class="va">data2</span>,</span>
+<span>  <span class="va">var2</span>,</span>
+<span>  flt <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  flt2 <span class="op">=</span> <span class="va">flt</span>,</span>
+<span>  threshold <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  min <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">expect_allany</span><span class="op">(</span></span>
+<span>  <span class="va">vars</span>,</span>
+<span>  <span class="va">func</span>,</span>
+<span>  flt <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  allany <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">chk_filter_all</span>, <span class="va">chk_filter_any</span><span class="op">)</span>,</span>
+<span>  func_desc <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>var</dt>
 <dd><p>An unquoted column name to test.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments to pass to <code>expect_allany()</code>.</p></dd>
+
+
 <dt>data2</dt>
 <dd><p>The data frame to compare against.</p></dd>
+
+
 <dt>by</dt>
 <dd><p>A character vector of columns to join by. See <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::join()</a></code> for
 details.</p></dd>
+
+
 <dt>not</dt>
 <dd><p>Reverse the results of the check?</p></dd>
+
+
 <dt>flt</dt>
 <dd><p>&lt;<code><a href="https://dplyr.tidyverse.org/reference/dplyr_data_masking.html" class="external-link">data-masking</a></code>&gt; A filter specifying
 a subset of the data frame to test.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>A data frame to test. The <a href="global-data.html">global test data</a> is used
 by default.</p></dd>
+
+
 <dt>var2</dt>
 <dd><p>An unquoted column name from data2.</p></dd>
+
+
 <dt>flt2</dt>
 <dd><p>A filter specifying a subset of data2 to test.</p></dd>
+
+
 <dt>threshold</dt>
 <dd><p>The maximum proportional difference allowed between the two
 categories.</p></dd>
+
+
 <dt>min</dt>
 <dd><p>The minimum number of responses for a category to allow
 comparison. This avoids small categories raising spurious errors.</p></dd>
+
+
 <dt>vars</dt>
 <dd><p>&lt;<code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy-select</a></code>&gt; A set of columns to
 test.</p></dd>
+
+
 <dt>func</dt>
 <dd><p>A function to use for testing that takes a vector as the first
 argument and returns a logical vector of the same length showing whether an
 element passed or failed.</p></dd>
+
+
 <dt>args</dt>
 <dd><p>A named list of arguments to pass to <code>func</code>.</p></dd>
+
+
 <dt>allany</dt>
 <dd><p>The function to combine the <code>func</code> results for each row.</p></dd>
+
+
 <dt>func_desc</dt>
 <dd><p>A human friendly description of <code>func</code> to use in the
 expectation failure message.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>expect_*()</code> functions are mainly called for their side effects. The
+    
+
+<p><code>expect_*()</code> functions are mainly called for their side effects. The
 expectation signals its result (e.g. "success", "failure"), which is logged
 by the current <a href="https://testthat.r-lib.org/reference/Reporter.html" class="external-link">test reporter</a>. In a non-testing
 context the expectation will raise an error with class
@@ -154,7 +187,7 @@ context the expectation will raise an error with class
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -56,15 +56,15 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">expect_cond</span><span class="op">(</span><span class="va">cond1</span>, <span class="va">cond2</span>, data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">expect_base</span><span class="op">(</span>
-  <span class="va">var</span>,
-  <span class="va">base</span>,
-  miss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"testdat.miss"</span><span class="op">)</span>,
-  missing_valid <span class="op">=</span> <span class="cn">FALSE</span>,
-  data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">expect_cond</span><span class="op">(</span><span class="va">cond1</span>, <span class="va">cond2</span>, data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">expect_base</span><span class="op">(</span></span>
+<span>  <span class="va">var</span>,</span>
+<span>  <span class="va">base</span>,</span>
+<span>  miss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"testdat.miss"</span><span class="op">)</span>,</span>
+<span>  missing_valid <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -72,28 +72,43 @@
     <dl><dt>cond1</dt>
 <dd><p>&lt;<code><a href="https://dplyr.tidyverse.org/reference/dplyr_data_masking.html" class="external-link">data-masking</a></code>&gt; First condition
 (antecedent) for consistency check.</p></dd>
+
+
 <dt>cond2</dt>
 <dd><p>&lt;<code><a href="https://dplyr.tidyverse.org/reference/dplyr_data_masking.html" class="external-link">data-masking</a></code>&gt; Second condition
 (consequent) for consistency check.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>A data frame to test. The <a href="global-data.html">global test data</a> is used
 by default.</p></dd>
+
+
 <dt>var</dt>
 <dd><p>An unquoted column name to test.</p></dd>
+
+
 <dt>base</dt>
 <dd><p>&lt;<code><a href="https://dplyr.tidyverse.org/reference/dplyr_data_masking.html" class="external-link">data-masking</a></code>&gt; The condition that
 determines which records should be non-missing.</p></dd>
+
+
 <dt>miss</dt>
 <dd><p>A vector of values to be treated as missing. The
 <a href="testdat-package.html">testdat.miss</a> option is used by default.</p></dd>
+
+
 <dt>missing_valid</dt>
 <dd><p>Should missing values be treated as valid for records
 meeting the <code>base</code> condition? This allows 'one way' base checks. This is
 <code>FALSE</code> by default.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>expect_*()</code> functions are mainly called for their side effects. The
+    
+
+<p><code>expect_*()</code> functions are mainly called for their side effects. The
 expectation signals its result (e.g. "success", "failure"), which is logged
 by the current <a href="https://testthat.r-lib.org/reference/Reporter.html" class="external-link">test reporter</a>. In a non-testing
 context the expectation will raise an error with class
@@ -102,9 +117,9 @@ context the expectation will raise an error with class
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>expect_cond</code>: Checks the coexistence of two
+<ul><li><p><code>expect_cond()</code>: Checks the coexistence of two
 conditions. It can be read as "if <code>cond1</code> then <code>cond2</code>".</p></li>
-<li><p><code>expect_base</code>: A special case that checks missing data
+<li><p><code>expect_base()</code>: A special case that checks missing data
 against a specified condition. It can be read as "if <code>base</code> then <code>var</code> not
 missing, if not <code>base</code> then <code>var</code> missing".</p></li>
 </ul></div>
@@ -126,26 +141,26 @@ missing, if not <code>base</code> then <code>var</code> missing".</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">my_survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span class="r-in">  resp_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
-<span class="r-in">  q1a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span>
-<span class="r-in">  q1b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, <span class="co"># Asked if q1a %in% 1</span></span>
-<span class="r-in">  q2a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">80</span>, <span class="fl">60</span>, <span class="fl">40</span>, <span class="fl">90</span><span class="op">)</span>,</span>
-<span class="r-in">  q2b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">""</span>, <span class="cn">NA</span>, <span class="st">"Some reason for low rating"</span>, <span class="st">""</span><span class="op">)</span> <span class="co"># Asked if q2a &lt; 50</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Check that q1b has a value if and only if q1a %in% 1</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">expect_base</span><span class="op">(</span><span class="va">q1b</span>, <span class="va">q1a</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">my_survey</span><span class="op">)</span><span class="op">)</span> <span class="co"># Fails for resp_id 2 and 5</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">my_survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  resp_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span></span>
+<span class="r-in"><span>  q1a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  q1b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, <span class="co"># Asked if q1a %in% 1</span></span></span>
+<span class="r-in"><span>  q2a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">80</span>, <span class="fl">60</span>, <span class="fl">40</span>, <span class="fl">90</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  q2b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">""</span>, <span class="cn">NA</span>, <span class="st">"Some reason for low rating"</span>, <span class="st">""</span><span class="op">)</span> <span class="co"># Asked if q2a &lt; 50</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Check that q1b has a value if and only if q1a %in% 1</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">expect_base</span><span class="op">(</span><span class="va">q1b</span>, <span class="va">q1a</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">my_survey</span><span class="op">)</span><span class="op">)</span> <span class="co"># Fails for resp_id 2 and 5</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error : `my_survey` has a base mismatch in variable `q1b`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 cases have `q1a %in% 1` but `q1b` is missing.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 cases do not have `q1a %in% 1` but `q1b` is non missing.</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Check that q2b has a value if and only if q2a &lt; 50</span></span>
-<span class="r-in"><span class="fu">expect_base</span><span class="op">(</span><span class="va">q2b</span>, <span class="va">q2a</span> <span class="op">&lt;</span> <span class="fl">50</span>, data <span class="op">=</span> <span class="va">my_survey</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Check that if q1a %in% 0 then q2a &gt; 50 (but not vice-versa)</span></span>
-<span class="r-in"><span class="fu">expect_cond</span><span class="op">(</span><span class="va">q1a</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">0</span>, <span class="va">q2a</span> <span class="op">&gt;</span> <span class="fl">50</span>, data <span class="op">=</span> <span class="va">my_survey</span><span class="op">)</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Check that q2b has a value if and only if q2a &lt; 50</span></span></span>
+<span class="r-in"><span><span class="fu">expect_base</span><span class="op">(</span><span class="va">q2b</span>, <span class="va">q2a</span> <span class="op">&lt;</span> <span class="fl">50</span>, data <span class="op">=</span> <span class="va">my_survey</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Check that if q1a %in% 0 then q2a &gt; 50 (but not vice-versa)</span></span></span>
+<span class="r-in"><span><span class="fu">expect_cond</span><span class="op">(</span><span class="va">q1a</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">0</span>, <span class="va">q2a</span> <span class="op">&gt;</span> <span class="fl">50</span>, data <span class="op">=</span> <span class="va">my_survey</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -160,7 +175,7 @@ missing, if not <code>base</code> then <code>var</code> missing".</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

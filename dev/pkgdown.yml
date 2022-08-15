@@ -1,9 +1,9 @@
 pandoc: 2.7.3
-pkgdown: 2.0.1
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   testdat: testdat.html
-last_built: 2022-01-11T23:04Z
+last_built: 2022-08-15T03:09Z
 urls:
   reference: https://socialresearchcentre.github.io/testdat/reference
   article: https://socialresearchcentre.github.io/testdat/articles

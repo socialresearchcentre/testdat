@@ -58,13 +58,13 @@ allow simple generation of domain specific data checks.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">expect_make</span><span class="op">(</span>
-  <span class="va">func</span>,
-  func_desc <span class="op">=</span> <span class="cn">NULL</span>,
-  vars <span class="op">=</span> <span class="cn">FALSE</span>,
-  all <span class="op">=</span> <span class="cn">TRUE</span>,
-  env <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/caller_env.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">expect_make</span><span class="op">(</span></span>
+<span>  <span class="va">func</span>,</span>
+<span>  func_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  vars <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  all <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  env <span class="op">=</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -72,41 +72,52 @@ allow simple generation of domain specific data checks.</p>
     <dl><dt>func</dt>
 <dd><p>A function whose first argument takes a vector to check, and
 returns a logical vector of the same length with the results.</p></dd>
+
+
 <dt>func_desc</dt>
 <dd><p>A character function description to use in the expectation
 failure message.</p></dd>
+
+
 <dt>vars</dt>
 <dd><p>Included for backwards compatibility only.</p></dd>
+
+
 <dt>all</dt>
 <dd><p>Function to use to combine results for each vector.</p></dd>
+
+
 <dt>env</dt>
 <dd><p>The parent environment of the function, defaults to the calling
 environment of <code>expect_make()</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An <code>expect_*()</code> style function.</p>
+    
+
+<p>An <code>expect_*()</code> style function.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Create a custom check</span></span>
-<span class="r-in"><span class="va">chk_binary</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">0</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Create custom expectation function</span></span>
-<span class="r-in"><span class="va">expect_binary</span> <span class="op">&lt;-</span> <span class="fu">expect_make</span><span class="op">(</span><span class="va">chk_binary</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create a custom check</span></span></span>
+<span class="r-in"><span><span class="va">chk_binary</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">0</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create custom expectation function</span></span></span>
+<span class="r-in"><span><span class="va">expect_binary</span> <span class="op">&lt;-</span> <span class="fu">expect_make</span><span class="op">(</span><span class="va">chk_binary</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval_tidy(enfunc):</span> object 'chk_binary' not found</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Validate a data frame</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">expect_binary</span><span class="op">(</span><span class="va">vs</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Validate a data frame</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">expect_binary</span><span class="op">(</span><span class="va">vs</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in expect_binary(vs, data = mtcars) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   could not find function "expect_binary"</span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">expect_binary</span><span class="op">(</span><span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">expect_binary</span><span class="op">(</span><span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in expect_binary(cyl, data = mtcars) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   could not find function "expect_binary"</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -121,7 +132,7 @@ environment of <code>expect_make()</code>.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

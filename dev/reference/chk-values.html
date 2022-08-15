@@ -56,35 +56,48 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">chk_equals</span><span class="op">(</span><span class="va">x</span>, <span class="va">val</span><span class="op">)</span>
-
-<span class="fu">chk_values</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, miss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"testdat.miss"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">chk_range</span><span class="op">(</span><span class="va">x</span>, <span class="va">min</span>, <span class="va">max</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">chk_blank</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">chk_equals</span><span class="op">(</span><span class="va">x</span>, <span class="va">val</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">chk_values</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, miss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"testdat.miss"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">chk_range</span><span class="op">(</span><span class="va">x</span>, <span class="va">min</span>, <span class="va">max</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">chk_blank</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A vector to check.</p></dd>
+
+
 <dt>val</dt>
 <dd><p>A scalar value for the equality check.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Vectors of valid values.</p></dd>
+
+
 <dt>miss</dt>
 <dd><p>A vector of values to be treated as missing. The
 <a href="testdat-package.html">testdat.miss</a> or <a href="testdat-package.html">testdat.miss_text</a> option is used by
 default.</p></dd>
+
+
 <dt>min</dt>
 <dd><p>Minimum value for range check.</p></dd>
+
+
 <dt>max</dt>
 <dd><p>Maximum value for range check.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A logical vector flagging records that have passed or failed the
+    
+
+<p>A logical vector flagging records that have passed or failed the
 check.</p>
     </div>
     <div id="see-also">
@@ -102,19 +115,19 @@ check.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">0</span>, <span class="cn">NA</span>, <span class="fl">99</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">chk_blank</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># Blank</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">0</span>, <span class="cn">NA</span>, <span class="fl">99</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">chk_blank</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># Blank</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE</span>
-<span class="r-in"><span class="fu">chk_equals</span><span class="op">(</span><span class="va">x</span>, <span class="fl">0</span><span class="op">)</span> <span class="co"># Either blank or 0</span></span>
+<span class="r-in"><span><span class="fu">chk_equals</span><span class="op">(</span><span class="va">x</span>, <span class="fl">0</span><span class="op">)</span> <span class="co"># Either blank or 0</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE</span>
-<span class="r-in"><span class="fu">chk_values</span><span class="op">(</span><span class="va">x</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># Either blank, 0, 1, or 99</span></span>
+<span class="r-in"><span><span class="fu">chk_values</span><span class="op">(</span><span class="va">x</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># Either blank, 0, 1, or 99</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE</span>
-<span class="r-in"><span class="fu">chk_range</span><span class="op">(</span><span class="va">x</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># Either blank or in [0,1]</span></span>
+<span class="r-in"><span><span class="fu">chk_range</span><span class="op">(</span><span class="va">x</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># Either blank or in [0,1]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE</span>
-<span class="r-in"><span class="fu">chk_range</span><span class="op">(</span><span class="va">x</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">99</span><span class="op">)</span> <span class="co"># Either blank, in [0,1], or equal to 99</span></span>
+<span class="r-in"><span><span class="fu">chk_range</span><span class="op">(</span><span class="va">x</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">99</span><span class="op">)</span> <span class="co"># Either blank, in [0,1], or equal to 99</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -129,7 +142,7 @@ check.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
