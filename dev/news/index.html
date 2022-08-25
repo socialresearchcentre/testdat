@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.4.0.9002</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.4.1.9000</span>
       </span>
     </div>
 
@@ -50,8 +50,9 @@
       <small>Source: <a href="https://github.com/socialresearchcentre/testdat/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2"><h2 class="page-header" data-toc-text="development version" id="testdat-development-version">testdat (development version)<a class="anchor" aria-label="anchor" href="#testdat-development-version"></a></h2></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="development version" id="testdat-development-version">testdat (development version)<a class="anchor" aria-label="anchor" href="#testdat-development-version"></a></h2>
+<h2 class="page-header" data-toc-text="0.4.1" id="testdat-041">testdat 0.4.1<a class="anchor" aria-label="anchor" href="#testdat-041"></a></h2>
 <ul><li>Updated the failure message on <code><a href="../reference/generic-expectations.html">expect_all()</a></code> to include more specific information on the location of erring values. In particular, variables failing the test are now highlighted in the error message. If, for instance, only one of three variables passed in as the <code>vars</code> argument fails the test, then only that variable will be mentioned as failing the test in the failure message. This makes it easier to track down the cause of expectation failures when checking multiple variables at once. For example,</li></ul><div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">expect_all</span>(<span class="kw">everything</span>(), is.numeric, <span class="dt">data =</span> iris)<span class="op">:</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="co">#&gt; Error: `iris` has 150 records failing  `is.numeric` on variable `Species`.</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="co">#&gt;  Vars: everything()</span></span>
