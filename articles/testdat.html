@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -94,159 +94,168 @@
 <li><p>Repeatability of data tests (avoid unintentionally breaking your data set!)</p></li>
 <li><p>Data-focused reporting of test results</p></li>
 </ul>
-<div class="section level1">
-<h1 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
-</h1>
-<p>As an extension of testthat, testdat uses the same basic testing framework. Before using testdat (and reading this documentation), make sure you’re familiar with the introduction to testthat in <a href="https://r-pkgs.org/tests.html" class="external-link">R packages</a>.</p>
+<div class="section level2">
+<h2 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
+</h2>
+<p>As an extension of testthat, testdat uses the same basic testing framework. Before using testdat (and reading this documentation), make sure you’re familiar with the introduction to testthat in <a href="https://r-pkgs.org/testing-basics.html" class="external-link">R packages</a>.</p>
 <p>The main addition provided by testdat is a set of expectations designed for testing data frames and an accompanying mechanism to globally specify a data set for testing.</p>
 </div>
-<div class="section level1">
-<h1 id="data-expectations">Data expectations<a class="anchor" aria-label="anchor" href="#data-expectations"></a>
-</h1>
 <div class="section level2">
-<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+<h2 id="data-expectations">Data expectations<a class="anchor" aria-label="anchor" href="#data-expectations"></a>
 </h2>
+<div class="section level3">
+<h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h3>
 <p>In general, our approach to data testing is variable-centric - the majority of expectations perform a check on one or more variables in a given data frame.</p>
 <p>The standard form of a data expectation is:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>expect_<span class="op">*</span>(<span class="kw">var</span>(s), ..., <span class="dt">flt =</span> <span class="ot">TRUE</span>, <span class="dt">data =</span> <span class="kw">get_testdata</span>())</span></code></pre></div>
 <p>testdat uses dplyr at its core, and thus supports tidy evaluation.</p>
-<div class="section level3">
-<h3 id="variables">Variables<a class="anchor" aria-label="anchor" href="#variables"></a>
-</h3>
+<div class="section level4">
+<h4 id="variables">Variables<a class="anchor" aria-label="anchor" href="#variables"></a>
+</h4>
 <p>Most operations act on one or more variables. There are two variants of the variable argument:</p>
 <ul>
 <li>
 <code>vars</code> requires a set of columns specified as <a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy selections</a>.</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"multi-variable identifier is unique"</span>, <span class="op">{</span>
-  <span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">year</span>, <span class="va">month</span>, <span class="va">day</span>, <span class="va">hour</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">storms</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; ── <span style="color: #FFAF00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:2:3): multi-variable identifier is unique</span> ───────────────────────────</span>
-<span class="co">#&gt; `storms` has 32 duplicate records on variable `name, year, month, day, hour`.</span>
-<span class="co">#&gt; Filter: None</span>
-<span class="co">#&gt; Error: Test failed</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"multi-variable identifier is unique"</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">year</span>, <span class="va">month</span>, <span class="va">day</span>, <span class="va">hour</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">storms</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:2:3): multi-variable identifier is unique</span> ───────────────────</span></span>
+<span><span class="co">#&gt; `storms` has 38 duplicate records on variable `name, year, month, day, hour`.</span></span>
+<span><span class="co">#&gt; Filter: None</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
 <ul>
 <li>
 <code>var</code> requires an unquoted variable name. This only applies to a small number of expectations.</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"hour values are valid"</span>, <span class="op">{</span>
-  <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">ts_diameter</span>, <span class="va">year</span> <span class="op">&gt;=</span> <span class="fl">2004</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; ── <span style="color: #FFAF00; font-weight: bold;">Error</span><span style="font-weight: bold;"> (&lt;text&gt;:2:3): hour values are valid</span> ───────────────────────────────────</span>
-<span class="co">#&gt; Error: A test data frame has not been specified. Use `set_testdata()` to set the data frame.</span>
-<span class="co">#&gt; <span style="font-weight: bold;">Backtrace:</span></span>
-<span class="co">#&gt; <span style="color: #555555;"> 1. </span>testdat::expect_base(ts_diameter, year &gt;= 2004)</span>
-<span class="co">#&gt; <span style="color: #555555;"> 4. </span>testdat::get_testdata()</span>
-<span class="co">#&gt; Error: Test failed</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"hour values are valid"</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">ts_diameter</span>, <span class="va">year</span> <span class="op">&gt;=</span> <span class="fl">2004</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> (&lt;text&gt;:2:3): hour values are valid</span> ───────────────────────────────────</span></span>
+<span><span class="co">#&gt; Error: A test data frame has not been specified. Use `set_testdata()` to set the data frame.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Backtrace:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> 1. </span><span style="font-weight: bold;">testdat</span>::expect_base(ts_diameter, year &gt;= 2004)</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> 4. </span>testdat::get_testdata()</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="filter">Filter<a class="anchor" aria-label="anchor" href="#filter"></a>
-</h3>
+<div class="section level4">
+<h4 id="filter">Filter<a class="anchor" aria-label="anchor" href="#filter"></a>
+</h4>
 <p>The <code>flt</code> argument takes a logical predicate defined in terms of the variables in <code>data</code> using <a href="https://dplyr.tidyverse.org/reference/dplyr_data_masking.html" class="external-link">data masking</a>. Only rows where the condition evaluates to <code>TRUE</code> are included in the test.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"iris range checks"</span>, <span class="op">{</span>
-  <span class="fu"><a href="../reference/value-expectations.html">expect_range</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">0</span>, <span class="fl">1</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; ── <span style="color: #FFAF00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:2:3): iris range checks</span> ─────────────────────────────────────</span>
-<span class="co">#&gt; `iris` has 93 records failing range check on variable `Petal.Width`.</span>
-<span class="co">#&gt; Filter: None</span>
-<span class="co">#&gt; Arguments: `min = 0, max = 1`</span>
-<span class="co">#&gt; Error: Test failed</span>
-
-<span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"iris range checks filtered"</span>, <span class="op">{</span>
-  <span class="co"># Test passes for setosa rows</span>
-  <span class="fu"><a href="../reference/value-expectations.html">expect_range</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">0</span>, <span class="fl">1</span>, flt <span class="op">=</span> <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
-  <span class="co"># Failures will provide the filter</span>
-  <span class="fu"><a href="../reference/value-expectations.html">expect_range</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">0</span>, <span class="fl">0.5</span>, flt <span class="op">=</span> <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; ── <span style="color: #FFAF00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:9:3): iris range checks filtered</span> ────────────────────────────</span>
-<span class="co">#&gt; `iris` has 1 records failing range check on variable `Petal.Width`.</span>
-<span class="co">#&gt; Filter: `Species == "setosa"`</span>
-<span class="co">#&gt; Arguments: `min = 0, max = 0.5`</span>
-<span class="co">#&gt; Error: Test failed</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"iris range checks"</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/value-expectations.html">expect_range</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">0</span>, <span class="fl">1</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:2:3): iris range checks</span> ─────────────────────────────────────</span></span>
+<span><span class="co">#&gt; `iris` has 93 records failing range check on variable `Petal.Width`.</span></span>
+<span><span class="co">#&gt; Variable set: `Petal.Width`</span></span>
+<span><span class="co">#&gt; Filter: None</span></span>
+<span><span class="co">#&gt; Arguments: `min = 0, max = 1`</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span>
+<span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"iris range checks filtered"</span>, <span class="op">{</span></span>
+<span>  <span class="co"># Test passes for setosa rows</span></span>
+<span>  <span class="fu"><a href="../reference/value-expectations.html">expect_range</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">0</span>, <span class="fl">1</span>, flt <span class="op">=</span> <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
+<span>  <span class="co"># Failures will provide the filter</span></span>
+<span>  <span class="fu"><a href="../reference/value-expectations.html">expect_range</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">0</span>, <span class="fl">0.5</span>, flt <span class="op">=</span> <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:9:3): iris range checks filtered</span> ────────────────────────────</span></span>
+<span><span class="co">#&gt; `iris` has 1 records failing range check on variable `Petal.Width`.</span></span>
+<span><span class="co">#&gt; Variable set: `Petal.Width`</span></span>
+<span><span class="co">#&gt; Filter: `Species == "setosa"`</span></span>
+<span><span class="co">#&gt; Arguments: `min = 0, max = 0.5`</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
-</h3>
+<div class="section level4">
+<h4 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
+</h4>
 <p>The <code>data</code> argument takes a data frame to test. To avoid redundant code the data argument defaults to a global test data set retrieved using <code><a href="../reference/global-data.html">get_testdata()</a></code>. This can be used in two ways:</p>
 <ul>
 <li>Setting the global test data using <code><a href="../reference/global-data.html">set_testdata()</a></code>.</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/global-data.html">set_testdata</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="../reference/global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">iris</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span>
-
-<span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span>
-  <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; ── <span style="color: #FFAF00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:5:3): Versicolor has sepal length greater than 5 - will fail</span> ───────────────────────────</span>
-<span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span>
-<span class="co">#&gt; Error: Test failed</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/global-data.html">set_testdata</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="../reference/global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">iris</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:5:3): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
+<span><span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
 <ul>
 <li>Using the <code><a href="../reference/global-data.html">with_testdata()</a></code> wrapper to temporarily set the global test data for a block of code.</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/global-data.html">set_testdata</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="../reference/global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">mtcars</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span>
-
-<span class="fu"><a href="../reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="va">iris</span>, <span class="op">{</span>
-  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span>
-    <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; ── <span style="color: #FFAF00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:6:5): Versicolor has sepal length greater than 5 - will fail</span> ───────────────────────────</span>
-<span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span>
-<span class="co">#&gt; Error: Test failed</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="../reference/global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">mtcars</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/global-data.html">set_testdata</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="../reference/global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="va">iris</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:6:5): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
+<span><span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="../reference/global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 <p>Both approaches are equivalent to:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span>
-  <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; ── <span style="color: #FFAF00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:2:3): Versicolor has sepal length greater than 5 - will fail</span> ───────────────────────────</span>
-<span class="co">#&gt; `iris` failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span>
-<span class="co">#&gt; Error: Test failed</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:2:3): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
+<span><span class="co">#&gt; `iris` failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
 <p>By default, <code><a href="../reference/global-data.html">set_testdata()</a></code> stores a quosure with a reference to the provided data frame rather than the data itself, so changes made to the data frame will be reflected in the test results.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tmp_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/global-data.html">set_testdata</a></span><span class="op">(</span><span class="va">tmp_data</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span>
-<span class="co">#&gt;       x     y</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     0    <span style="color: #BB0000;">NA</span></span>
-<span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span>
-
-<span class="va">tmp_data</span><span class="op">$</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">1</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span>
-<span class="co">#&gt;       x     y</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     0     1</span>
-<span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; Error: get_testdata() has a base mismatch in variable `y`.</span>
-<span class="co">#&gt; 0 cases have `x == 1` but `y` is missing.</span>
-<span class="co">#&gt; 1 cases do not have `x == 1` but `y` is non missing.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tmp_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/global-data.html">set_testdata</a></span><span class="op">(</span><span class="va">tmp_data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;       x     y</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     0    <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tmp_data</span><span class="op">$</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;       x     y</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     0     1</span></span>
+<span><span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error: get_testdata() has a base mismatch in variable `y`.</span></span>
+<span><span class="co">#&gt; 0 cases have `x == 1` but `y` is missing.</span></span>
+<span><span class="co">#&gt; 1 cases do not have `x == 1` but `y` is non missing.</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="section">
+<div class="section level4">
+<h4 id="section">
 <code>...</code><a class="anchor" aria-label="anchor" href="#section"></a>
-</h3>
+</h4>
 <p>Additional arguments are specific to the expectation. See the help page for the expectation function for details.</p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="categories">Categories<a class="anchor" aria-label="anchor" href="#categories"></a>
-</h2>
+<div class="section level3">
+<h3 id="categories">Categories<a class="anchor" aria-label="anchor" href="#categories"></a>
+</h3>
 <p>Data expectations fall into a few main classes.</p>
 <dl>
 <dt>Value</dt>
@@ -296,125 +305,130 @@
 </dl>
 </div>
 </div>
-<div class="section level1">
-<h1 id="using-tests">Using tests<a class="anchor" aria-label="anchor" href="#using-tests"></a>
-</h1>
 <div class="section level2">
-<h2 id="testing-inside-a-script">Testing inside a script<a class="anchor" aria-label="anchor" href="#testing-inside-a-script"></a>
+<h2 id="using-tests">Using tests<a class="anchor" aria-label="anchor" href="#using-tests"></a>
 </h2>
+<div class="section level3">
+<h3 id="testing-inside-a-script">Testing inside a script<a class="anchor" aria-label="anchor" href="#testing-inside-a-script"></a>
+</h3>
 <p>The easiest way to use data testing is directly inside an R script. Expecations and test blocks throw an error if they fail, so it is very clear to the user that something needs to be checked, and the script will fail when sourced.</p>
 <p>The example below shows how to adapt a script from exploratory “print and check” to a testing approach, using a simple data processing exercise.</p>
-<div class="section level3">
-<h3 id="print-and-check">Print and check<a class="anchor" aria-label="anchor" href="#print-and-check"></a>
-</h3>
+<div class="section level4">
+<h4 id="print-and-check">Print and check<a class="anchor" aria-label="anchor" href="#print-and-check"></a>
+</h4>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
-  <span class="op">~</span><span class="va">id</span>, <span class="op">~</span><span class="va">pcode</span>, <span class="op">~</span><span class="va">state</span>, <span class="op">~</span><span class="va">nsw_only</span>,
-  <span class="fl">1</span>,   <span class="fl">2000</span>,   <span class="st">"NSW"</span>,  <span class="fl">1</span>,
-  <span class="fl">2</span>,   <span class="fl">3123</span>,   <span class="st">"VIC"</span>,  <span class="cn">NA</span>,
-  <span class="fl">3</span>,   <span class="fl">2123</span>,   <span class="st">"NSW"</span>,  <span class="fl">3</span>,
-  <span class="fl">4</span>,   <span class="fl">12345</span>,  <span class="st">"VIC"</span>,  <span class="fl">3</span>
-<span class="op">)</span>
-
-<span class="co"># check id is unique</span>
-<span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html" class="external-link">duplicated</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 4</span></span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 4 variables: id &lt;dbl&gt;, pcode &lt;dbl&gt;, state &lt;chr&gt;, nsw_only &lt;dbl&gt;</span></span>
-
-<span class="co"># check values</span>
-<span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">pcode</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">2000</span><span class="op">:</span><span class="fl">3999</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span>
-<span class="co">#&gt;      id pcode state nsw_only</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 <span style="text-decoration: underline;">12</span>345 VIC          3</span>
-<span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span>
-<span class="co">#&gt;   state     n</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> NSW       2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> VIC       2</span>
-<span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">nsw_only</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span>
-<span class="co">#&gt;   nsw_only     n</span>
-<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>        1     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>        3     2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>       <span style="color: #BB0000;">NA</span>     1</span>
-
-<span class="co"># check base for nsw_only variable</span>
-<span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">state</span> <span class="op">!=</span> <span class="st">"NSW"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">nsw_only</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span>
-<span class="co">#&gt;   nsw_only     n</span>
-<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>        3     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>       <span style="color: #BB0000;">NA</span>     1</span>
-
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>market <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">pcode</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2999</span> <span class="op">~</span> <span class="fl">1</span>,
-                                     <span class="va">pcode</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">3000</span><span class="op">:</span><span class="fl">3999</span> <span class="op">~</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">market</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span>
-<span class="co">#&gt;   market     n</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      1     2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>      2     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     <span style="color: #BB0000;">NA</span>     1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">id</span>, <span class="op">~</span><span class="va">pcode</span>, <span class="op">~</span><span class="va">state</span>, <span class="op">~</span><span class="va">nsw_only</span>,</span>
+<span>  <span class="fl">1</span>,   <span class="fl">2000</span>,   <span class="st">"NSW"</span>,  <span class="fl">1</span>,</span>
+<span>  <span class="fl">2</span>,   <span class="fl">3123</span>,   <span class="st">"VIC"</span>,  <span class="cn">NA</span>,</span>
+<span>  <span class="fl">3</span>,   <span class="fl">2123</span>,   <span class="st">"NSW"</span>,  <span class="fl">3</span>,</span>
+<span>  <span class="fl">4</span>,   <span class="fl">12345</span>,  <span class="st">"VIC"</span>,  <span class="fl">3</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># check id is unique</span></span>
+<span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html" class="external-link">duplicated</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 4 variables: id &lt;dbl&gt;, pcode &lt;dbl&gt;, state &lt;chr&gt;, nsw_only &lt;dbl&gt;</span></span></span>
+<span></span>
+<span><span class="co"># check values</span></span>
+<span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">pcode</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">2000</span><span class="op">:</span><span class="fl">3999</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
+<span><span class="co">#&gt;      id pcode state nsw_only</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 <span style="text-decoration: underline;">12</span>345 VIC          3</span></span>
+<span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   state     n</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> NSW       2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> VIC       2</span></span>
+<span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">nsw_only</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">#&gt;   nsw_only     n</span></span>
+<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>        1     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>        3     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>       <span style="color: #BB0000;">NA</span>     1</span></span>
+<span></span>
+<span><span class="co"># check base for nsw_only variable</span></span>
+<span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">state</span> <span class="op">!=</span> <span class="st">"NSW"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">nsw_only</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   nsw_only     n</span></span>
+<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>        3     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>       <span style="color: #BB0000;">NA</span>     1</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>market <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">pcode</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2999</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>                                     <span class="va">pcode</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">3000</span><span class="op">:</span><span class="fl">3999</span> <span class="op">~</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">market</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">#&gt;   market     n</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      1     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>      2     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     <span style="color: #BB0000;">NA</span>     1</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="testdat">testdat<a class="anchor" aria-label="anchor" href="#testdat"></a>
-</h3>
+<div class="section level4">
+<h4 id="testdat">testdat<a class="anchor" aria-label="anchor" href="#testdat"></a>
+</h4>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://socialresearchcentre.github.io/testdat/">testdat</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
-  <span class="op">~</span><span class="va">id</span>, <span class="op">~</span><span class="va">pcode</span>, <span class="op">~</span><span class="va">state</span>, <span class="op">~</span><span class="va">nsw_only</span>,
-  <span class="fl">1</span>,   <span class="fl">2000</span>,   <span class="st">"NSW"</span>,  <span class="fl">1</span>,
-  <span class="fl">2</span>,   <span class="fl">3123</span>,   <span class="st">"VIC"</span>,  <span class="cn">NA</span>,
-  <span class="fl">3</span>,   <span class="fl">2123</span>,   <span class="st">"NSW"</span>,  <span class="fl">3</span>,
-  <span class="fl">4</span>,   <span class="fl">12345</span>,  <span class="st">"VIC"</span>,  <span class="fl">3</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="../reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="va">x</span>, <span class="op">{</span>
-  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"id is unique"</span>, <span class="op">{</span>
-    <span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span>
-  
-  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"variable values are correct"</span>, <span class="op">{</span>
-    <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">pcode</span>, <span class="fl">2000</span><span class="op">:</span><span class="fl">2999</span>, <span class="fl">3000</span><span class="op">:</span><span class="fl">3999</span><span class="op">)</span>
-    <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">state</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NSW"</span>, <span class="st">"VIC"</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="co"># by default expect_values allows NAs</span>
-  <span class="op">}</span><span class="op">)</span>
-  
-  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"filters applied correctly"</span>, <span class="op">{</span>
-    <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="va">state</span> <span class="op">==</span> <span class="st">"NSW"</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🎊</span>
-<span class="co">#&gt; ── <span style="color: #FFAF00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:18:5): variable values are correct</span> ───────────────────────────</span>
-<span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span>
-<span class="co">#&gt; Filter: None</span>
-<span class="co">#&gt; Arguments: `&lt;int: 2000L, 2001L, 2002L, 2003L, 2004L, ...&gt;, &lt;int: 3000L, 3001L, 3002L,`</span>
-<span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span>
-<span class="co">#&gt; Filter: None</span>
-<span class="co">#&gt; Arguments: `  3003L, 3004L, ...&gt;, miss = &lt;chr: NA, ""&gt;`</span>
-<span class="co">#&gt; Error: Test failed</span>
-
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>market <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">pcode</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2999</span> <span class="op">~</span> <span class="fl">1</span>,
-                                     <span class="va">pcode</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">3000</span><span class="op">:</span><span class="fl">3999</span> <span class="op">~</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="va">x</span>, <span class="op">{</span>
-  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"market derived correctly"</span>, <span class="op">{</span>
-    <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">market</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, miss <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># miss = NULL excludes NAs from valid values</span>
-  <span class="op">}</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; ── <span style="color: #FFAF00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:33:5): market derived correctly</span> ─────────────────────────────</span>
-<span class="co">#&gt; get_testdata() has 1 records failing value check on variable `market`.</span>
-<span class="co">#&gt; Filter: None</span>
-<span class="co">#&gt; Arguments: `&lt;int: 1L, 2L&gt;, miss = NULL`</span>
-<span class="co">#&gt; Error: Test failed</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://socialresearchcentre.github.io/testdat/">testdat</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">id</span>, <span class="op">~</span><span class="va">pcode</span>, <span class="op">~</span><span class="va">state</span>, <span class="op">~</span><span class="va">nsw_only</span>,</span>
+<span>  <span class="fl">1</span>,   <span class="fl">2000</span>,   <span class="st">"NSW"</span>,  <span class="fl">1</span>,</span>
+<span>  <span class="fl">2</span>,   <span class="fl">3123</span>,   <span class="st">"VIC"</span>,  <span class="cn">NA</span>,</span>
+<span>  <span class="fl">3</span>,   <span class="fl">2123</span>,   <span class="st">"NSW"</span>,  <span class="fl">3</span>,</span>
+<span>  <span class="fl">4</span>,   <span class="fl">12345</span>,  <span class="st">"VIC"</span>,  <span class="fl">3</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="va">x</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"id is unique"</span>, <span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"variable values are correct"</span>, <span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">pcode</span>, <span class="fl">2000</span><span class="op">:</span><span class="fl">2999</span>, <span class="fl">3000</span><span class="op">:</span><span class="fl">3999</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">state</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NSW"</span>, <span class="st">"VIC"</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="co"># by default expect_values allows NAs</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"filters applied correctly"</span>, <span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="va">state</span> <span class="op">==</span> <span class="st">"NSW"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🥇</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:18:5): variable values are correct</span> ──────────────────────────</span></span>
+<span><span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span></span>
+<span><span class="co">#&gt; Variable set: `pcode`</span></span>
+<span><span class="co">#&gt; Filter: None</span></span>
+<span><span class="co">#&gt; Arguments: `&lt;int: 2000L, 2001L, 2002L, 2003L, 2004L, ...&gt;, &lt;int: 3000L, 3001L, 3002L,`</span></span>
+<span><span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span></span>
+<span><span class="co">#&gt; Variable set: `pcode`</span></span>
+<span><span class="co">#&gt; Filter: None</span></span>
+<span><span class="co">#&gt; Arguments: `  3003L, 3004L, ...&gt;, miss = &lt;chr: NA, ""&gt;`</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>market <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">pcode</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2999</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>                                     <span class="va">pcode</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">3000</span><span class="op">:</span><span class="fl">3999</span> <span class="op">~</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/global-data.html">with_testdata</a></span><span class="op">(</span><span class="va">x</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"market derived correctly"</span>, <span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">market</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, miss <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># miss = NULL excludes NAs from valid values</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:33:5): market derived correctly</span> ─────────────────────────────</span></span>
+<span><span class="co">#&gt; get_testdata() has 1 records failing value check on variable `market`.</span></span>
+<span><span class="co">#&gt; Variable set: `market`</span></span>
+<span><span class="co">#&gt; Filter: None</span></span>
+<span><span class="co">#&gt; Arguments: `&lt;int: 1L, 2L&gt;, miss = NULL`</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
 <p>Note that:</p>
 <ul>
 <li><p>The global test data can be set with <code><a href="../reference/global-data.html">set_testdata()</a></code> or <code><a href="../reference/global-data.html">with_testdata()</a></code>.</p></li>
@@ -423,26 +437,27 @@
 </ul>
 </div>
 </div>
-<div class="section level2">
-<h2 id="using-a-test-suite">Using a test suite<a class="anchor" aria-label="anchor" href="#using-a-test-suite"></a>
-</h2>
+<div class="section level3">
+<h3 id="using-a-test-suite">Using a test suite<a class="anchor" aria-label="anchor" href="#using-a-test-suite"></a>
+</h3>
 <p>Setting up a proper project test suite can be useful for automatically validating final processed data sets.</p>
-<p>Setting up proper file based testing infrastructure is out of the scope of this vignette. See <a href="https://r-pkgs.org/tests.html" class="external-link">R packages</a> for a brief introduction to testing infrastructure.</p>
+<p>Setting up proper file based testing infrastructure is out of the scope of this vignette. See <a href="https://r-pkgs.org/testing-basics.html" class="external-link">R packages</a> for a brief introduction to testing infrastructure.</p>
 <p>In testthat, related tests are grouped into files. When using testdat, each file should have a test data set specified with a call to <code><a href="../reference/global-data.html">set_testdata()</a></code>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/global-data.html">set_testdata</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
-
-<span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Variable format checks"</span>, <span class="op">{</span>
-  <span class="fu"><a href="../reference/pattern-expectations.html">expect_regex</a></span><span class="op">(</span><span class="va">Species</span>, <span class="st">"^[a-z]+$"</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😀</span>
-
-<span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span>
-  <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; ── <span style="color: #FFAF00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:8:3): Versicolor has sepal length greater than 5 - will fail</span> ───────────────────────────</span>
-<span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span>
-<span class="co">#&gt; Error: Test failed</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/global-data.html">set_testdata</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Variable format checks"</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/pattern-expectations.html">expect_regex</a></span><span class="op">(</span><span class="va">Species</span>, <span class="st">"^[a-z]+$"</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😸</span></span>
+<span></span>
+<span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:8:3): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
+<span><span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
 </div>
 </div>
   </div>
@@ -464,7 +479,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

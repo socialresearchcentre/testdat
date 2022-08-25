@@ -19,7 +19,7 @@ optional filter (flt)."><meta property="og:image" content="https://socialresearc
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -60,33 +60,44 @@ optional filter (<code>flt</code>).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">chk_filter</span><span class="op">(</span><span class="va">data</span>, <span class="va">vars</span>, <span class="va">func</span>, flt <span class="op">=</span> <span class="cn">TRUE</span>, args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">chk_filter_all</span><span class="op">(</span><span class="va">data</span>, <span class="va">vars</span>, <span class="va">func</span>, flt <span class="op">=</span> <span class="cn">TRUE</span>, args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">chk_filter_any</span><span class="op">(</span><span class="va">data</span>, <span class="va">vars</span>, <span class="va">func</span>, flt <span class="op">=</span> <span class="cn">TRUE</span>, args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">chk_filter</span><span class="op">(</span><span class="va">data</span>, <span class="va">vars</span>, <span class="va">func</span>, flt <span class="op">=</span> <span class="cn">TRUE</span>, args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">chk_filter_all</span><span class="op">(</span><span class="va">data</span>, <span class="va">vars</span>, <span class="va">func</span>, flt <span class="op">=</span> <span class="cn">TRUE</span>, args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">chk_filter_any</span><span class="op">(</span><span class="va">data</span>, <span class="va">vars</span>, <span class="va">func</span>, flt <span class="op">=</span> <span class="cn">TRUE</span>, args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>A data frame to check.</p></dd>
+
+
 <dt>vars</dt>
 <dd><p>&lt;<code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy-select</a></code>&gt; A set of columns to
 check.</p></dd>
+
+
 <dt>func</dt>
 <dd><p>A function to use for checking that takes a vector as the first
 argument and returns a logical vector of the same length showing whether an
 element passed or failed.</p></dd>
+
+
 <dt>flt</dt>
 <dd><p>&lt;<code><a href="https://dplyr.tidyverse.org/reference/dplyr_data_masking.html" class="external-link">data-masking</a></code>&gt; A filter specifying
 a subset of the data frame to test.</p></dd>
+
+
 <dt>args</dt>
 <dd><p>A list of additional arguments to be added to the function calls.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A logical vector or data frame of logical vectors flagging records
+    
+
+<p>A logical vector or data frame of logical vectors flagging records
 that have passed or failed the check, with <code>NA</code> where records do not meet
 the filter condition.</p>
     </div>
@@ -107,16 +118,16 @@ columns in the output of <code>chk_filter()</code>).</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span>
-<span class="r-in"><span class="co"># inches AND &lt; 100 horsepower - return a data frame</span></span>
-<span class="r-in"><span class="fu">chk_filter</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">mtcars</span>,</span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disp"</span>, <span class="st">"hp"</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="va">chk_range</span>,</span>
-<span class="r-in">  <span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span>,</span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span></span>
+<span class="r-in"><span><span class="co"># inches AND &lt; 100 horsepower - return a data frame</span></span></span>
+<span class="r-in"><span><span class="fu">chk_filter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disp"</span>, <span class="st">"hp"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">chk_range</span>,</span></span>
+<span class="r-in"><span>  <span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      disp    hp</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4              NA    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag          NA    NA</span>
@@ -150,16 +161,16 @@ columns in the output of <code>chk_filter()</code>).</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Ferrari Dino           NA    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora          NA    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Volvo 142E          FALSE FALSE</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span>
-<span class="r-in"><span class="co"># inches AND &lt; 100 horsepower</span></span>
-<span class="r-in"><span class="fu">chk_filter_all</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">mtcars</span>,</span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disp"</span>, <span class="st">"hp"</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="va">chk_range</span>,</span>
-<span class="r-in">  <span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span>,</span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span></span>
+<span class="r-in"><span><span class="co"># inches AND &lt; 100 horsepower</span></span></span>
+<span class="r-in"><span><span class="fu">chk_filter_all</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disp"</span>, <span class="st">"hp"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">chk_range</span>,</span></span>
+<span class="r-in"><span>  <span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  NA                  NA               FALSE                  NA </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Hornet Sportabout             Valiant          Duster 360           Merc 240D </span>
@@ -176,16 +187,16 @@ columns in the output of <code>chk_filter()</code>).</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  NA                TRUE               FALSE               FALSE </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  NA                  NA                  NA               FALSE </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span>
-<span class="r-in"><span class="co"># inches OR &lt; 100 horsepower</span></span>
-<span class="r-in"><span class="fu">chk_filter_any</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">mtcars</span>,</span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disp"</span>, <span class="st">"hp"</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="va">chk_range</span>,</span>
-<span class="r-in">  <span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span>,</span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span></span>
+<span class="r-in"><span><span class="co"># inches OR &lt; 100 horsepower</span></span></span>
+<span class="r-in"><span><span class="fu">chk_filter_any</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disp"</span>, <span class="st">"hp"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">chk_range</span>,</span></span>
+<span class="r-in"><span>  <span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  NA                  NA                TRUE                  NA </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Hornet Sportabout             Valiant          Duster 360           Merc 240D </span>
@@ -202,15 +213,15 @@ columns in the output of <code>chk_filter()</code>).</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  NA                TRUE                TRUE                TRUE </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  NA                  NA                  NA               FALSE </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Check that columns made up of whole numbers are binary</span></span>
-<span class="r-in"><span class="fu">chk_filter_all</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">mtcars</span>,</span>
-<span class="r-in">  <span class="fu">where</span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">1</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="va">chk_values</span>,</span>
-<span class="r-in">  <span class="cn">TRUE</span>,</span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Check that columns made up of whole numbers are binary</span></span></span>
+<span class="r-in"><span><span class="fu">chk_filter_all</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">where</span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">1</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">chk_values</span>,</span></span>
+<span class="r-in"><span>  <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               FALSE               FALSE               FALSE               FALSE </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Hornet Sportabout             Valiant          Duster 360           Merc 240D </span>
@@ -227,7 +238,7 @@ columns in the output of <code>chk_filter()</code>).</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               FALSE               FALSE               FALSE               FALSE </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               FALSE               FALSE               FALSE               FALSE </span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -242,7 +253,7 @@ columns in the output of <code>chk_filter()</code>).</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

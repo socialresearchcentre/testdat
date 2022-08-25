@@ -18,7 +18,7 @@ These functions are deprecated."><meta property="og:image" content="https://soci
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -58,23 +58,28 @@ These functions are deprecated."><meta property="og:image" content="https://soci
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">chk_length</span><span class="op">(</span><span class="va">x</span>, <span class="va">len</span><span class="op">)</span>
-
-<span class="fu">chk_miss</span><span class="op">(</span><span class="va">x</span>, miss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"testdat.miss_text"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">chk_nmiss</span><span class="op">(</span><span class="va">x</span>, miss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"testdat.miss_text"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">chk_length</span><span class="op">(</span><span class="va">x</span>, <span class="va">len</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">chk_miss</span><span class="op">(</span><span class="va">x</span>, miss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"testdat.miss_text"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">chk_nmiss</span><span class="op">(</span><span class="va">x</span>, miss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"testdat.miss_text"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A vector to check.</p></dd>
+
+
 <dt>len</dt>
 <dd><p>Maximum string length for checking string variables.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A logical vector flagging records that have passed or failed the
+    
+
+<p>A logical vector flagging records that have passed or failed the
 check.</p>
     </div>
     <div id="see-also">
@@ -95,7 +100,7 @@ check.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

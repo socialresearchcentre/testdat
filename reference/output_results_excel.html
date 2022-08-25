@@ -20,7 +20,7 @@ showing details of each unsuccessful test."><meta property="og:image" content="h
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -62,7 +62,7 @@ showing details of each unsuccessful test.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">output_results_excel</span><span class="op">(</span><span class="va">results</span>, <span class="va">file</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">output_results_excel</span><span class="op">(</span><span class="va">results</span>, <span class="va">file</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -70,21 +70,26 @@ showing details of each unsuccessful test.</p>
     <dl><dt>results</dt>
 <dd><p>An object of class <code>testthat_results</code>, e.g. output from
 <code><a href="https://testthat.r-lib.org/reference/test_dir.html" class="external-link">test_dir()</a></code> or <code><a href="https://testthat.r-lib.org/reference/test_file.html" class="external-link">test_file()</a></code>.</p></dd>
+
+
 <dt>file</dt>
 <dd><p>Output file name</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The return value of <code><a href="https://rdrr.io/pkg/openxlsx/man/saveWorkbook.html" class="external-link">openxlsx::saveWorkbook()</a></code>.</p>
+    
+
+<p>The return value of <code><a href="https://rdrr.io/pkg/openxlsx/man/saveWorkbook.html" class="external-link">openxlsx::saveWorkbook()</a></code>.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Output the results from running all tests in a directory</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://testthat.r-lib.org/reference/test_dir.html" class="external-link">test_dir</a></span><span class="op">(</span><span class="st">"."</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">output_results_excel</span><span class="op">(</span><span class="va">x</span>, <span class="st">"Test results.xlsx"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Output the results from running all tests in a directory</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://testthat.r-lib.org/reference/test_dir.html" class="external-link">test_dir</a></span><span class="op">(</span><span class="st">"."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">output_results_excel</span><span class="op">(</span><span class="va">x</span>, <span class="st">"Test results.xlsx"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -99,7 +104,7 @@ showing details of each unsuccessful test.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

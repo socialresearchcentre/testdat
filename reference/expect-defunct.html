@@ -23,7 +23,7 @@ interface using tidy-select.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -65,16 +65,16 @@ interface using <code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">filter_expect</span><span class="op">(</span><span class="va">data</span>, <span class="va">expect_function</span>, <span class="va">...</span>, not <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">expect_where</span><span class="op">(</span>
-  <span class="va">where</span>,
-  <span class="va">func</span>,
-  flt <span class="op">=</span> <span class="cn">TRUE</span>,
-  data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>,
-  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  func_desc <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">filter_expect</span><span class="op">(</span><span class="va">data</span>, <span class="va">expect_function</span>, <span class="va">...</span>, not <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">expect_where</span><span class="op">(</span></span>
+<span>  <span class="va">where</span>,</span>
+<span>  <span class="va">func</span>,</span>
+<span>  flt <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  func_desc <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -82,21 +82,34 @@ interface using <code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_
     <dl><dt>data</dt>
 <dd><p>A data frame to test. The <a href="global-data.html">global test data</a> is used
 by default.</p></dd>
+
+
 <dt>expect_function</dt>
 <dd><p>An expectation function.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments to pass to expect_function.</p></dd>
+
+
 <dt>not</dt>
 <dd><p>Reverse the results of the check.</p></dd>
+
+
 <dt>where</dt>
 <dd><p>&lt;<code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy-select</a></code>&gt; Columns to check</p></dd>
+
+
 <dt>flt</dt>
 <dd><p>&lt;<code><a href="https://dplyr.tidyverse.org/reference/dplyr_data_masking.html" class="external-link">data-masking</a></code>&gt; A filter specifying
 a subset of the data frame to test.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The input data frame filtered to records failing the expectation.</p>
+    
+
+<p>The input data frame filtered to records failing the expectation.</p>
     </div>
 
   </div>
@@ -111,7 +124,7 @@ a subset of the data frame to test.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

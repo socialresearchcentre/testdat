@@ -19,7 +19,7 @@ frame (data), with an optional filter (flt), using an arbitrary function
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -60,19 +60,23 @@ frame (<code>data</code>), with an optional filter (<code>flt</code>), using an 
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">expect_allany</span><span class="op">(</span>
-  <span class="va">vars</span>,
-  <span class="va">func</span>,
-  flt <span class="op">=</span> <span class="cn">TRUE</span>,
-  data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>,
-  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  allany <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">chk_filter_all</span>, <span class="va">chk_filter_any</span><span class="op">)</span>,
-  func_desc <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span>
-
-<span class="fu">expect_all</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">expect_any</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">expect_all</span><span class="op">(</span></span>
+<span>  <span class="va">vars</span>,</span>
+<span>  <span class="va">func</span>,</span>
+<span>  flt <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  func_desc <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">expect_any</span><span class="op">(</span></span>
+<span>  <span class="va">vars</span>,</span>
+<span>  <span class="va">func</span>,</span>
+<span>  flt <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  func_desc <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -80,29 +84,38 @@ frame (<code>data</code>), with an optional filter (<code>flt</code>), using an 
     <dl><dt>vars</dt>
 <dd><p>&lt;<code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy-select</a></code>&gt; A set of columns to
 test.</p></dd>
+
+
 <dt>func</dt>
 <dd><p>A function to use for testing that takes a vector as the first
 argument and returns a logical vector of the same length showing whether an
 element passed or failed.</p></dd>
+
+
 <dt>flt</dt>
 <dd><p>&lt;<code><a href="https://dplyr.tidyverse.org/reference/dplyr_data_masking.html" class="external-link">data-masking</a></code>&gt; A filter specifying
 a subset of the data frame to test.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>A data frame to test. The <a href="global-data.html">global test data</a> is used
 by default.</p></dd>
+
+
 <dt>args</dt>
 <dd><p>A named list of arguments to pass to <code>func</code>.</p></dd>
-<dt>allany</dt>
-<dd><p>The function to combine the <code>func</code> results for each row.</p></dd>
+
+
 <dt>func_desc</dt>
 <dd><p>A human friendly description of <code>func</code> to use in the
 expectation failure message.</p></dd>
-<dt>...</dt>
-<dd><p>Arguments to pass to <code>expect_allany()</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>expect_*()</code> functions are mainly called for their side effects. The
+    
+
+<p><code>expect_*()</code> functions are mainly called for their side effects. The
 expectation signals its result (e.g. "success", "failure"), which is logged
 by the current <a href="https://testthat.r-lib.org/reference/Reporter.html" class="external-link">test reporter</a>. In a non-testing
 context the expectation will raise an error with class
@@ -111,10 +124,10 @@ context the expectation will raise an error with class
     <div id="details">
     <h2>Details</h2>
     
-<ul><li><p><code>expect_allany()</code> tests the columns in <code>vars</code> to see whether <code>func</code>
+<ul><li><p><code><a href="expect-deprec.html">expect_allany()</a></code> tests the columns in <code>vars</code> to see whether <code>func</code>
 returns <code>TRUE</code> for each of them, and combines the results for each row using
 the function in <code>allany</code>. Both <code>expect_all()</code> and <code>expect_any()</code> are wrappers
-around <code>expect_allany()</code>.</p></li>
+around <code><a href="expect-deprec.html">expect_allany()</a></code>.</p></li>
 <li><p><code>expect_all()</code> tests the <code>vars</code> to see whether <code>func</code> returns <code>TRUE</code> for
 <em>all</em> of them (i.e. whether the conjunction of results of applying <code>func</code> to
 each of the <code>vars</code> is <code>TRUE</code>).</p></li>
@@ -130,6 +143,7 @@ to each of the <code>vars</code> is <code>TRUE</code>).</p></li>
 <code><a href="datacomp-expectations.html">datacomp-expectations</a></code>,
 <code><a href="date-expectations.html">date-expectations</a></code>,
 <code><a href="exclusivity-expectations.html">exclusivity-expectations</a></code>,
+<code><a href="expect_depends.html">expect_depends</a>()</code>,
 <code><a href="label-expectations.html">label-expectations</a></code>,
 <code><a href="pattern-expectations.html">pattern-expectations</a></code>,
 <code><a href="proportion-expectations.html">proportion-expectations</a></code>,
@@ -140,45 +154,48 @@ to each of the <code>vars</code> is <code>TRUE</code>).</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span>
-<span class="r-in"><span class="co"># inches *AND* &lt; 100 horsepower</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span>
-<span class="r-in"><span class="fu">expect_all</span><span class="op">(</span></span>
-<span class="r-in">  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">disp</span>, <span class="va">hp</span><span class="op">)</span>,</span>
-<span class="r-in">  func <span class="op">=</span> <span class="va">chk_range</span>,</span>
-<span class="r-in">  flt <span class="op">=</span> <span class="op">(</span><span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span><span class="op">)</span>,</span>
-<span class="r-in">  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
-<span class="r-in">  data <span class="op">=</span> <span class="va">mtcars</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error : `mtcars` has 7 records failing `chk_range` on variable `disp, hp`.</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span></span>
+<span class="r-in"><span><span class="co"># inches *AND* &lt; 100 horsepower</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu">expect_all</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">disp</span>, <span class="va">hp</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  func <span class="op">=</span> <span class="va">chk_range</span>,</span></span>
+<span class="r-in"><span>  flt <span class="op">=</span> <span class="op">(</span><span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : `mtcars` has 7 records failing `chk_range` on variable `disp` and/or `hp`.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variable set: `disp, hp`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Filter: `(cyl == 4)`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Arguments: `min = 0, max = 100`</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span>
-<span class="r-in"><span class="co"># inches *OR* &lt; 100 horsepower</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span>
-<span class="r-in"><span class="fu">expect_any</span><span class="op">(</span></span>
-<span class="r-in">  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">disp</span>, <span class="va">hp</span><span class="op">)</span>,</span>
-<span class="r-in">  func <span class="op">=</span> <span class="va">chk_range</span>,</span>
-<span class="r-in">  flt <span class="op">=</span> <span class="op">(</span><span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span><span class="op">)</span>,</span>
-<span class="r-in">  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
-<span class="r-in">  data <span class="op">=</span> <span class="va">mtcars</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Check that every 4-cylinder car has an engine displacement of &lt; 100 cubic</span></span></span>
+<span class="r-in"><span><span class="co"># inches *OR* &lt; 100 horsepower</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu">expect_any</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">disp</span>, <span class="va">hp</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  func <span class="op">=</span> <span class="va">chk_range</span>,</span></span>
+<span class="r-in"><span>  flt <span class="op">=</span> <span class="op">(</span><span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error : `mtcars` has 1 records failing `chk_range` on variable `disp, hp`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Filter: `(cyl == 4)`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Arguments: `min = 0, max = 100`</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Check petal dimensions are positive</span></span>
-<span class="r-in"><span class="fu">expect_allany</span><span class="op">(</span></span>
-<span class="r-in">  vars <span class="op">=</span> <span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>,</span>
-<span class="r-in">  func <span class="op">=</span> <span class="va">chk_range</span>,</span>
-<span class="r-in">  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>,</span>
-<span class="r-in">  allany <span class="op">=</span> <span class="va">chk_filter_all</span>,</span>
-<span class="r-in">  data <span class="op">=</span> <span class="va">iris</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Check that all variables are numeric:</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">expect_all</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  vars <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  func <span class="op">=</span> <span class="va">is.numeric</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">iris</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : `iris` has 150 records failing `is.numeric` on variable `Species`.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variable set: `everything()`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Filter: None</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Arguments: ``</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -193,7 +210,7 @@ to each of the <code>vars</code> is <code>TRUE</code>).</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

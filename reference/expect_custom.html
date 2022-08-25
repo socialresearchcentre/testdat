@@ -21,7 +21,7 @@ test results."><meta property="og:image" content="https://socialresearchcentre.g
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -64,43 +64,54 @@ test results.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">expect_custom</span><span class="op">(</span>
-  <span class="va">ok</span>,
-  <span class="va">failure_message</span>,
-  info <span class="op">=</span> <span class="cn">NULL</span>,
-  srcref <span class="op">=</span> <span class="cn">NULL</span>,
-  trace <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">expect_custom</span><span class="op">(</span></span>
+<span>  <span class="va">ok</span>,</span>
+<span>  <span class="va">failure_message</span>,</span>
+<span>  info <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  srcref <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  trace <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ok</dt>
 <dd><p><code>TRUE</code> or <code>FALSE</code> indicating if the expectation was successful.</p></dd>
+
+
 <dt>failure_message</dt>
 <dd><p>Message to show if the expectation failed.</p></dd>
+
+
 <dt>info</dt>
 <dd><p>Character vector continuing additional information. Included for
 backward compatibility only and new expectations should not use it.</p></dd>
+
+
 <dt>srcref</dt>
 <dd><p>Location of the failure. Should only needed to be explicitly
 supplied when you need to forward a srcref captured elsewhere.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional data to be added to a list in the <code>custom</code> attribute of
 the resulting expectation.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An expectation object. Signals the expectation condition with a
+    
+
+<p>An expectation object. Signals the expectation condition with a
 <code>continue_test</code> restart.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># calling expect_custom directly with some custom data</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">expect_custom</span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Test"</span>, extra_data <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, more_data <span class="op">=</span> <span class="st">"Hello"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># calling expect_custom directly with some custom data</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">expect_custom</span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Test"</span>, extra_data <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, more_data <span class="op">=</span> <span class="st">"Hello"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ message: chr "Test"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ srcref : NULL</span>
@@ -109,35 +120,35 @@ the resulting expectation.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ extra_data: int [1:5] 1 2 3 4 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ more_data : chr "Hello"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:3] "expectation_success" "expectation" "condition"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># an example expectation (note additional libraries used)</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rlang.r-lib.org" class="external-link">rlang</a></span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># an example expectation (note additional libraries used)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rlang.r-lib.org" class="external-link">rlang</a></span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘rlang’</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:testthat’:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     is_false, is_null, is_true</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">expect_example</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">var</span>, <span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">act</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://testthat.r-lib.org/reference/quasi_label.html" class="external-link">quasi_label</a></span><span class="op">(</span><span class="fu"><a href="https://rlang.r-lib.org/reference/nse-defuse.html" class="external-link">enquo</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">act</span><span class="op">$</span><span class="va">var_desc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/expr_label.html" class="external-link">expr_label</a></span><span class="op">(</span><span class="fu"><a href="https://rlang.r-lib.org/reference/set_expr.html" class="external-link">get_expr</a></span><span class="op">(</span><span class="fu"><a href="https://rlang.r-lib.org/reference/nse-defuse.html" class="external-link">enquo</a></span><span class="op">(</span><span class="va">var</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">act</span><span class="op">$</span><span class="va">var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/expr_label.html" class="external-link">expr_text</a></span><span class="op">(</span><span class="fu"><a href="https://rlang.r-lib.org/reference/set_expr.html" class="external-link">get_expr</a></span><span class="op">(</span><span class="fu"><a href="https://rlang.r-lib.org/reference/nse-defuse.html" class="external-link">enquo</a></span><span class="op">(</span><span class="va">var</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">act</span><span class="op">$</span><span class="va">result</span> <span class="op">&lt;-</span> <span class="va">act</span><span class="op">$</span><span class="va">val</span><span class="op">[[</span><span class="va">act</span><span class="op">$</span><span class="va">var</span><span class="op">]</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0</span></span>
-<span class="r-in">  <span class="va">act</span><span class="op">$</span><span class="va">result</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">act</span><span class="op">$</span><span class="va">result</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="fu">expect_custom</span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">act</span><span class="op">$</span><span class="va">result</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"{act$lab} has {sum(!act$result, na.rm = TRUE)} cases with \\</span>
-<span class="r-in">                {act$var_desc} not greater than 0."</span><span class="op">)</span>,</span>
-<span class="r-in">    failed_count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">!</span><span class="va">act</span><span class="op">$</span><span class="va">result</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span class="r-in">    total_count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">act</span><span class="op">$</span><span class="va">result</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="va">act</span><span class="op">$</span><span class="va">result</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">expect_example</span><span class="op">(</span><span class="va">x</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="op">-</span><span class="fl">2</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">expect_example</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">var</span>, <span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="global-data.html">get_testdata</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">act</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://testthat.r-lib.org/reference/quasi_label.html" class="external-link">quasi_label</a></span><span class="op">(</span><span class="fu"><a href="https://rlang.r-lib.org/reference/enquo.html" class="external-link">enquo</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">act</span><span class="op">$</span><span class="va">var_desc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/expr_label.html" class="external-link">expr_label</a></span><span class="op">(</span><span class="fu"><a href="https://rlang.r-lib.org/reference/set_expr.html" class="external-link">get_expr</a></span><span class="op">(</span><span class="fu"><a href="https://rlang.r-lib.org/reference/enquo.html" class="external-link">enquo</a></span><span class="op">(</span><span class="va">var</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">act</span><span class="op">$</span><span class="va">var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/expr_label.html" class="external-link">expr_text</a></span><span class="op">(</span><span class="fu"><a href="https://rlang.r-lib.org/reference/set_expr.html" class="external-link">get_expr</a></span><span class="op">(</span><span class="fu"><a href="https://rlang.r-lib.org/reference/enquo.html" class="external-link">enquo</a></span><span class="op">(</span><span class="va">var</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">act</span><span class="op">$</span><span class="va">result</span> <span class="op">&lt;-</span> <span class="va">act</span><span class="op">$</span><span class="va">val</span><span class="op">[[</span><span class="va">act</span><span class="op">$</span><span class="va">var</span><span class="op">]</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span>  <span class="va">act</span><span class="op">$</span><span class="va">result</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">act</span><span class="op">$</span><span class="va">result</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu">expect_custom</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">act</span><span class="op">$</span><span class="va">result</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"{act$lab} has {sum(!act$result, na.rm = TRUE)} cases with \\</span></span></span>
+<span class="r-in"><span><span class="st">                {act$var_desc} not greater than 0."</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    failed_count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">!</span><span class="va">act</span><span class="op">$</span><span class="va">result</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    total_count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">act</span><span class="op">$</span><span class="va">result</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="va">act</span><span class="op">$</span><span class="va">result</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">expect_example</span><span class="op">(</span><span class="va">x</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="op">-</span><span class="fl">2</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error : data.frame(x = c(NA, -2:2)) has 4 cases with `x` not greater than 0.</span>
 </code></pre></div>
     </div>
@@ -153,7 +164,7 @@ the resulting expectation.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
