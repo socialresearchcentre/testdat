@@ -98,7 +98,7 @@
 <div class="section level2">
 <h2 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
 </h2>
-<p>As an extension of testthat, testdat uses the same basic testing framework. Before using testdat (and reading this documentation), make sure you’re familiar with the introduction to testthat in <a href="https://r-pkgs.org/tests.html" class="external-link">R packages</a>.</p>
+<p>As an extension of testthat, testdat uses the same basic testing framework. Before using testdat (and reading this documentation), make sure you’re familiar with the introduction to testthat in <a href="https://r-pkgs.org/testing-basics.html" class="external-link">R packages</a>.</p>
 <p>The main addition provided by testdat is a set of expectations designed for testing data frames and an accompanying mechanism to globally specify a data set for testing.</p>
 </div>
 <div class="section level2">
@@ -402,7 +402,7 @@
 <span>    <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="va">state</span> <span class="op">==</span> <span class="st">"NSW"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🌈</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😸</span></span>
 <span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:18:5): variable values are correct</span> ──────────────────────────</span></span>
 <span><span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span></span>
 <span><span class="co">#&gt; Variable set: `pcode`</span></span>
@@ -442,7 +442,7 @@
 <h3 id="using-a-test-suite">Using a test suite<a class="anchor" aria-label="anchor" href="#using-a-test-suite"></a>
 </h3>
 <p>Setting up a proper project test suite can be useful for automatically validating final processed data sets.</p>
-<p>Setting up proper file based testing infrastructure is out of the scope of this vignette. See <a href="https://r-pkgs.org/tests.html" class="external-link">R packages</a> for a brief introduction to testing infrastructure.</p>
+<p>Setting up proper file based testing infrastructure is out of the scope of this vignette. See <a href="https://r-pkgs.org/testing-basics.html" class="external-link">R packages</a> for a brief introduction to testing infrastructure.</p>
 <p>In testthat, related tests are grouped into files. When using testdat, each file should have a test data set specified with a call to <code><a href="../reference/global-data.html">set_testdata()</a></code>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/global-data.html">set_testdata</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
@@ -450,7 +450,7 @@
 <span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Variable format checks"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/pattern-expectations.html">expect_regex</a></span><span class="op">(</span><span class="va">Species</span>, <span class="st">"^[a-z]+$"</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🎊</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🥳</span></span>
 <span></span>
 <span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span>
