@@ -42,7 +42,7 @@ test_that("excel_results", {
     call = c("NULL", "NULL")
   )
 
-  expect_match(x_xl_erroring$description, "Error:")
+  expect_match(x_xl_erroring$description, "<vctrs_error_subscript_oob/vctrs_error_subscript/rlang_error/error/condition>")
   expect_equal(x_xl_summary, xl_summary)
   expect_equal(x_xl_failing, xl_failing)
   expect_equal(names(x_xl_passing), names(xl_failing))
