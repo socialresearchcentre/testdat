@@ -1,7 +1,10 @@
+
+This release fixes the HTML validation NOTEs in CRAN package check results.
+
 ## R CMD check results
 
 0 errors | 0 warnings | 0 note
 
-## Notes
+## Reverse dependencies
 
-* In addition to new features, this submission fixes a failing test on CRAN due to updates to a dependent package. A warning about an incorrect documentation link has been fixed from the previous submission.
+There are no reverse dependencies.

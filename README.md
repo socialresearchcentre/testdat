@@ -87,10 +87,13 @@ with_testdata(x, {
 #> Test passed 🌈
 #> ── Failure (<text>:18:5): variable values are correct ──────────────────────────
 #> get_testdata() has 1 records failing value check on variable `pcode`.
+#> Variable set: `pcode`
 #> Filter: None
 #> Arguments: `<int: 2000L, 2001L, 2002L, 2003L, 2004L, ...>, <int: 3000L, 3001L, 3002L,`
 #> get_testdata() has 1 records failing value check on variable `pcode`.
+#> Variable set: `pcode`
 #> Filter: None
 #> Arguments: `  3003L, 3004L, ...>, miss = <chr: NA, "">`
-#> Error: Test failed
+#> Error in `reporter$stop_if_needed()`:
+#> ! Test failed
 ```
