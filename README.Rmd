@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![R-CMD-check](https://github.com/socialresearchcentre/testdat/workflows/R-CMD-check/badge.svg)](https://github.com/socialresearchcentre/testdat/actions)
+[![R-CMD-check](https://github.com/socialresearchcentre/testdat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/socialresearchcentre/testdat/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/socialresearchcentre/testdat/branch/master/graph/badge.svg)](https://app.codecov.io/gh/socialresearchcentre/testdat?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/testdat)](https://CRAN.R-project.org/package=testdat)
 <!-- badges: end -->

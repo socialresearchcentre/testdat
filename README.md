@@ -7,7 +7,7 @@
 
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![R-CMD-check](https://github.com/socialresearchcentre/testdat/workflows/R-CMD-check/badge.svg)](https://github.com/socialresearchcentre/testdat/actions)
+[![R-CMD-check](https://github.com/socialresearchcentre/testdat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/socialresearchcentre/testdat/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/socialresearchcentre/testdat/branch/master/graph/badge.svg)](https://app.codecov.io/gh/socialresearchcentre/testdat?branch=master)
 [![CRAN
@@ -24,15 +24,15 @@ reporting tools focused on checking of data frames.
 
 Features include:
 
--   A fully fledged test framework so you can spend more time specifying
-    tests and less time running them
+- A fully fledged test framework so you can spend more time specifying
+  tests and less time running them
 
--   A set of common methods for simply specifying data validation rules
+- A set of common methods for simply specifying data validation rules
 
--   Repeatability of data tests (avoid unintentionally breaking your
-    data set!)
+- Repeatability of data tests (avoid unintentionally breaking your data
+  set!)
 
--   Data-focused reporting of test results
+- Data-focused reporting of test results
 
 ## Installation
 
@@ -84,8 +84,8 @@ with_testdata(x, {
     expect_base(nsw_only, state == "NSW")
   })
 })
-#> Test passed 🌈
-#> ── Failure (<text>:18:5): variable values are correct ──────────────────────────
+#> Test passed 🥳
+#> ── Failure (']8;line = 18:col = 1;file:///home/danny/Nextcloud/workspace/r/testdat/<text><text>:18]8;;'): variable values are correct ──────────────────────────
 #> get_testdata() has 1 records failing value check on variable `pcode`.
 #> Variable set: `pcode`
 #> Filter: None
