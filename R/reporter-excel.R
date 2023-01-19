@@ -89,5 +89,5 @@ summarise_results_excel <- function(results) {
       mutate(context = e$context)
   }) %>%
     bind_rows %>%
-    select(.data$context, everything())
+    select("context", everything())
 }
