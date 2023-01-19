@@ -74,7 +74,7 @@
 
       
 
-      </header><script src="testdat_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to testdat</h1>
@@ -87,19 +87,30 @@
 
     
     
-<p>testdat is a package designed to ease data validation, particularly for complex data processing, inspired by software unit testing. testdat extends the strong and flexible unit testing framework already provided by testthat with a family of functions and reporting tools focused on checking data frames.</p>
+<p>testdat is a package designed to ease data validation, particularly
+for complex data processing, inspired by software unit testing. testdat
+extends the strong and flexible unit testing framework already provided
+by testthat with a family of functions and reporting tools focused on
+checking data frames.</p>
 <p>Features include:</p>
 <ul>
-<li><p>A fully fledged test framework so you can spend more time specifying tests and less time running them</p></li>
-<li><p>A set of common methods for simply specifying data validation rules</p></li>
-<li><p>Repeatability of data tests (avoid unintentionally breaking your data set!)</p></li>
+<li><p>A fully fledged test framework so you can spend more time
+specifying tests and less time running them</p></li>
+<li><p>A set of common methods for simply specifying data validation
+rules</p></li>
+<li><p>Repeatability of data tests (avoid unintentionally breaking your
+data set!)</p></li>
 <li><p>Data-focused reporting of test results</p></li>
 </ul>
 <div class="section level2">
 <h2 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
 </h2>
-<p>As an extension of testthat, testdat uses the same basic testing framework. Before using testdat (and reading this documentation), make sure you’re familiar with the introduction to testthat in <a href="https://r-pkgs.org/testing-basics.html" class="external-link">R packages</a>.</p>
-<p>The main addition provided by testdat is a set of expectations designed for testing data frames and an accompanying mechanism to globally specify a data set for testing.</p>
+<p>As an extension of testthat, testdat uses the same basic testing
+framework. Before using testdat (and reading this documentation), make
+sure you’re familiar with the introduction to testthat in <a href="https://r-pkgs.org/testing-basics.html" class="external-link">R packages</a>.</p>
+<p>The main addition provided by testdat is a set of expectations
+designed for testing data frames and an accompanying mechanism to
+globally specify a data set for testing.</p>
 </div>
 <div class="section level2">
 <h2 id="data-expectations">Data expectations<a class="anchor" aria-label="anchor" href="#data-expectations"></a>
@@ -107,36 +118,42 @@
 <div class="section level3">
 <h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h3>
-<p>In general, our approach to data testing is variable-centric - the majority of expectations perform a check on one or more variables in a given data frame.</p>
+<p>In general, our approach to data testing is variable-centric - the
+majority of expectations perform a check on one or more variables in a
+given data frame.</p>
 <p>The standard form of a data expectation is:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>expect_<span class="op">*</span>(<span class="kw">var</span>(s), ..., <span class="dt">flt =</span> <span class="ot">TRUE</span>, <span class="dt">data =</span> <span class="kw">get_testdata</span>())</span></code></pre></div>
-<p>testdat uses dplyr at its core, and thus supports tidy evaluation.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>expect_<span class="sc">*</span>(<span class="fu">var</span>(s), ..., <span class="at">flt =</span> <span class="cn">TRUE</span>, <span class="at">data =</span> <span class="fu">get_testdata</span>())</span></code></pre></div>
+<p>testdat uses dplyr at its core, and thus supports tidy
+evaluation.</p>
 <div class="section level4">
 <h4 id="variables">Variables<a class="anchor" aria-label="anchor" href="#variables"></a>
 </h4>
-<p>Most operations act on one or more variables. There are two variants of the variable argument:</p>
+<p>Most operations act on one or more variables. There are two variants
+of the variable argument:</p>
 <ul>
 <li>
-<code>vars</code> requires a set of columns specified as <a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy selections</a>.</li>
+<code>vars</code> requires a set of columns specified as <a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy
+selections</a>.</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"multi-variable identifier is unique"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">year</span>, <span class="va">month</span>, <span class="va">day</span>, <span class="va">hour</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">storms</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:2:3): multi-variable identifier is unique</span> ───────────────────</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:2</span><span style="font-weight: bold;">'): multi-variable identifier is unique</span> ───────────────────</span></span>
 <span><span class="co">#&gt; `storms` has 38 duplicate records on variable `name, year, month, day, hour`.</span></span>
 <span><span class="co">#&gt; Filter: None</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
 <ul>
 <li>
-<code>var</code> requires an unquoted variable name. This only applies to a small number of expectations.</li>
+<code>var</code> requires an unquoted variable name. This only
+applies to a small number of expectations.</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"hour values are valid"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">ts_diameter</span>, <span class="va">year</span> <span class="op">&gt;=</span> <span class="fl">2004</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> (&lt;text&gt;:2:3): hour values are valid</span> ───────────────────────────────────</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:2</span><span style="font-weight: bold;">'): hour values are valid</span> ───────────────────────────────────</span></span>
 <span><span class="co">#&gt; Error: A test data frame has not been specified. Use `set_testdata()` to set the data frame.</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Backtrace:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"> 1. </span><span style="font-weight: bold;">testdat</span>::expect_base(ts_diameter, year &gt;= 2004)</span></span>
@@ -147,12 +164,15 @@
 <div class="section level4">
 <h4 id="filter">Filter<a class="anchor" aria-label="anchor" href="#filter"></a>
 </h4>
-<p>The <code>flt</code> argument takes a logical predicate defined in terms of the variables in <code>data</code> using <a href="https://dplyr.tidyverse.org/reference/dplyr_data_masking.html" class="external-link">data masking</a>. Only rows where the condition evaluates to <code>TRUE</code> are included in the test.</p>
+<p>The <code>flt</code> argument takes a logical predicate defined in
+terms of the variables in <code>data</code> using <a href="https://dplyr.tidyverse.org/reference/dplyr_data_masking.html" class="external-link">data
+masking</a>. Only rows where the condition evaluates to
+<code>TRUE</code> are included in the test.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"iris range checks"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/value-expectations.html">expect_range</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">0</span>, <span class="fl">1</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:2:3): iris range checks</span> ─────────────────────────────────────</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:2</span><span style="font-weight: bold;">'): iris range checks</span> ─────────────────────────────────────</span></span>
 <span><span class="co">#&gt; `iris` has 93 records failing range check on variable `Petal.Width`.</span></span>
 <span><span class="co">#&gt; Variable set: `Petal.Width`</span></span>
 <span><span class="co">#&gt; Filter: None</span></span>
@@ -166,7 +186,7 @@
 <span>  <span class="co"># Failures will provide the filter</span></span>
 <span>  <span class="fu"><a href="../reference/value-expectations.html">expect_range</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">0</span>, <span class="fl">0.5</span>, flt <span class="op">=</span> <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:9:3): iris range checks filtered</span> ────────────────────────────</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:9</span><span style="font-weight: bold;">'): iris range checks filtered</span> ────────────────────────────</span></span>
 <span><span class="co">#&gt; `iris` has 1 records failing range check on variable `Petal.Width`.</span></span>
 <span><span class="co">#&gt; Variable set: `Petal.Width`</span></span>
 <span><span class="co">#&gt; Filter: `Species == "setosa"`</span></span>
@@ -177,7 +197,10 @@
 <div class="section level4">
 <h4 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
 </h4>
-<p>The <code>data</code> argument takes a data frame to test. To avoid redundant code the data argument defaults to a global test data set retrieved using <code><a href="../reference/global-data.html">get_testdata()</a></code>. This can be used in two ways:</p>
+<p>The <code>data</code> argument takes a data frame to test. To avoid
+redundant code the data argument defaults to a global test data set
+retrieved using <code><a href="../reference/global-data.html">get_testdata()</a></code>. This can be used in two
+ways:</p>
 <ul>
 <li>Setting the global test data using <code><a href="../reference/global-data.html">set_testdata()</a></code>.</li>
 </ul>
@@ -189,12 +212,13 @@
 <span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:5:3): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:5</span><span style="font-weight: bold;">'): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
 <span><span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
 <ul>
-<li>Using the <code><a href="../reference/global-data.html">with_testdata()</a></code> wrapper to temporarily set the global test data for a block of code.</li>
+<li>Using the <code><a href="../reference/global-data.html">with_testdata()</a></code> wrapper to temporarily set
+the global test data for a block of code.</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/global-data.html">set_testdata</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
@@ -206,7 +230,7 @@
 <span>    <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:6:5): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:6</span><span style="font-weight: bold;">'): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
 <span><span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span>
@@ -218,11 +242,14 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:2:3): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:2</span><span style="font-weight: bold;">'): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
 <span><span class="co">#&gt; `iris` failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
-<p>By default, <code><a href="../reference/global-data.html">set_testdata()</a></code> stores a quosure with a reference to the provided data frame rather than the data itself, so changes made to the data frame will be reflected in the test results.</p>
+<p>By default, <code><a href="../reference/global-data.html">set_testdata()</a></code> stores a quosure with a
+reference to the provided data frame rather than the data itself, so
+changes made to the data frame will be reflected in the test
+results.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tmp_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -251,7 +278,8 @@
 <h4 id="section">
 <code>...</code><a class="anchor" aria-label="anchor" href="#section"></a>
 </h4>
-<p>Additional arguments are specific to the expectation. See the help page for the expectation function for details.</p>
+<p>Additional arguments are specific to the expectation. See the help
+page for the expectation function for details.</p>
 </div>
 </div>
 <div class="section level3">
@@ -277,7 +305,8 @@
 </dd>
 <dd>
 <p><code><a href="../reference/value-expectations.html">?`value-expectations`</a></code></p>
-<p>Value expectations test variable values for valid data. Tests include explicit value checks, pattern checks and others.</p>
+<p>Value expectations test variable values for valid data. Tests include
+explicit value checks, pattern checks and others.</p>
 </dd>
 <dt>Relationships</dt>
 <dd>
@@ -285,23 +314,35 @@
 </dd>
 <dd>
 <p><code><a href="../reference/uniqueness-expectations.html">?`uniqueness-expectations`</a></code></p>
-<p>Relationship expectations test for relationships among variables. Tests include uniqueness and exclusivity checks.</p>
+<p>Relationship expectations test for relationships among variables.
+Tests include uniqueness and exclusivity checks.</p>
 </dd>
 <dt>Conditional</dt>
 <dd>
 <p><code><a href="../reference/conditional-expectations.html">?`conditional-expectations`</a></code></p>
-<p>Conditional expectations check for the co-existence of multiple conditions.</p>
+<p>Conditional expectations check for the co-existence of multiple
+conditions.</p>
 </dd>
 <dt>Data frame comparison</dt>
 <dd>
 <p><code><a href="../reference/datacomp-expectations.html">?`datacomp-expectations`</a></code></p>
-<p>Data frame comparison expectations test for consistency between data frames, for example ensuring similar frequencies between similar variables in different data frames.</p>
+<p>Data frame comparison expectations test for consistency between data
+frames, for example ensuring similar frequencies between similar
+variables in different data frames.</p>
 </dd>
 <dt>Generic</dt>
 <dd>
 <p><code><a href="../reference/generic-expectations.html">?`generic-expectations`</a></code></p>
-<p>Generic expectations allow for testing of a data frame using an arbitrary function. The function provided should take a single vector as its first argument and return a logical vector showing whether each element has passed or failed. Additional arguments to the checking function can be passed as a list using the <code>args</code> argument.</p>
-<p>testdat includes a set of useful checking functions. See <code>?`chk-generic`</code> for details. Several of the checking functions have a corresponding expectation. These are listed in <code>?`chk-expect`</code>.</p>
+<p>Generic expectations allow for testing of a data frame using an
+arbitrary function. The function provided should take a single vector as
+its first argument and return a logical vector showing whether each
+element has passed or failed. Additional arguments to the checking
+function can be passed as a list using the <code>args</code>
+argument.</p>
+<p>testdat includes a set of useful checking functions. See
+<code>?`chk-generic`</code> for details. Several of the checking
+functions have a corresponding expectation. These are listed in
+<code>?`chk-expect`</code>.</p>
 </dd>
 </dl>
 </div>
@@ -312,8 +353,13 @@
 <div class="section level3">
 <h3 id="testing-inside-a-script">Testing inside a script<a class="anchor" aria-label="anchor" href="#testing-inside-a-script"></a>
 </h3>
-<p>The easiest way to use data testing is directly inside an R script. Expecations and test blocks throw an error if they fail, so it is very clear to the user that something needs to be checked, and the script will fail when sourced.</p>
-<p>The example below shows how to adapt a script from exploratory “print and check” to a testing approach, using a simple data processing exercise.</p>
+<p>The easiest way to use data testing is directly inside an R script.
+Expecations and test blocks throw an error if they fail, so it is very
+clear to the user that something needs to be checked, and the script
+will fail when sourced.</p>
+<p>The example below shows how to adapt a script from exploratory “print
+and check” to a testing approach, using a simple data processing
+exercise.</p>
 <div class="section level4">
 <h4 id="print-and-check">Print and check<a class="anchor" aria-label="anchor" href="#print-and-check"></a>
 </h4>
@@ -402,8 +448,8 @@
 <span>    <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="va">state</span> <span class="op">==</span> <span class="st">"NSW"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😸</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:18:5): variable values are correct</span> ──────────────────────────</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🥇</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:18</span><span style="font-weight: bold;">'): variable values are correct</span> ──────────────────────────</span></span>
 <span><span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span></span>
 <span><span class="co">#&gt; Variable set: `pcode`</span></span>
 <span><span class="co">#&gt; Filter: None</span></span>
@@ -423,7 +469,7 @@
 <span>    <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">market</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, miss <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># miss = NULL excludes NAs from valid values</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:33:5): market derived correctly</span> ─────────────────────────────</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:33</span><span style="font-weight: bold;">'): market derived correctly</span> ─────────────────────────────</span></span>
 <span><span class="co">#&gt; get_testdata() has 1 records failing value check on variable `market`.</span></span>
 <span><span class="co">#&gt; Variable set: `market`</span></span>
 <span><span class="co">#&gt; Filter: None</span></span>
@@ -432,30 +478,40 @@
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
 <p>Note that:</p>
 <ul>
-<li><p>The global test data can be set with <code><a href="../reference/global-data.html">set_testdata()</a></code> or <code><a href="../reference/global-data.html">with_testdata()</a></code>.</p></li>
-<li><p>The <code><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that()</a></code> wrapper is not strictly necessary, but it provides more informative error messaging and logically groups a set of expectations.</p></li>
-<li><p>Each <code><a href="../reference/global-data.html">with_testdata()</a></code> block will fail on the first <code><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that()</a></code> block that fails. The “filters applied correctly” test block is not run in the example.</p></li>
+<li><p>The global test data can be set with <code><a href="../reference/global-data.html">set_testdata()</a></code>
+or <code><a href="../reference/global-data.html">with_testdata()</a></code>.</p></li>
+<li><p>The <code><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that()</a></code> wrapper is not strictly necessary,
+but it provides more informative error messaging and logically groups a
+set of expectations.</p></li>
+<li><p>Each <code><a href="../reference/global-data.html">with_testdata()</a></code> block will fail on the first
+<code><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that()</a></code> block that fails. The “filters applied
+correctly” test block is not run in the example.</p></li>
 </ul>
 </div>
 </div>
 <div class="section level3">
 <h3 id="using-a-test-suite">Using a test suite<a class="anchor" aria-label="anchor" href="#using-a-test-suite"></a>
 </h3>
-<p>Setting up a proper project test suite can be useful for automatically validating final processed data sets.</p>
-<p>Setting up proper file based testing infrastructure is out of the scope of this vignette. See <a href="https://r-pkgs.org/testing-basics.html" class="external-link">R packages</a> for a brief introduction to testing infrastructure.</p>
-<p>In testthat, related tests are grouped into files. When using testdat, each file should have a test data set specified with a call to <code><a href="../reference/global-data.html">set_testdata()</a></code>.</p>
+<p>Setting up a proper project test suite can be useful for
+automatically validating final processed data sets.</p>
+<p>Setting up proper file based testing infrastructure is out of the
+scope of this vignette. See <a href="https://r-pkgs.org/testing-basics.html" class="external-link">R packages</a> for a brief
+introduction to testing infrastructure.</p>
+<p>In testthat, related tests are grouped into files. When using
+testdat, each file should have a test data set specified with a call to
+<code><a href="../reference/global-data.html">set_testdata()</a></code>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/global-data.html">set_testdata</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Variable format checks"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/pattern-expectations.html">expect_regex</a></span><span class="op">(</span><span class="va">Species</span>, <span class="st">"^[a-z]+$"</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🥳</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😀</span></span>
 <span></span>
 <span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> (&lt;text&gt;:8:3): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:8</span><span style="font-weight: bold;">'): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
 <span><span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
@@ -480,7 +536,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
