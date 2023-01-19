@@ -37,3 +37,11 @@ test_that("check that the `quosure` argument works in set_testdata", {
   tmp_data <- tibble(x = c(1, 0), y = c(1, 1))
   expect_identical(get_testdata(), tmp_data_orig)
 })
+
+test_that("groups are removed by `get_testdata()`", {
+  tmp_data <- tibble(x = c(1, 0), y = c(1, NA))
+  tmp_data <- group_by(tmp_data, x)
+  set_testdata(tmp_data)
+
+  expect_length(groups(get_testdata()), 0)
+})

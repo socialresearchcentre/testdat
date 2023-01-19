@@ -56,7 +56,7 @@ get_testdata <- function() {
          "Use `set_testdata()` to set the data frame.",
          call. = FALSE)
 
-  return(eval_tidy(dat))
+  return(ungroup(eval_tidy(dat)))
 }
 
 #' @export

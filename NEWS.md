@@ -1,5 +1,7 @@
 # testdat (development version)
 
+* `get_testdata()` now removes groups from the test data frame if it a `grouped_df` (#68). Grouped data frames cause issues with several expectations.
+
 # testdat 0.4.1
 
 * Updated the failure message on `expect_all()` to include more specific information on the location of erring values. In particular, variables failing the test are now highlighted in the error message. If, for instance, only one of three variables passed in as the `vars` argument fails the test, then only that variable will be mentioned as failing the test in the failure message. This makes it easier to track down the cause of expectation failures when checking multiple variables at once. For example,
