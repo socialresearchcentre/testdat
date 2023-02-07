@@ -82,6 +82,9 @@ expect_base <- function(var,
   act$var_desc <- as_label(ensym(var))
   act$var <- as_name(ensym(var))
 
+  if (!act$var %in% names(act$val)) expect_custom(FALSE,
+                                                  glue("Var `{act$var}` cannot be found in testdata"))
+
   base <- enquo(base)
   act$base_desc <- as_label(base)
   act$base <- act$val %>% transmute(!!base) %>% pull(1)
