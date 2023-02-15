@@ -9,5 +9,5 @@ test_that("NA check results are handled correctly", {
 })
 
 test_that("fails if var is not in testdata", {
-  expect_failure(expect_base(y, TRUE, data = tibble(x = 0:1)))
+  expect_error(expect_base(y, TRUE, data = tibble(x = 0:1)))
 })
