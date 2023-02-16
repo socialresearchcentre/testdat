@@ -87,8 +87,8 @@ expect_base <- function(var,
   act$base <- act$val %>% transmute(!!base) %>% pull(1)
   act$base[is.na(act$base)] <- FALSE
 
-  act$miss <- (act$val[[act$var]] %in% miss & !missing_valid) & act$base
-  act$nmiss <- !(act$val[[act$var]] %in% miss) & !act$base
+  act$miss <- (pull(act$val, {{ var }}) %in% miss & !missing_valid) & act$base
+  act$nmiss <- !(pull(act$val, {{ var }}) %in% miss) & !act$base
   act$result <- !(act$miss | act$nmiss)
 
   expect_custom(
