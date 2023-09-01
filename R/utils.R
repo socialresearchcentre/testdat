@@ -6,7 +6,7 @@ as_char_scipen <- function(x) {
 }
 
 # TODO: remove when minimum R version >= 3.5
-if (getRversion() < 3.5) {
+if (getRversion() < "3.5") {
   isFALSE <- function(x) is.logical(x) && length(x) == 1L && !is.na(x) && !x
 }
 
