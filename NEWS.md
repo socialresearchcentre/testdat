@@ -1,6 +1,6 @@
 # testdat (development version)
 
-* `get_testdata()` now removes groups from the test data frame if it a `grouped_df` (#68). Grouped data frames cause issues with several expectations.
+* `get_testdata()` now removes groups from the test data frame if it is a `grouped_df` (#68). Grouped data frames cause issues with several expectations.
 
 # testdat 0.4.1
 

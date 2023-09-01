@@ -1,5 +1,5 @@
 
-This release fixes the HTML validation NOTEs in CRAN package check results.
+This release fixes an invalid non-character numeric version spec per CRAN advice.
 
 ## R CMD check results
 
