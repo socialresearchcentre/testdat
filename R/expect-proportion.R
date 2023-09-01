@@ -84,7 +84,7 @@ expect_prop <- function(var,
 
   act$result <- data %>%
     filter(!!flt) %>%
-    mutate(across(!!var, func, !!!args)) %>%
+    mutate(across(!!var, ~func(.x, !!!args))) %>%
     pull(!!var)
 
   act$result_prop <- sum(act$result, na.rm = TRUE) / length(act$result)
