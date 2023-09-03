@@ -139,8 +139,8 @@ selections</a>.</li>
 <code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"multi-variable identifier is unique"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/uniqueness-expectations.html">expect_unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">year</span>, <span class="va">month</span>, <span class="va">day</span>, <span class="va">hour</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">storms</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:2</span><span style="font-weight: bold;">'): multi-variable identifier is unique</span> ───────────────────</span></span>
-<span><span class="co">#&gt; `storms` has 38 duplicate records on variable `name, year, month, day, hour`.</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:2:3</span><span style="font-weight: bold;">'): multi-variable identifier is unique</span> ─────────────────</span></span>
+<span><span class="co">#&gt; `storms` has 46 duplicate records on variable `name, year, month, day, hour`.</span></span>
 <span><span class="co">#&gt; Filter: None</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
@@ -153,11 +153,14 @@ applies to a small number of expectations.</li>
 <code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"hour values are valid"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">ts_diameter</span>, <span class="va">year</span> <span class="op">&gt;=</span> <span class="fl">2004</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:2</span><span style="font-weight: bold;">'): hour values are valid</span> ───────────────────────────────────</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:2:3</span><span style="font-weight: bold;">'): hour values are valid</span> ─────────────────────────────────</span></span>
 <span><span class="co">#&gt; Error: A test data frame has not been specified. Use `set_testdata()` to set the data frame.</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Backtrace:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"> 1. </span><span style="font-weight: bold;">testdat</span>::expect_base(ts_diameter, year &gt;= 2004)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"> 4. </span>testdat::get_testdata()</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">    </span>▆</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> 1. </span>└─<span style="font-weight: bold;">testdat</span>::expect_base(ts_diameter, year &gt;= 2004)</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> 2. </span>  ├─<span style="font-weight: bold;">testthat</span>::quasi_label(enquo(data))</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> 3. </span>  │ └─<span style="font-weight: bold;">rlang</span>::eval_bare(expr, quo_get_env(quo))</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> 4. </span>  └─<span style="font-weight: bold;">testdat</span>::get_testdata()</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
 </div>
@@ -172,7 +175,7 @@ masking</a>. Only rows where the condition evaluates to
 <code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"iris range checks"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/value-expectations.html">expect_range</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">0</span>, <span class="fl">1</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:2</span><span style="font-weight: bold;">'): iris range checks</span> ─────────────────────────────────────</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:2:3</span><span style="font-weight: bold;">'): iris range checks</span> ───────────────────────────────────</span></span>
 <span><span class="co">#&gt; `iris` has 93 records failing range check on variable `Petal.Width`.</span></span>
 <span><span class="co">#&gt; Variable set: `Petal.Width`</span></span>
 <span><span class="co">#&gt; Filter: None</span></span>
@@ -186,7 +189,7 @@ masking</a>. Only rows where the condition evaluates to
 <span>  <span class="co"># Failures will provide the filter</span></span>
 <span>  <span class="fu"><a href="../reference/value-expectations.html">expect_range</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">0</span>, <span class="fl">0.5</span>, flt <span class="op">=</span> <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:9</span><span style="font-weight: bold;">'): iris range checks filtered</span> ────────────────────────────</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:9:3</span><span style="font-weight: bold;">'): iris range checks filtered</span> ──────────────────────────</span></span>
 <span><span class="co">#&gt; `iris` has 1 records failing range check on variable `Petal.Width`.</span></span>
 <span><span class="co">#&gt; Variable set: `Petal.Width`</span></span>
 <span><span class="co">#&gt; Filter: `Species == "setosa"`</span></span>
@@ -212,7 +215,7 @@ ways:</p>
 <span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:5</span><span style="font-weight: bold;">'): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:5:3</span><span style="font-weight: bold;">'): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
 <span><span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
@@ -230,7 +233,7 @@ the global test data for a block of code.</li>
 <span>    <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:6</span><span style="font-weight: bold;">'): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:6:5</span><span style="font-weight: bold;">'): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
 <span><span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span>
@@ -242,7 +245,7 @@ the global test data for a block of code.</li>
 <code class="sourceCode R"><span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:2</span><span style="font-weight: bold;">'): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:2:3</span><span style="font-weight: bold;">'): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
 <span><span class="co">#&gt; `iris` failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
@@ -377,7 +380,7 @@ exercise.</p>
 <span><span class="co"># check id is unique</span></span>
 <span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html" class="external-link">duplicated</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 4</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 4 variables: id &lt;dbl&gt;, pcode &lt;dbl&gt;, state &lt;chr&gt;, nsw_only &lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 variables: id &lt;dbl&gt;, pcode &lt;dbl&gt;, state &lt;chr&gt;, nsw_only &lt;dbl&gt;</span></span></span>
 <span></span>
 <span><span class="co"># check values</span></span>
 <span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">pcode</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">2000</span><span class="op">:</span><span class="fl">3999</span><span class="op">)</span></span>
@@ -448,8 +451,8 @@ exercise.</p>
 <span>    <span class="fu"><a href="../reference/conditional-expectations.html">expect_base</a></span><span class="op">(</span><span class="va">nsw_only</span>, <span class="va">state</span> <span class="op">==</span> <span class="st">"NSW"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🥇</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:18</span><span style="font-weight: bold;">'): variable values are correct</span> ──────────────────────────</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🎊</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:18:5</span><span style="font-weight: bold;">'): variable values are correct</span> ────────────────────────</span></span>
 <span><span class="co">#&gt; get_testdata() has 1 records failing value check on variable `pcode`.</span></span>
 <span><span class="co">#&gt; Variable set: `pcode`</span></span>
 <span><span class="co">#&gt; Filter: None</span></span>
@@ -469,7 +472,7 @@ exercise.</p>
 <span>    <span class="fu"><a href="../reference/value-expectations.html">expect_values</a></span><span class="op">(</span><span class="va">market</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, miss <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># miss = NULL excludes NAs from valid values</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:33</span><span style="font-weight: bold;">'): market derived correctly</span> ─────────────────────────────</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:33:5</span><span style="font-weight: bold;">'): market derived correctly</span> ───────────────────────────</span></span>
 <span><span class="co">#&gt; get_testdata() has 1 records failing value check on variable `market`.</span></span>
 <span><span class="co">#&gt; Variable set: `market`</span></span>
 <span><span class="co">#&gt; Filter: None</span></span>
@@ -506,12 +509,12 @@ testdat, each file should have a test data set specified with a call to
 <span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Variable format checks"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/pattern-expectations.html">expect_regex</a></span><span class="op">(</span><span class="va">Species</span>, <span class="st">"^[a-z]+$"</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😀</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🥳</span></span>
 <span></span>
 <span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"Versicolor has sepal length greater than 5 - will fail"</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/conditional-expectations.html">expect_cond</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"versicolor"</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:8</span><span style="font-weight: bold;">'): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
+<span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Failure</span><span style="font-weight: bold;"> ('</span><span style="color: #0000BB; font-weight: bold;">&lt;text&gt;:8:3</span><span style="font-weight: bold;">'): Versicolor has sepal length greater than 5 - will fail</span> ──</span></span>
 <span><span class="co">#&gt; get_testdata() failed consistency check. 1 cases have `Species %in% "versicolor"` but not `Sepal.Length &gt;= 5`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reporter$stop_if_needed()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Test failed</span></span></code></pre></div>
