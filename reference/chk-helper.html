@@ -19,7 +19,7 @@ optional filter (flt)."><meta property="og:image" content="https://socialresearc
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testdat</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
       </span>
     </div>
 
@@ -217,7 +217,7 @@ columns in the output of <code>chk_filter()</code>).</p></li>
 <span class="r-in"><span><span class="co"># Check that columns made up of whole numbers are binary</span></span></span>
 <span class="r-in"><span><span class="fu">chk_filter_all</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>  <span class="fu">where</span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">1</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">1</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  <span class="va">chk_values</span>,</span></span>
 <span class="r-in"><span>  <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span></span>
@@ -253,7 +253,7 @@ columns in the output of <code>chk_filter()</code>).</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
