@@ -78,7 +78,7 @@ chk_filter <- function(data, vars, func, flt = TRUE, args = list()) {
 
   data %>%
     select({{ vars }}) %>%
-    mutate(across({{ vars }}, func, !!!args)) %>%
+    mutate(across({{ vars }}, ~func(.x, !!!args))) %>%
     mutate(across(everything(), ~ifelse(flt$.cond, ., NA)))
 }
 

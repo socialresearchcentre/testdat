@@ -84,8 +84,8 @@ with_testdata(x, {
     expect_base(nsw_only, state == "NSW")
   })
 })
-#> Test passed 🥳
-#> ── Failure (']8;line = 18:col = 1;file:///home/danny/Nextcloud/workspace/r/testdat/<text><text>:18]8;;'): variable values are correct ──────────────────────────
+#> Test passed 
+#> -- Failure ('<text>:18:5'): variable values are correct ------------------------
 #> get_testdata() has 1 records failing value check on variable `pcode`.
 #> Variable set: `pcode`
 #> Filter: None

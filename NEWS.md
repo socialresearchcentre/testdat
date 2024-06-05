@@ -1,7 +1,12 @@
 # testdat (development version)
 
-* `get_testdata()` now removes groups from the test data frame if it a `grouped_df` (#68). Grouped data frames cause issues with several expectations.
 * Bug fix for `expect_base()` where the test would pass when the `var` argument isn't a variable in the test data (#72, @lachlangh). 
+
+# testdat 0.4.2
+
+* `get_testdata()` now removes groups from the test data frame if it is a `grouped_df` (#68). Grouped data frames cause issues with several expectations.
+
+* Fix for upcoming R-devel change.
 
 # testdat 0.4.1
 
