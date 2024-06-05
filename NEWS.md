@@ -1,6 +1,6 @@
 # testdat (development version)
 
-* Bug fix for `expect_base()` where the test would pass when the `var` argument isn't a variable in the test data (#72, @lachlangh). 
+* `expect_base()` now errors when `var` doesn't exist in the test data instead of passing (#71, @lachlangh).
 
 # testdat 0.4.2
 
