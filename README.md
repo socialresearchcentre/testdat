@@ -9,7 +9,7 @@
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
 [![R-CMD-check](https://github.com/socialresearchcentre/testdat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/socialresearchcentre/testdat/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/socialresearchcentre/testdat/branch/master/graph/badge.svg)](https://app.codecov.io/gh/socialresearchcentre/testdat?branch=master)
+coverage](https://codecov.io/gh/socialresearchcentre/testdat/graph/badge.svg)](https://app.codecov.io/gh/socialresearchcentre/testdat)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/testdat)](https://CRAN.R-project.org/package=testdat)
 <!-- badges: end -->
@@ -84,7 +84,7 @@ with_testdata(x, {
     expect_base(nsw_only, state == "NSW")
   })
 })
-#> Test passed 😸
+#> Test passed 😀
 #> ── Failure: variable values are correct ────────────────────────────────────────
 #> get_testdata() has 1 records failing value check on variable `pcode`.
 #> Variable set: `pcode`
