@@ -27,7 +27,7 @@ by default.}
 
 \item{not}{Reverse the results of the check.}
 
-\item{where}{<\code{\link[=dplyr_tidy_select]{tidy-select}}> Columns to check}
+\item{where}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}> Columns to check}
 
 \item{flt}{<\code{\link[dplyr:dplyr_data_masking]{data-masking}}> A filter specifying
 a subset of the data frame to test.}
@@ -42,7 +42,7 @@ These functions are defunct.
 \itemize{
 \item \code{expect_where()} works exactly like \code{expect_all()}. When testdat used
 \code{dplyr::vars()} as standard \code{expect_where()} provided an alternative
-interface using \code{\link[=dplyr_tidy_select]{tidy-select}}.
+interface using \code{\link[dplyr:dplyr_tidy_select]{tidy-select}}.
 }
 }
 \keyword{internal}

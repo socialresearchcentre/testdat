@@ -8,7 +8,7 @@ output_results_excel(results, file)
 }
 \arguments{
 \item{results}{An object of class \code{testthat_results}, e.g. output from
-\code{\link[=test_dir]{test_dir()}} or \code{\link[=test_file]{test_file()}}.}
+\code{\link[testthat:test_dir]{testthat::test_dir()}} or \code{\link[testthat:test_file]{testthat::test_file()}}.}
 
 \item{file}{Output file name}
 }

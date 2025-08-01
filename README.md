@@ -84,8 +84,8 @@ with_testdata(x, {
     expect_base(nsw_only, state == "NSW")
   })
 })
-#> Test passed 
-#> -- Failure ('<text>:18:5'): variable values are correct ------------------------
+#> Test passed 😸
+#> ── Failure: variable values are correct ────────────────────────────────────────
 #> get_testdata() has 1 records failing value check on variable `pcode`.
 #> Variable set: `pcode`
 #> Filter: None
@@ -94,6 +94,6 @@ with_testdata(x, {
 #> Variable set: `pcode`
 #> Filter: None
 #> Arguments: `  3003L, 3004L, ...>, miss = <chr: NA, "">`
-#> Error in `reporter$stop_if_needed()`:
+#> Error:
 #> ! Test failed
 ```

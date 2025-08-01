@@ -6,7 +6,7 @@
 #' showing details of each unsuccessful test.
 #'
 #' @param results An object of class `testthat_results`, e.g. output from
-#'   [test_dir()] or [test_file()].
+#'   [testthat::test_dir()] or [testthat::test_file()].
 #' @param file Output file name
 #' @return The return value of [openxlsx::saveWorkbook()].
 #' @examples

@@ -49,7 +49,7 @@ chk_nmiss <- function(x, miss = getOption("testdat.miss_text")) {
 #'
 #' * `chk_filter_where()` works exactly like `chk_filter_all()`. When testdat
 #' used `dplyr::vars()` as standard `chk_filter_where()` provided an alternative
-#' interface using [`tidy-select`][dplyr_tidy_select].
+#' interface using [`tidy-select`][dplyr::dplyr_tidy_select].
 #'
 #' @inheritParams chk-dummy
 #' @return A logical vector flagging records that have passed or failed the
@@ -67,7 +67,7 @@ chk_filter_vars <- function(data, vars, func, flt = TRUE, args = list()) {
 }
 
 #' @rdname chk-defunct
-#' @param where <[`tidy-select`][dplyr_tidy_select]> Columns to check.
+#' @param where <[`tidy-select`][dplyr::dplyr_tidy_select]> Columns to check.
 #' @export
 chk_filter_where <- function(data, where, func, flt = TRUE, args = list()) {
   lifecycle::deprecate_stop("0.3.0", "chk_filter_where()", "chk_filter_all()")

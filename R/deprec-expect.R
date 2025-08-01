@@ -131,7 +131,7 @@ expect_allany <- function(vars,
 #'
 #' * `expect_where()` works exactly like `expect_all()`. When testdat used
 #' `dplyr::vars()` as standard `expect_where()` provided an alternative
-#' interface using [`tidy-select`][dplyr_tidy_select].
+#' interface using [`tidy-select`][dplyr::dplyr_tidy_select].
 #'
 #' @inheritParams data-params
 #' @inherit data-params return
@@ -151,7 +151,7 @@ filter_expect <- function(data, expect_function, ..., not = TRUE) {
 
 #' @export
 #' @rdname expect-defunct
-#' @param where <[`tidy-select`][dplyr_tidy_select]> Columns to check
+#' @param where <[`tidy-select`][dplyr::dplyr_tidy_select]> Columns to check
 expect_where <- function(where, func, flt = TRUE, data = get_testdata(), args = list(), func_desc = NULL) {
   lifecycle::deprecate_stop("0.3.0", "expect_where()", "expect_all()")
 }

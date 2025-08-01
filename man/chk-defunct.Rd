@@ -11,7 +11,7 @@ chk_filter_vars(data, vars, func, flt = TRUE, args = list())
 chk_filter_where(data, where, func, flt = TRUE, args = list())
 }
 \arguments{
-\item{where}{<\code{\link[=dplyr_tidy_select]{tidy-select}}> Columns to check.}
+\item{where}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}> Columns to check.}
 }
 \value{
 A logical vector flagging records that have passed or failed the
@@ -24,7 +24,7 @@ These functions are defunct.
 \itemize{
 \item \code{chk_filter_where()} works exactly like \code{chk_filter_all()}. When testdat
 used \code{dplyr::vars()} as standard \code{chk_filter_where()} provided an alternative
-interface using \code{\link[=dplyr_tidy_select]{tidy-select}}.
+interface using \code{\link[dplyr:dplyr_tidy_select]{tidy-select}}.
 }
 }
 \seealso{

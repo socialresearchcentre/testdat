@@ -1,7 +1,7 @@
 Type: Package
 Package: testdat
 Title: Data Unit Testing for R
-Version: 0.4.2.9000
+Version: 0.4.2.9001
 Authors@R: 
     c(person(given = "Danny",
              family = "Smith",
@@ -42,7 +42,7 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Collate: 
     'chk-filter.R'
     'chk.R'

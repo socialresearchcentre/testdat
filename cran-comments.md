@@ -1,5 +1,5 @@
 
-This release fixes an invalid non-character numeric version spec per CRAN advice.
+This release adds missing package anchors in documentation per CRAN advice.
 
 ## R CMD check results
 
