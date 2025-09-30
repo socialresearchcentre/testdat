@@ -70,7 +70,7 @@ expect_custom <- function(ok,
     }
   }
 
-  exp <- expectation(type, message, srcref = srcref, trace = trace)
+  exp <- new_expectation(type, message, srcref = srcref, trace = trace)
   exp[["custom"]] <- list(...)
 
   exp_signal(exp)
