@@ -2,6 +2,8 @@
 
 * `expect_base()` now errors when `var` doesn't exist in the test data instead of passing (#71, @lachlangh).
 
+* Expectations are now created using `new_expectation()` to prepare for upcoming changes in testthat 3.3.0 (#78, @hadley).
+
 # testdat 0.4.2
 
 * `get_testdata()` now removes groups from the test data frame if it is a `grouped_df` (#68). Grouped data frames cause issues with several expectations.

@@ -45,7 +45,7 @@
 #' }
 #'
 #' try(expect_example(x, data = data.frame(x = c(NA, -2:2))))
-#' @importFrom testthat expectation is.expectation quasi_label exp_signal
+#' @importFrom testthat new_expectation is.expectation quasi_label exp_signal
 #' @export
 expect_custom <- function(ok,
                           failure_message,
