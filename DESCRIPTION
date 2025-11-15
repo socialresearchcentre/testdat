@@ -1,7 +1,7 @@
 Type: Package
 Package: testdat
 Title: Data Unit Testing for R
-Version: 0.4.3.9000
+Version: 0.4.4
 Authors@R: 
     c(person(given = "Danny",
              family = "Smith",
